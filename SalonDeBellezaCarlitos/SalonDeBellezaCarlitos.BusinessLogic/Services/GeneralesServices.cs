@@ -18,6 +18,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         private readonly MunicipioRepository _MunicipiosRepository;
         private readonly ClienteRepository _ClientesRepository;
         private readonly EstadoCivilRepository _EstadosCivilesRepository; 
+        private readonly MetodopagoRepositpory _MetodopagoRepository; 
 
         public GeneralesServices(   CargoRepository CargoRepository, 
                                     EmpleadoRepository EmpleadoRepository, 
@@ -27,7 +28,8 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                                     DepartametoRepository departametoRepository,
                                     MunicipioRepository municipioRepository,
                                     ClienteRepository clienteRepository,
-                                    EstadoCivilRepository estadoCivilRepository
+                                    EstadoCivilRepository estadoCivilRepository,
+                                    MetodopagoRepositpory metodopagoRepositpory
             ) 
         {
             _CargoRepository = CargoRepository;
@@ -39,6 +41,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             _MunicipiosRepository = municipioRepository;
             _ClientesRepository = clienteRepository;
             _EstadosCivilesRepository = estadoCivilRepository;
+            _MetodopagoRepository = metodopagoRepositpory;
         }
 
         #region Cargos
@@ -130,7 +133,6 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #endregion
 
-
         #region Servicios
 
         public IEnumerable<tbServicios> ListadoServicios(out string error)
@@ -203,7 +205,6 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #endregion
 
-
         #region clientes
         
         public IEnumerable<tbClientes> ListadoClientes(out string error)
@@ -239,5 +240,24 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         }
 
         #endregion
+
+        #region Metodo pago
+
+        public IEnumerable<tbMetodoPago> ListadoMetodoPago(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _MetodopagoRepository.List();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<tbMetodoPago>();
+            }
+        }
+
+        #endregion
+
     }
 }
