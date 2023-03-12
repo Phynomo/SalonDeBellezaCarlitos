@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MobMVg9ckv7C8oYeTt/IXdULBGRJ614IwEj+L9Ou8JhgL+ImhzPX2zfK+D05RjWdPr8x1g7VFlo0D4lECC4kfQ==",
+  "dgSpecHash": "QyNMbCJ+XxQXPFtvUuh8vRIjjl+st44R/JFQLdvHAq/r3fBnd5OYPJ//0sF8c65ILS//aJYyc7/QamPMzlL0JA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj",
+  "projectFilePath": "C:\\Users\\danie\\Desktop\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\danie\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
