@@ -2536,6 +2536,139 @@ SELECT 0 as Proceso
 END CATCH
 END
 GO
+--Procedimientos almacenados de proveedor
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Listado
+AS
+BEGIN
+
+SELECT [prov_Id]
+      ,[prov_NombreEmpresa]
+      ,[prov_NombreContacto]
+      ,T1.[muni_Id]
+	  ,T2.muni_Descripcion
+	  ,T2.muni_Codigo
+	  ,T3.depa_Id
+	  ,T3.depa_Descripcion
+	  ,T3.depa_Codigo
+      ,[prov_DireccionExacta]
+      ,[prov_Telefono]
+      ,[prov_FechaCreacion]
+      ,[prov_UsuarioCreacion]
+      ,[prov_FechaModificacion]
+      ,[prov_UsuarioModificacion]
+      ,[prov_Estado]
+  FROM [salo].[tbProveedores] T1 INNER JOIN gnrl.tbMunicipios T2
+  ON t1.muni_Id = t2.muni_Id INNER JOIN gnrl.tbDepartamentos T3
+  ON t3.depa_Id = T2.depa_Id
+  WHERE T1.prov_Estado = 1
+
+
+END
+
+
+
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Insert
+	@prov_NombreEmpresa Nvarchar(150),
+	@prov_NombreContacto Nvarchar(150),
+	@muni_Id INT,
+	@prov_DireccionExacta Nvarchar(500),
+	@prov_Telefono Varchar(20),
+	@prov_UsuarioCreacion INT
+AS
+BEGIN
+
+BEGIN TRY
+
+
+
+SELECT 1 as Proceso
+END TRY
+BEGIN CATCH
+SELECT 0 as Proceso
+END CATCH
+
+INSERT INTO [salo].[tbProveedores]
+           ([prov_NombreEmpresa]
+           ,[prov_NombreContacto]
+           ,[muni_Id]
+           ,[prov_DireccionExacta]
+           ,[prov_Telefono]
+           ,[prov_FechaCreacion]
+           ,[prov_UsuarioCreacion]
+           ,[prov_FechaModificacion]
+           ,[prov_UsuarioModificacion]
+           ,[prov_Estado])
+     VALUES
+           (@prov_NombreEmpresa
+           ,@prov_NombreContacto
+           ,@muni_Id
+           ,@prov_DireccionExacta
+           ,@prov_Telefono
+           ,GETDATE()
+           ,@prov_UsuarioCreacion
+           ,null
+           ,null
+           ,1)
+
+END
+GO
+
+
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Update
+	@pro_Id INT,
+	@prov_NombreEmpresa Nvarchar(150),
+	@prov_NombreContacto Nvarchar(150),
+	@muni_Id INT,
+	@prov_DireccionExacta Nvarchar(500),
+	@prov_Telefono Varchar(20),
+	@prov_UsuarioModificacion INT
+AS
+BEGIN
+BEGIN TRY
+
+UPDATE [salo].[tbProveedores]
+   SET [prov_NombreEmpresa] = @prov_NombreEmpresa
+      ,[prov_NombreContacto] = @prov_NombreContacto
+      ,[muni_Id] = @muni_Id
+      ,[prov_DireccionExacta] = @prov_DireccionExacta
+      ,[prov_Telefono] = @prov_Telefono
+      ,[prov_FechaModificacion] = GETDATE()
+      ,[prov_UsuarioModificacion] = @prov_UsuarioModificacion
+ WHERE prov_Id = @pro_Id
+
+SELECT 1 as Proceso
+END TRY
+BEGIN CATCH
+SELECT 0 as Proceso
+END CATCH
+
+
+END
+GO
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Delete
+	@pro_Id INT
+AS
+BEGIN
+BEGIN TRY
+
+UPDATE [salo].[tbProveedores]
+   SET [prov_Estado] = 0
+ WHERE prov_Id = @pro_Id
+
+
+SELECT 1 as Proceso
+END TRY
+BEGIN CATCH
+SELECT 0 as Proceso
+END CATCH
+
+
+END
+GO
 
 --Inserts 
 
