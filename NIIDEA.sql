@@ -2537,3 +2537,224 @@ END CATCH
 END
 GO
 
+--Inserts 
+
+----Inserts de tabla servicios
+
+INSERT INTO salo.tbServicios(serv_Nombre,
+							 serv_Descripcion,
+							 serv_Precio,
+							 serv_FechaCreacion,
+							 serv_UsuarioCreacion,
+							 serv_FechaModificacion,
+							 serv_UsuarioModificacion,
+							 serv_Estado)
+	VALUES('Corte de cabello', 'Servicio de corte de cabello para hombres y mujeres', 25.00,GETDATE(), 1, NULL, NULL, 1),
+		  ('Manicure', 'Servicio de cuidado de uñas para mujeres', 20.00,GETDATE(), 1, NULL, NULL, 1),
+		  ('Pedicure', 'Servicio de cuidado de pies y uñas para mujeres', 30.00,GETDATE(), 1, NULL, NULL, 1),
+		  ('Maquillaje', 'Servicio de maquillaje para eventos especiales', 50.00,GETDATE(), 1, NULL, NULL, 1),
+		  ('Depilación', 'Servicio de depilación para mujeres', 40.00,GETDATE(), 1, NULL, NULL, 1),
+		  ('Masaje relajante', 'Servicio de masaje relajante para hombres y mujeres', 60.00,GETDATE(), 1, NULL, NULL, 1),
+		  ('Limpieza facial', 'Servicio de limpieza facial para mujeres', 35.00,GETDATE(), 1, NULL, NULL, 1),
+		  ('Tratamiento capilar', 'Servicio de tratamiento para el cabello', 80.00,GETDATE(), 1, NULL, NULL, 1),
+		  ('Peinado para novias', 'Servicio de peinado para novias', 100.00,GETDATE(), 1, NULL, NULL, 1),
+		  ('Coloración de cabello', 'Servicio de coloración de cabello para hombres y mujeres', 50.00,GETDATE(), 1, NULL, NULL, 1)
+
+----Inserts para la tabla Proveedores
+
+
+INSERT INTO salo.tbProveedores (prov_NombreEmpresa, prov_NombreContacto, muni_Id, prov_DireccionExacta, prov_Telefono, prov_FechaCreacion, prov_UsuarioCreacion, prov_FechaModificacion, prov_UsuarioModificacion, prov_Estado)
+VALUES ('Empresa1', 'Contacto1', 1, 'Dirección1', '123456789', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProveedores (prov_NombreEmpresa, prov_NombreContacto, muni_Id, prov_DireccionExacta, prov_Telefono, prov_FechaCreacion, prov_UsuarioCreacion, prov_FechaModificacion, prov_UsuarioModificacion, prov_Estado)
+VALUES ('Empresa2', 'Contacto2', 2, 'Dirección2', '234567890', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProveedores (prov_NombreEmpresa, prov_NombreContacto, muni_Id, prov_DireccionExacta, prov_Telefono, prov_FechaCreacion, prov_UsuarioCreacion, prov_FechaModificacion, prov_UsuarioModificacion, prov_Estado)
+VALUES ('Empresa3', 'Contacto3', 3, 'Dirección3', '345678901', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProveedores (prov_NombreEmpresa, prov_NombreContacto, muni_Id, prov_DireccionExacta, prov_Telefono, prov_FechaCreacion, prov_UsuarioCreacion, prov_FechaModificacion, prov_UsuarioModificacion, prov_Estado)
+VALUES ('Empresa4', 'Contacto4', 4, 'Dirección4', '456789012', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProveedores (prov_NombreEmpresa, prov_NombreContacto, muni_Id, prov_DireccionExacta, prov_Telefono, prov_FechaCreacion, prov_UsuarioCreacion, prov_FechaModificacion, prov_UsuarioModificacion, prov_Estado)
+VALUES ('Empresa5', 'Contacto5', 5, 'Dirección5', '567890123', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProveedores (prov_NombreEmpresa, prov_NombreContacto, muni_Id, prov_DireccionExacta, prov_Telefono, prov_FechaCreacion, prov_UsuarioCreacion, prov_FechaModificacion, prov_UsuarioModificacion, prov_Estado)
+VALUES ('Empresa6', 'Contacto6', 6, 'Dirección6', '678901234', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProveedores (prov_NombreEmpresa, prov_NombreContacto, muni_Id, prov_DireccionExacta, prov_Telefono, prov_FechaCreacion, prov_UsuarioCreacion, prov_FechaModificacion, prov_UsuarioModificacion, prov_Estado)
+VALUES ('Empresa7', 'Contacto7', 7, 'Dirección7', '789012345', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProveedores (prov_NombreEmpresa, prov_NombreContacto, muni_Id, prov_DireccionExacta, prov_Telefono, prov_FechaCreacion, prov_UsuarioCreacion, prov_FechaModificacion, prov_UsuarioModificacion, prov_Estado)
+VALUES ('Empresa8', 'Contacto8', 8, 'Dirección8', '890123456', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProveedores (prov_NombreEmpresa, prov_NombreContacto, muni_Id, prov_DireccionExacta, prov_Telefono, prov_FechaCreacion, prov_UsuarioCreacion, prov_FechaModificacion, prov_UsuarioModificacion, prov_Estado)
+VALUES ('Empresa9', 'Contacto9', 9, 'Dirección9', '901234567', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProveedores (prov_NombreEmpresa, prov_NombreContacto, muni_Id, prov_DireccionExacta, prov_Telefono, prov_FechaCreacion, prov_UsuarioCreacion, prov_FechaModificacion, prov_UsuarioModificacion, prov_Estado)
+VALUES ('Empresa10', 'Contacto10', 10, 'Dirección10', '012345678', GETDATE(), 1, NULL, NULL, 1);
+
+
+----Inserts para la tabla Categorias
+
+INSERT INTO salo.tbCategorias (cate_Descripcion,
+							   cate_FechaCreacion,
+							   cate_UsuarioCreacion,
+							   cate_FechaModificacion,
+							   cate_UsuarioModificacion,
+							   cate_Estado)
+	VALUES('Categoria 1', GETDATE(), 1, NULL, NULL, 1),
+		  ('Categoria 2', GETDATE(), 1, NULL, NULL, 1),
+		  ('Categoria 3', GETDATE(), 1, NULL, NULL, 1),
+		  ('Categoria 4', GETDATE(), 1, NULL, NULL, 1),
+		  ('Categoria 5', GETDATE(), 1, NULL, NULL, 1)
+----Inserts para la tabla Productos
+
+INSERT INTO salo.tbProductos (prod_Nombre,
+							  prod_Precio,
+							  cate_Id,
+							  prod_Stock,
+							  prov_id,
+							  prod_FechaCreacion,
+							  prod_UsuarioCreacion,
+							  prod_FechaModificacion,
+							  prod_UsuarioModificacion)
+	VALUES('Polo de algodón', 25.99, 1, 50, 1,GETDATE(), 1, NULL, NULL),
+		  ('Vaqueros desgastados', 59.99, 2, 30, 2,GETDATE(), 1, NULL, NULL),
+		  ('Zapatillas deportivas', 89.99, 3, 20, 1,GETDATE(), 1, NULL, NULL),
+		  ('Abrigo de lana', 129.99, 4, 10, 3,GETDATE(), 1, NULL, NULL),
+		  ('Gorra de béisbol', 19.99, 5, 100, 1,GETDATE(), 1, NULL, NULL),
+		  ('Camisa de cuadros', 39.99, 1, 15, 1,GETDATE(), 1, NULL, NULL),
+		  ('Pantalón chino', 49.99, 2, 25, 1, GETDATE(), 1, NULL, NULL),
+		  ('Sudadera con capucha', 69.99, 3, 12, 2,GETDATE(), 1, NULL, NULL),
+		  ('Bolso de cuero', 149.99, 4, 8, 1,GETDATE(), 1, NULL, NULL),
+		  ('Jersey de lana', 79.99, 3, 18, 3,GETDATE(), 1, NULL, NULL)
+
+
+
+
+
+INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_CorreoElectronico, clie_FechaCreacion, clie_UsuarioCreacion ,clie_FechaModificacion, clie_UsuarioModificacion, clie_Estado)
+VALUES ('Juan', 'Perez', '555-1234', 'juanperez@example.com', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_CorreoElectronico, clie_FechaCreacion, clie_UsuarioCreacion ,clie_FechaModificacion, clie_UsuarioModificacion, clie_Estado)
+VALUES ('Maria', 'Garcia', '555-5678', 'mariagarcia@example.com', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_CorreoElectronico, clie_FechaCreacion, clie_UsuarioCreacion ,clie_FechaModificacion, clie_UsuarioModificacion, clie_Estado)
+VALUES ('Pedro', 'Lopez', '555-9876', 'pedrolopez@example.com', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_CorreoElectronico, clie_FechaCreacion, clie_UsuarioCreacion ,clie_FechaModificacion, clie_UsuarioModificacion, clie_Estado)
+VALUES ('Ana', 'Martinez', '555-4321', 'anamartinez@example.com', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_CorreoElectronico, clie_FechaCreacion, clie_UsuarioCreacion ,clie_FechaModificacion, clie_UsuarioModificacion, clie_Estado)
+VALUES ('Luis', 'Gonzalez', '555-8765', 'luisgonzalez@example.com', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_CorreoElectronico, clie_FechaCreacion, clie_UsuarioCreacion ,clie_FechaModificacion, clie_UsuarioModificacion, clie_Estado)
+VALUES ('Sofia', 'Rodriguez', '555-2468', 'sofiarodriguez@example.com', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_CorreoElectronico, clie_FechaCreacion, clie_UsuarioCreacion ,clie_FechaModificacion, clie_UsuarioModificacion, clie_Estado)
+VALUES ('Ramon', 'Hernandez', '555-1357', 'ramonhernandez@example.com', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_CorreoElectronico, clie_FechaCreacion, clie_UsuarioCreacion ,clie_FechaModificacion, clie_UsuarioModificacion, clie_Estado)
+VALUES ('Elena', 'Sanchez', '555-5793', 'elenasanchez@example.com', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_CorreoElectronico, clie_FechaCreacion, clie_UsuarioCreacion ,clie_FechaModificacion, clie_UsuarioModificacion, clie_Estado)
+VALUES ('Carlos', 'Gomez', '555-3698', 'carlosgomez@example.com', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_CorreoElectronico, clie_FechaCreacion, clie_UsuarioCreacion ,clie_FechaModificacion, clie_UsuarioModificacion, clie_Estado)
+VALUES ('Laura', 'Diaz', '555-8246', 'lauradiaz@example.com', GETDATE(), 1, NULL, NULL, 1);
+
+
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 1', 1, 'Calle 1 #123', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 2', 2, 'Avenida 2 #456', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 3', 3, 'Calle 3 #789', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 4', 4, 'Avenida 4 #012', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 5', 5, 'Calle 5 #345', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 6', 6, 'Avenida 6 #678', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 7', 7, 'Calle 7 #901', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 8', 8, 'Avenida 8 #234', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 9', 9, 'Calle 9 #567', GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 10', 10, 'Avenida 10 #890', GETDATE(), 1, NULL, NULL, 1);
+
+
+
+INSERT INTO salo.tbReservaciones (clie_Id, sucu_Id, rese_DiaReservado, rese_HoraInicio, rese_HoraFin, rese_FechaCreacion, rese_UsuarioCreacion, rese_FechaModificacion, rese_UsuarioModificacion, rese_Estado)
+VALUES (1, 2, '2023-03-15', '14:00:00', '16:00:00', GETDATE(), 1, NULL, NULL, 1)
+
+INSERT INTO salo.tbReservaciones (clie_Id, sucu_Id, rese_DiaReservado, rese_HoraInicio, rese_HoraFin, rese_FechaCreacion, rese_UsuarioCreacion, rese_FechaModificacion, rese_UsuarioModificacion, rese_Estado)
+VALUES (2, 3, '2023-03-20', '10:30:00', '12:30:00', GETDATE(), 1, NULL, NULL, 1)
+
+INSERT INTO salo.tbReservaciones (clie_Id, sucu_Id, rese_DiaReservado, rese_HoraInicio, rese_HoraFin, rese_FechaCreacion, rese_UsuarioCreacion, rese_FechaModificacion, rese_UsuarioModificacion, rese_Estado)
+VALUES (5, 1, '2023-03-25', '16:00:00', '18:00:00', GETDATE(), 1, NULL, NULL, 1)
+
+INSERT INTO salo.tbReservaciones (clie_Id, sucu_Id, rese_DiaReservado, rese_HoraInicio, rese_HoraFin, rese_FechaCreacion, rese_UsuarioCreacion, rese_FechaModificacion, rese_UsuarioModificacion, rese_Estado)
+VALUES (3, 2, '2023-03-16', '09:00:00', '11:00:00', GETDATE(), 1, NULL, NULL, 1)
+
+INSERT INTO salo.tbReservaciones (clie_Id, sucu_Id, rese_DiaReservado, rese_HoraInicio, rese_HoraFin, rese_FechaCreacion, rese_UsuarioCreacion, rese_FechaModificacion, rese_UsuarioModificacion, rese_Estado)
+VALUES (4, 3, '2023-03-18', '12:30:00', '14:30:00', GETDATE(), 1, NULL, NULL, 1)
+
+INSERT INTO salo.tbReservaciones (clie_Id, sucu_Id, rese_DiaReservado, rese_HoraInicio, rese_HoraFin, rese_FechaCreacion, rese_UsuarioCreacion, rese_FechaModificacion, rese_UsuarioModificacion, rese_Estado)
+VALUES (2, 1, '2023-03-20', '15:00:00', '17:00:00', GETDATE(), 1, NULL, NULL, 1)
+
+INSERT INTO salo.tbReservaciones (clie_Id, sucu_Id, rese_DiaReservado, rese_HoraInicio, rese_HoraFin, rese_FechaCreacion, rese_UsuarioCreacion, rese_FechaModificacion, rese_UsuarioModificacion, rese_Estado)
+VALUES (5, 2, '2023-03-26', '11:00:00', '13:00:00', GETDATE(), 1, NULL, NULL, 1)
+
+INSERT INTO salo.tbReservaciones (clie_Id, sucu_Id, rese_DiaReservado, rese_HoraInicio, rese_HoraFin, rese_FechaCreacion, rese_UsuarioCreacion, rese_FechaModificacion, rese_UsuarioModificacion, rese_Estado)
+VALUES (4, 1, '2023-03-22', '14:30:00', '16:30:00', GETDATE(), 1, NULL, NULL, 1)
+
+INSERT INTO salo.tbReservaciones (clie_Id, sucu_Id, rese_DiaReservado, rese_HoraInicio, rese_HoraFin, rese_FechaCreacion, rese_UsuarioCreacion, rese_FechaModificacion, rese_UsuarioModificacion, rese_Estado)
+VALUES (3, 3, '2023-03-19', '16:00:00', '18:00:00', GETDATE(), 1, NULL, NULL, 1)
+
+INSERT INTO salo.tbReservaciones (clie_Id, sucu_Id, rese_DiaReservado, rese_HoraInicio, rese_HoraFin, rese_FechaCreacion, rese_UsuarioCreacion, rese_FechaModificacion, rese_UsuarioModificacion, rese_Estado)
+VALUES (1, 2, '2023-03-23', '09:30:00', '12:00:00', GETDATE(), 1, NULL, NULL, 1)
+
+
+
+
+INSERT INTO salo.tbProductosXServicio (serv_Id, prod_Id, spro_FechaCreacion, spro_UsuarioCreacion, spro_FechaModificacion, spro_UsuarioModificacion, spro_Estado)
+VALUES (1, 3, GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProductosXServicio (serv_Id, prod_Id, spro_FechaCreacion, spro_UsuarioCreacion, spro_FechaModificacion, spro_UsuarioModificacion, spro_Estado)
+VALUES (2, 3, GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProductosXServicio (serv_Id, prod_Id, spro_FechaCreacion, spro_UsuarioCreacion, spro_FechaModificacion, spro_UsuarioModificacion, spro_Estado)
+VALUES (4, 7, GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProductosXServicio (serv_Id, prod_Id, spro_FechaCreacion, spro_UsuarioCreacion, spro_FechaModificacion, spro_UsuarioModificacion, spro_Estado)
+VALUES (3, 8, GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProductosXServicio (serv_Id, prod_Id, spro_FechaCreacion, spro_UsuarioCreacion, spro_FechaModificacion, spro_UsuarioModificacion, spro_Estado)
+VALUES (1, 1, GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProductosXServicio (serv_Id, prod_Id, spro_FechaCreacion, spro_UsuarioCreacion, spro_FechaModificacion, spro_UsuarioModificacion, spro_Estado)
+VALUES (6, 7, GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProductosXServicio (serv_Id, prod_Id, spro_FechaCreacion, spro_UsuarioCreacion, spro_FechaModificacion, spro_UsuarioModificacion, spro_Estado)
+VALUES (7, 5, GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProductosXServicio (serv_Id, prod_Id, spro_FechaCreacion, spro_UsuarioCreacion, spro_FechaModificacion, spro_UsuarioModificacion, spro_Estado)
+VALUES (4, 2, GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProductosXServicio (serv_Id, prod_Id, spro_FechaCreacion, spro_UsuarioCreacion, spro_FechaModificacion, spro_UsuarioModificacion, spro_Estado)
+VALUES (2, 9, GETDATE(), 1, NULL, NULL, 1);
+
+INSERT INTO salo.tbProductosXServicio (serv_Id, prod_Id, spro_FechaCreacion, spro_UsuarioCreacion, spro_FechaModificacion, spro_UsuarioModificacion, spro_Estado)
+VALUES (8, 6, GETDATE(), 1, NULL, NULL, 1);

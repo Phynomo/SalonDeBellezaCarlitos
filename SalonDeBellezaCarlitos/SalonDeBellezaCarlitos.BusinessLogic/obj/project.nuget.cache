@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0YOA3oS6VA7dTU9S6khL3b5xxEZBveDTH7lfyF9hmPS4PjgsoAnSF9GaMo9vtfhHHUKuOf/c+/r7LlsrgAji+A==",
+  "dgSpecHash": "OAThYP+2pQvnsX4xAfzcveClPMzs2aY0+jSVj+TfTZbAy7jRQm0S3e3uZTjkAuGhuS+fk6SrVgjSvfw7HzTgaA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\danie\\Desktop\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj",
+  "projectFilePath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\danie\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\danie\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
