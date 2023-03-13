@@ -14,24 +14,19 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         private readonly UsuarioRepository _UsuariosRepository;
         private readonly ServicioRepository _ServicioRepository;
         private readonly CategoriaRepository _CategoriaRepository;
-        private readonly DepartametoRepository _DepartamentosRepository; 
+        private readonly DepartametoRepository _DepartamentosRepository;
         private readonly MunicipioRepository _MunicipiosRepository;
         private readonly ClienteRepository _ClientesRepository;
-<<<<<<< HEAD
         private readonly EstadoCivilRepository _EstadosCivilesRepository;
         private readonly SucursalesRepository _SucursalesRepository;
         private readonly ProductoRepository _ProductosRepository;
         private readonly ReservacionRepository _ReservacionRepository;
         private readonly FacturasRepository _FacturasRepository;
-
-=======
-        private readonly EstadoCivilRepository _EstadosCivilesRepository; 
         private readonly MetodopagoRepositpory _MetodopagoRepository;
         private readonly ProveedorRepository _ProveedoresRepository;
->>>>>>> Daniel
 
-        public GeneralesServices(   CargoRepository CargoRepository, 
-                                    EmpleadoRepository EmpleadoRepository, 
+        public GeneralesServices(CargoRepository CargoRepository,
+                                    EmpleadoRepository EmpleadoRepository,
                                     UsuarioRepository usuarioRepository,
                                     ServicioRepository servicioRepository,
                                     CategoriaRepository categoriaRepository,
@@ -39,16 +34,13 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                                     MunicipioRepository municipioRepository,
                                     ClienteRepository clienteRepository,
                                     EstadoCivilRepository estadoCivilRepository,
-<<<<<<< HEAD
                                     SucursalesRepository sucursalesRepository,
                                     ProductoRepository productoRepository,
                                     ReservacionRepository reservacionRepository,
-                                    FacturasRepository facturasRepository
-=======
+                                    FacturasRepository facturasRepository,
                                     MetodopagoRepositpory metodopagoRepositpory,
                                     ProveedorRepository proveedorRepository
->>>>>>> Daniel
-            ) 
+            )
         {
             _CargoRepository = CargoRepository;
             _EmpleadoRepository = EmpleadoRepository;
@@ -59,15 +51,12 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             _MunicipiosRepository = municipioRepository;
             _ClientesRepository = clienteRepository;
             _EstadosCivilesRepository = estadoCivilRepository;
-<<<<<<< HEAD
             _SucursalesRepository = sucursalesRepository;
             _ProductosRepository = productoRepository;
             _ReservacionRepository = reservacionRepository;
             _FacturasRepository = facturasRepository;
-=======
             _MetodopagoRepository = metodopagoRepositpory;
             _ProveedoresRepository = proveedorRepository;
->>>>>>> Daniel
         }
 
         #region Cargos
@@ -232,7 +221,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         #endregion
 
         #region clientes
-        
+
         public IEnumerable<tbClientes> ListadoClientes(out string error)
         {
             error = string.Empty;
@@ -267,71 +256,42 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #endregion
 
-<<<<<<< HEAD
         #region Sucursales
 
-        public IEnumerable<tbSucursales> ListadoSucursales(out string error)
-=======
-        #region Metodo pago
-
-        public IEnumerable<tbMetodoPago> ListadoMetodoPago(out string error)
->>>>>>> Daniel
+        public IEnumerable<tbSucursales> ListadoSucursales(out string error) 
         {
             error = string.Empty;
             try
             {
-<<<<<<< HEAD
                 return _SucursalesRepository.List();
-=======
-                return _MetodopagoRepository.List();
->>>>>>> Daniel
             }
             catch (Exception e)
             {
                 error = e.Message;
-<<<<<<< HEAD
                 return Enumerable.Empty<tbSucursales>();
-=======
-                return Enumerable.Empty<tbMetodoPago>();
->>>>>>> Daniel
             }
         }
 
         #endregion
 
-<<<<<<< HEAD
         #region Productos
 
         public IEnumerable<tbProductos> ListadoProductos(out string error)
-=======
-        #region Proveedor
-
-        public IEnumerable<tbProveedores> ListadoProveedores(out string error)
->>>>>>> Daniel
         {
             error = string.Empty;
             try
             {
-<<<<<<< HEAD
                 return _ProductosRepository.List();
-=======
-                return _ProveedoresRepository.List();
->>>>>>> Daniel
             }
             catch (Exception e)
             {
                 error = e.Message;
-<<<<<<< HEAD
                 return Enumerable.Empty<tbProductos>();
-=======
-                return Enumerable.Empty<tbProveedores>();
->>>>>>> Daniel
             }
         }
 
         #endregion
 
-<<<<<<< HEAD
         #region Reservaciones
 
         public IEnumerable<tbReservaciones> ListadoReservaciones(out string error)
@@ -367,7 +327,44 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         }
 
         #endregion
-=======
->>>>>>> Daniel
+
+        #region Proveedor
+
+        public IEnumerable<tbProveedores> ListadoProveedores(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _ProveedoresRepository.List();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<tbProveedores>();
+            }
+
+            #endregion
+
+        }
+
+        #region Metodo pago
+
+        public IEnumerable<tbMetodoPago> ListadoMetodoPago(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _MetodopagoRepository.List();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<tbMetodoPago>();
+            }
+        }
+
+        #endregion
+
+
     }
 }

@@ -23,16 +23,13 @@ namespace SalonDeBellezaCarlitos.BusinessLogic
             service.AddScoped<MunicipioRepository>();
             service.AddScoped<ClienteRepository>();
             service.AddScoped<EstadoCivilRepository>();
-<<<<<<< HEAD
             service.AddScoped<SucursalesRepository>();
             service.AddScoped<ProductoRepository>();
             service.AddScoped<ReservacionRepository>();
             service.AddScoped<FacturasRepository>();
-=======
             service.AddScoped<MetodopagoRepositpory>();
             service.AddScoped<ProveedorRepository>();
 
->>>>>>> Daniel
 
             SalonCarlitosContext.BuildConnectionString(connectionString);
 

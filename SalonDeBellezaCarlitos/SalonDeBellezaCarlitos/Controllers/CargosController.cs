@@ -44,7 +44,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         }
 
         [HttpPost("/Cargos/Crear")]
-        public ActionResult Create(CargoViewModel cargo, string? carg_Descripcion)
+        public ActionResult Create(CargoViewModel cargo)
         {
             var result = 0;
             var car = _mapper.Map<tbCargos>(cargo);

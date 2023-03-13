@@ -1,37 +1,23 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj": {}
+    "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj": {
+    "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj",
         "projectName": "SalonDeBellezaCarlitos.BusinessLogic",
-        "projectPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj",
-        "packagesPath": "C:\\Users\\Auxiliar.Operaciones\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\obj\\",
-=======
-    "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj",
-        "projectName": "SalonDeBellezaCarlitos.BusinessLogic",
-        "projectPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj",
-        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\obj\\",
->>>>>>> Daniel
+        "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj",
+        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Auxiliar.Operaciones\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -46,13 +32,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-<<<<<<< HEAD
-              "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj"
-=======
-              "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj"
->>>>>>> Daniel
+              "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj"
               }
             }
           }
@@ -85,31 +66,20 @@
         }
       }
     },
-<<<<<<< HEAD
-    "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj": {
+    "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj",
         "projectName": "SalonDeBellezaCarlitos.DataAccess",
-        "projectPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\Auxiliar.Operaciones\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\obj\\",
-=======
-    "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj",
-        "projectName": "SalonDeBellezaCarlitos.DataAccess",
-        "projectPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\obj\\",
->>>>>>> Daniel
+        "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Auxiliar.Operaciones\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -124,13 +94,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-<<<<<<< HEAD
-              "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj": {
-                "projectPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj"
-=======
-              "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj": {
-                "projectPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj"
->>>>>>> Daniel
+              "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj": {
+                "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj"
               }
             }
           }
@@ -177,31 +142,20 @@
         }
       }
     },
-<<<<<<< HEAD
-    "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj": {
+    "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj",
         "projectName": "SalonDeBellezaCarlitos.Entities",
-        "projectPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj",
-        "packagesPath": "C:\\Users\\Auxiliar.Operaciones\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\obj\\",
-=======
-    "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj",
-        "projectName": "SalonDeBellezaCarlitos.Entities",
-        "projectPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj",
-        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\obj\\",
->>>>>>> Daniel
+        "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj",
+        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Auxiliar.Operaciones\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -246,31 +200,20 @@
         }
       }
     },
-<<<<<<< HEAD
-    "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj": {
+    "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj",
         "projectName": "SalonDeBellezaCarlitos.WebUI",
-        "projectPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj",
-        "packagesPath": "C:\\Users\\Auxiliar.Operaciones\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\obj\\",
-=======
-    "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj",
-        "projectName": "SalonDeBellezaCarlitos.WebUI",
-        "projectPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj",
-        "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\obj\\",
->>>>>>> Daniel
+        "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.WebUI.csproj",
+        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Auxiliar.Operaciones\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -285,13 +228,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-<<<<<<< HEAD
-              "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj": {
-                "projectPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj"
-=======
-              "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj": {
-                "projectPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj"
->>>>>>> Daniel
+              "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj": {
+                "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.BusinessLogic\\SalonDeBellezaCarlitos.BusinessLogic.csproj"
               }
             }
           }
