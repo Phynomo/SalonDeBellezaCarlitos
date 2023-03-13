@@ -20,6 +20,8 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         private readonly EstadoCivilRepository _EstadosCivilesRepository;
         private readonly SucursalesRepository _SucursalesRepository;
         private readonly ProductoRepository _ProductosRepository;
+        private readonly ReservacionRepository _ReservacionRepository;
+
 
         public GeneralesServices(   CargoRepository CargoRepository, 
                                     EmpleadoRepository EmpleadoRepository, 
@@ -31,7 +33,8 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                                     ClienteRepository clienteRepository,
                                     EstadoCivilRepository estadoCivilRepository,
                                     SucursalesRepository sucursalesRepository,
-                                    ProductoRepository productoRepository
+                                    ProductoRepository productoRepository,
+                                    ReservacionRepository reservacionRepository
             ) 
         {
             _CargoRepository = CargoRepository;
@@ -45,6 +48,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             _EstadosCivilesRepository = estadoCivilRepository;
             _SucursalesRepository = sucursalesRepository;
             _ProductosRepository = productoRepository;
+            _ReservacionRepository = reservacionRepository;
         }
 
         #region Cargos
@@ -275,6 +279,24 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             {
                 error = e.Message;
                 return Enumerable.Empty<tbProductos>();
+            }
+        }
+
+        #endregion
+
+        #region Reservaciones
+
+        public IEnumerable<tbReservaciones> ListadoReservaciones(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _ReservacionRepository.List();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<tbReservaciones>();
             }
         }
 

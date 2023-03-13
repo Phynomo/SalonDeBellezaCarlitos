@@ -25,7 +25,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic
             service.AddScoped<EstadoCivilRepository>();
             service.AddScoped<SucursalesRepository>();
             service.AddScoped<ProductoRepository>();
-
+            service.AddScoped<ReservacionRepository>();
 
             SalonCarlitosContext.BuildConnectionString(connectionString);
 
@@ -37,4 +37,5 @@ namespace SalonDeBellezaCarlitos.BusinessLogic
         }
 
     }
+
 }

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.ReservacionesViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.clie_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sucu_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.rese_DiaReservado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.rese_HoraInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.rese_HoraFin)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.clie_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sucu_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rese_DiaReservado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rese_HoraInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rese_HoraFin)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.rese_Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.rese_Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.rese_Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
