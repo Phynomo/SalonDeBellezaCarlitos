@@ -24,7 +24,15 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public int Insert(tbMetodoPago item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@metp_Descripcion", item.metp_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@metp_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_MetodoPago, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public IEnumerable<tbMetodoPago> List()

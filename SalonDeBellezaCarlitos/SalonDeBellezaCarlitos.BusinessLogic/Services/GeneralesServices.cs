@@ -59,6 +59,11 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             _ProveedoresRepository = proveedorRepository;
         }
 
+        public int InsertarCategorias(tbCategorias cate)
+        {
+            throw new NotImplementedException();
+        }
+
         #region Cargos
 
         public IEnumerable<tbCargos> ListadoCargos(out string error)
@@ -182,6 +187,22 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
         }
 
+        public int InsertarCategoria(tbCategorias item)
+        {
+
+            try
+            {
+                var resultado = _CategoriaRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
         #endregion
 
         #region Departamentos
@@ -198,6 +219,22 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 error = e.Message;
                 return Enumerable.Empty<tbDepartamentos>();
             }
+        }
+
+        public int InsertarDepartamento(tbDepartamentos item)
+        {
+
+            try
+            {
+                var resultado = _DepartamentosRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
         }
 
         #endregion
@@ -343,9 +380,8 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return Enumerable.Empty<tbProveedores>();
             }
 
-            #endregion
-
         }
+        #endregion
 
         #region Metodo pago
 
@@ -362,6 +398,23 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return Enumerable.Empty<tbMetodoPago>();
             }
         }
+
+        public int InsertarMetodoPago(tbMetodoPago item)
+        {
+
+            try
+            {
+                var resultado = _MetodopagoRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
 
         #endregion
 

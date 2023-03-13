@@ -1,0 +1,30 @@
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.CategoriaViewModel 
+
+
+<div class="modal" id="modalCreate" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crear cargo</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Create" id="formCreate">
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="cate_Descripcion" class="control-label"></label>
+                        <input asp-for="cate_Descripcion" class="form-control" id="cate_Descripcion" name="cate_Descripcion" />
+                        <label name="lbl_DescripcionCreateError" id="lbl_DescripcionCreateError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="GuardarModalCreate()">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

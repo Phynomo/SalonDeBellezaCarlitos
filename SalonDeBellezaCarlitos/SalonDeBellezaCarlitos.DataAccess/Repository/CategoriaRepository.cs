@@ -26,9 +26,15 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public int Insert(tbCategorias item)
         {
-            using var db = new SalonCarlitosContext();
-            db.tbCategorias.Add(item);
-            return item.cate_Id;
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@cate_Descripcion", item.cate_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@cate_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Categorias, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public IEnumerable<tbCategorias> List()

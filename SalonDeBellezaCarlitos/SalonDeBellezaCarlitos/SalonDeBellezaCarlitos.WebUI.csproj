@@ -1,8 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\js\App\General\**" />
+    <Content Remove="wwwroot\js\App\General\**" />
+    <EmbeddedResource Remove="wwwroot\js\App\General\**" />
+    <None Remove="wwwroot\js\App\General\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
@@ -17,10 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SalonDeBellezaCarlitos.BusinessLogic\SalonDeBellezaCarlitos.BusinessLogic.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\js\App\General\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

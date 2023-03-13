@@ -12,25 +12,17 @@
             </div>
             <form asp-action="Create" id="formCreate">
                 <div class="modal-body">
-                    <!--<div class="form-group">-->
-                    @*<label name="lbl_DescripcionCreate" id="lbl_DescripcionCreate" class="control-label">Descripcion</label>*@
-                    @*<input name="carg_DescripcionCreate" id="carg_DescripcionCreate" class="form-control" />*@
-                    <!--<label asp-for="carg_Descripcion" class="control-label"></label>
-        <input asp-for="carg_Descripcion" class="form-control" />
-        <label name="lbl_DescripcionCreateError" id="lbl_DescripcionCreateError" class="control-label" hidden style="color: red;">Llena este campo hijo puta</label>
-    </div>-->
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="carg_Descripcion" class="control-label"></label>
                         <input asp-for="carg_Descripcion" class="form-control" id="carg_Descripcion" name="carg_Descripcion" />
-                        <label name="lbl_DescripcionCreateError" id="lbl_DescripcionCreateError" class="control-label" hidden style="color: red;">Llena este campo hijo puta</label>
+                        <label name="lbl_DescripcionCreateError" id="lbl_DescripcionCreateError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="GuardarModalCreate()">Guardar</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <input type="submit" value="noooooooo" />
                 </div>
             </form>
         </div>

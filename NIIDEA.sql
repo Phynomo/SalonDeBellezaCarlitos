@@ -1927,7 +1927,6 @@ GO
 
 
 CREATE OR ALTER PROCEDURE gnrl.UDP_tbDepartamentos_Insert
-    @depa_Id NVARCHAR(4),
     @depa_Descripcion NVARCHAR(150),
 	@depa_Codigo		CHAR(2),
 	@depa_UsuarioCreacion INT
@@ -1937,16 +1936,14 @@ BEGIN
 BEGIN TRY
 
 
-    INSERT INTO gnrl.tbDepartamentos(   [depa_Id],
-                                        [depa_Descripcion], 
+    INSERT INTO gnrl.tbDepartamentos(   [depa_Descripcion], 
                                         depa_Codigo, 
                                         [depa_FechaCreacion], 
                                         [depa_UsuarioCreacion], 
                                         [depa_FechaModificacion], 
                                         [depa_UsuarioModificacion], 
                                         [depa_Estado]) 
-    VALUES (@depa_Id, 
-            @depa_Descripcion,
+    VALUES (@depa_Descripcion,
             @depa_Codigo, 
             GETDATE(), 
             @depa_UsuarioCreacion, 
