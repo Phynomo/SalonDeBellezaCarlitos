@@ -97,6 +97,39 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         }
 
 
+        public tbCargos BuscarCategoria(int? id)
+        {
+            try
+            {
+                var resultado = _CargoRepository.find(id);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+        public int EditarCategoria(tbCargos categoria)
+        {
+           
+            try
+            {
+                var resultado =  _CargoRepository.Update(categoria);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+
+
         #endregion
 
         #region Empleados
