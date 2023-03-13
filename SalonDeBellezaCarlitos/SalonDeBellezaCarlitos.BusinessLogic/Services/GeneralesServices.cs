@@ -19,6 +19,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         private readonly ClienteRepository _ClientesRepository;
         private readonly EstadoCivilRepository _EstadosCivilesRepository;
         private readonly SucursalesRepository _SucursalesRepository;
+        private readonly ProductoRepository _ProductosRepository;
 
         public GeneralesServices(   CargoRepository CargoRepository, 
                                     EmpleadoRepository EmpleadoRepository, 
@@ -29,7 +30,8 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                                     MunicipioRepository municipioRepository,
                                     ClienteRepository clienteRepository,
                                     EstadoCivilRepository estadoCivilRepository,
-                                    SucursalesRepository sucursalesRepository
+                                    SucursalesRepository sucursalesRepository,
+                                    ProductoRepository productoRepository
             ) 
         {
             _CargoRepository = CargoRepository;
@@ -42,6 +44,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             _ClientesRepository = clienteRepository;
             _EstadosCivilesRepository = estadoCivilRepository;
             _SucursalesRepository = sucursalesRepository;
+            _ProductosRepository = productoRepository;
         }
 
         #region Cargos
@@ -254,6 +257,24 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             {
                 error = e.Message;
                 return Enumerable.Empty<tbSucursales>();
+            }
+        }
+
+        #endregion
+
+        #region Productos
+
+        public IEnumerable<tbProductos> ListadoProductos(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _ProductosRepository.List();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<tbProductos>();
             }
         }
 
