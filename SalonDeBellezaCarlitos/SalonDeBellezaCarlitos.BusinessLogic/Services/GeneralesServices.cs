@@ -18,7 +18,8 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         private readonly MunicipioRepository _MunicipiosRepository;
         private readonly ClienteRepository _ClientesRepository;
         private readonly EstadoCivilRepository _EstadosCivilesRepository; 
-        private readonly MetodopagoRepositpory _MetodopagoRepository; 
+        private readonly MetodopagoRepositpory _MetodopagoRepository;
+        private readonly ProveedorRepository _ProveedoresRepository;
 
         public GeneralesServices(   CargoRepository CargoRepository, 
                                     EmpleadoRepository EmpleadoRepository, 
@@ -29,7 +30,8 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                                     MunicipioRepository municipioRepository,
                                     ClienteRepository clienteRepository,
                                     EstadoCivilRepository estadoCivilRepository,
-                                    MetodopagoRepositpory metodopagoRepositpory
+                                    MetodopagoRepositpory metodopagoRepositpory,
+                                    ProveedorRepository proveedorRepository
             ) 
         {
             _CargoRepository = CargoRepository;
@@ -42,6 +44,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             _ClientesRepository = clienteRepository;
             _EstadosCivilesRepository = estadoCivilRepository;
             _MetodopagoRepository = metodopagoRepositpory;
+            _ProveedoresRepository = proveedorRepository;
         }
 
         #region Cargos
@@ -254,6 +257,24 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             {
                 error = e.Message;
                 return Enumerable.Empty<tbMetodoPago>();
+            }
+        }
+
+        #endregion
+
+        #region Proveedor
+
+        public IEnumerable<tbProveedores> ListadoProveedores(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _ProveedoresRepository.List();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<tbProveedores>();
             }
         }
 

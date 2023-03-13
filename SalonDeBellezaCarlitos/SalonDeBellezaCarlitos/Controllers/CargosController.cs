@@ -47,7 +47,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         }
 
         [HttpPost("/Cargos/Crear")]
-        public ActionResult Create(CargoViewModel cargo)
+        public ActionResult Create(CargoViewModel cargo, string? carg_Descripcion)
         {
             var result = 0;
             var car = _mapper.Map<tbCargos>(cargo);
@@ -60,5 +60,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             return RedirectToAction("Listado");
         }
+        
+
     }
 }

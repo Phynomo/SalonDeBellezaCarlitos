@@ -22,6 +22,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Extensions
             CreateMap<ClienteViewModel, tbClientes>().ReverseMap();
             CreateMap<EstadoCivilViewModel, tbEstadosCiviles>().ReverseMap();
             CreateMap<MetodoPagoViewModel, tbMetodoPago>().ReverseMap();
+            CreateMap<ProveedorViewModel, tbProveedores>().ReverseMap();
 
         }
     }

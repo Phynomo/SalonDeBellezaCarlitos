@@ -2618,7 +2618,7 @@ GO
 
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Update
-	@pro_Id INT,
+	@prov_Id INT,
 	@prov_NombreEmpresa Nvarchar(150),
 	@prov_NombreContacto Nvarchar(150),
 	@muni_Id INT,
@@ -2637,7 +2637,7 @@ UPDATE [salo].[tbProveedores]
       ,[prov_Telefono] = @prov_Telefono
       ,[prov_FechaModificacion] = GETDATE()
       ,[prov_UsuarioModificacion] = @prov_UsuarioModificacion
- WHERE prov_Id = @pro_Id
+ WHERE prov_Id = @prov_Id
 
 SELECT 1 as Proceso
 END TRY
@@ -2648,16 +2648,18 @@ END CATCH
 
 END
 GO
+
+
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Delete
-	@pro_Id INT
+	@prov_Id INT
 AS
 BEGIN
 BEGIN TRY
 
 UPDATE [salo].[tbProveedores]
    SET [prov_Estado] = 0
- WHERE prov_Id = @pro_Id
+ WHERE prov_Id = @prov_Id
 
 
 SELECT 1 as Proceso

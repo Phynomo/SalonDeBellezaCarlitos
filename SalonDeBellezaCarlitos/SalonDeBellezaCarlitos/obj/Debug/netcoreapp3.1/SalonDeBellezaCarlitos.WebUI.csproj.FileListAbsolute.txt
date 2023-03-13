@@ -549,3 +549,5 @@ C:\Users\danie\Desktop\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBell
 C:\Users\danie\Desktop\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\SalonDeBellezaCarlitos.WebUI.pdb
 C:\Users\danie\Desktop\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\SalonDeBellezaCarlitos.WebUI.genruntimeconfig.cache
 C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Metodopago\Index.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Proveedores\Index.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Cargos\_CreateModalPartialView.cshtml.g.cs

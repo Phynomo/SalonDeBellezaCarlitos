@@ -1,6 +1,9 @@
-﻿using SalonDeBellezaCarlitos.Entities.Entities;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
+using SalonDeBellezaCarlitos.Entities.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace SalonDeBellezaCarlitos.DataAccess.Repository
@@ -14,7 +17,9 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public tbProveedores find(int? id)
         {
-            throw new NotImplementedException();
+            using var db = new SalonCarlitosContext();
+            var listado = db.tbProveedores.Find(id);
+            return listado;
         }
 
         public int Insert(tbProveedores item)
@@ -24,7 +29,8 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public IEnumerable<tbProveedores> List()
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            return db.Query<tbProveedores>(ScriptsDataBase.UDP_Listado_Proveedores, null, commandType: CommandType.StoredProcedure);
         }
 
         public int Update(tbProveedores item)

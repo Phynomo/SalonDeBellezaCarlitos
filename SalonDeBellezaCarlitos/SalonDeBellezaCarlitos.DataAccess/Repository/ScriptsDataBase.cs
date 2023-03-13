@@ -150,5 +150,13 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         #endregion
 
+        #region Proveedores
+
+        public static string UDP_Listado_Proveedores = "salo.UDP_tbProveedores_Listado";
+        public static string UDP_Insertar_Proveedores = "salo.UDP_tbProveedores_Insert";
+        public static string UDP_Editar_Proveedores = "salo.UDP_tbProveedores_Update";
+        public static string UDP_Borrar_Proveedores = "salo.UDP_tbProveedores_Delete";
+
+        #endregion
     }
 }
