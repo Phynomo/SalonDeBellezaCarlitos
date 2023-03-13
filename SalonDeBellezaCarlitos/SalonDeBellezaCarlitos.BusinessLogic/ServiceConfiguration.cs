@@ -26,6 +26,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic
             service.AddScoped<SucursalesRepository>();
             service.AddScoped<ProductoRepository>();
             service.AddScoped<ReservacionRepository>();
+            service.AddScoped<FacturasRepository>();
 
             SalonCarlitosContext.BuildConnectionString(connectionString);
 

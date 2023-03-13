@@ -21,6 +21,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         private readonly SucursalesRepository _SucursalesRepository;
         private readonly ProductoRepository _ProductosRepository;
         private readonly ReservacionRepository _ReservacionRepository;
+        private readonly FacturasRepository _FacturasRepository;
 
 
         public GeneralesServices(   CargoRepository CargoRepository, 
@@ -34,7 +35,8 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                                     EstadoCivilRepository estadoCivilRepository,
                                     SucursalesRepository sucursalesRepository,
                                     ProductoRepository productoRepository,
-                                    ReservacionRepository reservacionRepository
+                                    ReservacionRepository reservacionRepository,
+                                    FacturasRepository facturasRepository
             ) 
         {
             _CargoRepository = CargoRepository;
@@ -49,6 +51,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             _SucursalesRepository = sucursalesRepository;
             _ProductosRepository = productoRepository;
             _ReservacionRepository = reservacionRepository;
+            _FacturasRepository = facturasRepository;
         }
 
         #region Cargos
@@ -297,6 +300,24 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             {
                 error = e.Message;
                 return Enumerable.Empty<tbReservaciones>();
+            }
+        }
+
+        #endregion
+
+        #region Facturas
+
+        public IEnumerable<tbFacturas> ListadoFacturas(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _FacturasRepository.List();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<tbFacturas>();
             }
         }
 
