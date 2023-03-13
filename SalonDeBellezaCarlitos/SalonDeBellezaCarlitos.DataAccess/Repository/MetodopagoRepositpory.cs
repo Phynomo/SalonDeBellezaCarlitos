@@ -8,32 +8,32 @@ using System.Text;
 
 namespace SalonDeBellezaCarlitos.DataAccess.Repository
 {
-    public class ProveedorRepository : IRepository<tbProveedores>
+    public class MetodopagoRepositpory : IRepository<tbMetodoPago>
     {
-        public int Delete(tbProveedores item)
+        public int Delete(tbMetodoPago item)
         {
             throw new NotImplementedException();
         }
 
-        public tbProveedores find(int? id)
+        public tbMetodoPago find(int? id)
         {
             using var db = new SalonCarlitosContext();
-            var listado = db.tbProveedores.Find(id);
+            var listado = db.tbMetodoPago.Find(id);
             return listado;
         }
 
-        public int Insert(tbProveedores item)
+        public int Insert(tbMetodoPago item)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<tbProveedores> List()
+        public IEnumerable<tbMetodoPago> List()
         {
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
-            return db.Query<tbProveedores>(ScriptsDataBase.UDP_Listado_Proveedores, null, commandType: CommandType.StoredProcedure);
+            return db.Query<tbMetodoPago>(ScriptsDataBase.UDP_Listado_MetodoPago, null, commandType: CommandType.StoredProcedure);
         }
 
-        public int Update(tbProveedores item)
+        public int Update(tbMetodoPago item)
         {
             throw new NotImplementedException();
         }

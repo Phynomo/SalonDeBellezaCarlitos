@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
+    
+    <link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,8 +23,6 @@
 
     <!-- Premium solid icons [ OPTIONAL ] -->
     <link rel="stylesheet" href="~/premium/icon-sets/icons/solid-icons/premium-solid-icons.min.css">
-
-    <link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" />
 
 
 </head>
@@ -53,6 +53,7 @@
                     <div class="card mb-4">
                         <div class="card-body">
 
+                            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
                             @RenderBody()
 
@@ -84,7 +85,7 @@
                     <div class="brand-wrap">
 
                         <!-- Brand logo -->
-                        <a href="./index.html" class="brand-img stretched-link">
+                        <a href="/Home/Index" class="brand-img stretched-link">
                             <img src="~/img/Logo.ico" alt="Nifty Logo" class="Nifty logo" width="40" height="40" style="filter: invert(100%);">
                         </a>
 
@@ -475,13 +476,16 @@
                                 <!-- Dashboard submenu list -->
                                 <ul class="mininav-content nav collapse">
                                     <li class="nav-item">
-                                        <a href="./index.html" class="nav-link active">Dashboard 1</a>
+                                        <a href="/Metodospago/Listado" class="nav-link active">Metodos de pago</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="./dashboard-2.html" class="nav-link">Dashboard 2</a>
+                                        <a href="/EstadosCiviles/Listado" class="nav-link">Estados Civiles</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="./dashboard-3.html" class="nav-link">Dashboard 3</a>
+                                        <a href="/Departamentos/Listado" class="nav-link">Departamentos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Municipios/Listado" class="nav-link">Municipios</a>
                                     </li>
 
                                 </ul>
@@ -491,7 +495,7 @@
 
                             <li class="nav-item has-sub">
 
-                                <a href="#" class="mininav-toggle nav-link ">
+                                <a href="#" class="mininav-toggle nav-link active">
                                     <i class="pli-unlock fs-5 me-2"></i>
                                     <span class="nav-label ms-1">Salon Carlitos</span>
                                 </a>
@@ -499,13 +503,34 @@
                                 <!-- Dashboard submenu list -->
                                 <ul class="mininav-content nav collapse">
                                     <li class="nav-item">
-                                        <a href="./index.html" class="nav-link ">Dashboard 1</a>
+                                        <a href="/Cargos/Listado" class="nav-link">Cargos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="./dashboard-2.html" class="nav-link">Dashboard 2</a>
+                                        <a href="/Empleados/Listado" class="nav-link">Empleados</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="./dashboard-3.html" class="nav-link">Dashboard 3</a>
+                                        <a href="/Proveedores/Listado" class="nav-link">Proveedores</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Categorias/Listado" class="nav-link">Categorias</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Productos/Listado" class="nav-link">Productos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Clientes/Listado" class="nav-link">Clientes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Servicios/Listado" class="nav-link">Servivicos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Facturas/Listado" class="nav-link">Facturas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Sucursales/Listado" class="nav-link">Sucursales</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Reservaciones/Listado" class="nav-link">Reservaciones</a>
                                     </li>
 
                                 </ul>
@@ -515,7 +540,7 @@
 
                             <li class="nav-item has-sub">
 
-                                <a href="#" class="mininav-toggle nav-link ">
+                                <a href="#" class="mininav-toggle nav-link active">
                                     <i class="d-block pli-information fs-5 me-2"></i>
                                     <span class="nav-label ms-1">Seguridad</span>
                                 </a>
@@ -523,13 +548,7 @@
                                 <!-- Dashboard submenu list -->
                                 <ul class="mininav-content nav collapse">
                                     <li class="nav-item">
-                                        <a href="./index.html" class="nav-link">Dashboard 1</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="./dashboard-2.html" class="nav-link">Dashboard 2</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="./dashboard-3.html" class="nav-link">Dashboard 3</a>
+                                        <a href="/Usuarios/Listado" class="nav-link">Usuarios</a>
                                     </li>
 
                                 </ul>
