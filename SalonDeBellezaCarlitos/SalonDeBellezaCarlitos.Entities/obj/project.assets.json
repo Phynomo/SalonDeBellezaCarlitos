@@ -14,11 +14,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj",
       "projectName": "SalonDeBellezaCarlitos.Entities",
       "projectPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj",
       "packagesPath": "C:\\Users\\Auxiliar.Operaciones\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj",
+      "projectName": "SalonDeBellezaCarlitos.Entities",
+      "projectPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\SalonDeBellezaCarlitos.Entities.csproj",
+      "packagesPath": "C:\\Users\\danie\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.Entities\\obj\\",
+>>>>>>> Daniel
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -548,6 +548,7 @@ C:\Users\danie\Desktop\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBell
 C:\Users\danie\Desktop\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\SalonDeBellezaCarlitos.WebUI.dll
 C:\Users\danie\Desktop\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\SalonDeBellezaCarlitos.WebUI.pdb
 C:\Users\danie\Desktop\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\SalonDeBellezaCarlitos.WebUI.genruntimeconfig.cache
+<<<<<<< HEAD
 C:\Users\Auxiliar.Operaciones\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\Auxiliar.Operaciones\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\Auxiliar.Operaciones\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\bin\Debug\netcoreapp3.1\SalonDeBellezaCarlitos.WebUI.exe
@@ -725,3 +726,8 @@ C:\Users\Auxiliar.Operaciones\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBel
 C:\Users\Auxiliar.Operaciones\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Producto\Index.cshtml.g.cs
 C:\Users\Auxiliar.Operaciones\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Reservacion\Index.cshtml.g.cs
 C:\Users\Auxiliar.Operaciones\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Facturas\Index.cshtml.g.cs
+=======
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Metodopago\Index.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Proveedores\Index.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Cargos\_CreateModalPartialView.cshtml.g.cs
+>>>>>>> Daniel

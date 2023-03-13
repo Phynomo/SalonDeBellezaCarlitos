@@ -1,3 +1,7 @@
 is_global = true
 build_property.RootNamespace = SalonDeBellezaCarlitos.DataAccess
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\Auxiliar.Operaciones\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos.DataAccess\
+=======
+build_property.ProjectDir = C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos.DataAccess\
+>>>>>>> Daniel

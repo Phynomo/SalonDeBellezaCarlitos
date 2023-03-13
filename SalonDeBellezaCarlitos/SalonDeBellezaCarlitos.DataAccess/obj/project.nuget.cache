@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "b5LtSNe+XSqoy50ccbNYpzxGUFlKu08Ws3K+IXUvRBV373/OzovEK6hyJIk7YyNkr2Sqab/bRNN3yUnIv5MkaQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Auxiliar.Operaciones\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj",
+=======
+  "dgSpecHash": "n8uNLqUPhybt0HYmKnEKF8C68uKrMTTaJbcguLs1d8vEHpPc1PQw+Ga1W1f+7zW2IlyE4uwtzJCSq9AkmaiDwQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\danie\\Documents\\GitHub\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos\\SalonDeBellezaCarlitos.DataAccess\\SalonDeBellezaCarlitos.DataAccess.csproj",
+>>>>>>> Daniel
   "expectedPackageFiles": [
     "C:\\Users\\Auxiliar.Operaciones\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\Auxiliar.Operaciones\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
