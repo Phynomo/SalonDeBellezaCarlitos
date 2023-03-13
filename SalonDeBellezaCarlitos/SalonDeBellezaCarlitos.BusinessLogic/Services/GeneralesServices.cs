@@ -17,7 +17,8 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         private readonly DepartametoRepository _DepartamentosRepository; 
         private readonly MunicipioRepository _MunicipiosRepository;
         private readonly ClienteRepository _ClientesRepository;
-        private readonly EstadoCivilRepository _EstadosCivilesRepository; 
+        private readonly EstadoCivilRepository _EstadosCivilesRepository;
+        private readonly SucursalesRepository _SucursalesRepository;
 
         public GeneralesServices(   CargoRepository CargoRepository, 
                                     EmpleadoRepository EmpleadoRepository, 
@@ -27,7 +28,8 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                                     DepartametoRepository departametoRepository,
                                     MunicipioRepository municipioRepository,
                                     ClienteRepository clienteRepository,
-                                    EstadoCivilRepository estadoCivilRepository
+                                    EstadoCivilRepository estadoCivilRepository,
+                                    SucursalesRepository sucursalesRepository
             ) 
         {
             _CargoRepository = CargoRepository;
@@ -39,6 +41,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             _MunicipiosRepository = municipioRepository;
             _ClientesRepository = clienteRepository;
             _EstadosCivilesRepository = estadoCivilRepository;
+            _SucursalesRepository = sucursalesRepository;
         }
 
         #region Cargos
@@ -130,7 +133,6 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #endregion
 
-
         #region Servicios
 
         public IEnumerable<tbServicios> ListadoServicios(out string error)
@@ -203,7 +205,6 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #endregion
 
-
         #region clientes
         
         public IEnumerable<tbClientes> ListadoClientes(out string error)
@@ -235,6 +236,24 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             {
                 error = e.Message;
                 return Enumerable.Empty<tbEstadosCiviles>();
+            }
+        }
+
+        #endregion
+
+        #region Sucursales
+
+        public IEnumerable<tbSucursales> ListadoSucursales(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _SucursalesRepository.List();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<tbSucursales>();
             }
         }
 
