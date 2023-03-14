@@ -215,6 +215,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return Enumerable.Empty<tbServicios>();
             }
         }
+        public int InsertarServicio(tbServicios item)
+        {
+
+            try
+            {
+                var resultado = _ServicioRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
 
         #endregion
 
@@ -354,6 +369,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 error = e.Message;
                 return Enumerable.Empty<tbSucursales>();
             }
+        }
+        public int InsertarSucursal(tbSucursales item)
+        {
+
+            try
+            {
+                var resultado = _SucursalesRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
         }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
+using SalonDeBellezaCarlitos.Entities.Entities;
 using SalonDeBellezaCarlitos.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,20 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
 
             return View(listadoMapeado);
+        }
+        [HttpPost("/Sucursal/Crear")]
+        public ActionResult Create(SucursalViewModel cargo)
+        {
+            var result = 0;
+            var car = _mapper.Map<tbSucursales>(cargo);
+            result = _generalesService.InsertarSucursal(car);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
         }
     }
 }

@@ -26,9 +26,20 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public int Insert(tbServicios item)
         {
-            using var db = new SalonCarlitosContext();
-            db.tbServicios.Add(item);
-            return item.serv_Id;
+            //using var db = new SalonCarlitosContext();
+            //db.tbServicios.Add(item);
+            //return item.serv_Id;
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@serv_Nombre", item.serv_Nombre, DbType.String, ParameterDirection.Input);
+            parametros.Add("@serv_Descripcion", item.serv_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@serv_Precio", item.serv_Precio, DbType.String, ParameterDirection.Input);
+            parametros.Add("@serv_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Servicios, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public IEnumerable<tbServicios> List()

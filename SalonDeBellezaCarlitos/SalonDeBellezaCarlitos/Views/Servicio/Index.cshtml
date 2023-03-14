@@ -5,11 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="row text-center">
+    <div class="col">
+        <h1>Index</h1>
+        <hr />
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row mb-3 text-center">
+    <div class="col">
+        @*<a asp-action="Create">Create New</a>*@
+        <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar Un Servicio</button>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -35,32 +43,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.serv_Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.serv_Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.serv_Precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.serv_FechaCreacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.serv_FechaModificacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.serv_Estado)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.serv_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.serv_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.serv_Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.serv_Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.serv_Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.serv_Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.serv_FechaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.serv_FechaModificacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.serv_Estado)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.serv_Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.serv_Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.serv_Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@Html.Partial("_ServicioCreateModalViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.ServicioViewModel())
+<script src="~/js/App/Salon/Servicios.js"></script>
