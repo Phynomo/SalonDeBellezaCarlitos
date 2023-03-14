@@ -51,3 +51,21 @@ function AbrirModalDelete(id) {
     $("#carg_Id_Delete").val(id);
     $("#EliminarCargos").appendTo('body').modal('show');
 };
+
+
+
+function GuardarModalDelete() {
+    var carg_Descripcion = $('#carg_Id_Delete').val();
+    console.log('hola');
+
+    $("#lbl_DescripcionDeleteError").attr('hidden', true);
+
+    if (carg_Descripcion != "") {
+        $("#formDelete").submit();
+
+    } else {
+        $("#lbl_DescripcionDeleteError").attr('hidden', false);
+        console.log('holperra');
+    }
+
+}

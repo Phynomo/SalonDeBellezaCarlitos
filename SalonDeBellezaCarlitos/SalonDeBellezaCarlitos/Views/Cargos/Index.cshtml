@@ -5,19 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<div class="row mb-3">
+<div class="row text-center">
     <div class="col">
         <h1>Index</h1>
-    </div>
-    <div class="col d-flex justify-content-end">
-        @*<a asp-action="Create">Create New</a>*@
-        <button class="btn btn-primary d-flex justify-content-end" onclick="AbrirModalCreate()">Crear un nuevo cargo</button>
+        <hr />
     </div>
 </div>
 
+<div class="row mb-3 text-center">
+    <div class="col">
+        @*<a asp-action="Create">Create New</a>*@
+        <button class="btn btn-primary" onclick="AbrirModalCreate()">Crear un nuevo cargo</button>
+    </div>
+</div>
 
-<table class="table">
+<table id="example" class="table dataTable compact hover stripe" style="width: 100%;" aria-describedby="example_info">
     <thead>
         <tr>
             <th>
@@ -52,9 +54,9 @@
                     @Html.DisplayFor(modelItem => item.carg_Estado)
                 </td>
                 <td>
-                    <button type="button" id="btnEditar" class="btn btn-warning" onclick="AbrirModalEdit('@item.carg_Id,@item.carg_Descripcion')">Editar</button> |
-                    <a asp-action="Details" asp-route-id="@item.carg_Id">Details</a> |
-                    <button type="button" id="btnEliminar" class="btn btn-danger" onclick="AbrirModalDelete('@item.carg_Id')">Delete</button>
+                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.carg_Id,@item.carg_Descripcion')">Editar</button> |
+                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.carg_Id">Details</a> |
+                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.carg_Id')">Delete</button>
                 </td>
             </tr>
         }

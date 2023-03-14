@@ -61,7 +61,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Cargos/Editar/{id}")]
         public IActionResult Edit(int? id)
         {
-            var listado = _generalesService.BuscarCategoria(id);
+            var listado = _generalesService.BuscarCargo(id);
             return View(listado);
         }
 
@@ -70,7 +70,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             var result = 0;
             var car = _mapper.Map<tbCargos>(cargo);
-            result = _generalesService.EditarCategoria(car);
+            result = _generalesService.EditarCargo(car);
 
             if (result == 0)
             {
@@ -81,7 +81,28 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
            
         }
 
+        [HttpGet("/Cargos/Eliminar/{id}")]
+        public IActionResult Delete(int? id)
+        {
+            var listado = _generalesService.BuscarCargo(id);
+            return View(listado);
+        }
 
+        [HttpPost("/Cargos/Eliminar")]
+        public IActionResult Delete(CargoViewModel cargo)
+        {
+            var result = 0;
+            var car = _mapper.Map<tbCargos>(cargo);
+            result = _generalesService.EliminarCargo(car);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+
+        }
 
     }
 }

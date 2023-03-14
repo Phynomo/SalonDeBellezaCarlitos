@@ -97,7 +97,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         }
 
 
-        public tbCargos BuscarCategoria(int? id)
+        public tbCargos BuscarCargo(int? id)
         {
             try
             {
@@ -112,7 +112,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         }
 
 
-        public int EditarCategoria(tbCargos categoria)
+        public int EditarCargo(tbCargos categoria)
         {
            
             try
@@ -128,7 +128,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         }
 
+        public int EliminarCargo(tbCargos categoria)
+        {
 
+            try
+            {
+                var resultado = _CargoRepository.Delete(categoria);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
 
         #endregion
 
