@@ -24,7 +24,15 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public int Insert(tbEstadosCiviles item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@estc_Descripcion", item.estc_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@estc_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_EstadosCiviles, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public IEnumerable<tbEstadosCiviles> List()

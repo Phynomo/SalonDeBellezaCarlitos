@@ -1818,7 +1818,6 @@ GO
 
 
 CREATE OR ALTER  PROCEDURE gnrl.UDP_tbEstadoCiviles_Insert
-@estc_Id  INT,
 @estc_Descripcion Varchar(200),
 @estc_UsuarioCreacion INT
 as
@@ -1826,16 +1825,14 @@ begin
 BEGIN TRY
 
 INSERT INTO [gnrl].[tbEstadosCiviles]
-           ([estc_Id]
-           ,[estc_Descripcion]
+           ([estc_Descripcion]
            ,[estc_FechaCreacion]
            ,[estc_UsuarioCreacion]
            ,[estc_FechaModificacion]
            ,[estc_UsuarioModificacion]
            ,[estc_Estado])
      VALUES
-           (@estc_Id
-           ,@estc_Descripcion
+           (@estc_Descripcion
            ,GETDATE()
            ,@estc_UsuarioCreacion
            ,NULL

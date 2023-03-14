@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
+using SalonDeBellezaCarlitos.Entities.Entities;
 using SalonDeBellezaCarlitos.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,26 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
 
             return View(listadoMapeado);
+        }
+        [HttpGet("/EstadosCiviles/Crear")]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost("/EstadosCiviles/Crear")]
+        public ActionResult Create(EstadoCivilViewModel estadociv)
+        {
+            var result = 0;
+            var civ = _mapper.Map<tbEstadosCiviles>(estadociv);
+            result = _generalesService.InsertarEstadoCivil(civ);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return RedirectToAction("Listado");
+            }
+            return RedirectToAction("Listado");
         }
 
     }

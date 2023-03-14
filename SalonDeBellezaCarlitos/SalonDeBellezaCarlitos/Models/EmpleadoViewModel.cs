@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -51,6 +52,10 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
         public int? empl_UsuarioModificacion { get; set; }
         [Display(Name = "Estado")]
         public bool? empl_Estado { get; set; }
+        [NotMapped]
+        public int depa_Id { get; set; }
+
+
 
     }
 }

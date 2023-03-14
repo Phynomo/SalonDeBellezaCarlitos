@@ -5,7 +5,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Crear cargo</h5>
+                <h5 class="modal-title">Crear Estado Civil</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -16,8 +16,9 @@
                     <div class="form-group">
                         <label asp-for="estc_Descripcion" class="control-label"></label>
                         <input asp-for="estc_Descripcion" class="form-control" id="estc_Descripcion" name="estc_Descripcion" />
-                        <label name="lbl_estc_Descripcion" id="lbl_estc_Descripcion" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                        <label name="lbl_DescripcionCreateError" id="lbl_DescripcionCreateError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="GuardarModalCreate()">Guardar</button>

@@ -4,12 +4,12 @@
 }
 
 function GuardarModalCreate() {
-    var carg_Descripcion = $('#carg_Descripcion').val();
+    var estc_Descripcion = $('#estc_Descripcion').val();
 
 
     $("#lbl_DescripcionCreateError").attr('hidden', true);
 
-    if (carg_Descripcion != "") {
+    if (estc_Descripcion != "") {
         $("#formCreate").submit();
 
     } else {
@@ -18,6 +18,7 @@ function GuardarModalCreate() {
     }
 
 }
+
 
 function AbrirModalEdit(cadena) {
     var datastring = cadena;

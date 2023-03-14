@@ -37,13 +37,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         }
 
 
-        //[HttpGet("/Cargos/Listado")]
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+        [HttpGet("/Cargos/Crear")]
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-        [HttpPost("/Cargos/Listado")]
+        [HttpPost("/Cargos/Crear")]
         public ActionResult Create(CargoViewModel cargo)
         {
             var result = 0;
@@ -53,7 +53,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             if (result == 0)
             {
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View("/Cargos/Listado");
+                return RedirectToAction("Listado");
             }
             return RedirectToAction("Listado");
         }

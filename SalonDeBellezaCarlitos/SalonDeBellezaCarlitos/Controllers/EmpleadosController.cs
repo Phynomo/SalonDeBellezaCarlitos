@@ -49,9 +49,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Empleados/Crear")]
         public IActionResult Create()
         {
-            
-            var CargosList = _generalesService.ListadoCargos(out string error).ToList();
-            ViewBag.carg_Id = new SelectList(CargosList, "carg_Id", "carg_Descripcion");
+
+            //var CargosList = ; @estc_Id
+            ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion");
+            ViewBag.carg_Id = new SelectList(_generalesService.ListadoCargos(out string error2).ToList(), "carg_Id", "carg_Descripcion");
+            ViewBag.estc_Id = new SelectList(_generalesService.ListadoEstadosCiviles(out string error1).ToList(), "estc_Id", "estc_Descripcion");
             return View();
         }
 
@@ -70,6 +72,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 return View();
             }
             return RedirectToAction("Listado");
+        }
+
+        public IActionResult CargarMunicipios(int id)
+        {
+            var cargarmunicipios = _generalesService.BuscarCargo(id);
+            return Json(cargarmunicipios);
         }
 
     }

@@ -352,6 +352,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return Enumerable.Empty<tbEstadosCiviles>();
             }
         }
+        public int InsertarEstadoCivil(tbEstadosCiviles item)
+        {
+
+            try
+            {
+                var resultado = _EstadosCivilesRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
 
         #endregion
 
