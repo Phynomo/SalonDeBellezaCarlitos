@@ -1,0 +1,47 @@
+﻿@model SalonDeBellezaCarlitos.Entities.Entities.tbMunicipios
+
+<h4>tbMunicipios</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="muni_Descripcion" class="control-label"></label>
+                        <input asp-for="muni_Descripcion" class="form-control" />
+                        <span asp-validation-for="muni_Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="muni_Codigo" class="control-label"></label>
+                        <input asp-for="muni_Codigo" class="form-control" />
+                        <span asp-validation-for="muni_Codigo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="depa_Id" class="control-label">Id Dedpartamento</label>
+                        <select asp-for="depa_Id" class="form-control" asp-items="ViewBag.depa_Id"></select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="muni_UsuarioCreacion" class="control-label">Usuario Creación</label>
+                        <select asp-for="muni_UsuarioCreacion" class="form-control" asp-items="ViewBag.muni_UsuarioCreacion"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-end">
+                <div class="col d-flex justify-content-end">
+                    <input type="submit" value="Create" class="btn btn-primary mx-1" />
+                    <a class="btn btn-dark" asp asp-action="Index">Regresar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

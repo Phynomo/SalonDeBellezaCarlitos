@@ -24,7 +24,19 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public int Insert(tbProductos item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@prod_Nombre", item.prod_Nombre, DbType.String, ParameterDirection.Input);
+            parametros.Add("@prod_Precio", item.prod_Precio, DbType.String, ParameterDirection.Input);
+            parametros.Add("@cate_Id", item.cate_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@prod_Stock", item.prod_Stock, DbType.String, ParameterDirection.Input);
+            parametros.Add("@prov_Id", item.prov_id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@prod_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Categorias, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public IEnumerable<tbProductos> List()

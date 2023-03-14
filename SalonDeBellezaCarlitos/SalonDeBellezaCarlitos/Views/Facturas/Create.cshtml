@@ -1,0 +1,61 @@
+﻿@model SalonDeBellezaCarlitos.Entities.Entities.tbFacturas
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>tbFacturas</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="clie_Id" class="control-label">Id Cliente</label>
+                        <select asp-for="clie_Id" class="form-control" asp-items="ViewBag.clie_Id"></select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="empl_Id_Atendido" class="control-label">Id Empleado</label>
+                        <select asp-for="empl_Id_Atendido" class="form-control" asp-items="ViewBag.empl_Id_Atendido"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="empl_Id_Caja" class="control-label">Id Caja</label>
+                        <select asp-for="empl_Id_Caja" class="form-control" asp-items="ViewBag.empl_Id_Caja"></select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="metp_Id" class="control-label">Metodo de Pago</label>
+                        <select asp-for="metp_Id" class="form-control" asp-items="ViewBag.metp_Id"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="fact_UsuarioCreacion" class="control-label">Usuario Creación</label>
+                        <select asp-for="fact_UsuarioCreacion" class="form-control" asp-items="ViewBag.fact_UsuarioCreacion"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-end">
+                <div class="col d-flex justify-content-end">
+                    <input type="submit" value="Create" class="btn btn-primary mx-1" />
+                    <a class="btn btn-dark" asp asp-action="Index">Regresar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

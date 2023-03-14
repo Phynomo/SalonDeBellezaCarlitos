@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
+using SalonDeBellezaCarlitos.Entities.Entities;
 using SalonDeBellezaCarlitos.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,26 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
 
             return View(listadoMapeado);
+        }
+        [HttpGet("/Proveedores/Crear")]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost("/Proveedores/Crear")]
+        public ActionResult Create(ProveedorViewModel proveedor)
+        {
+            var result = 0;
+            var prov = _mapper.Map<tbProveedores>(proveedor);
+            result = _generalesService.InsertarProveedor(prov);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
         }
 
     }

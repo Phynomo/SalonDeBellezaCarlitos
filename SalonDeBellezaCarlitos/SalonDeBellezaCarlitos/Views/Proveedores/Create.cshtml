@@ -1,0 +1,71 @@
+﻿@model SalonDeBellezaCarlitos.Entities.Entities.tbProveedores
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>tbProveedores</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="prov_NombreEmpresa" class="control-label"></label>
+                        <input asp-for="prov_NombreEmpresa" class="form-control" />
+                        <span asp-validation-for="prov_NombreEmpresa" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="prov_NombreContacto" class="control-label"></label>
+                        <input asp-for="prov_NombreContacto" class="form-control" />
+                        <span asp-validation-for="prov_NombreContacto" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="muni_Id" class="control-label"></label>
+                        <select asp-for="muni_Id" class="form-control" asp-items="ViewBag.muni_Id"></select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="prov_DireccionExacta" class="control-label"></label>
+                        <input asp-for="prov_DireccionExacta" class="form-control" />
+                        <span asp-validation-for="prov_DireccionExacta" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="prov_Telefono" class="control-label"></label>
+                        <input asp-for="prov_Telefono" class="form-control" />
+                        <span asp-validation-for="prov_Telefono" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label asp-for="prov_UsuarioCreacion" class="control-label"></label>
+                        <input asp-for="prov_UsuarioCreacion" class="form-control" />
+                        <span asp-validation-for="prov_UsuarioCreacion" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-end">
+                <div class="col d-flex justify-content-end">
+                    <input type="submit" value="Create" class="btn btn-primary mx-1" />
+                    <a class="btn btn-dark" asp asp-action="Index">Regresar</a>
+                </div>
+            </div>
+        </form> 
+    </div>
+</div>

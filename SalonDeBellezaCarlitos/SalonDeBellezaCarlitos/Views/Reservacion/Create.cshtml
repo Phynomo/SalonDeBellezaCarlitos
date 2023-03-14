@@ -1,0 +1,70 @@
+﻿@model SalonDeBellezaCarlitos.Entities.Entities.tbReservaciones
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>tbReservaciones</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="clie_Id" class="control-label"></label>
+                        <select asp-for="clie_Id" class="form-control" asp-items="ViewBag.clie_Id"></select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="sucu_Id" class="control-label">Id Sucursal</label>
+                        <select asp-for="sucu_Id" class="form-control" asp-items="ViewBag.sucu_Id"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="rese_DiaReservado" class="control-label"></label>
+                        <input asp-for="rese_DiaReservado" class="form-control" />
+                        <span asp-validation-for="rese_DiaReservado" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="rese_HoraInicio" class="control-label"></label>
+                        <input asp-for="rese_HoraInicio" class="form-control" />
+                        <span asp-validation-for="rese_HoraInicio" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="rese_HoraFin" class="control-label"></label>
+                        <input asp-for="rese_HoraFin" class="form-control" />
+                        <span asp-validation-for="rese_HoraFin" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="rese_UsuarioCreacion" class="control-label">Usuario Creacion</label>
+                        <select asp-for="rese_UsuarioCreacion" class="form-control" asp-items="ViewBag.rese_UsuarioCreacion"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-end">
+                <div class="col d-flex justify-content-end">
+                    <input type="submit" value="Create" class="btn btn-primary mx-1" />
+                    <a class="btn btn-dark" asp asp-action="Index">Regresar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

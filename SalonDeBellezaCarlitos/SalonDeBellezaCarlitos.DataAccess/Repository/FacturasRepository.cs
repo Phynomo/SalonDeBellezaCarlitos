@@ -24,7 +24,18 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public int Insert(tbFacturas item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@clie_Id", item.clie_Id, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empl_Id_Atendido", item.empl_Id_Atendido, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empl_Id_Caja", item.empl_Id_CajaNavigation, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@metp_Id", item.metp_Id, DbType.String, ParameterDirection.Input);
+            parametros.Add("@fact_UsuarioCreacion", item.fact_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Facturas, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public IEnumerable<tbFacturas> List()

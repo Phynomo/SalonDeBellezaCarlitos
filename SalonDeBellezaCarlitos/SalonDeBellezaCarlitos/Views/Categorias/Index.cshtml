@@ -5,13 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row mb-3">
+<div class="row text-center">
     <div class="col">
         <h1>Index</h1>
+        <hr />
     </div>
-    <div class="col d-flex justify-content-end">
+</div>
+
+<div class="row mb-3 text-center">
+    <div class="col">
         @*<a asp-action="Create">Create New</a>*@
-        <button class="btn btn-primary d-flex justify-content-end" onclick="AbrirModalCreate()">Crear un nueva categoria</button>
+        <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar Un Categoria</button>
     </div>
 </div>
 <table id="example" class="table dataTable compact hover stripe" style="width: 100%;" aria-describedby="example_info">

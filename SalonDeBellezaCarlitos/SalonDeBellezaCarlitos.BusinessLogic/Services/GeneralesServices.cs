@@ -59,10 +59,6 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             _ProveedoresRepository = proveedorRepository;
         }
 
-        public int InsertarCategorias(tbCategorias cate)
-        {
-            throw new NotImplementedException();
-        }
 
         #region Cargos
 
@@ -316,6 +312,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return Enumerable.Empty<tbMunicipios>();
             }
         }
+        public int InsertarMunicipio(tbMunicipios item)
+        {
+
+            try
+            {
+                var resultado = _MunicipiosRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
 
         #endregion
 
@@ -333,6 +344,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 error = e.Message;
                 return Enumerable.Empty<tbClientes>();
             }
+        }
+        public int InsertarCLientes(tbClientes item)
+        {
+
+            try
+            {
+                var resultado = _ClientesRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
         }
 
         #endregion
@@ -418,6 +444,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return Enumerable.Empty<tbProductos>();
             }
         }
+        public int InsertarProducto(tbProductos item)
+        {
+
+            try
+            {
+                var resultado = _ProductosRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
 
         #endregion
 
@@ -435,6 +476,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 error = e.Message;
                 return Enumerable.Empty<tbReservaciones>();
             }
+        }
+        public int InsertarReservaciones(tbReservaciones item)
+        {
+
+            try
+            {
+                var resultado = _ReservacionRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
         }
 
         #endregion
@@ -454,6 +510,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return Enumerable.Empty<tbFacturas>();
             }
         }
+        public int InsertarFacturas(tbFacturas item)
+        {
+
+            try
+            {
+                var resultado = _FacturasRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
 
         #endregion
 
@@ -470,6 +541,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             {
                 error = e.Message;
                 return Enumerable.Empty<tbProveedores>();
+            }
+
+        }
+        public int InsertarProveedor(tbProveedores item)
+        {
+
+            try
+            {
+                var resultado = _ProveedoresRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
             }
 
         }
