@@ -52,6 +52,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
         public int? empl_UsuarioModificacion { get; set; }
         [Display(Name = "Estado")]
         public bool? empl_Estado { get; set; }
+        
+        [Display(Name = "Departamento")]
+        [Required(ErrorMessage = "El campo {0} es necesario!")]
         [NotMapped]
         public int depa_Id { get; set; }
 

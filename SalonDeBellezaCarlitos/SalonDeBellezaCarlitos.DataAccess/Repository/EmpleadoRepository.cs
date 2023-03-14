@@ -67,5 +67,16 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<tbEmpleados> BuscarEmpleado(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@empl_Id", id, DbType.String, ParameterDirection.Input);
+            return db.Query<tbEmpleados>(ScriptsDataBase.UDP_Buscar_Empleados, parametros, commandType: CommandType.StoredProcedure);
+
+        }
+
+
     }
 }

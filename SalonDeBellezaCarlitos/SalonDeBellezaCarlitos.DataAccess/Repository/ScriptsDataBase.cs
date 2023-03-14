@@ -18,6 +18,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         #region Empleados
 
         public static string UDP_Listado_Empleados = "salo.UDP_tbEmpleados_Listado";
+        public static string UDP_Buscar_Empleados = "salo.UDP_tbEmpleados_Buscar";
         public static string UDP_Insertar_Empleados = "salo.UDP_tbEmpleados_Insert";
         public static string UDP_Editar_Empleados = "salo.UDP_tbEmpleados_Update";
         public static string UDP_Borrar_Empleados = "salo.UDP_tbEmpleados_Delete";
@@ -117,6 +118,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         #region Municipios
 
         public static string UDP_Listado_Municipios = "gnrl.UDP_tbMunicipios_Listado";
+        public static string UDP_Listado_MunicipiosXDepartamento = "gnrl.UDP_tbMunicipios_Departamento";
         public static string UDP_Insertar_Municipios = "gnrl.UDP_tbMunicipios_Insert";
         public static string UDP_Editar_Municipios = "gnrl.UDP_tbMunicipios_Update";
         public static string UDP_Borrar_Municipios = "gnrl.UDP_tbMunicipiosDelete";

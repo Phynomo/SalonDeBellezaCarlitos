@@ -3,7 +3,6 @@ using SalonDeBellezaCarlitos.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 {
@@ -163,6 +162,20 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
         }
 
+
+        public tbEmpleados findEmpleado(int? id)
+        {
+            try
+            {
+                return _EmpleadoRepository.find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
         public int InsertarEmpleado(tbEmpleados item)
         {
 
@@ -179,6 +192,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         }
 
+        public IEnumerable<tbEmpleados> BuscarEmpleados(int? id) 
+        {
+            try
+            {
+                return _EmpleadoRepository.BuscarEmpleado(id);
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<tbEmpleados>();
+            }
+        }
 
         #endregion
 
@@ -314,6 +338,33 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             {
                 error = e.Message;
                 return Enumerable.Empty<tbMunicipios>();
+            }
+        }
+
+        public IEnumerable<tbMunicipios> ListadoMunicipiosPorDepartamento(int id)
+        {
+            try
+            {
+                return _MunicipiosRepository.MunicipiosxDepartamento(id);
+            }
+            catch (Exception )
+            {
+                return Enumerable.Empty<tbMunicipios>();
+            }
+        }
+
+
+        public tbMunicipios BuscarMunicipio(int? id)
+        {
+            try
+            {
+                var resultado = _MunicipiosRepository.find(id);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
 
