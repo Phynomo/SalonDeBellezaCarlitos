@@ -10,9 +10,11 @@ function GuardarModalCreate() {
     $("#lbl_DescripcionCreateError").attr('hidden', true);
 
     if (carg_Descripcion != "") {
+        $('#carg_Descripcion').val('');
         $("#formCreate").submit();
 
     } else {
+        console.log('false')
         $("#lbl_DescripcionCreateError").attr('hidden', false);
     }
 
@@ -56,7 +58,6 @@ function AbrirModalDelete(id) {
 
 function GuardarModalDelete() {
     var carg_Descripcion = $('#carg_Id_Delete').val();
-    console.log('hola');
 
     $("#lbl_DescripcionDeleteError").attr('hidden', true);
 
@@ -65,7 +66,6 @@ function GuardarModalDelete() {
 
     } else {
         $("#lbl_DescripcionDeleteError").attr('hidden', false);
-        console.log('holperra');
     }
 
 }
