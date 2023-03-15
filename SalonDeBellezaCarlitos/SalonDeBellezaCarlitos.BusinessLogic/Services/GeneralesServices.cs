@@ -651,17 +651,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #region Facturas
 
-        public IEnumerable<tbFacturas> ListadoFacturas(out string error)
+        public IEnumerable<VW_tbFacturas_Listado> ListadoFacturas(out string error)
         {
             error = string.Empty;
             try
             {
-                return _FacturasRepository.List();
+                return _FacturasRepository.ListView();
             }
             catch (Exception e)
             {
                 error = e.Message;
-                return Enumerable.Empty<tbFacturas>();
+                return Enumerable.Empty<VW_tbFacturas_Listado>();
             }
         }
         public int InsertarFacturas(tbFacturas item)

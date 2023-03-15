@@ -80,6 +80,10 @@
       {
          "Name": "[salo].[tbSucursales]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VW_tbFacturas_Listado]",
+         "ObjectType": 3
       }
    ],
    "UiHint": "DESKTOP-383CMQ3\\MSSQLSERVERLOCAL.SalonDeBellezaCarlitos",
