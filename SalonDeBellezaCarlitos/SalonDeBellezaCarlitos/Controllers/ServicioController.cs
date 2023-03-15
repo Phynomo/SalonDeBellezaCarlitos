@@ -100,5 +100,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             return RedirectToAction("Listado");
 
         }
+
+        [HttpGet("/Servicio/Detalles")]
+        public IActionResult Details(int? id)
+        {
+            var servicio = _generalesService.BuscarServicios(id);
+            var servicioMapeado = _mapper.Map<IEnumerable<ServicioViewModel>>(servicio);
+            return View(servicioMapeado);
+        }
     }
 }

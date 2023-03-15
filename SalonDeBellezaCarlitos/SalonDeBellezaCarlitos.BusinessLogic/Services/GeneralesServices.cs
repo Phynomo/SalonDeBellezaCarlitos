@@ -325,6 +325,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public IEnumerable<tbServicios> BuscarServicios(int? id)
+        {
+            try
+            {
+                return _ServicioRepository.BuscarServicio(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         #endregion
 
@@ -737,6 +748,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             try
             {
                 var resultado = _MetodopagoRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+        public int EliminarMetodoPago(tbMetodoPago metodoPago)
+        {
+
+            try
+            {
+                var resultado = _MetodopagoRepository.Delete(metodoPago);
 
                 return resultado;
             }

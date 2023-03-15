@@ -1279,6 +1279,28 @@ END
 
 GO
 
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbServicios_Buscar
+	@serv_Id	INT
+AS
+BEGIN
+
+SELECT [serv_Id]
+      ,[serv_Nombre]
+      ,[serv_Descripcion]
+      ,[serv_Precio]
+      ,[serv_FechaCreacion]
+      ,[serv_UsuarioCreacion]
+      ,[serv_FechaModificacion]
+      ,[serv_UsuarioModificacion]
+      ,[serv_Estado]
+  FROM [salo].[tbServicios]
+  WHERE serv_Estado = 1 
+  AND serv_Id = @serv_Id		
+
+END
+
+GO
 
 CREATE OR ALTER PROCEDURE salo.UDP_tbServicios_Insert
 	@serv_Nombre Nvarchar(150),

@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Content Remove="Views\EstadosCiviles\_CreateModalPartialView.cshtml" />
-    <Content Remove="wwwroot\js\App\Salon\Cargos - Copia.js" />
   </ItemGroup>
 
   <ItemGroup>

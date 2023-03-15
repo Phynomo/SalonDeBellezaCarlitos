@@ -72,5 +72,14 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
             return resultado;
         }
+
+        public IEnumerable<tbServicios> BuscarServicio(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@serv_Id", id, DbType.Int32, ParameterDirection.Input);
+            return db.Query<tbServicios>(ScriptsDataBase.UDP_Buscar_Servicios, parametros, commandType: CommandType.StoredProcedure);
+
+        }
     }
 }

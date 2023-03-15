@@ -66,16 +66,12 @@ function GuardarModalEdit() {
 }
 
 function AbrirModalDelete(id) {
-    console.log(id);
     $("#serv_Id_Delete").val(id);
     $("#EliminarServicio").appendTo('body').modal('show');
 };
 
-
-
 function GuardarModalDelete() {
     var serv_Id_Delete = $('#serv_Id_Delete').val();
-    console.log('outa');
     $("#lbl_DescripcionDeleteError").attr('hidden', true);
 
     if (serv_Id_Delete != "") {

@@ -61,5 +61,29 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         }
 
 
+        [HttpGet("/Metodopago/Eliminar/{id}")]
+        public IActionResult Delete(int? id)
+        {
+            var listado = _generalesService.BuscarCargo(id);
+            return View(listado);
+        }
+
+        [HttpPost("/Metodopago/Eliminar")]
+        public IActionResult Delete(MetodoPagoViewModel metodoPago)
+        {
+            var result = 0;
+            var met = _mapper.Map<tbMetodoPago>(metodoPago);
+            result = _generalesService.EliminarMetodoPago(met);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+
+        }
+
+
     }
 }

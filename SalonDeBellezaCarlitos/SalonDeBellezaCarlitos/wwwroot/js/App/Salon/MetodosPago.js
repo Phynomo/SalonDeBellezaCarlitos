@@ -18,3 +18,20 @@ function GuardarModalCreate() {
     }
 
 }
+function AbrirModalDelete(id) {
+    $("#metp_Id_Delete").val(id);
+    $("#EliminarMetodopago").appendTo('body').modal('show');
+};
+
+function GuardarModalDelete() {
+    var metp_Id_Delete = $('#metp_Id_Delete').val();
+    $("#lbl_DescripcionDeleteError").attr('hidden', true);
+
+    if (metp_Id_Delete != "") {
+        $("#formDelete").submit();
+
+    } else {
+        $("#lbl_DescripcionDeleteError").attr('hidden', false);
+    }
+
+}
