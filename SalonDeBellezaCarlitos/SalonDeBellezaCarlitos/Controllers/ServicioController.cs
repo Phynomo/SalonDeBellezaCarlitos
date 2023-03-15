@@ -24,7 +24,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         }
 
 
-        [HttpGet("/Servicios/Listado")]
+        [HttpGet("/Servicio/Listado")]
         public IActionResult Index()
         {
             var listado = _generalesService.ListadoServicios(out string error);
@@ -39,12 +39,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             return View(listadoMapeado);
         }
 
-        [HttpPost("/Servicios/Crear")]
+        [HttpPost("/Servicio/Crear")]
         public ActionResult Create(ServicioViewModel servicio)
         {
             var result = 0;
-            var car = _mapper.Map<tbServicios>(servicio);
-            result = _generalesService.InsertarServicio(car);
+            var ser = _mapper.Map<tbServicios>(servicio);
+            result = _generalesService.InsertarServicio(ser);
 
             if (result == 0)
             {
@@ -53,14 +53,39 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             return RedirectToAction("Listado");
         }
-        [HttpGet("/Servicios/Eliminar/{id}")]
+
+        [HttpGet("/Servicio/Editar/{id}")]
+        public IActionResult Edit(int? id)
+        {
+            var listado = _generalesService.BuscarCargo(id);
+            return View(listado);
+        }
+
+        [HttpPost("/Servicio/Editar")]
+        public IActionResult Edit(ServicioViewModel servicio)
+        {
+            var result = 0;
+            var ser = _mapper.Map<tbServicios>(servicio);
+            result = _generalesService.EditarServicio(ser);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+
+        }
+
+
+        [HttpGet("/Servicio/Eliminar/{id}")]
         public IActionResult Delete(int? id)
         {
             var listado = _generalesService.BuscarCargo(id);
             return View(listado);
         }
 
-        [HttpPost("/Servicios/Eliminar")]
+        [HttpPost("/Servicio/Eliminar")]
         public IActionResult Delete(ServicioViewModel servicio)
         {
             var result = 0;

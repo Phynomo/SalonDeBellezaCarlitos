@@ -1,0 +1,57 @@
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.ServicioViewModel
+
+
+<div class="modal" id="EditarServicio" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Servicio</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Edit" id="formEdit">
+                <div class="modal-body">
+                    <input asp-for="serv_Id" class="form-control" id="serv_Id_Edit" name="serv_Id" hidden />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="serv_Nombre" class="control-label"></label>
+                                <input asp-for="serv_Nombre" class="form-control" id="serv_Nombre_Edit" name="serv_Nombre" />
+                                <label name="lbl_NombreEditError" id="lbl_NombreEditError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="serv_Descripcion" class="control-label"></label>
+                                <input asp-for="serv_Descripcion" class="form-control" id="serv_Descripcion_Edit" name="serv_Descripcion" />
+                                <label name="lbl_DescripcionEditError" id="lbl_DescripcionEditError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="serv_Precio" class="control-label"></label>
+                                <input asp-for="serv_Precio" class="form-control" id="serv_Precio_Edit" name="serv_Precio" />
+                                <label name="lbl_PrecioEditError" id="lbl_PrecioEditError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="serv_UsuarioModificacion" class="control-label"></label>
+                                <input asp-for="serv_UsuarioModificacion" class="form-control" id="serv_UsuarioModificacion_Edit" name="serv_UsuarioModificacion" />
+                                <label name="lbl_DescripcionEditError" id="lbl_DescripcionEditError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="GuardarModalEdit()">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

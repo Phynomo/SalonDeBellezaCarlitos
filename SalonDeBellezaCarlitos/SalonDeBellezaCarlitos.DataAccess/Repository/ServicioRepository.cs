@@ -56,10 +56,21 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public int Update(tbServicios item)
         {
-            using var db = new SalonCarlitosContext();
-            db.Entry(item).State = EntityState.Modified;
-            db.SaveChanges();
-            return item.serv_Id;
+            //using var db = new SalonCarlitosContext();
+            //db.Entry(item).State = EntityState.Modified;
+            //db.SaveChanges();
+            //return item.serv_Id;
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@serv_Id", item.serv_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@serv_Nombre", item.serv_Nombre, DbType.String, ParameterDirection.Input);
+            parametros.Add("@serv_Descripcion", item.serv_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@serv_Precio", item.serv_Precio, DbType.String, ParameterDirection.Input);
+            parametros.Add("@serv_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Servicios, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
     }
 }
