@@ -1,5 +1,4 @@
-﻿@model SalonDeBellezaCarlitos.WebUI.Models.EstadoCivilViewModel
-
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.SucursalViewModel
 
 <div class="modal" id="modalCreate" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -14,8 +13,8 @@
                 <div class="modal-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="estc_Descripcion" class="control-label"></label>
-                        <input asp-for="estc_Descripcion" class="form-control" id="estc_Descripcion" name="estc_Descripcion" />
+                        <label asp-for="sucu_Descripcion" class="control-label"></label>
+                        <input asp-for="sucu_Descripcion" class="form-control" id="estc_Descripcion" name="estc_Descripcion" />
                         <label name="lbl_estc_Descripcion" id="lbl_estc_Descripcion" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                     </div>
                 </div>

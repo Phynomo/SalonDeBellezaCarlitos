@@ -226,6 +226,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public int EliminarServicio(tbServicios servicio)
+        {
+
+            try
+            {
+                var resultado = _ServicioRepository.Delete(servicio);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
 
         #endregion
 

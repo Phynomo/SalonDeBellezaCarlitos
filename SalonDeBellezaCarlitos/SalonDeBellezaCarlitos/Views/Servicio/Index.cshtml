@@ -67,7 +67,8 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.serv_Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.serv_Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.serv_Id">Delete</a>
+                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.serv_Id')">Delete</button>
+
                 </td>
             </tr>
         }
@@ -75,4 +76,5 @@
 </table>
 
 @Html.Partial("_ServicioCreateModalViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.ServicioViewModel())
+@Html.Partial("_ServicioDeleteModalViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.ServicioViewModel())
 <script src="~/js/App/Salon/Servicios.js"></script>
