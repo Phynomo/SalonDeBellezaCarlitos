@@ -5,12 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<div class="row mb-3">
+    <div class="col">
+        <h1>Index</h1>
+    </div>
+    <div class="col d-flex justify-content-end">
+        @*<a asp-action="Create">Create New</a>*@
+        <button class="btn btn-primary d-flex justify-content-end" onclick="AbrirModalCreate()">Crear un nueva categoria</button>
+    </div>
+</div>
+<table id="example" class="table dataTable compact hover stripe" style="width: 100%;" aria-describedby="example_info">
     <thead>
         <tr>
             <th>
@@ -26,23 +30,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.cate_Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cate_FechaCreacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cate_FechaModificacion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.cate_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.cate_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.cate_Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cate_Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cate_FechaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cate_FechaModificacion)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.cate_Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.cate_Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.cate_Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+@Html.Partial("_CategoriasCreateViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.CategoriaViewModel());
+
+
+<script src="~/js/App/Salon/Categorias.js"></script>

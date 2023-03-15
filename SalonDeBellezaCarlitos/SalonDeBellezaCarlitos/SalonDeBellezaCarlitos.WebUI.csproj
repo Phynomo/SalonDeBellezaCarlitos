@@ -1,8 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\js\App\General\**" />
+    <Content Remove="wwwroot\js\App\General\**" />
+    <EmbeddedResource Remove="wwwroot\js\App\General\**" />
+    <None Remove="wwwroot\js\App\General\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\EstadosCiviles\_CreateModalPartialView.cshtml" />
+    <Content Remove="wwwroot\js\App\Salon\Cargos - Copia.js" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />

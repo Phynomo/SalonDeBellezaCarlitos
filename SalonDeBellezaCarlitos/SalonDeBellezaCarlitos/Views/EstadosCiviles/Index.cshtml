@@ -5,11 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="row text-center">
+    <div class="col">
+        <h1>Index</h1>
+        <hr />
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row mb-3 text-center">
+    <div class="col">
+        @*<a asp-action="Create">Create New</a>*@
+        <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar Un Estado Civil</button>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -26,23 +34,29 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.estc_Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.estc_FechaCreacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.estc_FechaModificacion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.estc_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.estc_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.estc_Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estc_Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estc_FechaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estc_FechaModificacion)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.estc_Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.estc_Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.estc_Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@Html.Partial("_EstadoCivilCreateViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.EstadoCivilViewModel())
+
+
+<script src="~/js/App/Salon/EstadosCiviles.js"></script>

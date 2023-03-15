@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.SucursalViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row text-center">
+    <div class="col">
+        <h1>Index</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row mb-3 text-center">
+    <div class="col">
+        @*<a asp-action="Create">Create New</a>*@
+        <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar Una Sucursal</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.sucu_Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sucu_DireccionExacta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.muni_Id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sucu_Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sucu_DireccionExacta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.muni_Id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.sucu_Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.sucu_Id">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.sucu_Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@Html.Partial("_SucursalCreateModalViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.SucursalViewModel())
+<script src="~/js/App/Salon/Sucursales.js"></script>
