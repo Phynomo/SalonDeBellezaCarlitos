@@ -44,3 +44,28 @@
                 });
         });
     });
+
+
+
+
+function AbrirModalDelete(id) {
+    console.log(id);
+    $("#empl_Id_Delete").val(id);
+    $("#EliminarEmpleado").appendTo('body').modal('show');
+};
+
+
+
+function GuardarModalDelete() {
+    var carg_Descripcion = $('#empl_Id_Delete').val();
+
+    $("#lbl_DescripcionDeleteError").attr('hidden', true);
+
+    if (carg_Descripcion != "") {
+        $("#formDelete").submit();
+
+    } else {
+        $("#lbl_DescripcionDeleteError").attr('hidden', false);
+    }
+
+}

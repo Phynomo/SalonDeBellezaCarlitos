@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.MetodoPagoViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row text-center">
+    <div class="col">
+        <h1>Index</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row mb-3 text-center">
+    <div class="col">
+        @*<a asp-action="Create">Create New</a>*@
+        <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar un Metodo de pago</button>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.metp_Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.metp_FechaCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.metp_FechaModificacion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.metp_Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.metp_FechaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.metp_FechaModificacion)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.metp_Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.metp_Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.metp_Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@Html.Partial("_MetodopagoCreateViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.MetodoPagoViewModel())
+
+
+<script src="~/js/App/Salon/MetodosPago.js"></script>

@@ -1,15 +1,22 @@
 ﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.EmpleadoViewModel>
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row text-center">
+    <div class="col">
+        <h1>Empleados</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row mb-3 text-center">
+    <div class="col">
+        <a class="btn btn-primary" asp-action="Create">Agregar un empleado</a>
+        @*<button class="btn btn-primary" onclick="AbrirModalCreate()">Crear un nuevo cargo</button>*@
+    </div>
+</div>
 <table id="example" class="table dataTable compact hover stripe" style="width: 100%;" aria-describedby="example_info">
     <thead>
         <tr>
@@ -37,31 +44,37 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.empl_Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.empl_Apellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.empl_Sexo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.empl_DireccionExacta)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.empl_Telefono)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.empl_CorreoElectronico)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.empl_Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.empl_Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.empl_Id">Delete</a>
-                </td>
-            </tr>
-        }
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.empl_Nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.empl_Apellido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.empl_Sexo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.empl_DireccionExacta)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.empl_Telefono)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.empl_CorreoElectronico)
+    </td>
+    <td>
+        <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.empl_Id">Editar</a> |
+        <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.empl_Id">Detalles</a> |
+        <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.empl_Id')">Eliminar</button>
+    </td>
+</tr>
+}
     </tbody>
 </table>
+
+
+
+@Html.Partial("_EmpleadosDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.EmpleadoViewModel())
+
+<script src="~/js/App/Salon/Empleados.js"></script>
