@@ -48,5 +48,14 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<tbMunicipios> MunicipiosxDepartamento(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@depa_Id", id, DbType.String, ParameterDirection.Input);
+            return db.Query<tbMunicipios>(ScriptsDataBase.UDP_Listado_MunicipiosXDepartamento, parametros, commandType: CommandType.StoredProcedure);
+        }
+
     }
 }

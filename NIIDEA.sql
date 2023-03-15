@@ -1016,6 +1016,46 @@ END CATCH
 
 END
 GO
+GO
+
+CREATE OR ALTER PROCEDURE salo.UDP_tbEmpleados_Buscar
+@empl_Id INT
+AS
+BEGIN
+
+SELECT	empl_Id, 
+		empl_Nombre, 
+		empl_Apellido, 
+		empl_Sexo, 
+		T1.muni_Id, 
+		T2.muni_Codigo,
+		T2.muni_Descripcion,
+		T3.depa_Codigo,
+		T3.depa_Descripcion,
+		T3.depa_Id,
+		empl_DireccionExacta, 
+		T1.estc_Id,
+		T4.estc_Descripcion,
+		empl_Telefono, 
+		empl_CorreoElectronico, 
+		empl_FechaNacimiento, 
+		empl_FechaContratacion, 
+		T1.carg_Id,
+		T5.carg_Descripcion,
+		empl_FechaCreacion, 
+		empl_UsuarioCreacion, 
+		empl_FechaModificacion, 
+		empl_UsuarioModificacion, 
+		empl_Estado
+FROM salo.tbEmpleados T1 INNER JOIN gnrl.tbMunicipios T2 
+ON t1.muni_Id = t2.muni_Id INNER JOIN gnrl.tbDepartamentos T3
+ON T3.depa_Id = t2.depa_Id INNER JOIN gnrl.tbEstadosCiviles T4
+ON T4.estc_Id = T1.estc_Id INNER JOIN salo.tbCargos T5
+ON t5.carg_Id = t1.carg_Id
+WHERE empl_Estado = 1 AND T1.empl_Id = @empl_Id
+
+END
+
 
 --Procedimientos almacenados de categorias
 GO
@@ -2119,6 +2159,30 @@ END CATCH
 
 end 
 GO
+
+GO
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbMunicipios_Departamento
+@depa_Id	INT
+AS
+BEGIN
+
+SELECT [muni_Id]
+      ,[muni_Descripcion]
+      ,[muni_Codigo]
+      ,T1.[depa_Id]
+	  ,T2.depa_Codigo
+	  ,T2.depa_Descripcion
+      ,[muni_FechaCreacion]
+      ,[muni_UsuarioCreacion]
+      ,[muni_FechaModificacion]
+      ,[muni_UsuarioModificacion]
+      ,[muni_Estado]
+  FROM [gnrl].[tbMunicipios] T1 INNER JOIN gnrl.tbDepartamentos T2
+  ON T1.depa_Id = T2.depa_Id
+  WHERE muni_Estado = 1 and t1.depa_Id = @depa_Id
+
+END
+
 
 
 --Procedimiento Insert Facturas 

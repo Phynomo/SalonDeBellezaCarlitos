@@ -1,0 +1,142 @@
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.EmpleadoViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Detalles</h1>
+
+
+@*<div class="row">
+    <div class="col">
+        <label class="text-black font-weight-bold"></label><br />
+        <label></label>
+    </div>
+    <div class="col">
+        <label class="text-black font-weight-bold"></label><br />
+        <label></label>
+    </div>
+</div>*@
+
+<div>
+    <h4 class="text-center">Empleados</h4>
+    <hr />
+    <input type="hidden" asp-for="empl_Id" value="@ViewBag.empl_Id" />
+    <div class="row">
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.empl_Nombre)</label><br />
+            <label>@ViewBag.empl_Nombre</label>
+        </div>
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.empl_Apellido)</label><br />
+            <label>@ViewBag.empl_Apellido</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.empl_Sexo)</label><br />
+            <label>@ViewBag.empl_Sexo</label>
+        </div>
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.empl_DireccionExacta)</label><br />
+            <label>@ViewBag.empl_DireccionExacta</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label class="text-black font-weight-bold">Departamento</label><br />
+            <label>@ViewBag.depa_Id</label>
+        </div>
+        <div class="col">
+            <label class="text-black font-weight-bold">Municipio</label><br />
+            <label>@ViewBag.muni_Id</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label class="text-black font-weight-bold">Estado civil</label><br />
+            <label>@ViewBag.estc_Id</label>
+        </div>
+        <div class="col">
+            <label class="text-black font-weight-bold">Cargo</label><br />
+            <label>@ViewBag.carg_Id</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.empl_Telefono)</label><br />
+            <label>@ViewBag.empl_Telefono</label>
+        </div>
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.empl_CorreoElectronico)</label><br />
+            <label>@ViewBag.empl_CorreoElectronico</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.empl_FechaNacimiento)</label><br />
+            <label>@ViewBag.empl_FechaNacimiento</label>
+        </div>
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.empl_FechaContratacion)</label><br />
+            <label>@ViewBag.empl_FechaContratacion</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col d-flex justify-content-end">
+            <a class="btn btn-warning mx-1" asp-action="Edit" asp-route-id="@ViewBag.empl_Id">Editar</a> 
+            <a class="btn btn-dark" asp-action="Index">Regresar al listado</a>
+        </div>
+        
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header" style="background-color:#2a0637;">
+            <h3 class="text-white ">Auditoria</h3>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Accion</th>
+                        <th>Usuario</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Creado</td>
+                        <td>@ViewBag.UsuarioCreacion</td>
+                        <td>@ViewBag.FechaCreacion</td>
+                    </tr>
+                    <tr>
+                        <td>Modificado</td>
+                        <td>@ViewBag.UsuarioModificacion</td>
+                        <td>@ViewBag.FechaModificacion</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @*<dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.empl_FechaCreacion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.empl_FechaCreacion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.empl_FechaModificacion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.empl_FechaModificacion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.empl_Estado)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.empl_Estado)
+        </dd>*@
+</div>

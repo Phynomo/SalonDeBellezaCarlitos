@@ -3,7 +3,6 @@ using SalonDeBellezaCarlitos.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 {
@@ -144,6 +143,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #region Empleados
 
+        public int EliminarEmpleado(tbEmpleados Empleado)
+        {
+
+            try
+            {
+                var resultado = _EmpleadoRepository.Delete(Empleado);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
 
         public IEnumerable<tbEmpleados> ListadoEmpleados(out string error)
         {
@@ -158,6 +172,20 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return Enumerable.Empty<tbEmpleados>();
             }
         }
+
+
+        public tbEmpleados findEmpleado(int? id)
+        {
+            try
+            {
+                return _EmpleadoRepository.find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
 
         public int InsertarEmpleado(tbEmpleados item)
         {
@@ -175,10 +203,51 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         }
 
+        public int EditarEmpleado(tbEmpleados item)
+        {
+
+            try
+            {
+                var resultado = _EmpleadoRepository.Update(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public IEnumerable<tbEmpleados> BuscarEmpleados(int? id) 
+        {
+            try
+            {
+                return _EmpleadoRepository.BuscarEmpleado(id);
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<tbEmpleados>();
+            }
+        }
 
         #endregion
 
         #region Usuarios
+
+        public tbUsuarios BuscarUsuario(int? id)
+        {
+            try
+            {
+                var resultado = _UsuariosRepository.find(id);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         public IEnumerable<tbUsuarios> ListadoUsuarios(out string error)
         {
@@ -325,6 +394,20 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         }
 
+        public tbDepartamentos BuscarDepartameto(int? id)
+        {
+            try
+            {
+                var resultado = _DepartamentosRepository.find(id);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         #endregion
 
         #region Municipios
@@ -356,6 +439,33 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return 0;
             }
 
+        }
+
+        public IEnumerable<tbMunicipios> ListadoMunicipiosPorDepartamento(int id)
+        {
+            try
+            {
+                return _MunicipiosRepository.MunicipiosxDepartamento(id);
+            }
+            catch (Exception )
+            {
+                return Enumerable.Empty<tbMunicipios>();
+            }
+        }
+
+
+        public tbMunicipios BuscarMunicipio(int? id)
+        {
+            try
+            {
+                var resultado = _MunicipiosRepository.find(id);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         #endregion
@@ -394,6 +504,20 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         #endregion
 
         #region Estados Civiles
+
+        public tbEstadosCiviles BuscarEstadoCivil(int? id)
+        {
+            try
+            {
+                var resultado = _EstadosCivilesRepository.find(id);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         public IEnumerable<tbEstadosCiviles> ListadoEstadosCiviles(out string error)
         {
