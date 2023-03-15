@@ -1,4 +1,10 @@
 ﻿$(document).ready(function () {
+    $('#navSalon').addClass('active');
+    $('#navEmpleados').addClass('active');
+    $('#subnavSalon').addClass('show');
+
+
+
     if ($("#muni_Id").val() == '') {
         var departamentoId = $("#depa_Id").val();
         $.getJSON('/Empleados/CargarMunicipios', { id: departamentoId })

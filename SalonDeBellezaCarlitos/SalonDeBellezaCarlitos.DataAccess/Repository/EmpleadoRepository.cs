@@ -42,7 +42,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             DateTime fechaContratacion = Convert.ToDateTime(fechaContratacionstring);
             string FN = fechaNacimineto.ToString("yyyy-MM-dd");
             string FC = fechaContratacion.ToString("yyyy-MM-dd");
-
+            item.empl_CorreoElectronico += " ";
 
             parametros.Add("@empl_Nombre", item.empl_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_Apellido", item.empl_Apellido, DbType.String, ParameterDirection.Input);
@@ -81,7 +81,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             DateTime fechaContratacion = Convert.ToDateTime(fechaContratacionstring);
             string FN = fechaNacimineto.ToString("yyyy-MM-dd");
             string FC = fechaContratacion.ToString("yyyy-MM-dd");
-
+            item.empl_CorreoElectronico += " ";
 
             parametros.Add("@empl_Id", item.empl_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@empl_Nombre", item.empl_Nombre, DbType.String, ParameterDirection.Input);

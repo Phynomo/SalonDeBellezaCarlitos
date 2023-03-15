@@ -239,6 +239,20 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #region Usuarios
 
+        public tbUsuarios BuscarUsuario(int? id)
+        {
+            try
+            {
+                var resultado = _UsuariosRepository.find(id);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public IEnumerable<tbUsuarios> ListadoUsuarios(out string error)
         {
             error = string.Empty;

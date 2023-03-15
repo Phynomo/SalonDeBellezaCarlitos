@@ -104,10 +104,20 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.empl_Id = item.empl_Id;
                 ViewBag.empl_Nombre = item.empl_Nombre;
                 ViewBag.empl_Apellido = item.empl_Apellido;
-                ViewBag.empl_Sexo = item.empl_Sexo;
+                
                 ViewBag.empl_DireccionExacta = item.empl_DireccionExacta;
                 ViewBag.empl_Telefono = item.empl_Telefono;
                 ViewBag.empl_CorreoElectronico = item.empl_CorreoElectronico;
+
+                if (item.empl_Sexo == "M")
+                {
+                    ViewBag.empl_SexoM = "checked";
+                }
+                else
+                {
+                    ViewBag.empl_SexoF = "checked";
+                }
+
 
                 DateTime fechaNacimineto = Convert.ToDateTime(item.empl_FechaNacimiento);
                 DateTime fechaContratacion = Convert.ToDateTime(item.empl_FechaContratacion);
@@ -123,7 +133,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         }
 
         [HttpPost("/Empleados/Editar")]
-        public ActionResult Edit(EmpleadoViewModel empleado)
+        public IActionResult Edit(EmpleadoViewModel empleado)
         {
             var result = 0;
             var emp = _mapper.Map<tbEmpleados>(empleado);
@@ -137,7 +147,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(empleado.depa_Id), "muni_Id", "muni_Descripcion", empleado.muni_Id);
                 ViewBag.carg_Id = new SelectList(_generalesService.ListadoCargos(out string error2).ToList(), "carg_Id", "carg_Descripcion", empleado.carg_Id);
                 ViewBag.estc_Id = new SelectList(_generalesService.ListadoEstadosCiviles(out string error1).ToList(), "estc_Id", "estc_Descripcion", empleado.estc_Id);
-                
+
+                    ViewBag.empl_Id = emp.empl_Id;
                     ViewBag.empl_Nombre = emp.empl_Nombre;
                     ViewBag.empl_Apellido = emp.empl_Apellido;
                     ViewBag.empl_Sexo = emp.empl_Sexo;
@@ -193,9 +204,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.empl_FechaNacimiento = FN;
                 ViewBag.empl_FechaContratacion = FC;
 
-                ViewBag.UsuarioCreacion = item.empl_UsuarioCreacion;
+                var UsuarioCreacion = _generalesService.BuscarUsuario(item.empl_UsuarioCreacion);
+                var nombreCreacion = _generalesService.findEmpleado(UsuarioCreacion.empl_Id);
+                ViewBag.UsuarioCreacion = nombreCreacion.empl_Nombre + " " + nombreCreacion.empl_Apellido;
                 ViewBag.FechaCreacion = item.empl_FechaCreacion;
-                ViewBag.UsuarioModificacion = item.empl_UsuarioModificacion;
+
+                var UsuarioModificacion = _generalesService.BuscarUsuario(item.empl_UsuarioModificacion);
+                var nombreModificacion = _generalesService.findEmpleado(UsuarioModificacion.empl_Id);
+                ViewBag.UsuarioModificacion = nombreModificacion.empl_Nombre + " " + nombreModificacion.empl_Apellido;
                 ViewBag.FechaModificacion = item.empl_FechaModificacion;
 
             }

@@ -3,12 +3,12 @@
 
 <div class="modal" id="EliminarEmpleado" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Desvincular empleado</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+        <div class="modal-content text-cen">
+            <div class="modal-header text-center">
+                <h5 class="text-center" style="margin:auto;">Desvincular empleado</h5>
+                @*<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button>
+                </button>*@
             </div>
             <form asp-action="Delete" id="formDelete">
                 <div class="modal-body">
@@ -16,15 +16,15 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <input asp-for="empl_Id" class="form-control" id="empl_Id_Delete" name="empl_Id" hidden />
-                                <h4 class="padding-top-30 mb-30 weight-500">¿Desea eliminar este registro?</h4>
+                                <h4 class="padding-top-30 mb-30 weight-500">¿Desea darle el rango "cliente" a este empleado?</h4>
                                 <label name="lbl_DescripcionDeleteError" id="lbl_DescripcionDeleteError" class="control-label" hidden style="color: red;">Ocurrio un error con este delete</label>
 
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <button type="button" class="btn btn-primary mx-1" onclick="GuardarModalDelete()">Eliminar</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary mx-1" onclick="GuardarModalDelete()">Ascender</button>
+                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
                             </div>
                         </div>
 

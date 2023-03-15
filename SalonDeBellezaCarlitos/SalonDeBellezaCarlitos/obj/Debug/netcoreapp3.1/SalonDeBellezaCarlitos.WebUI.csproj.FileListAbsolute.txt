@@ -562,3 +562,5 @@ C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\Sa
 C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Sucursal\_SucursalCreateModalViewPartial.cshtml.g.cs
 C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Empleados\Details.cshtml.g.cs
 C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Empleados\_EmpleadosDeleteViewPartial.cshtml.g.cs
+C:\Users\LAB01\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Empleados\Details.cshtml.g.cs
+C:\Users\LAB01\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Empleados\_EmpleadosDeleteViewPartial.cshtml.g.cs
