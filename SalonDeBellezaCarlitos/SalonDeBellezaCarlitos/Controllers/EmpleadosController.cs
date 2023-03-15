@@ -209,10 +209,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.UsuarioCreacion = nombreCreacion.empl_Nombre + " " + nombreCreacion.empl_Apellido;
                 ViewBag.FechaCreacion = item.empl_FechaCreacion;
 
-                var UsuarioModificacion = _generalesService.BuscarUsuario(item.empl_UsuarioModificacion);
-                var nombreModificacion = _generalesService.findEmpleado(UsuarioModificacion.empl_Id);
-                ViewBag.UsuarioModificacion = nombreModificacion.empl_Nombre + " " + nombreModificacion.empl_Apellido;
-                ViewBag.FechaModificacion = item.empl_FechaModificacion;
+                if (!string.IsNullOrEmpty(item.empl_UsuarioModificacion.ToString()))
+                {
+                    var UsuarioModificacion = _generalesService.BuscarUsuario(item.empl_UsuarioModificacion);
+                    var nombreModificacion = _generalesService.findEmpleado(UsuarioModificacion.empl_Id);
+                    ViewBag.UsuarioModificacion = nombreModificacion.empl_Nombre + " " + nombreModificacion.empl_Apellido;
+                    ViewBag.FechaModificacion = item.empl_FechaModificacion;
+                }
+               
 
             }
 
