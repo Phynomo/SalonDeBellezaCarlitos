@@ -8,39 +8,35 @@
 <h1>Details</h1>
 @foreach (var item in Model)
 {
-<div>
-    <h4>tbServicios</h4>
-    <hr />
-    <div class="row">
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Nombre)</label><br />
-            <label>@Html.DisplayFor(model => item.serv_Nombre)</label>
+    <div>
+        <h4>tbServicios</h4>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Nombre)</label><br />
+                <label>@Html.DisplayFor(model => item.serv_Nombre)</label>
+            </div>
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Descripcion)</label><br />
+                <label>@Html.DisplayFor(model => item.serv_Descripcion)</label>
+            </div>
         </div>
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Descripcion)</label><br />
-            <label>@Html.DisplayFor(model => item.serv_Descripcion)</label>
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Precio)</label><br />
+                <label>@Html.DisplayFor(model => item.serv_Precio)</label>
+            </div>
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_FechaCreacion)</label><br />
+                <label>@Html.DisplayFor(model => item.serv_FechaCreacion)</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Precio)</label><br />
-            <label>@Html.DisplayFor(model => item.serv_Precio)</label>
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Estado)</label><br />
+                <label>@Html.DisplayFor(model => item.serv_Estado)</label>
+            </div>
         </div>
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_FechaCreacion)</label><br />
-            <label>@Html.DisplayFor(model => item.serv_FechaCreacion)</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Estado)</label><br />
-            <label>@Html.DisplayFor(model => item.serv_Estado)</label>
-        </div>
-    </div>
-
-
-
-
 
     <div class="card mt-4">
         <div class="card-header" style="background-color:#2a0637;">

@@ -1,11 +1,11 @@
-﻿@model SalonDeBellezaCarlitos.WebUI.Models.MetodoPagoViewModel
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.EstadoCivilViewModel
 
 
-<div class="modal" id="EliminarMetodopago" tabindex="-1" role="dialog">
+<div class="modal" id="EliminarEstadoCivil" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Borrar Servicio</h5>
+                <h5 class="modal-title">Borrar Esatdo Civil</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,7 +15,7 @@
                     <div class="modal-body text-center">
                         <div class="row mb-3">
                             <div class="col">
-                                <input asp-for="metp_Id" class="form-control" id="metp_Id_Delete" name="metp_Id" hidden />
+                                <input asp-for="estc_Id" class="form-control" id="estc_Id_Delete" name="estc_Id" hidden />
                                 <h4 class="padding-top-30 mb-30 weight-500">¿Desea eliminar este registro?</h4>
                                 <label name="lbl_DescripcionDeleteError" id="lbl_DescripcionDeleteError" class="control-label" hidden style="color: red;">Ocurrio un error con este delete</label>
                             </div>

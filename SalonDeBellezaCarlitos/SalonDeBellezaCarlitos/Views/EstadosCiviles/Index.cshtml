@@ -47,16 +47,19 @@
                     @Html.DisplayFor(modelItem => item.estc_FechaModificacion)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.estc_Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.estc_Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.estc_Id">Delete</a>
+                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.estc_Id,@item.estc_Descripcion')">Editar</button> |
+                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.estc_Id">Details</a> |
+                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.estc_Id')">Delete</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-@Html.Partial("_EstadoCivilCreateViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.EstadoCivilViewModel())
+
+@Html.Partial("_EstadoCivilDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.EstadoCivilViewModel())
+
+@Html.Partial("_EstadoCivilEditViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.EstadoCivilViewModel())
 
 
 <script src="~/js/App/Salon/EstadosCiviles.js"></script>

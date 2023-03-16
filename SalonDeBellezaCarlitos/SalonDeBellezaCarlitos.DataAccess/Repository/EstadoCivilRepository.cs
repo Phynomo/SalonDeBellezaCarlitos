@@ -12,7 +12,13 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
     {
         public int Delete(tbEstadosCiviles item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@estc_Id", item.estc_Id, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Borrar_EstadosCiviles, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public tbEstadosCiviles find(int? id)
@@ -40,10 +46,27 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
             return db.Query<tbEstadosCiviles>(ScriptsDataBase.UDP_Listado_EstadosCiviles, null, commandType: CommandType.StoredProcedure);
         }
+        
+        public IEnumerable<tbEstadosCiviles> Buscar(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+
+            var parametros = new DynamicParameters();
+            parametros.Add("@estc_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<tbEstadosCiviles>(ScriptsDataBase.UDP_Buscar_EstadosCiviles, parametros, commandType: CommandType.StoredProcedure);
+        }
 
         public int Update(tbEstadosCiviles item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@estc_Id", item.estc_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@estc_Descripcion", item.estc_Descripcion, DbType.String, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Buscar_EstadosCiviles, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
     }
 }

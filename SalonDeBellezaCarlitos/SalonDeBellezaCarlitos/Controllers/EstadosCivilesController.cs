@@ -58,5 +58,45 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             return RedirectToAction("Listado");
         }
 
+        [HttpPost("/EstadosCiviles/Eliminar")]
+        public IActionResult Delete(EstadoCivilViewModel estado)
+        {
+            var result = 0;
+            var est = _mapper.Map<tbEstadosCiviles>(estado);
+            result = _generalesService.EliminarEstadoCivil(est);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+
+        }
+
+        [HttpPost("/EstadosCiviles/Editar")]
+        public IActionResult Edit(EstadoCivilViewModel estado)
+        {
+            var result = 0;
+            var est = _mapper.Map<tbEstadosCiviles>(estado);
+            result = _generalesService.EditarEstadoCivil(est);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+
+        }
+
+        [HttpGet("/EstadoCivil/Detalles")]
+        public IActionResult Details(int? id)
+        {
+            var servicio = _generalesService.BuscarEstadoCivil_IEnumerable(id);
+            var servicioMapeado = _mapper.Map<IEnumerable<EstadoCivilViewModel>>(servicio);
+            return View(servicioMapeado);
+        }
+
     }
 }

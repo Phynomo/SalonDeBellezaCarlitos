@@ -1780,6 +1780,25 @@ END
 
 GO
 
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbMetodoPago_Buscar
+	@metp_Id	INT
+AS
+BEGIN
+
+SELECT [metp_Id]
+      ,[metp_Descripcion]
+      ,[metp_FechaCreacion]
+      ,[metp_UsuarioCreacion]
+      ,[metp_FechaModificacion]
+      ,[metp_UsuarioModificacion]
+      ,[metp_Estado]
+  FROM [gnrl].[tbMetodoPago]
+  WHERE metp_Estado = 1
+  AND metp_Id = @metp_Id		
+
+END
+
+GO
 
 CREATE PROCEDURE gnrl.UDP_tbMetodoPago_Insert
 (
@@ -1813,18 +1832,15 @@ END
 
 -----------Procedimiento Update MetodoPago
 GO
-CREATE PROCEDURE gnrl.UDP_tbMetodoPago_Update
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbMetodoPago_Update
 	@metp_Id                      INT,
-	@metp_Descripcion             NVARCHAR (100),
-	@metp_UsuarioModificacion     INT
+	@metp_Descripcion             NVARCHAR (100)
 AS
 BEGIN
 BEGIN TRY
 
 	UPDATE gnrl.tbMetodoPago
-	SET metp_Descripcion = @metp_Descripcion,
-	    metp_FechaModificacion = GETDATE(),
-	    metp_UsuarioModificacion = @metp_UsuarioModificacion
+	SET metp_Descripcion = @metp_Descripcion
 	WHERE metp_Id = @metp_Id;
 
 SELECT 1 as Proceso
@@ -1836,17 +1852,15 @@ END
 
 -----------Procedimiento Delete MetodoPago
 GO
-CREATE PROCEDURE gnrl.UDP_tbMetodoPago_Delete (
-    @metp_Id INT, @metp_UsuarioModificacion INT
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbMetodoPago_Delete (
+    @metp_Id INT
 )
 AS
 BEGIN
 BEGIN TRY
 
     UPDATE gnrl.tbMetodoPago
-    SET metp_Estado = 0,
-        metp_FechaModificacion = GETDATE(),
-        metp_UsuarioModificacion = @metp_UsuarioModificacion 
+    SET metp_Estado = 0
     WHERE  metp_Id = @metp_Id
 
 SELECT 1 as Proceso
@@ -1914,8 +1928,7 @@ GO
 -----------Procedimiento Update EstadoCiviles
 CREATE OR ALTER  PROCEDURE gnrl.UDP_tbEstadoCiviles_Update
 @estc_Id  INT,
-@estc_Descripcion Varchar(200),
-@estc_UsuarioModificacion INT
+@estc_Descripcion Varchar(200)
 
 as
 begin
@@ -1923,8 +1936,6 @@ BEGIN TRY
 
 UPDATE [gnrl].[tbEstadosCiviles]
    SET[estc_Descripcion] = @estc_Descripcion
-      ,[estc_FechaModificacion] = GETDATE()
-      ,[estc_UsuarioModificacion] = @estc_UsuarioModificacion
  WHERE estc_Id = @estc_Id
 
 SELECT 1 as Proceso

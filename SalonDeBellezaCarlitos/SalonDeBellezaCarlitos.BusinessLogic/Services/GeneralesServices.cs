@@ -530,6 +530,20 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
         }
 
+        public IEnumerable<tbEstadosCiviles> BuscarEstadoCivil_IEnumerable(int? id)
+        {
+            try
+            {
+                var resultado = _EstadosCivilesRepository.Buscar(id);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<tbEstadosCiviles>();
+            }
+        }
+
         public IEnumerable<tbEstadosCiviles> ListadoEstadosCiviles(out string error)
         {
             error = string.Empty;
@@ -558,6 +572,47 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public int EliminarEstadoCivil(tbEstadosCiviles estados)
+        {
+
+            try
+            {
+                var resultado = _EstadosCivilesRepository.Delete(estados);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+        public int EditarEstadoCivil(tbEstadosCiviles estados)
+        {
+
+            try
+            {
+                var resultado = _EstadosCivilesRepository.Update(estados);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+        //public IEnumerable<tbEstadosCiviles> BuscarEstadoCivil(int? id)
+        //{
+        //    try
+        //    {
+        //        return _EstadosCivilesRepository.BuscarEstado(id);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return null;
+        //    }
+        //}
 
         #endregion
 
@@ -771,6 +826,32 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return 0;
             }
 
+        }
+        public int EditarMetodoPago(tbMetodoPago metodoPago)
+        {
+
+            try
+            {
+                var resultado = _MetodopagoRepository.Update(metodoPago);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+        public IEnumerable<tbMetodoPago> BuscarMetodoPago(int? id)
+        {
+            try
+            {
+                return _MetodopagoRepository.BuscarMetodoPago(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
 
