@@ -2096,7 +2096,16 @@ select * from gnrl.VW_tbMunicipios_View
 END
 
 GO
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbMunicipios_Buscar
+@muni_Id		INT
+AS
+BEGIN
 
+select * from gnrl.VW_tbMunicipios_View
+WHERE muni_Id = @muni_Id
+
+END
+GO
 
 Create OR ALTER Procedure gnrl.UDP_tbMunicipios_Insert
 @muni_Descripcion Nvarchar(150),
