@@ -38,7 +38,6 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             return View(listadoMapeado);
         }
 
-
         [HttpGet("/Metodopago/Crear")]
         public IActionResult Create()
         {

@@ -1,0 +1,35 @@
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.DepartamentoViewModel
+
+
+<div class="modal" id="EditarDepartamento" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Departamentos</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Edit" id="formEdit">
+                <div class="modal-body">
+                    <input asp-for="depa_Id" class="form-control" id="depa_Id_Edit" name="depa_Id" hidden />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="depa_Descripcion" class="control-label"></label>
+                        <input asp-for="depa_Descripcion" class="form-control" id="depa_Descripcion_Edit" name="depa_Descripcion" />
+                        <label name="lbl_DescripcionEditError" id="lbl_DescripcionEditError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="depa_Codigo" class="control-label"></label>
+                        <input asp-for="depa_Codigo" class="form-control" id="depa_Codigo_Edit" name="depa_Codigo" />
+                        <label name="lbl_DescripcionEditError" id="lbl_DescripcionEditError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="GuardarModalEdit()">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

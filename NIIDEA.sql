@@ -1892,6 +1892,26 @@ END
 
 GO
 
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbEstadoCiviles_Buscar
+	@estc_Id	INT
+AS
+BEGIN
+
+SELECT [estc_Id]
+      ,[estc_Descripcion]
+      ,[estc_FechaCreacion]
+      ,[estc_UsuarioCreacion]
+      ,[estc_FechaModificacion]
+      ,[estc_UsuarioModificacion]
+      ,[estc_Estado]
+  FROM [gnrl].[tbEstadosCiviles]
+  WHERE estc_Estado = 1
+  AND [estc_Id] = @estc_Id
+
+END
+
+GO
+
 
 CREATE OR ALTER  PROCEDURE gnrl.UDP_tbEstadoCiviles_Insert
 @estc_Descripcion Varchar(200),

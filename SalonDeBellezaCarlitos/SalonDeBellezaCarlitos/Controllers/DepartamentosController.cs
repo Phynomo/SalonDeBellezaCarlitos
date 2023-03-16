@@ -59,7 +59,43 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             return RedirectToAction("Listado");
         }
 
+        [HttpPost("/Departamentos/Editar")]
+        public IActionResult Edit(DepartamentoViewModel departamento)
+        {
+            var result = 0;
+            var dep = _mapper.Map<tbDepartamentos>(departamento);
+            result = _generalesService.EditarDepartamento(dep);
 
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
 
+        }
+
+        [HttpGet("/Departamentos/Eliminar/{id}")]
+        public IActionResult Delete(int? id)
+        {
+            var listado = _generalesService.BuscarCargo(id);
+            return View(listado);
+        }
+
+        [HttpPost("/Departamentos/Eliminar")]
+        public IActionResult Delete(DepartamentoViewModel departamento)
+        {
+            var result = 0;
+            var dep = _mapper.Map<tbDepartamentos>(departamento);
+            result = _generalesService.EliminarDepartamento(dep);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+
+        }
     }
 }

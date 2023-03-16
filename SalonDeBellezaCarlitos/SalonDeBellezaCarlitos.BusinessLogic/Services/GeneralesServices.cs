@@ -404,6 +404,19 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public int EditarDepartamento(tbDepartamentos departamentos)
+        {
+            try
+            {
+                var resultado = _DepartamentosRepository.Update(departamentos);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
 
         public tbDepartamentos BuscarDepartameto(int? id)
         {
@@ -417,6 +430,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             {
                 return null;
             }
+        }
+        public int EliminarDepartamento(tbDepartamentos departamentos)
+        {
+
+            try
+            {
+                var resultado = _DepartamentosRepository.Delete(departamentos);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
         }
 
         #endregion

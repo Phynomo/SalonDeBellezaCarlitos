@@ -12,7 +12,13 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
     {
         public int Delete(tbDepartamentos item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@depa_Id", item.depa_Id, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Borrar_Departamentos, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public tbDepartamentos find(int? id)
@@ -44,7 +50,16 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public int Update(tbDepartamentos item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@depa_Id", item.depa_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@depa_Descripcion", item.depa_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@depa_Codigo", item.depa_Codigo, DbType.String, ParameterDirection.Input);
+            parametros.Add("@depa_UsuarioModificacion", 1, DbType.String, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Departamentos, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
     }
 }

@@ -46,14 +46,12 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
             return db.Query<tbEstadosCiviles>(ScriptsDataBase.UDP_Listado_EstadosCiviles, null, commandType: CommandType.StoredProcedure);
         }
-        
+
         public IEnumerable<tbEstadosCiviles> Buscar(int? id)
         {
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
-
             var parametros = new DynamicParameters();
             parametros.Add("@estc_Id", id, DbType.Int32, ParameterDirection.Input);
-
             return db.Query<tbEstadosCiviles>(ScriptsDataBase.UDP_Buscar_EstadosCiviles, parametros, commandType: CommandType.StoredProcedure);
         }
 
