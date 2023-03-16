@@ -24,10 +24,10 @@ function AbrirModalDelete(id) {
 };
 
 function GuardarModalDelete() {
-    var metp_Id_Delete = $('#metp_Id_Delete').val();
+    var metp_Descripcion = $('#metp_Id_Delete').val();
     $("#lbl_DescripcionDeleteError").attr('hidden', true);
 
-    if (metp_Id_Delete != "") {
+    if (metp_Descripcion != "") {
         $("#formDelete").submit();
 
     } else {
