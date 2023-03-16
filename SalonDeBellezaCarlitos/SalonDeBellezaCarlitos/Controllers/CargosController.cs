@@ -9,7 +9,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 {
     public class CargosController : Controller
     {
-
+        
         private readonly GeneralesServices _generalesService;
 
         private readonly IMapper _mapper;
@@ -102,6 +102,30 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             return RedirectToAction("Listado");
 
+        }
+
+        [HttpGet("/Cargos/Detalles")]
+        public IActionResult Details(int? id)
+        {
+
+            var listado = _generalesService.BuscarCargo(id);
+            var listadoMapeado = _mapper.Map<IEnumerable<CargoViewModel>>(listado);
+            foreach (var item in listadoMapeado)
+            {
+            var UsuarioCreacion = _generalesService.BuscarUsuario(item.carg_UsuarioCreacion);
+            var nombreCreacion = _generalesService.findEmpleado(UsuarioCreacion.empl_Id);
+            ViewBag.UsuarioCreacion = nombreCreacion.empl_Nombre + " " + nombreCreacion.empl_Apellido;
+
+            if (!string.IsNullOrEmpty(item.carg_UsuarioModificacion.ToString()))
+            {
+                var UsuarioModificacion = _generalesService.BuscarUsuario(item.carg_UsuarioModificacion);
+                var nombreModificacion = _generalesService.findEmpleado(UsuarioModificacion.empl_Id);
+                ViewBag.UsuarioModificacion = nombreModificacion.empl_Nombre + " " + nombreModificacion.empl_Apellido;
+            }
+            }
+            
+
+            return View(listadoMapeado);
         }
 
     }

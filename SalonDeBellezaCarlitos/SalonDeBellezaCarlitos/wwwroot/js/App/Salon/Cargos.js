@@ -1,4 +1,11 @@
-﻿function AbrirModalCreate()
+﻿$(document).ready(function () {
+    $('#navSalon').addClass('active');
+    $('#navCargos').addClass('active');
+    $('#subnavSalon').addClass('show');
+});
+
+
+function AbrirModalCreate()
 {
     $("#modalCreate").appendTo('body').modal('show');
 }

@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\js\App\General\**" />
-    <Content Remove="wwwroot\js\App\General\**" />
-    <EmbeddedResource Remove="wwwroot\js\App\General\**" />
-    <None Remove="wwwroot\js\App\General\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="Views\EstadosCiviles\_CreateModalPartialView.cshtml" />
     <Content Remove="wwwroot\js\App\Salon\Cargos - Copia.js" />
   </ItemGroup>

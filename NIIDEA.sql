@@ -1162,6 +1162,27 @@ GO
 --Procedimientos almacenados de Cargos
 
 GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbCargos_Buscar
+@carg_Id INT
+AS
+BEGIN
+
+SELECT [carg_Id]
+      ,[carg_Descripcion]
+      ,[carg_FechaCreacion]
+      ,[carg_UsuarioCreacion]
+      ,[carg_FechaModificacion]
+      ,[carg_UsuarioModificacion]
+      ,[carg_Estado]
+  FROM [salo].[tbCargos]
+  WHERE carg_Estado = 1
+  AND carg_Id = @carg_Id
+
+END
+
+GO
+
+GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbCargos_Listado
 AS
 BEGIN
@@ -2045,11 +2066,8 @@ GO
 
 -----------Procedimiento Insert Municipios
 
-GO
-CREATE OR ALTER PROCEDURE gnrl.UDP_tbMunicipios_Listado
-AS
-BEGIN
-
+CREATE OR ALTER VIEW gnrl.VW_tbMunicipios_View
+as
 SELECT [muni_Id]
       ,[muni_Descripcion]
       ,[muni_Codigo]
@@ -2065,13 +2083,22 @@ SELECT [muni_Id]
   ON T1.depa_Id = T2.depa_Id
   WHERE muni_Estado = 1
 
+  GO
+
+
+GO
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbMunicipios_Listado
+AS
+BEGIN
+
+select * from gnrl.VW_tbMunicipios_View
+
 END
 
 GO
 
 
-Create Procedure gnrl.UDP_tbMunicipios_Insert
-@muni_Id INT,
+Create OR ALTER Procedure gnrl.UDP_tbMunicipios_Insert
 @muni_Descripcion Nvarchar(150),
 @muni_Codigo Char(4),
 @depa_Id INT,
@@ -2081,8 +2108,7 @@ begin
 BEGIN TRY
 
 INSERT INTO [gnrl].[tbMunicipios]
-           ([muni_Id]
-           ,[muni_Descripcion]
+           ([muni_Descripcion]
 		   ,muni_Codigo
            ,[depa_Id]
            ,[muni_FechaCreacion]
@@ -2091,8 +2117,7 @@ INSERT INTO [gnrl].[tbMunicipios]
            ,[muni_UsuarioModificacion]
            ,[muni_Estado])
      VALUES
-           (@muni_Id
-           ,@muni_Descripcion
+           (@muni_Descripcion
 		   ,@muni_Codigo
            ,@depa_Id
            ,GETDATE()

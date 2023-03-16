@@ -8,6 +8,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
     {
         #region Cargos
 
+        public static string UDP_Buscar_Cargos = "salo.UDP_tbCargos_Buscar";
         public static string UDP_Listado_Cargos = "salo.UDP_tbCargos_Listado";
         public static string UDP_Insertar_Cargos = "salo.UDP_tbCargos_Insert";
         public static string UDP_Editar_Cargos = "salo.UDP_tbCargos_Update";
@@ -122,6 +123,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_Municipios = "gnrl.UDP_tbMunicipios_Insert";
         public static string UDP_Editar_Municipios = "gnrl.UDP_tbMunicipios_Update";
         public static string UDP_Borrar_Municipios = "gnrl.UDP_tbMunicipiosDelete";
+        public static string UDP_Buscar_Municipios = "gnrl.UDP_tbMunicipios_Buscar";
 
         #endregion
 

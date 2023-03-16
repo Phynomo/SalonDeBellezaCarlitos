@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
 using SalonDeBellezaCarlitos.Entities.Entities;
 using SalonDeBellezaCarlitos.WebUI.Models;
@@ -27,10 +28,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public IActionResult Index()
         {
 
-            var listado = _generalesService.ListadoMunicipios(out string error);
-            var listadoMapeado = _mapper.Map<IEnumerable<MunicipioViewModel>>(listado);
+            ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion");
+            var listado = _generalesService.ListadoMunicipios(out string error1);
+            var listadoMapeado = _mapper.Map<IEnumerable<VWMunicipiosViewModel>>(listado);
 
-            if (string.IsNullOrEmpty(error))
+            if (!string.IsNullOrEmpty(error))
             {
                 ModelState.AddModelError("", error);
             }
@@ -56,6 +58,62 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 return View();
             }
             return RedirectToAction("Listado");
+        }
+
+        [HttpPost("/Municipios/Editar")]
+        public ActionResult Edit(MunicipioViewModel municipio)
+        {
+            var result = 0;
+            var muni = _mapper.Map<tbMunicipios>(municipio);
+            result = _generalesService.EditarMunicipio(muni);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+        }
+
+        [HttpPost("/Municipios/Eliminar")]
+        public ActionResult Delete(MunicipioViewModel municipio)
+        {
+            var result = 0;
+            var muni = _mapper.Map<tbMunicipios>(municipio);
+            result = _generalesService.EliminarMunicipio(muni);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+        }
+
+        [HttpGet("/Municipios/Detalles")]
+        public IActionResult Details(int? id)
+        {
+
+            ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion");
+
+            var listado = _generalesService.BuscarMunicipioView(id);
+            var listadoMapeado = _mapper.Map<IEnumerable<VWMunicipiosViewModel>>(listado);
+            foreach (var item in listadoMapeado)
+            {
+                var UsuarioCreacion = _generalesService.BuscarUsuario(item.muni_UsuarioCreacion);
+                var nombreCreacion = _generalesService.findEmpleado(UsuarioCreacion.empl_Id);
+                ViewBag.UsuarioCreacion = nombreCreacion.empl_Nombre + " " + nombreCreacion.empl_Apellido;
+
+                if (!string.IsNullOrEmpty(item.muni_UsuarioModificacion.ToString()))
+                {
+                    var UsuarioModificacion = _generalesService.BuscarUsuario(item.muni_UsuarioModificacion);
+                    var nombreModificacion = _generalesService.findEmpleado(UsuarioModificacion.empl_Id);
+                    ViewBag.UsuarioModificacion = nombreModificacion.empl_Nombre + " " + nombreModificacion.empl_Apellido;
+                }
+            }
+
+
+            return View(listadoMapeado);
         }
 
     }

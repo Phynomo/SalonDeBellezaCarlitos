@@ -1,0 +1,53 @@
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.MunicipioViewModel
+
+
+<div class="modal" id="EditarMunicipios" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Municipio</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Edit" id="formEdit">
+                <div class="modal-body">
+                    <input asp-for="muni_Id" class="form-control" id="muni_Id_Edit" name="muni_Id" hidden />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="muni_Descripcion" class="control-label"></label>
+                                <input asp-for="muni_Descripcion" id="muni_DescripcionE" class="form-control" />
+                                <label name="lbl_DescripcionEditError" id="lbl_DescripcionEditError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="muni_Codigo" class="control-label"></label>
+                                <input asp-for="muni_Codigo" id="muni_CodigoE" class="form-control" />
+                                <label name="lbl_MunicipioEditError" id="lbl_MunicipioEditError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label asp-for="depa_Id" class="control-label"></label>
+                                <select asp-for="depa_Id" id="depa_IdE" class="form-select" asp-items="ViewBag.depa_Id">
+                                    <option value="">-- Selecciones un Departamento --</option>
+                                </select>
+                                <label name="lbl_DepartamentoEditError" id="lbl_DepartamentoEditError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="GuardarModalEdit()">Editar municipio</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

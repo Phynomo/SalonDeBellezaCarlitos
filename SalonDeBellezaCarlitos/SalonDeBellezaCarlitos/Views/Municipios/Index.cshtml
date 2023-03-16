@@ -1,15 +1,22 @@
-﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.MunicipioViewModel>
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWMunicipiosViewModel>
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-<h1>Index</h1>
+<div class="row text-center">
+    <div class="col">
+        <h1>Municipios</h1>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <hr />
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row mb-3 text-center">
+    <div class="col">
+        @*<a asp-action="Create">Create New</a>*@
+        <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar un nuevo Municipio</button>
+    </div>
+</div>
 
 
 <table class="table compact">
@@ -19,38 +26,43 @@
                 @Html.DisplayNameFor(model => model.muni_Descripcion)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.depa_Descripcion)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.muni_Codigo)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.muni_FechaCreacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.muni_FechaModificacion)
-            </th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.muni_Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.muni_Codigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.muni_FechaCreacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.muni_FechaModificacion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.muni_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.muni_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.muni_Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.muni_Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.depa_Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.muni_Codigo)
+    </td>
+    <td>
+        <button style="font-size: 10px; height:25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.muni_Id,@item.muni_Codigo,@item.muni_Descripcion,@item.depa_Id')">Editar</button> |
+        <a style="font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.muni_Id">Details</a> |
+        <button style="font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.muni_Id')">Delete</button>
+
+    </td>
+</tr>}
     </tbody>
 </table>
+
+
+@Html.Partial("_MunicipiosCreateViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.MunicipioViewModel())
+
+@Html.Partial("_MunicipiosEditViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.MunicipioViewModel())
+
+@Html.Partial("_MunicipiosDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.MunicipioViewModel())
+
+
+<script src="~/js/App/General/Municipios.js"></script>

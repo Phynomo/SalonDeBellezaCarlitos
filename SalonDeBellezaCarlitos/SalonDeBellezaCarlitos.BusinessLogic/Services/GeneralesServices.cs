@@ -92,7 +92,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         }
 
 
-        public tbCargos BuscarCargo(int? id)
+        public IEnumerable<tbCargos> BuscarCargo(int? id)
+        {
+            try
+            {
+                var resultado = _CargoRepository.buscar(id);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public tbCargos FindCargo(int? id)
         {
             try
             {
@@ -105,7 +119,6 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return null;
             }
         }
-
 
         public int EditarCargo(tbCargos categoria)
         {
@@ -412,17 +425,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #region Municipios
 
-        public IEnumerable<tbMunicipios> ListadoMunicipios(out string error)
+        public IEnumerable<VW_tbMunicipios_View> ListadoMunicipios(out string error)
         {
             error = string.Empty;
             try
             {
-                return _MunicipiosRepository.List();
+                return _MunicipiosRepository.ListView();
             }
             catch (Exception e)
             {
                 error = e.Message;
-                return Enumerable.Empty<tbMunicipios>();
+                return Enumerable.Empty<VW_tbMunicipios_View>();
             }
         }
         public int InsertarMunicipio(tbMunicipios item)
@@ -440,6 +453,51 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+
+        public IEnumerable<VW_tbMunicipios_View> BuscarMunicipioView(int? id)
+        {
+            try
+            {
+                return _MunicipiosRepository.BuscarView(id);
+            }
+            catch (Exception )
+            {
+                return Enumerable.Empty<VW_tbMunicipios_View>();
+            }
+        }
+
+        public int EditarMunicipio(tbMunicipios item)
+        {
+
+            try
+            {
+                var resultado = _MunicipiosRepository.Update(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public int EliminarMunicipio(tbMunicipios item)
+        {
+
+            try
+            {
+                var resultado = _MunicipiosRepository.Delete(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
 
         public IEnumerable<tbMunicipios> ListadoMunicipiosPorDepartamento(int id)
         {

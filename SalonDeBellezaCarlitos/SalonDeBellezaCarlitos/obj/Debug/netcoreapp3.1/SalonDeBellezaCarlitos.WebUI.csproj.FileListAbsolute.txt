@@ -573,3 +573,17 @@ C:\Users\LAB01\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\Sa
 C:\Users\LAB01\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Servicio\Details.cshtml.g.cs
 C:\Users\LAB01\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Servicio\_ServicioDeleteModalViewPartial.cshtml.g.cs
 C:\Users\LAB01\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Servicio\_ServicioEditModalViewPartial.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Clientes\_ClienteCreateViewPartial.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Facturas\Create.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Municipios\Create.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Producto\Create.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Proveedores\Create.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Reservacion\Create.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Servicio\Details.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Servicio\_ServicioDeleteModalViewPartial.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Servicio\_ServicioEditModalViewPartial.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Cargos\Details.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Municipios\_MunicipiosCreateViewPartial.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Municipios\_MunicipiosDeleteViewPartial.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Municipios\_MunicipiosEditViewPartial.cshtml.g.cs
+C:\Users\danie\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\obj\Debug\netcoreapp3.1\Razor\Views\Municipios\Details.cshtml.g.cs

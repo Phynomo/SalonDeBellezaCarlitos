@@ -12,7 +12,14 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
     {
         public int Delete(tbMunicipios item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Borrar_Municipios, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public tbMunicipios find(int? id)
@@ -26,10 +33,9 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         {
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
             var parametros = new DynamicParameters();
-
-            parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
+            
             parametros.Add("@muni_Descripcion", item.muni_Descripcion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@muni_Codigo", item.muni_Codigo, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@muni_Codigo", item.muni_Codigo, DbType.String, ParameterDirection.Input);
             parametros.Add("@depa_Id", item.depa_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@muni_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
 
@@ -43,10 +49,36 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
             return db.Query<tbMunicipios>(ScriptsDataBase.UDP_Listado_Municipios, null, commandType: CommandType.StoredProcedure);
         }
+        public IEnumerable<VW_tbMunicipios_View> ListView()
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            return db.Query<VW_tbMunicipios_View>(ScriptsDataBase.UDP_Listado_Municipios, null, commandType: CommandType.StoredProcedure);
+        }
+
+        public IEnumerable<VW_tbMunicipios_View> BuscarView(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+
+            var parametros = new DynamicParameters();
+            parametros.Add("@muni_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<VW_tbMunicipios_View>(ScriptsDataBase.UDP_Buscar_Municipios, parametros, commandType: CommandType.StoredProcedure);
+        }
 
         public int Update(tbMunicipios item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
+            parametros.Add("@muni_Descripcion", item.muni_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@muni_Codigo", item.muni_Codigo, DbType.String, ParameterDirection.Input);
+            parametros.Add("@depa_Id", item.depa_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@muni_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Municipios, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public IEnumerable<tbMunicipios> MunicipiosxDepartamento(int? id)

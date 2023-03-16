@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.CargoViewModel>
+
+@{ ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h1 class="text-center">Detalles</h1>
+@foreach (var item in Model)
+{
+
+<div>
+    <h4 class="text-center">Cargos</h4>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.carg_Descripcion)</label><br />
+            <label> @Html.DisplayFor(model => item.carg_Descripcion)</label>
+        </div>
+        <div class="col">
+            <label class="text-black font-weight-bold"></label><br />
+            <label></label>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col d-flex justify-content-end">
+            <button class="btn btn-warning mx-1" type="button" id="btnEditar" onclick="AbrirModalEdit('@item.carg_Id,@item.carg_Descripcion')">Editar</button> 
+            <a class="btn btn-dark" asp-action="Index">Regresar al listado</a>
+        </div>
+    </div>
+
+
+    <div class="card mt-4">
+        <div class="card-header" style="background-color:#2a0637;">
+            <h3 class="text-white ">Auditoria</h3>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Accion</th>
+                        <th>Usuario</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Creado</td>
+                        <td>@ViewBag.UsuarioCreacion</td>
+                        <td>@Html.DisplayFor(model => item.carg_FechaCreacion)</td>
+                    </tr>
+                    <tr>
+                        <td>Modificado</td>
+                        <td>@ViewBag.UsuarioModificacion</td>
+                        <td>@Html.DisplayFor(model => item.carg_FechaModificacion)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>            
+}
+
+
+
+@Html.Partial("_CargosEditViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.CargoViewModel())
+<script src="~/js/App/Salon/Cargos.js"></script>

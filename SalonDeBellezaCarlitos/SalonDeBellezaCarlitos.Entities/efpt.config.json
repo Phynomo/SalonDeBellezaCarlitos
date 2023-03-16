@@ -80,9 +80,13 @@
       {
          "Name": "[salo].[tbSucursales]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[gnrl].[VW_tbMunicipios_View]",
+         "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-383CMQ3\\MSSQLSERVERLOCAL.SalonDeBellezaCarlitos",
+   "UiHint": "DESKTOP-51051C3\\SQLEXPRESS.SalonDeBellezaCarlitos",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

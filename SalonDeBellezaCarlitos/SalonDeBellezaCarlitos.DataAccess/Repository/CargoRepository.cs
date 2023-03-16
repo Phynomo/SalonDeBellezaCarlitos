@@ -30,6 +30,17 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             return listado;
         }
 
+        public IEnumerable<tbCargos> buscar(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@carg_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<tbCargos>(ScriptsDataBase.UDP_Buscar_Cargos, parametros, commandType: CommandType.StoredProcedure);
+
+        }
+
+
         public int Insert(tbCargos item)
         {
 

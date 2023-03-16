@@ -179,7 +179,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
                 ViewBag.empl_Id = item.empl_Id;
                 var muni_Id = _generalesService.BuscarMunicipio(item.muni_Id);
-                var carg_Id = _generalesService.BuscarCargo(item.carg_Id);
+                var carg_Id = _generalesService.FindCargo(item.carg_Id);
                 var depa_Id = _generalesService.BuscarDepartameto(item.depa_Id);
                 var estc_Id = _generalesService.BuscarEstadoCivil(item.estc_Id);
                 
