@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿    using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
 using SalonDeBellezaCarlitos.Entities.Entities;
@@ -69,10 +69,10 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         //}
 
         [HttpPost("/Metodopago/Eliminar")]
-        public IActionResult Delete(MetodoPagoViewModel metodoPago)
+        public IActionResult Delete(MetodoPagoViewModel Metodopago)
         {
             var result = 0;
-            var met = _mapper.Map<tbMetodoPago>(metodoPago);
+            var met = _mapper.Map<tbMetodoPago>(Metodopago);
             result = _generalesService.EliminarMetodoPago(met);
 
             if (result == 0)
