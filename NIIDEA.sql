@@ -2229,7 +2229,7 @@ GO
 
 
 GO
-CREATE PROCEDURE salo.UDP_salo_tbFacturas_Insert
+CREATE OR ALTER PROCEDURE salo.UDP_salo_tbFacturas_Insert
     @clie_Id                INT,
     @empl_Id_Atendido       INT,
 	@empl_Id_Caja			INT,
@@ -2261,7 +2261,7 @@ BEGIN TRY
                 NULL,
                 1);
 
-SELECT 1 as Proceso
+SELECT SCOPE_IDENTITY() as Proceso
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -2358,7 +2358,7 @@ BEGIN TRY
 
 DECLARE @precio DECIMAL(18,2)
 
-	IF (@serv_Id IS NULL)
+	IF (@serv_Id = 0)
 		BEGIN
 
 		SET @precio = (SELECT prod_Precio FROM salo.tbProductos WHERE prod_Id = @prod_Id)

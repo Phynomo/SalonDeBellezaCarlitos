@@ -680,6 +680,22 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         }
 
+        public int InsertarFacturasDetalles(tbFacturas item)
+        {
+
+            try
+            {
+                var resultado = _FacturasRepository.InsertFacturaDetalles(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
         #endregion
 
         #region Proveedor

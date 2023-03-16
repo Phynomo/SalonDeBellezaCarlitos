@@ -34,5 +34,17 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
         public int? fact_UsuarioModificacion { get; set; }
         [Display(Name = "Estado")]
         public bool? fact_Estado { get; set; }
+
+        public int fade_Id { get; set; }
+        public int? prod_Id { get; set; }
+        public int? serv_Id { get; set; }
+        public int fade_Cantidad { get; set; }
+        public decimal fade_Precio { get; set; }
+        public DateTime fade_FechaCreacion { get; set; }
+        public int fade_UsuarioCreacion { get; set; }
+        public DateTime? fade_FechaModificacion { get; set; }
+        public int? fade_UsuarioModificacion { get; set; }
+        public bool? fade_Estado { get; set; }
+
     }
 }
