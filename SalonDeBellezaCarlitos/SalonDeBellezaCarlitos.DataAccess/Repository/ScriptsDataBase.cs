@@ -115,6 +115,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_Departamentos = "gnrl.UDP_tbDepartamentos_Insert";
         public static string UDP_Editar_Departamentos = "gnrl.UDP_tbDepartamentos_Update";
         public static string UDP_Borrar_Departamentos  = "gnrl.UDP_tbDepartamentos_Delete";
+        public static string UDP_Buscar_Departamentos = "gnrl.UDP_tbDepartamentos_Buscar";
 
         #endregion
 

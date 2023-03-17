@@ -61,5 +61,13 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
             return resultado;
         }
+        public IEnumerable<tbDepartamentos> BuscarDepartamento(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@depa_Id", id, DbType.Int32, ParameterDirection.Input);
+            return db.Query<tbDepartamentos>(ScriptsDataBase.UDP_Buscar_Departamentos, parametros, commandType: CommandType.StoredProcedure);
+
+        }
     }
 }

@@ -2015,6 +2015,29 @@ END
 
 GO
 
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbDepartamentos_Buscar
+	@depa_Id	INT
+AS
+BEGIN
+
+
+SELECT [depa_Id]
+      ,[depa_Descripcion]
+      ,[depa_Codigo]
+      ,[depa_FechaCreacion]
+      ,[depa_UsuarioCreacion]
+      ,[depa_FechaModificacion]
+      ,[depa_UsuarioModificacion]
+      ,[depa_Estado]
+  FROM [gnrl].[tbDepartamentos]
+  WHERE depa_Estado = 1
+  And [depa_Id] = @depa_Id
+
+
+END
+
+GO
+
 
 CREATE OR ALTER PROCEDURE gnrl.UDP_tbDepartamentos_Insert
     @depa_Descripcion NVARCHAR(150),

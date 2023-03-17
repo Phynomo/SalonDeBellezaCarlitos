@@ -183,7 +183,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 var depa_Id = _generalesService.BuscarDepartameto(item.depa_Id);
                 var estc_Id = _generalesService.BuscarEstadoCivil(item.estc_Id);
                 
-                ViewBag.depa_Id = depa_Id.depa_Descripcion;
+                //ViewBag.depa_Id = depa_Id.depa_Descripcion;
                 ViewBag.muni_Id = muni_Id.muni_Descripcion;
                 ViewBag.carg_Id = carg_Id.carg_Descripcion;
                 ViewBag.estc_Id = estc_Id.estc_Descripcion;

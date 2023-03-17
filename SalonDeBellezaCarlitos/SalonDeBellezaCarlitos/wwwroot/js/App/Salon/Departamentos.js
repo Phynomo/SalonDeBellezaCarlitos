@@ -14,11 +14,11 @@ function GuardarModalCreate() {
         $("#formCreate").submit();
 
     } else {
-        if (depa_Codigo == "") {
-            $("#lbl_depa_Codigo").attr('hidden', false);
-        }
         if (depa_Descripcion == "") {
             $("#lbl_depa_Descripcion").attr('hidden', false);
+        }
+        if (depa_Codigo == "") {
+            $("#lbl_depa_Codigo").attr('hidden', false);
         }
     }
 
