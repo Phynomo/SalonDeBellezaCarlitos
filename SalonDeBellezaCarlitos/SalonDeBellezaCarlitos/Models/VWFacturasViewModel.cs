@@ -10,7 +10,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
     {
         [Display(Name = "ID")]
         public int fact_Id { get; set; }
-        [Display(Name = "Cliente Id")]
+        [Display(Name = "Clinte")]
         public int clie_Id { get; set; }
         [Display(Name = "Nombre del Cliente")]
         public string clie_Nombre { get; set; }

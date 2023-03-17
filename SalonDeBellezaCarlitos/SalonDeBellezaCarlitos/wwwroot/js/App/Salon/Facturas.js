@@ -31,6 +31,21 @@
 
     }
 
+    if (logrado == "edit") {
+        $("#clie_Id").prop("disabled", true);
+        $("#metp_Id").prop("disabled", true);
+        $("#empl_Id_Caja").prop("disabled", true);
+        $("#empl_Id_Atendido").prop("disabled", true);
+        $("#btnFacturar").attr("hidden", true);
+        $("#consumidor").attr("hidden", false);
+        $("#Servicio").attr("hidden", false);
+
+        $("#prod_Id").prop("disabled", false);
+        $("#serv_Id").prop("disabled", false);
+        $("#fade_Cantidad").prop("disabled", false);
+        $("#btnDetalles").prop("disabled", false);
+
+    }
 
     $('#prod_Id').val("0");
     $('#serv_Id').val("0");
