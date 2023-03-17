@@ -709,17 +709,20 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #region Facturas
 
-        public IEnumerable<tbFacturas> ListadoFacturas(out string error)
+
+
+
+        public IEnumerable<VW_tbFacturas_Listado> ListadoFacturas(out string error)
         {
             error = string.Empty;
             try
             {
-                return _FacturasRepository.List();
+                return _FacturasRepository.ListView();
             }
             catch (Exception e)
             {
                 error = e.Message;
-                return Enumerable.Empty<tbFacturas>();
+                return Enumerable.Empty<VW_tbFacturas_Listado>();
             }
         }
         public int InsertarFacturas(tbFacturas item)
@@ -737,6 +740,39 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+
+        public int InsertarFacturasDetalles(tbFacturas item)
+        {
+
+            try
+            {
+                var resultado = _FacturasRepository.InsertFacturaDetalles(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public IEnumerable<VW_tbFacturaDetalle_View> BuscarFacturasDetalles(int? item)
+        {
+
+            try
+            {
+                var resultado = _FacturasRepository.BuscarFacturaDetalles(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
 
         #endregion
 

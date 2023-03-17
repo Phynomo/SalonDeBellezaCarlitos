@@ -82,7 +82,15 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[VW_tbFacturas_Listado]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[gnrl].[VW_tbMunicipios_View]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[salo].[VW_tbFacturaDetalle_View]",
          "ObjectType": 3
       }
    ],

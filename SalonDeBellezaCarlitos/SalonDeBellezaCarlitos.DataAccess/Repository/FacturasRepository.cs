@@ -29,19 +29,52 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
             parametros.Add("@clie_Id", item.clie_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_Id_Atendido", item.empl_Id_Atendido, DbType.String, ParameterDirection.Input);
-            parametros.Add("@empl_Id_Caja", item.empl_Id_CajaNavigation, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@empl_Id_Caja", item.empl_Id_Caja, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@metp_Id", item.metp_Id, DbType.String, ParameterDirection.Input);
-            parametros.Add("@fact_UsuarioCreacion", item.fact_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@fact_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Facturas, parametros, commandType: CommandType.StoredProcedure);
 
             return resultado;
         }
 
-        public IEnumerable<tbFacturas> List()
+        public int InsertFacturaDetalles(tbFacturas item)
         {
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
-            return db.Query<tbFacturas>(ScriptsDataBase.UDP_Listado_Facturas, null, commandType: CommandType.StoredProcedure);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@fact_Id", item.fact_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@prod_Id", item.empl_Id_Atendido, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@serv_Id", item.empl_Id_Caja, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@fade_Cantidad", item.fact_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@fade_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_FacturasDetalle, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
+        }
+
+
+        public IEnumerable<VW_tbFacturaDetalle_View> BuscarFacturaDetalles(int? item)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@fact_Id", item, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.Query<VW_tbFacturaDetalle_View>(ScriptsDataBase.UDP_Buscar_FacturasDetalle, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
+        }
+
+        public IEnumerable<tbFacturas> List()
+        {
+            throw new NotImplementedException();
+        }
+        public IEnumerable<VW_tbFacturas_Listado> ListView()
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            return db.Query<VW_tbFacturas_Listado>(ScriptsDataBase.UDP_Listado_Facturas, null, commandType: CommandType.StoredProcedure);
         }
 
         public int Update(tbFacturas item)

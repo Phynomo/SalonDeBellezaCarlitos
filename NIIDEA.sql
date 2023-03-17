@@ -2217,13 +2217,9 @@ SELECT [muni_Id]
 
 END
 
-
-
---Procedimiento Insert Facturas 
 GO
-CREATE OR ALTER PROCEDURE salo.UDP_salo_tbFacturas_Listado
+CREATE OR ALTER VIEW VW_tbFacturas_Listado
 AS
-BEGIN
 SELECT [fact_Id]
       ,T1.[clie_Id]
 	  ,T2.clie_Nombre
@@ -2250,7 +2246,16 @@ SELECT [fact_Id]
   ON T3.metp_Id = T1.metp_Id INNER JOIN salo.tbEmpleados Ate
   ON Ate.empl_Id = t1.empl_Id_Atendido INNER JOIN salo.tbEmpleados caja
   ON caja.empl_Id = T1.empl_Id_Caja
-  WHERE T1.fact_Estado = 1
+  GO
+
+
+
+--Procedimiento Insert Facturas 
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_salo_tbFacturas_Listado
+AS
+BEGIN
+	SELECT * FROM VW_tbFacturas_Listado
 
 END
 
@@ -2258,7 +2263,7 @@ GO
 
 
 GO
-CREATE PROCEDURE salo.UDP_salo_tbFacturas_Insert
+CREATE OR ALTER PROCEDURE salo.UDP_salo_tbFacturas_Insert
     @clie_Id                INT,
     @empl_Id_Atendido       INT,
 	@empl_Id_Caja			INT,
@@ -2290,7 +2295,7 @@ BEGIN TRY
                 NULL,
                 1);
 
-SELECT 1 as Proceso
+SELECT SCOPE_IDENTITY() as Proceso
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -2350,16 +2355,15 @@ END
 GO
 
 --Procedimiento Insert FacturasDetalle
-GO
-GO
-CREATE OR ALTER PROCEDURE salo.UDP_salo_FacturaDetalle_Listado
-AS
-BEGIN
 
+CREATE OR ALTER VIEW salo.VW_tbFacturaDetalle_View
+as
 SELECT [fade_Id]
       ,[fact_Id]
-      ,T1.[prod_Id] + T1.[serv_Id] AS Servicio_Producto_ID
-      ,T2.prod_Nombre + T3.serv_Nombre AS Servicio_Producto_Nombre
+	  ,T1.[prod_Id]
+	  ,T1.[serv_Id]
+      ,T2.prod_Nombre 
+	  ,T3.serv_Nombre
 	  ,[fade_Cantidad]
       ,[fade_Precio]
       ,[fade_FechaCreacion]
@@ -2367,18 +2371,37 @@ SELECT [fade_Id]
       ,[fade_FechaModificacion]
       ,[fade_UsuarioModificacion]
       ,[fade_Estado]
-  FROM [salo].[tbFacturasDetalles] T1 INNER JOIN salo.tbProductos T2
-  ON t1.prod_Id = T2.prod_Id INNER JOIN salo.tbServicios T3
+  FROM [salo].[tbFacturasDetalles] T1 LEFT JOIN salo.tbProductos T2
+  ON t1.prod_Id = T2.prod_Id LEFT JOIN salo.tbServicios T3
   ON t3.serv_Id = T1.serv_Id
   WHERE fade_Estado = 1
 
+GO
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_salo_FacturaDetalle_Listado
+AS
+BEGIN
+ 
+ Select * from salo.VW_tbFacturaDetalle_View
+
 END
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_salo_FacturaDetalle_Buscar
+@fact_Id int
+AS
+BEGIN
+ 
+ Select * from salo.VW_tbFacturaDetalle_View
+ WHERE fact_Id = @fact_Id
+
+END
+
 
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_salo_FacturaDetalle_Insert
     @fact_Id                INT,
-    @prod_Id                INT,
-	@serv_Id				INT,
+    @prod_Id                INT null,
+	@serv_Id				INT null,
     @fade_Cantidad          INT,
     @fade_UsuarioCreacion   INT
 AS
@@ -2387,7 +2410,7 @@ BEGIN TRY
 
 DECLARE @precio DECIMAL(18,2)
 
-	IF (@serv_Id IS NULL)
+	IF (@serv_Id = 0)
 		BEGIN
 
 		SET @precio = (SELECT prod_Precio FROM salo.tbProductos WHERE prod_Id = @prod_Id)
@@ -2455,7 +2478,7 @@ DECLARE @precio DECIMAL(18,2)
 				 SELECT @fact_Id,
 						T1.[prod_Id],
 						NULL,
-						1,
+						1 * @fade_Cantidad,
 						T2.prod_Precio,
 						GETDATE(),
 						@fade_UsuarioCreacion,
@@ -2464,6 +2487,7 @@ DECLARE @precio DECIMAL(18,2)
 						1
 				FROM [salo].[tbProductosXServicio] T1 INNER JOIN [salo].[tbProductos] T2
 				ON T1.prod_Id = T2.prod_Id
+				Where T1.serv_Id = @serv_Id
 
 
 
@@ -2985,3 +3009,7 @@ VALUES (2, 9, GETDATE(), 1, NULL, NULL, 1);
 
 INSERT INTO salo.tbProductosXServicio (serv_Id, prod_Id, spro_FechaCreacion, spro_UsuarioCreacion, spro_FechaModificacion, spro_UsuarioModificacion, spro_Estado)
 VALUES (8, 6, GETDATE(), 1, NULL, NULL, 1);
+
+
+
+--view 

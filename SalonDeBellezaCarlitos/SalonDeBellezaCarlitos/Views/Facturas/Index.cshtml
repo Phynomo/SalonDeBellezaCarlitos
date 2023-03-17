@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.FacturasViewModel>
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWFacturasViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -17,22 +17,19 @@
                 @Html.DisplayNameFor(model => model.fact_Fecha)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fact_FechaCreacion)
+                @Html.DisplayNameFor(model => model.clie_Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fact_Estado)
+                @Html.DisplayNameFor(model => model.clie_Apellido)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.clie_Id)
+                @Html.DisplayNameFor(model => model.NombreCaja)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.empl_Id_Atendido)
+                @Html.DisplayNameFor(model => model.NombreAtendido)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.empl_Id_Caja)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.metp_Id)
+                @Html.DisplayNameFor(model => model.metp_Descripcion)
             </th>
             <th></th>
         </tr>
@@ -44,25 +41,19 @@
                 @Html.DisplayFor(modelItem => item.fact_Fecha)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fact_FechaCreacion)
+                @Html.DisplayFor(modelItem => item.clie_Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fact_FechaModificacion)
+                @Html.DisplayFor(modelItem => item.clie_Apellido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fact_Estado)
+                @Html.DisplayFor(modelItem => item.NombreCaja)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.clie_Id)
+                @Html.DisplayFor(modelItem => item.NombreAtendido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.empl_Id_Atendido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.empl_Id_Caja)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.metp_Id)
+                @Html.DisplayFor(modelItem => item.metp_Descripcion)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.fact_Id">Edit</a> |

@@ -1,61 +1,202 @@
-﻿@model SalonDeBellezaCarlitos.Entities.Entities.tbFacturas
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.FacturasViewModel
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<input type="hidden" id="logrado" value="@ViewBag.logrado" />
 
-<h1>Create</h1>
-
-<h4>tbFacturas</h4>
-<hr />
 <div class="row">
-    <div class="col-md-12">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label asp-for="clie_Id" class="control-label">Id Cliente</label>
-                        <select asp-for="clie_Id" class="form-control" asp-items="ViewBag.clie_Id"></select>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label asp-for="empl_Id_Atendido" class="control-label">Id Empleado</label>
-                        <select asp-for="empl_Id_Atendido" class="form-control" asp-items="ViewBag.empl_Id_Atendido"></select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label asp-for="empl_Id_Caja" class="control-label">Id Caja</label>
-                        <select asp-for="empl_Id_Caja" class="form-control" asp-items="ViewBag.empl_Id_Caja"></select>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label asp-for="metp_Id" class="control-label">Metodo de Pago</label>
-                        <select asp-for="metp_Id" class="form-control" asp-items="ViewBag.metp_Id"></select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label asp-for="fact_UsuarioCreacion" class="control-label">Usuario Creación</label>
-                        <select asp-for="fact_UsuarioCreacion" class="form-control" asp-items="ViewBag.fact_UsuarioCreacion"></select>
-                    </div>
-                </div>
-            </div>
-            <div class="row d-flex justify-content-end">
-                <div class="col d-flex justify-content-end">
-                    <input type="submit" value="Create" class="btn btn-primary mx-1" />
-                    <a class="btn btn-dark" asp asp-action="Index">Regresar</a>
-                </div>
-            </div>
-        </form>
+    <div class="col">
+        <h1>Facturacion</h1>
+    </div>
+    <div class="col d-flex justify-content-end">
+        <a class="btn btn-dark" id="btnRegresar" asp asp-action="Index">Regresar</a>
     </div>
 </div>
 
+<hr />
+
+
+
+<div class="row" >
+    <div class="col-4">
+
+        <div class="row">
+            <div class="col mb-4" id="consumidor">
+
+                <div class="card">
+                    <div class="card-header " style="background-color: #800080; ">
+                        <h3 class="text-white ">Consumidor</h3>
+                    </div>
+                    <div class="card-body">
+
+                        <form asp-action="Create" id="formCreateFactura">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group col">
+                                        <label asp-for="clie_Id" class="control-label"></label>
+                                        <select asp-for="clie_Id" id="clie_Id" class="form-select" asp-items="ViewBag.clie_Id">
+                                            <option value="">-- Selecciones un Cliente --</option>
+                                        </select>
+                                        <label name="lbl_clie_IdError" id="lbl_clie_IdError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group col">
+                                        <label asp-for="metp_Id" class="control-label"></label>
+                                        <select asp-for="metp_Id" id="metp_Id" class="form-select" asp-items="ViewBag.metp_Id">
+                                            <option value="">-- Selecciones un Metodo de pago --</option>
+                                        </select>
+                                        <label name="lbl_metp_IdError" id="lbl_metp_IdError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="fila2">
+                                <div class="col-12">
+                                    <div class="form-group col">
+                                        <label asp-for="empl_Id_Caja" class="control-label"></label>
+                                        <select asp-for="empl_Id_Caja" id="empl_Id_Caja" class="form-select" asp-items="ViewBag.empl_Id_Caja">
+                                            <option value="">-- Selecciones un Cajero --</option>
+                                        </select>
+                                        <label name="lbl_empl_Id_CajaError" id="lbl_empl_Id_CajaError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group col">
+                                        <label asp-for="empl_Id_Atendido" class="control-label"></label>
+                                        <select asp-for="empl_Id_Atendido" id="empl_Id_Atendido" class="form-select" asp-items="ViewBag.empl_Id_Atendido">
+                                            <option value="">-- Selecciones un Estilista --</option>
+                                        </select>
+                                        <label name="lbl_empl_Id_AtendidoError" id="lbl_empl_Id_AtendidoError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-end">
+                                <div class="col d-flex justify-content-end">
+                                    <button type="button" class="btn btn-primary mx-1 me-3" id="btnFacturar" onclick="EnviarFormFactura()">Empezar a facturar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col" id="Servicio">
+
+
+                <div class="card">
+                    <div class="card-header " style="background-color: #800080; ">
+                        <h3 class="text-white ">Producto/Servicio</h3>
+                    </div>
+                    <div class="card-body">
+
+                        <form asp-action="Create" id="formFacturaDetalle">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <input type="hidden" asp-for="clie_Id" value="@ViewBag.clie_IdD" />
+                            <input type="hidden" asp-for="metp_Id" value="@ViewBag.metp_IdD" />
+                            <input type="hidden" asp-for="fact_Id" value="@ViewBag.fact_Id" />
+                            <div class="row text-center">
+                                <div class="col-12">
+                                    <div class="form-group col">
+                                        <label asp-for="prod_Id" class="control-label"></label>
+                                        <select asp-for="prod_Id" id="prod_Id" class="form-select" asp-items="ViewBag.prod_Id">
+                                            <option value="0">-- Selecciones un Producto --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group col">
+                                        <label asp-for="serv_Id" class="control-label"></label>
+                                        <select asp-for="serv_Id" id="serv_Id" class="form-select" asp-items="ViewBag.serv_Id">
+                                            <option value="0">-- Selecciones un Servicio --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div col="row text-center">
+                                <div class="col d-flex justify-content-center">
+                                    <label name="lbl_prod_Id_AtendidoError" id="lbl_prod_Id_AtendidoError" hidden class="control-label" style="color: red;">El campo producto o servicio es requerido</label>
+                                </div>
+                            </div>
+                            <div class="row text-center d-flex justify-content-center">
+                                <div class="col-12">
+                                    <div class="form-group col">
+                                        <label asp-for="fade_Cantidad" class="control-label"></label>
+                                        <input asp-for="fade_Cantidad" id="fade_Cantidad" class="form-control" />
+                                        <label name="lbl_fade_Cantidad_AtendidoError" id="lbl_fade_Cantidad_AtendidoError" hidden class="control-label" style="color: red;">Este campo cantidad es requerido</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-end">
+                                <div class="col d-flex justify-content-end">
+                                    <button type="button" id="btnDetalles" onclick="EnviarFormDetalles()" class="btn btn-primary mx-1">Ingresar producto</button>
+                                    <a class="btn btn-danger me-3" asp asp-action="Index">Finalizar compra</a>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="col-8">
+
+        <div class="card">
+            <div class="card-header " style="background-color: #800080; ">
+                <h3 class="text-white ">Factura</h3>
+            </div>
+            <div class="card-body">
+                <table class='table'>
+                    <thead>
+                        <tr>
+                            <td><strong>Compra</strong></td>
+                            <td><strong>Cantidad</strong></td>
+                            <td><strong>Precio</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        @foreach (var cliente in ViewBag.Clientes)
+                        {
+                            <tr>
+                                <td>@cliente.prod_Nombre @cliente.serv_Nombre</td>
+                                <td>@cliente.fade_Cantidad</td>
+                                <td>@cliente.fade_Precio</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<script src="~/js/App/Salon/Facturas.js"></script>
