@@ -33,8 +33,8 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
             var parametros = new DynamicParameters();
 
-            parametros.Add("@depa_Descripcion", item.depa_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@depa_Codigo", item.depa_Codigo, DbType.String, ParameterDirection.Input);
+            parametros.Add("@depa_Descripcion", item.depa_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@depa_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Departamentos, parametros, commandType: CommandType.StoredProcedure);
