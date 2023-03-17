@@ -5,12 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="row text-center">
+    <div class="col">
+        <h1>Productos</h1>
+        <hr />
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<div class="row mb-3 text-center">
+    <div class="col">
+        <a class="btn btn-primary" asp-action="Create">Agregar un Producto</a>
+        @*<button class="btn btn-primary" onclick="AbrirModalCreate()">Crear un nuevo cargo</button>*@
+    </div>
+</div>
+<table id="example" class="table dataTable compact hover stripe" style="width: 100%;" aria-describedby="example_info">
     <thead>
         <tr>
             <th>
@@ -41,38 +49,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.prod_Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.prod_Precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.prod_Stock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.prod_FechaCreacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.prod_FechaModificacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.prod_Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cate_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.prov_id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.prod_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.prod_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.prod_Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prod_Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prod_Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prod_Stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prod_FechaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prod_FechaModificacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prod_Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cate_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prov_id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.prod_Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.prod_Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.prod_Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

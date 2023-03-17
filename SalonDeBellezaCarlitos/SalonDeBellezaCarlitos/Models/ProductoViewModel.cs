@@ -10,19 +10,19 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
     {
         [Display(Name = "Id")]
         public int prod_Id { get; set; }
-        [Required(ErrorMessage = "El Campo {0} es necesaria!")]
+        [Required(ErrorMessage = "El Campo {0} es necesario!")]
         [Display(Name = "Nombre")]
         public string prod_Nombre { get; set; }
-        [Required(ErrorMessage = "El Campo {0} es necesaria!")]
+        [Required(ErrorMessage = "El Campo {0} es necesario!")]
         [Display(Name = "Precio")]
         public decimal prod_Precio { get; set; }
-        [Required(ErrorMessage = "El Campo {0} es necesaria!")]
+        [Required(ErrorMessage = "El Campo {0} es necesario!")]
         [Display(Name = "Categoria")]
         public int cate_Id { get; set; }
-        [Required(ErrorMessage = "El Campo {0} es necesaria!")]
+        [Required(ErrorMessage = "El Campo {0} es necesario!")]
         [Display(Name = "Stock")]
         public int prod_Stock { get; set; }
-        [Required(ErrorMessage = "El Campo {0} es necesaria!")]
+        [Required(ErrorMessage = "El Campo {0} es necesario!")]
         [Display(Name = "Proveedor")]
         public int? prov_id { get; set; }
         [Display(Name = "Fecha Creacion")]

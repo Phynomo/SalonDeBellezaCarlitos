@@ -1,4 +1,4 @@
-﻿using Dapper;
+﻿    using Dapper;
 using Microsoft.Data.SqlClient;
 using SalonDeBellezaCarlitos.Entities.Entities;
 using System;
@@ -34,7 +34,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@prov_Id", item.prov_id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@prod_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
 
-            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Categorias, parametros, commandType: CommandType.StoredProcedure);
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Productos, parametros, commandType: CommandType.StoredProcedure);
 
             return resultado;
         }

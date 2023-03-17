@@ -1,5 +1,10 @@
 ﻿@model SalonDeBellezaCarlitos.WebUI.Models.ProductoViewModel
 
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <h4>tbProductos</h4>
 <hr />
 <div class="row">
@@ -27,7 +32,10 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="cate_Id" class="control-label">Id Categoria</label>
-                        <select asp-for="cate_Id" class="form-control" asp-items="ViewBag.cate_Id"></select>
+                        <select asp-for="cate_Id" class="form-control" asp-items="ViewBag.cate_Id">
+                            <option value="">-- Selecciones una Categoria --</option>
+                        </select>
+                        <span asp-validation-for="cate_Id" class="text-danger" />
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -43,13 +51,9 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="prov_id" class="control-label">Id Proveedor</label>
-                        <select asp-for="prov_id" class="form-control" asp-items="ViewBag.prov_id"></select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="prod_UsuarioCreacion" class="control-label">Usuario Creación</label>
-                        <select asp-for="prod_UsuarioCreacion" class="form-control" asp-items="ViewBag.prod_UsuarioCreacion"></select>
+                        <select asp-for="prov_id" class="form-control" asp-items="ViewBag.prov_Id">
+                            <option value="">-- Selecciones un Proveedor --</option>
+                        </select>
                     </div>
                 </div>
                 <div>
@@ -64,6 +68,5 @@
         </form>
     </div>
 </div>
-
 
 
