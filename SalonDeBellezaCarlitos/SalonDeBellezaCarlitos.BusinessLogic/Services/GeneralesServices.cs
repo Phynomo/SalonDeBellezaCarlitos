@@ -383,6 +383,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public int EditarCategoria(tbCategorias categoria)
+        {
+
+            try
+            {
+                var resultado = _CategoriaRepository.Update(categoria);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
 
         public int EliminarCategoria(tbCategorias categorias)
         {
@@ -398,6 +413,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return 0;
             }
 
+        }
+        public IEnumerable<tbCategorias> BuscarCategoria(int? id)
+        {
+            try
+            {
+                return _CategoriaRepository.BuscarCategoria(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         #endregion
@@ -818,7 +844,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         #region Facturas
 
 
-
+        public IEnumerable<VW_tbFacturas_Listado> BuscarFactura(int? id)
+        {
+            try
+            {
+                return _FacturasRepository.BuscarFactura(id);
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<VW_tbFacturas_Listado>();
+            }
+        }
 
         public IEnumerable<VW_tbFacturas_Listado> ListadoFacturas(out string error)
         {
@@ -881,6 +917,22 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         }
 
+
+        public int EliminarDetalle(tbFacturas facturas)
+        {
+
+            try
+            {
+                var resultado = _FacturasRepository.DeleteDetalle(facturas);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
 
         #endregion
 

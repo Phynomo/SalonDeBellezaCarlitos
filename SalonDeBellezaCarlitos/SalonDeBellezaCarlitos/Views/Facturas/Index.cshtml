@@ -35,32 +35,35 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.fact_Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.clie_Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.clie_Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreCaja)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreAtendido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.metp_Descripcion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.fact_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.fact_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.fact_Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fact_Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clie_Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clie_Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCaja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreAtendido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.metp_Descripcion)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.fact_Id">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+
+<script src="~/js/App/Salon/Facturas.js"></script>

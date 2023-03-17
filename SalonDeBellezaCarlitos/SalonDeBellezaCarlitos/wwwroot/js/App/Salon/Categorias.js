@@ -18,6 +18,29 @@ function GuardarModalCreate() {
 
 }
 
+function AbrirModalEdit(cadena) {
+    var datastring = cadena;
+    var data = datastring.split(',');
+    $("#cate_Id_Edit").val(data[0]);
+    $("#cate_Descripcion_Edit").val(data[1]);
+    $("#EditarCategoria").appendTo('body').modal('show');
+};
+
+
+function GuardarModalEdit() {
+    var cate_Descripcion = $('#cate_Descripcion_Edit').val();
+
+    $("#lbl_DescripcionEditError").attr('hidden', true);
+
+    if (cate_Descripcion != "") {
+        $("#formEdit").submit();
+
+    } else {
+        $("#lbl_DescripcionEditError").attr('hidden', false);
+        console.log('holperra');
+    }
+
+}
 
 function AbrirModalDelete(id) {
     console.log(id);

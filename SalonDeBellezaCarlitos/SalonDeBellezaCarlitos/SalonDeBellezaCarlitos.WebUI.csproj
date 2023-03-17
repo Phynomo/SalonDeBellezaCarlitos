@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Categorias\_CargosEditViewPartial.cshtml" />
     <Content Remove="Views\EstadosCiviles\_CreateModalPartialView.cshtml" />
   </ItemGroup>
 

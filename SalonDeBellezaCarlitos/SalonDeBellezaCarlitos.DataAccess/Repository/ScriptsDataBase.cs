@@ -50,6 +50,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_Categorias = "salo.UDP_tbCategorias_Insert";
         public static string UDP_Editar_Categorias = "salo.UDP_tbCategorias_Update";
         public static string UDP_Borrar_Categorias = "salo.UDP_tbCategorias_Delete";
+        public static string UDP_Buscar_Categorias = "salo.UDP_tbCategorias_Buscar";
 
         #endregion
 
@@ -137,6 +138,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_Facturas = "salo.UDP_salo_tbFacturas_Insert";
         public static string UDP_Editar_Facturas = "salo.UDP_salo_tbFacturas_Update";
         public static string UDP_Borrar_Facturas = "salo.UDP_salo_tbFacturas_Delete";
+        public static string UDP_Buscar_Facturas = "salo.UDP_salo_tbFacturas_Buscar";
 
         #endregion
 

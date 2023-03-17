@@ -106,19 +106,43 @@ function EnviarFormDetalles() {
     var Cantidad = $("#fade_Cantidad").val();
     console.log(Cantidad);
 
-    if ((Producto != "0" && Servicio != "0") || Cantidad != 0) {
+    if ((Producto != "0" && Servicio != "0") || Cantidad > 0) {
         $("#formFacturaDetalle").submit();
     } else {
-        if (Producto == "0") {
+        if (Producto == "0" && Servicio == "0") {
             $("#lbl_prod_Id_AtendidoError").attr("hidden", false);
         }
-        if (Servicio == "0") {
-            $("#lbl_prod_Id_AtendidoError").attr("hidden", false);
-        }
-        if (Cantidad == 0) {
+        if (Cantidad <= 0) {
             $("#lbl_fade_Cantidad_AtendidoError").attr("hidden", false);
         }
     }
 
 
 }
+
+
+
+
+function AbrirModalDelete(id) {
+    console.log(id);
+    $("#fade_Id_Delete").val(id);
+    $("#fade_UsuarioModificacion_Delete").val(1);
+    $("#EliminarDetalle").appendTo('body').modal('show');
+};
+
+
+
+function GuardarModalDelete() {
+    var carg_Descripcion = $('#fade_Id_Delete').val();
+
+    $("#lbl_DescripcionDeleteError").attr('hidden', true);
+
+    if (carg_Descripcion != "") {
+        $("#formDelete").submit();
+
+    } else {
+        $("#lbl_DescripcionDeleteError").attr('hidden', false);
+    }
+
+}
+

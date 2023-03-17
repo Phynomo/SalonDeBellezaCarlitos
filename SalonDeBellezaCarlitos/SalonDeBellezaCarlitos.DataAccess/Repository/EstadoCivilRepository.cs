@@ -61,8 +61,9 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             var parametros = new DynamicParameters();
             parametros.Add("@estc_Id", item.estc_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@estc_Descripcion", item.estc_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@estc_UsuarioModificacion", item.estc_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
-            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Buscar_EstadosCiviles, parametros, commandType: CommandType.StoredProcedure);
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_EstadosCiviles, parametros, commandType: CommandType.StoredProcedure);
 
             return resultado;
         }

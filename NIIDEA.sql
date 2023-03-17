@@ -1077,6 +1077,28 @@ SELECT [cate_Id]
 END
 
 GO
+
+CREATE OR ALTER PROCEDURE salo.UDP_tbCategorias_Buscar
+    @cate_Id    INT
+AS
+BEGIN
+
+
+SELECT [cate_Id]
+      ,[cate_Descripcion]
+      ,[cate_FechaCreacion]
+      ,[cate_UsuarioCreacion]
+      ,[cate_FechaModificacion]
+      ,[cate_UsuarioModificacion]
+      ,[cate_Estado]
+  FROM [salo].[tbCategorias]
+  WHERE cate_Estado = 1
+  AND [cate_Id] = @cate_Id
+
+END
+
+GO
+
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbCategorias_Insert
 	@cate_Descripcion Nvarchar(150),
@@ -1969,14 +1991,16 @@ GO
 -----------Procedimiento Update EstadoCiviles
 CREATE OR ALTER  PROCEDURE gnrl.UDP_tbEstadoCiviles_Update
 @estc_Id  INT,
-@estc_Descripcion Varchar(200)
-
+@estc_Descripcion Varchar(200),
+@estc_UsuarioModificacion INT
 as
 begin
 BEGIN TRY
 
 UPDATE [gnrl].[tbEstadosCiviles]
    SET[estc_Descripcion] = @estc_Descripcion
+		,estc_UsuarioModificacion = @estc_UsuarioModificacion
+		,estc_FechaModificacion = GETDATE()
  WHERE estc_Id = @estc_Id
 
 SELECT 1 as Proceso
@@ -2337,6 +2361,16 @@ END
 
 GO
 
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_salo_tbFacturas_Buscar
+@fact_Id int
+AS
+BEGIN
+	SELECT * FROM VW_tbFacturas_Listado
+	WHERE fact_Id = @fact_Id
+END
+
+GO
 
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_salo_tbFacturas_Insert
@@ -2611,15 +2645,15 @@ END
 
 --Procedimiento Delete FacturasDetalle
 GO
-CREATE PROCEDURE salo.UDP_salo_tbFacturasDetalle_Delete 
+CREATE OR ALTER PROCEDURE salo.UDP_salo_tbFacturasDetalle_Delete 
     @fade_Id                    INT
 AS
 BEGIN
 BEGIN TRY
 
-    UPDATE  salo.tbFacturasDetalles
-    SET     fade_Estado = 0
-    WHERE   fade_Id = @fade_Id
+DELETE FROM [salo].[tbFacturasDetalles]
+      WHERE fade_Id = @fade_Id
+
 
 SELECT 1 as Proceso
 END TRY

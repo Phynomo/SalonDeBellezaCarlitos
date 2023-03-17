@@ -1,0 +1,93 @@
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWFacturasViewModel>
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col">
+        <h1>Factura</h1>
+    </div>
+    <div class="col d-flex justify-content-end">
+        <a class="btn btn-dark" id="btnRegresar" asp asp-action="Index">Regresar</a>
+    </div>
+</div>
+
+<hr />
+@foreach (var item in Model)
+{
+
+    <div class="row">
+        <div class="col-3 text-center" style="border-right:2px solid black;">
+            <img src="~/img/Logo.png" style="height:22vh;"/>
+        </div>
+        <div class="col ms-2 mt-3">
+            <div class="row" style="font-size:1.5em;">
+                <div class="col">
+                    <label class="text-black">N° de factura</label><br />
+                    <label> @Html.DisplayFor(model => item.fact_Id)</label>
+                </div>
+                <div class="col">
+                    <label class="text-black">Fecha de facturacion</label><br />
+                    <label> @Html.DisplayFor(model => item.fact_Fecha)</label>
+                </div>
+            </div>
+            <div class="row" style="font-size:1.5em;">
+                <div class="col">
+                    <label class="text-black">Cliente</label><br />
+                    <label> @Html.DisplayFor(model => item.clie_Nombre) @Html.DisplayFor(model => item.clie_Apellido)</label>
+                </div>
+                <div class="col">
+                    <label class="text-black">Facturado por</label><br />
+                    <label> @Html.DisplayFor(model => item.NombreCaja) @Html.DisplayFor(model => item.ApellidoCaja)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card border-3 mt-2" style="font-size:1.2em;">
+                <div class="card-header " style="background-color: #2a0637; ">
+                    <h3 class="text-white ">Factura</h3>
+                </div>
+                <div class="card-body">
+                    <table class='table'>
+                        <thead>
+                            <tr>
+                                <td><strong>Compra</strong></td>
+                                <td><strong>Cantidad</strong></td>
+                                <td><strong>Precio</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @foreach (var cliente in ViewBag.Clientes)
+                            {
+                                <tr>
+                                    <td>@cliente.prod_Nombre @cliente.serv_Nombre</td>
+                                    <td>@cliente.fade_Cantidad</td>
+                                    <td>@cliente.fade_Precio</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <label>SubTotal</label>
+                    <label>@ViewBag.Subtotal</label><br />
+                    <label>IVA</label>
+                    <label>@ViewBag.IVA</label><br />
+                    <label>Total</label>
+                    <label>@ViewBag.Total</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+

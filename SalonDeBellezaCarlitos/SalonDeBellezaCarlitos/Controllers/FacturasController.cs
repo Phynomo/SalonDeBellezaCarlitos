@@ -60,7 +60,49 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             var result = 0;
 
-            
+            if (Convert.ToInt32(factura.fade_UsuarioModificacion) == 1)
+            {
+                factura.fact_UsuarioCreacion = factura.fade_Id;
+                var car = _mapper.Map<tbFacturas>(factura);
+                result = _generalesService.EliminarDetalle(car);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error241).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
+                    ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error141).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
+
+                    ViewBag.clie_IdD = factura.clie_Id;
+                    ViewBag.metp_IdD = factura.metp_Id;
+
+                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error24).ToList(), "prod_Id", "prod_Nombre");
+                    ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error14).ToList(), "serv_Id", "serv_Nombre");
+
+                    return View(factura);
+                }
+
+                ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
+                ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
+                ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error21).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
+                ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error11).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
+
+                ViewBag.clie_IdD = factura.clie_Id;
+                ViewBag.metp_IdD = factura.metp_Id;
+
+                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre", 0);
+                ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre", 0);
+
+                ViewBag.fact_Id = factura.fact_Id;
+                ViewBag.logrado = "true";
+
+                var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
+                ViewBag.Clientes = lista;
+
+
+                return View();
+
+
+            }
 
             if ((factura.prod_Id == 0 && factura.serv_Id == 0) || (factura.prod_Id == null && factura.serv_Id == null))
             {
@@ -76,6 +118,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error3).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
                     ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error22).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
                     ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error1255).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
+
+
+                    var lista2 = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
+                    ViewBag.Clientes = lista2;
+
                     return View(factura);
                 }
 
@@ -118,6 +165,10 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error24).ToList(), "prod_Id", "prod_Nombre");
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error14).ToList(), "serv_Id", "serv_Nombre");
 
+
+                    var lista3 = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
+                    ViewBag.Clientes = lista3;
+
                     return View(factura);
                 }
 
@@ -144,37 +195,33 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
         }
 
-        //[HttpGet("/Facturas/Crear/{prod_Id}/{fade_Cantidad}/{fact_Id}")]
-        //public ActionResult Crea2(string? prod_Id, string fade_Cantidad, string fact_Id)
-        //{
-        //    //var result = 0;
-        //    //var fac = _mapper.Map<tbFacturas>(factura);
-        //    //result = _generalesService.InsertarFacturas(fac);
 
-        //    //if (result == 0)
-        //    //{
+        [HttpGet("/Facturas/Detalles")]
+        public IActionResult Details(int? id)
+        {
+            var Factura = _generalesService.BuscarFactura(id);
+            var listadoMapeado = _mapper.Map<IEnumerable<VWFacturasViewModel>>(Factura);
 
-        //    //    ViewBag.FecturaPreInsertadahidden = "hidden";
-        //    //    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-        //    //    ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
-        //    //    ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error3).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
-        //    //    ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error22).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
-        //    //    ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error1255).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
-        //    //    return View(factura);
-        //    //}
+            var lista = _generalesService.BuscarFacturasDetalles(id).ToList();
+            ViewBag.Clientes = lista;
 
-        //    //ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
-        //    //ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
-        //    //ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error21).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
-        //    //ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error11).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
+            decimal subtotal = 0;
 
+            foreach (var item in lista)
+            {
+                subtotal += item.fade_Cantidad * item.fade_Precio;
+            }
+            
+            decimal iva = (subtotal * Convert.ToDecimal(0.12));
+            decimal Total = iva + subtotal;
 
-        //    //ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
-        //    //ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
+            ViewBag.Total = Total;
+            ViewBag.Subtotal = subtotal;
+            ViewBag.IVA = iva;
 
-        //    //ViewBag.logrado = "true";
-        //    return View("Listado");
-        //}
+            return View(listadoMapeado);
+        }
+
 
     }
 }

@@ -15,6 +15,18 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             throw new NotImplementedException();
         }
 
+
+        public int DeleteDetalle(tbFacturas item)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@fade_Id", item.fact_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Borrar_FacturasDetalle, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
+        }
+
         public tbFacturas find(int? id)
         {
             using var db = new SalonCarlitosContext();
@@ -63,6 +75,18 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@fact_Id", item, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.Query<VW_tbFacturaDetalle_View>(ScriptsDataBase.UDP_Buscar_FacturasDetalle, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
+        }
+
+        public IEnumerable<VW_tbFacturas_Listado> BuscarFactura(int? item)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@fact_Id", item, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.Query<VW_tbFacturas_Listado>(ScriptsDataBase.UDP_Buscar_Facturas, parametros, commandType: CommandType.StoredProcedure);
 
             return resultado;
         }

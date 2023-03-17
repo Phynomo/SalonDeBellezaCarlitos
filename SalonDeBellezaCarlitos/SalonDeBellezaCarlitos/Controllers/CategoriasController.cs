@@ -67,6 +67,30 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             return View(listado);
         }
 
+        [HttpGet("/Categorias/Editar/{id}")]
+        public IActionResult Edit(int? id)
+        {
+            var listado = _generalesService.BuscarCargo(id);
+            return View(listado);
+        }
+
+        [HttpPost("/Categorias/Editar")]
+        public IActionResult Edit(CategoriaViewModel cargo)
+        {
+            var result = 0;
+            var car = _mapper.Map<tbCategorias>(cargo);
+            result = _generalesService.EditarCategoria(car);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+
+        }
+
+
         [HttpPost("/Categorias/Eliminar")]
         public IActionResult Delete(CategoriaViewModel cargo)
         {
@@ -81,6 +105,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             return RedirectToAction("Listado");
 
+        }
+
+        [HttpGet("/Categorias/Detalles")]
+        public IActionResult Details(int? id)
+        {
+            var servicio = _generalesService.BuscarCategoria(id);
+            var servicioMapeado = _mapper.Map<IEnumerable<CategoriaViewModel>>(servicio);
+            return View(servicioMapeado);
         }
     }
 }

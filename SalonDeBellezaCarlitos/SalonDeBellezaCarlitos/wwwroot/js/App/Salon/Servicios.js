@@ -22,7 +22,7 @@ function GuardarModalCreate() {
         if (serv_Descripcion == "") {
             $("#lbl_serv_Descripcion").attr('hidden', false);
         }
-        if (serv_Precio == "0,00") {
+        if (serv_Precio == "0,00" || serv_Precio == "0.00") {
             $("#lbl_serv_Precio").attr('hidden', false);
         }
     }

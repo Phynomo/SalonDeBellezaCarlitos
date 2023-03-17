@@ -74,6 +74,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
         }
 
+
+        [HttpGet("/EstadosCiviles/Editar/{id}")]
+        public IActionResult Edit(int? id)
+        {
+            var listado = _generalesService.BuscarCargo(id);
+            return View(listado);
+        }
         [HttpPost("/EstadosCiviles/Editar")]
         public IActionResult Edit(EstadoCivilViewModel estado)
         {
