@@ -1158,7 +1158,7 @@ END CATCH
 
 END
 GO
-
+//
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbCategorias_Delete
 	@cate_Id INT
