@@ -54,6 +54,19 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             return resultado;
         }
 
+
+        public IEnumerable<VW_tbFacturaDetalle_View> BuscarFacturaDetalles(int? item)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@fact_Id", item, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.Query<VW_tbFacturaDetalle_View>(ScriptsDataBase.UDP_Buscar_FacturasDetalle, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
+        }
+
         public IEnumerable<tbFacturas> List()
         {
             throw new NotImplementedException();

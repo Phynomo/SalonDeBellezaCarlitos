@@ -2321,27 +2321,37 @@ END
 GO
 
 --Procedimiento Insert FacturasDetalle
-GO
-GO
-CREATE OR ALTER PROCEDURE salo.UDP_salo_FacturaDetalle_Listado
-AS
-BEGIN
 
+CREATE VIEW salo.VW_tbFacturaDetalle_View
+as
 SELECT [fade_Id]
       ,[fact_Id]
+	  ,T1.[prod_Id]
+	  ,T1.[serv_Id]
       ,T1.[prod_Id] + T1.[serv_Id] AS Servicio_Producto_ID
       ,T2.prod_Nombre + T3.serv_Nombre AS Servicio_Producto_Nombre
 	  ,[fade_Cantidad]
       ,[fade_Precio]
+	  ,[fade_Cantidad] * [fade_Precio] as Subtotal
       ,[fade_FechaCreacion]
       ,[fade_UsuarioCreacion]
       ,[fade_FechaModificacion]
       ,[fade_UsuarioModificacion]
       ,[fade_Estado]
-  FROM [salo].[tbFacturasDetalles] T1 INNER JOIN salo.tbProductos T2
-  ON t1.prod_Id = T2.prod_Id INNER JOIN salo.tbServicios T3
+  FROM [salo].[tbFacturasDetalles] T1 LEFT JOIN salo.tbProductos T2
+  ON t1.prod_Id = T2.prod_Id LEFT JOIN salo.tbServicios T3
   ON t3.serv_Id = T1.serv_Id
   WHERE fade_Estado = 1
+
+  select * from salo.[tbFacturasDetalles]
+
+GO
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_salo_FacturaDetalle_Listado
+AS
+BEGIN
+ 
+ Select * from
 
 END
 

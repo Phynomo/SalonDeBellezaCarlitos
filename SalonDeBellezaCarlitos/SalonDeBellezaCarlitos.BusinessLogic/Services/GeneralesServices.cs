@@ -651,6 +651,9 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #region Facturas
 
+
+
+
         public IEnumerable<VW_tbFacturas_Listado> ListadoFacturas(out string error)
         {
             error = string.Empty;
@@ -695,6 +698,23 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+
+        public IEnumerable<VW_tbFacturaDetalle_View> BuscarFacturasDetalles(int? item)
+        {
+
+            try
+            {
+                var resultado = _FacturasRepository.BuscarFacturaDetalles(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
 
         #endregion
 

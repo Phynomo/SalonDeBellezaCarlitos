@@ -140,6 +140,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_FacturasDetalle = "salo.UDP_salo_FacturaDetalle_Insert";
         public static string UDP_Editar_FacturasDetalle = "salo.UDP_salo_tbFacturaDetalle_Update";
         public static string UDP_Borrar_FacturasDetalle = "salo.UDP_salo_tbFacturasDetalle_Delete";
+        public static string UDP_Buscar_FacturasDetalle = "salo.UDP_salo_FacturaDetalle_Buscar";
 
         #endregion
 

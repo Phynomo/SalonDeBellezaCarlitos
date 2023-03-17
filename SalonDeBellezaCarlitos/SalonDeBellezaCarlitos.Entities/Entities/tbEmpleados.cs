@@ -34,7 +34,6 @@ namespace SalonDeBellezaCarlitos.Entities.Entities
         public bool? empl_Estado { get; set; }
         [NotMapped]
         public int depa_Id { get; set; }
-
         public virtual tbCargos carg { get; set; }
         public virtual tbUsuarios empl_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios empl_UsuarioModificacionNavigation { get; set; }

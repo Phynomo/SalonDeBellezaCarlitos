@@ -84,9 +84,13 @@
       {
          "Name": "[dbo].[VW_tbFacturas_Listado]",
          "ObjectType": 3
+      },
+      {
+         "Name": "[salo].[VW_tbFacturaDetalle_View]",
+         "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-383CMQ3\\MSSQLSERVERLOCAL.SalonDeBellezaCarlitos",
+   "UiHint": "DESKTOP-51051C3\\SQLEXPRESS.SalonDeBellezaCarlitos",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

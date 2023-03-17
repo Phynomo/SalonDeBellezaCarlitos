@@ -48,6 +48,10 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error3).ToList(), "empl_Id", "empl_Nombre");
             ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error221).ToList(), "clie_Id", "clie_Nombre");
             ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error69).ToList(), "metp_Id", "metp_Descripcion");
+
+            var lista = _generalesService.BuscarFacturasDetalles(0).ToList();
+            ViewBag.Clientes = lista;
+
             return View();
         }
 
@@ -55,6 +59,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(FacturasViewModel factura)
         {
             var result = 0;
+
+            
 
             if ((factura.prod_Id == 0 && factura.serv_Id == 0) || (factura.prod_Id == null && factura.serv_Id == null))
             {
@@ -78,9 +84,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error21).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
                 ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error11).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
 
+                ViewBag.clie_IdD = factura.clie_Id;
+                ViewBag.metp_IdD = factura.metp_Id;
                 ViewBag.fact_Id = result;
                 ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
                 ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
+
+                var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
+                ViewBag.Clientes = lista;
 
                 ViewBag.logrado = "true";
                 return View(factura);
@@ -101,6 +112,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error241).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
                     ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error141).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
 
+                    ViewBag.clie_IdD = factura.clie_Id;
+                    ViewBag.metp_IdD = factura.metp_Id;
+
                     ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error24).ToList(), "prod_Id", "prod_Nombre");
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error14).ToList(), "serv_Id", "serv_Nombre");
 
@@ -112,6 +126,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error21).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
                 ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error11).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
 
+                ViewBag.clie_IdD = factura.clie_Id;
+                ViewBag.metp_IdD = factura.metp_Id;
 
                 ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre", 0);
                 ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre", 0);
@@ -119,7 +135,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.fact_Id = factura.fact_Id;
                 ViewBag.logrado = "true";
 
-                return View(factura);
+                var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
+                ViewBag.Clientes = lista;
+
+
+                return View();
             }
 
         }
