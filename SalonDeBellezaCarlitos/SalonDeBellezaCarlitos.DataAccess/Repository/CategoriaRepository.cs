@@ -14,7 +14,13 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
     {
         public int Delete(tbCategorias item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@cate_Id", item.cate_Id, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Borrar_Categorias, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public tbCategorias find(int? id)

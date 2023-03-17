@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.EstadoCivilViewModel>
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Details</h1>
+@foreach (var item in Model)
+{
+    <div>
+        <h4>tbServicios</h4>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.estc_Descripcion)</label><br />
+                <label>@Html.DisplayFor(model => item.estc_Descripcion)</label>
+            </div>
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.estc_FechaCreacion)</label><br />
+                <label>@Html.DisplayFor(model => item.estc_FechaModificacion)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.estc_FechaModificacion)</label><br />
+                <label>@Html.DisplayFor(model => item.estc_FechaModificacion)</label>
+            </div>
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.estc_Estado)</label><br />
+                <label>@Html.DisplayFor(model => item.estc_Estado)</label>
+            </div>
+        </div>
+
+
+
+        <div class="card mt-4">
+            <div class="card-header" style="background-color:#2a0637;">
+                <h3 class="text-white ">Auditoria</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Accion</th>
+                            <th>Usuario</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Creado</td>
+                            <td>@ViewBag.UsuarioCreacion</td>
+                            <td>@ViewBag.FechaCreacion</td>
+                        </tr>
+                        <tr>
+                            <td>Modificado</td>
+                            <td>@ViewBag.UsuarioModificacion</td>
+                            <td>@ViewBag.FechaModificacion</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        @*<a asp-action="Edit" asp-route-id="@Model.estc_Id">Edit</a> |*@
+        <a asp-action="Index">Back to List</a>
+    </div>
+}

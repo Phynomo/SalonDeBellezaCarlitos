@@ -1,4 +1,4 @@
-﻿@model SalonDeBellezaCarlitos.WebUI.Models.ServicioViewModel
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.ServicioViewModel>
 
 @{
     ViewData["Title"] = "Details";
@@ -6,111 +6,37 @@
 }
 
 <h1>Details</h1>
-
-<div>
-    <h4>tbServicios</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.serv_Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.serv_Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.serv_Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.serv_Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.serv_Precio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.serv_Precio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.serv_FechaCreacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.serv_FechaCreacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.serv_FechaModificacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.serv_FechaModificacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.serv_Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.serv_Estado)
-        </dd>
-    </dl>
-</div>
-<div>
-
-    <div class="row">
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Nombre)</label><br />
-            <label></label>
+@foreach (var item in Model)
+{
+    <div>
+        <h4>tbServicios</h4>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Nombre)</label><br />
+                <label>@Html.DisplayFor(model => item.serv_Nombre)</label>
+            </div>
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Descripcion)</label><br />
+                <label>@Html.DisplayFor(model => item.serv_Descripcion)</label>
+            </div>
         </div>
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayFor(model => model.serv_Nombre)</label><br />
-            <label></label>
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Precio)</label><br />
+                <label>@Html.DisplayFor(model => item.serv_Precio)</label>
+            </div>
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_FechaCreacion)</label><br />
+                <label>@Html.DisplayFor(model => item.serv_FechaCreacion)</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Descripcion)</label><br />
-            <label></label>
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Estado)</label><br />
+                <label>@Html.DisplayFor(model => item.serv_Estado)</label>
+            </div>
         </div>
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayFor(model => model.serv_Descripcion)</label><br />
-            <label></label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Precio)</label><br />
-            <label></label>
-        </div>
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayFor(model => model.serv_Precio)</label><br />
-            <label></label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_FechaCreacion)</label><br />
-            <label></label>
-        </div>
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayFor(model => model.serv_FechaCreacion)</label><br />
-            <label></label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_FechaModificacion)</label><br />
-            <label></label>
-        </div>
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayFor(model => model.serv_FechaModificacion)</label><br />
-            <label></label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.serv_Estado)</label><br />
-            <label></label>
-        </div>
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayFor(model => model.serv_Estado)</label><br />
-            <label></label>
-        </div>
-    </div>
 
     <div class="card mt-4">
         <div class="card-header" style="background-color:#2a0637;">
@@ -143,6 +69,8 @@
 
 
 
-    <a asp-action="Edit" asp-route-id="@Model.serv_Id">Edit</a> |
+    @*<a asp-action="Edit" asp-route-id="@Model.serv_Id">Edit</a>*@ |
     <a asp-action="Index">Back to List</a>
 </div>
+
+}

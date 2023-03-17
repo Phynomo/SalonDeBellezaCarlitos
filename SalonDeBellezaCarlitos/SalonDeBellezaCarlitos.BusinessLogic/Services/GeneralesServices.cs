@@ -338,6 +338,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public IEnumerable<tbServicios> BuscarServicios(int? id)
+        {
+            try
+            {
+                return _ServicioRepository.BuscarServicio(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         #endregion
 
@@ -363,6 +374,22 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             try
             {
                 var resultado = _CategoriaRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public int EliminarCategoria(tbCategorias categorias)
+        {
+
+            try
+            {
+                var resultado = _CategoriaRepository.Delete(categorias);
 
                 return resultado;
             }
@@ -406,19 +433,45 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
-
-        public tbDepartamentos BuscarDepartameto(int? id)
+        public int EditarDepartamento(tbDepartamentos departamentos)
         {
             try
             {
-                var resultado = _DepartamentosRepository.find(id);
+                var resultado = _DepartamentosRepository.Update(departamentos);
 
                 return resultado;
             }
             catch (Exception)
             {
+                return 0;
+            }
+        }
+
+        public IEnumerable<tbDepartamentos> BuscarDepartameto(int? id)
+        {
+            try
+            {
+                return _DepartamentosRepository.BuscarDepartamento(id);
+            }
+            catch (Exception)
+            {
                 return null;
             }
+        }
+        public int EliminarDepartamento(tbDepartamentos departamentos)
+        {
+
+            try
+            {
+                var resultado = _DepartamentosRepository.Delete(departamentos);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
         }
 
         #endregion
@@ -577,6 +630,20 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
         }
 
+        public IEnumerable<tbEstadosCiviles> BuscarEstadoCivil_IEnumerable(int? id)
+        {
+            try
+            {
+                var resultado = _EstadosCivilesRepository.Buscar(id);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<tbEstadosCiviles>();
+            }
+        }
+
         public IEnumerable<tbEstadosCiviles> ListadoEstadosCiviles(out string error)
         {
             error = string.Empty;
@@ -605,6 +672,47 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public int EliminarEstadoCivil(tbEstadosCiviles estados)
+        {
+
+            try
+            {
+                var resultado = _EstadosCivilesRepository.Delete(estados);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+        public int EditarEstadoCivil(tbEstadosCiviles estados)
+        {
+
+            try
+            {
+                var resultado = _EstadosCivilesRepository.Update(estados);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+        //public IEnumerable<tbEstadosCiviles> BuscarEstadoCivil(int? id)
+        //{
+        //    try
+        //    {
+        //        return _EstadosCivilesRepository.BuscarEstado(id);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return null;
+        //    }
+        //}
 
         #endregion
 
@@ -839,6 +947,47 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return 0;
             }
 
+        }
+        public int EliminarMetodoPago(tbMetodoPago metodoPago)
+        {
+
+            try
+            {
+                var resultado = _MetodopagoRepository.Delete(metodoPago);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+        public int EditarMetodoPago(tbMetodoPago metodoPago)
+        {
+
+            try
+            {
+                var resultado = _MetodopagoRepository.Update(metodoPago);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+        public IEnumerable<tbMetodoPago> BuscarMetodoPago(int? id)
+        {
+            try
+            {
+                return _MetodopagoRepository.BuscarMetodoPago(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
 

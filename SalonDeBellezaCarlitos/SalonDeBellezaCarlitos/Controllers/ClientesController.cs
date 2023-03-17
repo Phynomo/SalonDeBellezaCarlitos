@@ -21,8 +21,6 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             _generalesService = generalesServices;
             _mapper = mapper;
         }
-
-
         [HttpGet("/Clientes/Listado")]
         public IActionResult Index()
         {

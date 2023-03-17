@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.DepartamentoViewModel>
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Details</h1>
+@foreach (var item in Model)
+{
+    <div>
+        <h4>Departamentos</h4>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.depa_Descripcion)</label><br />
+                <label>@Html.DisplayFor(model => item.depa_Descripcion)</label>
+            </div>
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.depa_Codigo)</label><br />
+                <label>@Html.DisplayFor(model => item.depa_Codigo)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.depa_FechaCreacion)</label><br />
+                <label>@Html.DisplayFor(model => item.depa_FechaCreacion)</label>
+            </div>
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.depa_FechaModificacion)</label><br />
+                <label>@Html.DisplayFor(model => item.depa_FechaModificacion)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.depa_Estado)</label><br />
+                <label>@Html.DisplayFor(model => item.depa_Estado)</label>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header" style="background-color:#2a0637;">
+                <h3 class="text-white ">Auditoria</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Accion</th>
+                            <th>Usuario</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Creado</td>
+                            <td>@ViewBag.UsuarioCreacion</td>
+                            <td>@ViewBag.FechaCreacion</td>
+                        </tr>
+                        <tr>
+                            <td>Modificado</td>
+                            <td>@ViewBag.UsuarioModificacion</td>
+                            <td>@ViewBag.FechaModificacion</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        @*<a asp-action="Edit" asp-route-id="@Model.depa_Id">Edit</a>*@ |
+        <a asp-action="Index">Back to List</a>
+    </div>
+}
+
+

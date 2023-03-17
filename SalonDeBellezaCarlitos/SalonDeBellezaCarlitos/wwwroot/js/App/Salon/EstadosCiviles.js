@@ -22,26 +22,23 @@ function GuardarModalCreate() {
 
 function AbrirModalEdit(cadena) {
     var datastring = cadena;
-    console.log(datastring);
     var data = datastring.split(',');
-    $("#carg_Id_Edit").val(data[0]);
-    $("#carg_Descripcion_Edit").val(data[1]);
-    $("#EditarCargos").appendTo('body').modal('show');
+    $("#estc_Id_Edit").val(data[0]);
+    $("#estc_Descripcion_Edit").val(data[1]);
+    $("#EditarEstadoCivil").appendTo('body').modal('show');
 };
 
 
 function GuardarModalEdit() {
-    var carg_Descripcion = $('#carg_Descripcion_Edit').val();
-    console.log('hola');
+    var metp_Descripcion = $('#estc_Descripcion_Edit').val();
 
     $("#lbl_DescripcionEditError").attr('hidden', true);
 
-    if (carg_Descripcion != "") {
+    if (metp_Descripcion != "") {
         $("#formEdit").submit();
 
     } else {
         $("#lbl_DescripcionEditError").attr('hidden', false);
-        console.log('holperra');
     }
 
 }
@@ -49,19 +46,15 @@ function GuardarModalEdit() {
 
 
 function AbrirModalDelete(id) {
-    console.log(id);
-    $("#carg_Id_Delete").val(id);
-    $("#EliminarCargos").appendTo('body').modal('show');
+    $("#estc_Id_Delete").val(id);
+    $("#EliminarEstadoCivil").appendTo('body').modal('show');
 };
 
-
-
 function GuardarModalDelete() {
-    var carg_Descripcion = $('#carg_Id_Delete').val();
-
+    var estc_Descripcion = $('#estc_Id_Delete').val();
     $("#lbl_DescripcionDeleteError").attr('hidden', true);
 
-    if (carg_Descripcion != "") {
+    if (estc_Descripcion != "") {
         $("#formDelete").submit();
 
     } else {

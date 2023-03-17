@@ -59,6 +59,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_Servicios = "salo.UDP_tbServicios_Insert";
         public static string UDP_Editar_Servicios = "salo.UDP_tbServicios_Update";
         public static string UDP_Borrar_Servicios = "salo.UDP_tbServicios_Delete";
+        public static string UDP_Buscar_Servicios = "salo.UDP_tbServicios_Buscar";
 
         #endregion
 
@@ -95,6 +96,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_MetodoPago = "gnrl.UDP_tbMetodoPago_Insert";
         public static string UDP_Editar_MetodoPago = "gnrl.UDP_tbMetodoPago_Update";
         public static string UDP_Borrar_MetodoPago = "gnrl.UDP_tbMetodoPago_Delete";
+        public static string UDP_Buscar_MetodoPago = "gnrl.UDP_tbMetodoPago_Buscar";
 
         #endregion
 
@@ -104,6 +106,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_EstadosCiviles = "gnrl.UDP_tbEstadoCiviles_Insert";
         public static string UDP_Editar_EstadosCiviles = "gnrl.UDP_tbEstadoCiviles_Update";
         public static string UDP_Borrar_EstadosCiviles = "gnrl.UDP_tbEstadoCiviles_Delete";
+        public static string UDP_Buscar_EstadosCiviles = "gnrl.UDP_tbEstadoCiviles_Buscar";
 
         #endregion
 
@@ -113,6 +116,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_Departamentos = "gnrl.UDP_tbDepartamentos_Insert";
         public static string UDP_Editar_Departamentos = "gnrl.UDP_tbDepartamentos_Update";
         public static string UDP_Borrar_Departamentos  = "gnrl.UDP_tbDepartamentos_Delete";
+        public static string UDP_Buscar_Departamentos = "gnrl.UDP_tbDepartamentos_Buscar";
 
         #endregion
 

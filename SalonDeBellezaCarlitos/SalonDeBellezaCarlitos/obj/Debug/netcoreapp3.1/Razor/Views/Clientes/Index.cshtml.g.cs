@@ -176,7 +176,7 @@ using SalonDeBellezaCarlitos.Models;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n                </td>\r\n                <td>\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "22b7d815100eca2ceabaaf6d1beb6a864b7ded5810498", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "22b7d815100eca2ceabaaf6d1beb6a864b7ded5810753", async() => {
                 WriteLiteral("Edit");
             }
             );
@@ -207,7 +207,7 @@ using SalonDeBellezaCarlitos.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(" |\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "22b7d815100eca2ceabaaf6d1beb6a864b7ded5812726", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "22b7d815100eca2ceabaaf6d1beb6a864b7ded5812996", async() => {
                 WriteLiteral("Details");
             }
             );
@@ -238,7 +238,7 @@ using SalonDeBellezaCarlitos.Models;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(" |\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "22b7d815100eca2ceabaaf6d1beb6a864b7ded5814960", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "22b7d815100eca2ceabaaf6d1beb6a864b7ded5815245", async() => {
                 WriteLiteral("Delete");
             }
             );
@@ -285,7 +285,7 @@ Write(Html.Partial("_ClienteCreateViewPartial", new SalonDeBellezaCarlitos.WebUI
 #line hidden
 #nullable disable
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "22b7d815100eca2ceabaaf6d1beb6a864b7ded5817856", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "22b7d815100eca2ceabaaf6d1beb6a864b7ded5818186", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

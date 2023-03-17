@@ -18,7 +18,6 @@
         <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar un Metodo de pago</button>
     </div>
 </div>
-
 <table class="table">
     <thead>
         <tr>
@@ -48,9 +47,9 @@
                     @Html.DisplayFor(modelItem => item.metp_FechaModificacion)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.metp_Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.metp_Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.metp_Id">Delete</a>
+                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.metp_Id,@item.metp_Descripcion')">Editar</button> |
+                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.metp_Id">Details</a> |
+                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.metp_Id')">Delete</button>
                 </td>
             </tr>
         }
@@ -61,5 +60,8 @@
 
 @Html.Partial("_MetodopagoCreateViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.MetodoPagoViewModel())
 
+@Html.Partial("_MetodopagoEditViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.MetodoPagoViewModel())
+
+@Html.Partial("_MetodopagoDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.MetodoPagoViewModel())
 
 <script src="~/js/App/Salon/MetodosPago.js"></script>

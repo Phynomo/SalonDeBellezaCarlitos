@@ -1300,6 +1300,28 @@ END
 
 GO
 
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbServicios_Buscar
+	@serv_Id	INT
+AS
+BEGIN
+
+SELECT [serv_Id]
+      ,[serv_Nombre]
+      ,[serv_Descripcion]
+      ,[serv_Precio]
+      ,[serv_FechaCreacion]
+      ,[serv_UsuarioCreacion]
+      ,[serv_FechaModificacion]
+      ,[serv_UsuarioModificacion]
+      ,[serv_Estado]
+  FROM [salo].[tbServicios]
+  WHERE serv_Estado = 1 
+  AND serv_Id = @serv_Id		
+
+END
+
+GO
 
 CREATE OR ALTER PROCEDURE salo.UDP_tbServicios_Insert
 	@serv_Nombre Nvarchar(150),
@@ -1779,6 +1801,25 @@ END
 
 GO
 
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbMetodoPago_Buscar
+	@metp_Id	INT
+AS
+BEGIN
+
+SELECT [metp_Id]
+      ,[metp_Descripcion]
+      ,[metp_FechaCreacion]
+      ,[metp_UsuarioCreacion]
+      ,[metp_FechaModificacion]
+      ,[metp_UsuarioModificacion]
+      ,[metp_Estado]
+  FROM [gnrl].[tbMetodoPago]
+  WHERE metp_Estado = 1
+  AND metp_Id = @metp_Id		
+
+END
+
+GO
 
 CREATE PROCEDURE gnrl.UDP_tbMetodoPago_Insert
 (
@@ -1812,18 +1853,15 @@ END
 
 -----------Procedimiento Update MetodoPago
 GO
-CREATE PROCEDURE gnrl.UDP_tbMetodoPago_Update
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbMetodoPago_Update
 	@metp_Id                      INT,
-	@metp_Descripcion             NVARCHAR (100),
-	@metp_UsuarioModificacion     INT
+	@metp_Descripcion             NVARCHAR (100)
 AS
 BEGIN
 BEGIN TRY
 
 	UPDATE gnrl.tbMetodoPago
-	SET metp_Descripcion = @metp_Descripcion,
-	    metp_FechaModificacion = GETDATE(),
-	    metp_UsuarioModificacion = @metp_UsuarioModificacion
+	SET metp_Descripcion = @metp_Descripcion
 	WHERE metp_Id = @metp_Id;
 
 SELECT 1 as Proceso
@@ -1835,17 +1873,15 @@ END
 
 -----------Procedimiento Delete MetodoPago
 GO
-CREATE PROCEDURE gnrl.UDP_tbMetodoPago_Delete (
-    @metp_Id INT, @metp_UsuarioModificacion INT
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbMetodoPago_Delete (
+    @metp_Id INT
 )
 AS
 BEGIN
 BEGIN TRY
 
     UPDATE gnrl.tbMetodoPago
-    SET metp_Estado = 0,
-        metp_FechaModificacion = GETDATE(),
-        metp_UsuarioModificacion = @metp_UsuarioModificacion 
+    SET metp_Estado = 0
     WHERE  metp_Id = @metp_Id
 
 SELECT 1 as Proceso
@@ -1872,6 +1908,26 @@ SELECT [estc_Id]
       ,[estc_Estado]
   FROM [gnrl].[tbEstadosCiviles]
   WHERE estc_Estado = 1 
+
+END
+
+GO
+
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbEstadoCiviles_Buscar
+	@estc_Id	INT
+AS
+BEGIN
+
+SELECT [estc_Id]
+      ,[estc_Descripcion]
+      ,[estc_FechaCreacion]
+      ,[estc_UsuarioCreacion]
+      ,[estc_FechaModificacion]
+      ,[estc_UsuarioModificacion]
+      ,[estc_Estado]
+  FROM [gnrl].[tbEstadosCiviles]
+  WHERE estc_Estado = 1
+  AND [estc_Id] = @estc_Id
 
 END
 
@@ -1913,8 +1969,7 @@ GO
 -----------Procedimiento Update EstadoCiviles
 CREATE OR ALTER  PROCEDURE gnrl.UDP_tbEstadoCiviles_Update
 @estc_Id  INT,
-@estc_Descripcion Varchar(200),
-@estc_UsuarioModificacion INT
+@estc_Descripcion Varchar(200)
 
 as
 begin
@@ -1922,8 +1977,6 @@ BEGIN TRY
 
 UPDATE [gnrl].[tbEstadosCiviles]
    SET[estc_Descripcion] = @estc_Descripcion
-      ,[estc_FechaModificacion] = GETDATE()
-      ,[estc_UsuarioModificacion] = @estc_UsuarioModificacion
  WHERE estc_Id = @estc_Id
 
 SELECT 1 as Proceso
@@ -1977,6 +2030,29 @@ SELECT [depa_Id]
       ,[depa_Estado]
   FROM [gnrl].[tbDepartamentos]
   WHERE depa_Estado = 1
+
+
+END
+
+GO
+
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbDepartamentos_Buscar
+	@depa_Id	INT
+AS
+BEGIN
+
+
+SELECT [depa_Id]
+      ,[depa_Descripcion]
+      ,[depa_Codigo]
+      ,[depa_FechaCreacion]
+      ,[depa_UsuarioCreacion]
+      ,[depa_FechaModificacion]
+      ,[depa_UsuarioModificacion]
+      ,[depa_Estado]
+  FROM [gnrl].[tbDepartamentos]
+  WHERE depa_Estado = 1
+  And [depa_Id] = @depa_Id
 
 
 END

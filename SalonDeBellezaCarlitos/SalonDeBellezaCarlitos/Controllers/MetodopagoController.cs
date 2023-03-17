@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿    using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
 using SalonDeBellezaCarlitos.Entities.Entities;
@@ -38,7 +38,6 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             return View(listadoMapeado);
         }
 
-
         [HttpGet("/Metodopago/Crear")]
         public IActionResult Create()
         {
@@ -58,6 +57,53 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 return View();
             }
             return RedirectToAction("Listado");
+        }
+
+
+        //[HttpGet("/Metodopago/Eliminar/{id}")]
+        //public IActionResult Delete(int? id)
+        //{
+        //    var listado = _generalesService.BuscarCargo(id);
+        //    return View(listado);
+        //}
+
+        [HttpPost("/Metodopago/Eliminar")]
+        public IActionResult Delete(MetodoPagoViewModel Metodopago)
+        {
+            var result = 0;
+            var met = _mapper.Map<tbMetodoPago>(Metodopago);
+            result = _generalesService.EliminarMetodoPago(met);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+
+        }
+        [HttpPost("/Metodopago/Editar")]
+        public IActionResult Edit(MetodoPagoViewModel metodo)
+        {
+            var result = 0;
+            var met = _mapper.Map<tbMetodoPago>(metodo);
+            result = _generalesService.EditarMetodoPago(met);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+
+        }
+
+        [HttpGet("/Metodopago/Detalles")]
+        public IActionResult Details(int? id)
+        {
+            var servicio = _generalesService.BuscarMetodoPago(id);
+            var servicioMapeado = _mapper.Map<IEnumerable<MetodoPagoViewModel>>(servicio);
+            return View(servicioMapeado);
         }
 
 

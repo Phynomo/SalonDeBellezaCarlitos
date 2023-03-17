@@ -11,7 +11,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
 
         [Display(Name = "Id")]
         public int serv_Id { get; set; }
-        [Display(Name = "Nombre del Sercicio")]
+        [Display(Name = "Nombre del Servicio")]
         [Required(ErrorMessage = "El campo {0} es necesario!")]
         public string serv_Nombre { get; set; }
         [Display(Name = "Descripcion")]
@@ -20,11 +20,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
         [Display(Name = "Precio")]
         [Required(ErrorMessage = "El campo {0} es necesario!")]
         public decimal serv_Precio { get; set; }
-        [Display(Name = "Fecha creacion")]
+        [Display(Name = "Fecha Creacion")]
         public DateTime serv_FechaCreacion { get; set; }
         [Display(Name = "Usuario Creacion")]
         public int serv_UsuarioCreacion { get; set; }
-        [Display(Name = "Fecha modificacion")]
+        [Display(Name = "Fecha Modificacion")]
         public DateTime? serv_FechaModificacion { get; set; }
         [Display(Name = "Usuario Modificacion")]
         public int? serv_UsuarioModificacion { get; set; }
