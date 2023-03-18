@@ -1627,7 +1627,7 @@ CREATE OR ALTER PROCEDURE salo.UDP_tbSucursales_Insert
 AS
 BEGIN
 BEGIN TRY
-
+--para guardar xd
 INSERT INTO [salo].[tbSucursales]
            ([sucu_Descripcion]
            ,[muni_Id]
