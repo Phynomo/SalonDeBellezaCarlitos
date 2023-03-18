@@ -46,3 +46,4 @@ C:\Users\LAB01.DESKTOP-36LBO8D\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBe
 C:\Users\LAB01.DESKTOP-36LBO8D\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos.Entities\obj\Debug\netcoreapp3.1\SalonDeBellezaCarlitos.Entities.csproj.CoreCompileInputs.cache
 C:\Users\LAB01.DESKTOP-36LBO8D\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos.Entities\obj\Debug\netcoreapp3.1\SalonDeBellezaCarlitos.Entities.dll
 C:\Users\LAB01.DESKTOP-36LBO8D\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos.Entities\obj\Debug\netcoreapp3.1\SalonDeBellezaCarlitos.Entities.pdb
+C:\Users\Auxiliar.Operaciones\Documents\GitHub\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos\SalonDeBellezaCarlitos.Entities\obj\Debug\netcoreapp3.1\SalonDeBellezaCarlitos.Entities.csproj.AssemblyReference.cache

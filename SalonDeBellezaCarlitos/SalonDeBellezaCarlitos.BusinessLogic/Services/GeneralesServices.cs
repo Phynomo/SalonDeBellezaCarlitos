@@ -637,6 +637,37 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public int EditarCliente(tbClientes item)
+        {
+
+            try
+            {
+                var resultado = _ClientesRepository.Update(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public int EliminarCliente(tbClientes cliente)
+        {
+
+            try
+            {
+                var resultado = _ClientesRepository.Delete(cliente);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
 
         #endregion
 
@@ -805,6 +836,59 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public tbProductos findProducto(int? id)
+        {
+            try
+            {
+                return _ProductosRepository.find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public int EliminarProducto(tbProductos producto)
+        {
+
+            try
+            {
+                var resultado = _ProductosRepository.Delete(producto);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+        public int EditarProducto(tbProductos item)
+        {
+
+            try
+            {
+                var resultado = _ProductosRepository.Update(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+        public IEnumerable<tbProductos> BuscarProducto(int? id)
+        {
+            try
+            {
+                return _ProductosRepository.BuscarProducto(id);
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<tbProductos>();
+            }
+        }
+
 
         #endregion
 

@@ -70,6 +70,8 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_Productos = "salo.UDP_tbProductos_Insert";
         public static string UDP_Editar_Productos = "salo.UDP_tbProductos_Update";
         public static string UDP_Borrar_Productos = "salo.UDP_tbProductos_Delete";
+        public static string UDP_Buscar_Productos = "salo.UDP_tbProductos_Buscar";
+
 
         #endregion
 

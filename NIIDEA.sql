@@ -1464,7 +1464,35 @@ END
 
 GO
 
+CREATE OR ALTER PROCEDURE salo.UDP_tbProductos_Buscar
+	@prod_Id	INT
+AS
+BEGIN
 
+
+SELECT [prod_Id]
+      ,[prod_Nombre]
+      ,[prod_Precio]
+      ,T1.[cate_Id]
+	  ,T2.cate_Descripcion
+      ,[prod_Stock]
+      ,T1.[prov_id]
+	  ,T3.prov_NombreEmpresa
+      ,[prod_FechaCreacion]
+      ,[prod_UsuarioCreacion]
+      ,[prod_FechaModificacion]
+      ,[prod_UsuarioModificacion]
+      ,[prod_Estado]
+  FROM [salo].[tbProductos] T1 INNER JOIN salo.tbCategorias T2
+  ON t1.cate_Id = T2.cate_Id INNER JOIN salo.tbProveedores T3
+  ON T3.prov_Id = T1.prov_id
+  WHERE prod_Estado = 1
+  AND prod_Id = @prod_Id
+
+
+END
+
+GO
 
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbProductos_Insert

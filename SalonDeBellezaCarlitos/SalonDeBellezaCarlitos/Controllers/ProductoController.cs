@@ -62,5 +62,74 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             return RedirectToAction("Listado");
         }
+
+        [HttpPost("/Producto/Eliminar")]
+        public IActionResult Delete(ProductoViewModel producto)
+        {
+            var result = 0;
+            var prod = _mapper.Map<tbProductos>(producto);
+            result = _generalesService.EliminarProducto(prod);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return View();
+            }
+            return RedirectToAction("Listado");
+
+        }
+        [HttpGet("/Producto/Editar")]
+        public IActionResult Edit(int? id)
+        {
+            var productos = _generalesService.BuscarProducto(id);
+            ViewBag.cate_Id = new SelectList(_generalesService.ListadoCategorias(out string error).ToList(), "cate_Id", "cate_Descripcion");
+            ViewBag.prov_Id = new SelectList(_generalesService.ListadoProveedores(out string error2).ToList(), "prov_Id", "prov_NombreContacto");
+            foreach (var item in productos)
+            {
+                ViewBag.prod_Id = item.prod_Id;
+                ViewBag.prod_Nombre = item.prod_Nombre;
+                ViewBag.prod_Precio = item.prod_Precio;
+                ViewBag.prod_Stock = item.prod_Stock;
+            }
+            
+            return View();
+        }
+
+        [HttpPost("/Producto/Editar")]
+        public IActionResult Edit(ProductoViewModel producto)
+        {
+            var result = 0;
+            var prod = _mapper.Map<tbProductos>(producto);
+            result = _generalesService.EditarProducto(prod);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                ViewBag.cate_Id = new SelectList(_generalesService.ListadoCategorias(out string error).ToList(), "cate_Id", "cate_Descripcion");
+                ViewBag.prov_Id = new SelectList(_generalesService.ListadoProveedores(out string error2).ToList(), "prov_Id", "prov_NombreContacto");
+            }
+            return RedirectToAction("Listado");
+        }
+
+        [HttpGet("/Producto/Detalles")]
+        public IActionResult Details(int? id)
+        {
+            var producto = _generalesService.BuscarProducto(id);
+            var servicioMapeado = _mapper.Map<IEnumerable<ProductoViewModel>>(producto);
+            foreach (var item in producto)
+            {
+                ViewBag.prov_Id = new SelectList(_generalesService.ListadoProveedores(out string error2).ToList(), "prov_Id", "prov_NombreContacto");
+
+                ViewBag.prod_Id = item.prod_Id;
+                ViewBag.prod_Nombre = item.prod_Nombre;
+                ViewBag.prod_Precio = item.prod_Precio;
+                ViewBag.prod_Stock = item.prod_Stock;
+            }
+
+            //var servicio = _generalesService.BuscarProduc(id);
+            //var servicioMapeado = _mapper.Map<IEnumerable<ServicioViewModel>>(servicio);
+            //return View(servicioMapeado);
+            return View(servicioMapeado);
+        }
     }
 }

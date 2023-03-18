@@ -77,11 +77,15 @@
                     @Html.DisplayFor(modelItem => item.prov_id)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.prod_Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.prod_Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.prod_Id">Delete</a>
+                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.prod_Id">Editar</a> |
+                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.prod_Id">Detalles</a> |
+                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.prod_Id')">Eliminar</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@Html.Partial("_ProductoDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.ProductoViewModel())
+
+<script src="~/js/App/Salon/Productos.js"></script>

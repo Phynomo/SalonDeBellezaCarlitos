@@ -12,7 +12,13 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
     {
         public int Delete(tbProductos item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@prod_Id", item.prod_Id, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Borrar_Productos, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public tbProductos find(int? id)
@@ -47,7 +53,30 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public int Update(tbProductos item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@prod_Id", item.prod_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@prod_Nombre", item.prod_Nombre, DbType.String, ParameterDirection.Input);
+            parametros.Add("@prod_Precio", item.prod_Precio, DbType.String, ParameterDirection.Input);
+            parametros.Add("@cate_Id", item.cate_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@prod_Stock", item.prod_Stock, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@prov_Id", item.prov_id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@prod_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Productos, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
+        }
+
+        public IEnumerable<tbProductos> BuscarProducto(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@prod_Id", id, DbType.String, ParameterDirection.Input);
+            return db.Query<tbProductos>(ScriptsDataBase.UDP_Buscar_Productos, parametros, commandType: CommandType.StoredProcedure);
+
         }
     }
 }

@@ -216,14 +216,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.UsuarioModificacion = nombreModificacion.empl_Nombre + " " + nombreModificacion.empl_Apellido;
                     ViewBag.FechaModificacion = item.empl_FechaModificacion;
                 }
-               
-
             }
-
             return View();
         }
-
-
         [HttpPost("/Empleados/Eliminar")]
         public IActionResult Delete(EmpleadoViewModel empleado)
         {
