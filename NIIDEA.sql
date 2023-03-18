@@ -1583,12 +1583,8 @@ GO
 
 --Procedimientos Almacenados de Sucursales
 
-GO
-CREATE OR ALTER PROCEDURE salo.UDP_tbSucursales_Listado
-AS
-BEGIN
-
-
+CREATE OR ALTER VIEW salo.VW_tbSucursales_View
+as
 SELECT [sucu_Id]
       ,[sucu_Descripcion]
       ,T1.[muni_Id]
@@ -1607,6 +1603,15 @@ SELECT [sucu_Id]
   ON T1.muni_Id = T2.muni_Id INNER JOIN gnrl.tbDepartamentos T3
   ON T3.depa_Id = T2.depa_Id
   WHERE sucu_Estado = 1
+
+
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbSucursales_Listado
+AS
+BEGIN
+
+
+SELECT * FROM salo.VW_tbSucursales_View
 
 END
 
@@ -2783,6 +2788,42 @@ END CATCH
 END
 GO
 --Procedimientos almacenados de proveedor
+
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Buscar
+@prov_Id int
+AS
+BEGIN
+
+SELECT [prov_Id]
+      ,[prov_NombreEmpresa]
+      ,[prov_NombreContacto]
+      ,T1.[muni_Id]
+	  ,T2.muni_Descripcion
+	  ,T2.muni_Codigo
+	  ,T3.depa_Id
+	  ,T3.depa_Descripcion
+	  ,T3.depa_Codigo
+      ,[prov_DireccionExacta]
+      ,[prov_Telefono]
+      ,[prov_FechaCreacion]
+      ,[prov_UsuarioCreacion]
+      ,[prov_FechaModificacion]
+      ,[prov_UsuarioModificacion]
+      ,[prov_Estado]
+  FROM [salo].[tbProveedores] T1 INNER JOIN gnrl.tbMunicipios T2
+  ON t1.muni_Id = t2.muni_Id INNER JOIN gnrl.tbDepartamentos T3
+  ON t3.depa_Id = T2.depa_Id
+  WHERE T1.prov_Estado = 1
+  AND t1.prov_Id = @prov_Id
+
+
+END
+
+
+
+GO
+
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Listado
 AS
@@ -2828,13 +2869,6 @@ BEGIN
 BEGIN TRY
 
 
-
-SELECT 1 as Proceso
-END TRY
-BEGIN CATCH
-SELECT 0 as Proceso
-END CATCH
-
 INSERT INTO [salo].[tbProveedores]
            ([prov_NombreEmpresa]
            ,[prov_NombreContacto]
@@ -2857,6 +2891,13 @@ INSERT INTO [salo].[tbProveedores]
            ,null
            ,null
            ,1)
+
+
+SELECT 1 as Proceso
+END TRY
+BEGIN CATCH
+SELECT 0 as Proceso
+END CATCH
 
 END
 GO

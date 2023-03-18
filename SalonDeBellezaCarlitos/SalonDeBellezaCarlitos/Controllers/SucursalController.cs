@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
 using SalonDeBellezaCarlitos.Entities.Entities;
 using SalonDeBellezaCarlitos.WebUI.Models;
@@ -23,12 +24,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         }
 
 
-        [HttpGet("/Sucursales/Listado")]
+        [HttpGet("/Sucursal/Listado")]
         public IActionResult Index()
         {
 
-            var listado = _generalesService.ListadoSucursales(out string error);
-            var listadoMapeado = _mapper.Map<IEnumerable<SucursalViewModel>>(listado);
+            ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion");
+
+            var listado = _generalesService.ListadoSucursalesView(out string error2);
+            var listadoMapeado = _mapper.Map<IEnumerable<VWSucursalesViewModel>>(listado);
 
             if (string.IsNullOrEmpty(error))
             {
@@ -38,11 +41,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             return View(listadoMapeado);
         }
         [HttpPost("/Sucursal/Crear")]
-        public ActionResult Create(SucursalViewModel cargo)
+        public ActionResult Create(SucursalViewModel sucursal)
         {
             var result = 0;
-            var car = _mapper.Map<tbSucursales>(cargo);
-            result = _generalesService.InsertarSucursal(car);
+            var suc = _mapper.Map<tbSucursales>(sucursal);
+            result = _generalesService.InsertarSucursal(suc);
 
             if (result == 0)
             {

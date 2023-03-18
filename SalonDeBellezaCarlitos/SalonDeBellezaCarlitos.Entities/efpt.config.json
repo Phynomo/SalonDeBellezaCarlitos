@@ -92,6 +92,10 @@
       {
          "Name": "[salo].[VW_tbFacturaDetalle_View]",
          "ObjectType": 3
+      },
+      {
+         "Name": "[salo].[VW_tbSucursales_View]",
+         "ObjectType": 3
       }
    ],
    "UiHint": "DESKTOP-51051C3\\SQLEXPRESS.SalonDeBellezaCarlitos",

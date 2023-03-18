@@ -29,5 +29,6 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
         public int? sucu_UsuarioModificacion { get; set; }
         [Display(Name = "Estado")]
         public bool? sucu_Estado { get; set; }
+        public int depa_Id { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Context
 
                 entity.ToTable("tbCargos", "salo");
 
-                entity.HasIndex(e => e.carg_Descripcion, "UQ__tbCargos__F3099AE0E7E38B4E")
+                entity.HasIndex(e => e.carg_Descripcion, "UQ__tbCargos__F3099AE0B1CEAE17")
                     .IsUnique();
 
                 entity.Property(e => e.carg_Descripcion)
@@ -84,7 +84,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Context
 
                 entity.ToTable("tbCategorias", "salo");
 
-                entity.HasIndex(e => e.cate_Descripcion, "UQ__tbCatego__55D9A779E376D8F2")
+                entity.HasIndex(e => e.cate_Descripcion, "UQ__tbCatego__55D9A77969787C9A")
                     .IsUnique();
 
                 entity.Property(e => e.cate_Descripcion)
@@ -163,10 +163,10 @@ namespace SalonDeBellezaCarlitos.DataAccess.Context
 
                 entity.ToTable("tbDepartamentos", "gnrl");
 
-                entity.HasIndex(e => e.depa_Codigo, "UQ__tbDepart__CCD74A04B0324F2C")
+                entity.HasIndex(e => e.depa_Codigo, "UQ__tbDepart__CCD74A04012DB141")
                     .IsUnique();
 
-                entity.HasIndex(e => e.depa_Descripcion, "UQ__tbDepart__D4C398404A18A824")
+                entity.HasIndex(e => e.depa_Descripcion, "UQ__tbDepart__D4C398407D54BA35")
                     .IsUnique();
 
                 entity.Property(e => e.depa_Codigo)
@@ -276,6 +276,12 @@ namespace SalonDeBellezaCarlitos.DataAccess.Context
                     .HasForeignKey(d => d.muni_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_salo_tbEmpleados_gnrl_tbMunicipios_muni_Id");
+
+                entity.HasOne(d => d.sucu)
+                    .WithMany(p => p.tbEmpleados)
+                    .HasForeignKey(d => d.sucu_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_salo_tbEmpleados_salo_tbSucursales_sucu_Id");
             });
 
             modelBuilder.Entity<tbEstadosCiviles>(entity =>
@@ -285,7 +291,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Context
 
                 entity.ToTable("tbEstadosCiviles", "gnrl");
 
-                entity.HasIndex(e => e.estc_Descripcion, "UQ__tbEstado__01777E3BACAFE30C")
+                entity.HasIndex(e => e.estc_Descripcion, "UQ__tbEstado__01777E3BA9AA6B35")
                     .IsUnique();
 
                 entity.Property(e => e.estc_Descripcion)
@@ -458,7 +464,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Context
 
                 entity.ToTable("tbMunicipios", "gnrl");
 
-                entity.HasIndex(e => e.muni_Codigo, "UQ__tbMunici__3C7692E1998F35CE")
+                entity.HasIndex(e => e.muni_Codigo, "UQ__tbMunici__3C7692E19503188E")
                     .IsUnique();
 
                 entity.Property(e => e.muni_Codigo)
@@ -590,7 +596,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Context
 
                 entity.ToTable("tbProveedores", "salo");
 
-                entity.HasIndex(e => e.prov_NombreEmpresa, "UQ__tbProvee__9302DE55FFA89C6B")
+                entity.HasIndex(e => e.prov_NombreEmpresa, "UQ__tbProvee__9302DE55E85876FE")
                     .IsUnique();
 
                 entity.Property(e => e.prov_DireccionExacta)
@@ -755,10 +761,10 @@ namespace SalonDeBellezaCarlitos.DataAccess.Context
 
                 entity.ToTable("tbUsuarios", "acce");
 
-                entity.HasIndex(e => e.empl_Id, "UQ__tbUsuari__4772AE304DFEC6E9")
+                entity.HasIndex(e => e.empl_Id, "UQ__tbUsuari__4772AE30A94CF74B")
                     .IsUnique();
 
-                entity.HasIndex(e => e.usur_Usuario, "UQ__tbUsuari__FD066E387742CF85")
+                entity.HasIndex(e => e.usur_Usuario, "UQ__tbUsuari__FD066E386AF3E4C3")
                     .IsUnique();
 
                 entity.Property(e => e.usur_Contrasenia).IsRequired();

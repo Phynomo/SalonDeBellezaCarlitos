@@ -785,6 +785,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return Enumerable.Empty<tbSucursales>();
             }
         }
+
+        public IEnumerable<VW_tbSucursales_View> ListadoSucursalesView(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _SucursalesRepository.ListView();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<VW_tbSucursales_View>();
+            }
+        }
+
         public int InsertarSucursal(tbSucursales item)
         {
 
@@ -966,6 +981,23 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #region Proveedor
 
+        public int EliminarProveedor(tbProveedores Proveedor)
+        {
+
+            try
+            {
+                var resultado = _ProveedoresRepository.Delete(Proveedor);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+
         public IEnumerable<tbProveedores> ListadoProveedores(out string error)
         {
             error = string.Empty;
@@ -995,6 +1027,46 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+
+        public int EditarProveedor(tbProveedores item)
+        {
+
+            try
+            {
+                var resultado = _ProveedoresRepository.Update(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public IEnumerable<tbProveedores> BuscarProveedor(int? id)
+        {
+            try
+            {
+                return _ProveedoresRepository.BuscarProveedor(id);
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<tbProveedores>();
+            }
+        }
+        public tbProveedores findProveedor(int? id)
+        {
+            try
+            {
+                return _ProveedoresRepository.find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         #endregion
 
         #region Metodo pago

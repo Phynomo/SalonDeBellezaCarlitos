@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.SucursalViewModel>
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWSucursalesViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -28,7 +28,10 @@
                 @Html.DisplayNameFor(model => model.sucu_DireccionExacta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.muni_Id)
+                @Html.DisplayNameFor(model => model.muni_Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.depa_Descripcion)
             </th>
             <th></th>
         </tr>
@@ -44,7 +47,10 @@
                     @Html.DisplayFor(modelItem => item.sucu_DireccionExacta)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.muni_Id)
+                    @Html.DisplayFor(modelItem => item.muni_Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.depa_Descripcion)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.sucu_Id">Editar</a> |
