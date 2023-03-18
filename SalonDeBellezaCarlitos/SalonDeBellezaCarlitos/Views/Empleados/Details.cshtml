@@ -39,8 +39,8 @@
             <label>@ViewBag.empl_Sexo</label>
         </div>
         <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.empl_DireccionExacta)</label><br />
-            <label>@ViewBag.empl_DireccionExacta</label>
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.sucu_Id)</label><br />
+            <label>@ViewBag.sucu_Id</label>
         </div>
     </div>
     <div class="row">
@@ -83,13 +83,19 @@
             <label>@ViewBag.empl_FechaContratacion</label>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.empl_DireccionExacta)</label><br />
+            <label>@ViewBag.empl_DireccionExacta</label>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col d-flex justify-content-end">
-            <a class="btn btn-warning mx-1" asp-action="Edit" asp-route-id="@ViewBag.empl_Id">Editar</a> 
+            <a class="btn btn-warning mx-1" asp-action="Edit" asp-route-id="@ViewBag.empl_Id">Editar</a>
             <a class="btn btn-dark" asp-action="Index">Regresar al listado</a>
         </div>
-        
+
     </div>
 
     <div class="card mt-4">

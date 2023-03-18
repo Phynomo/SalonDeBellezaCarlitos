@@ -27,6 +27,7 @@ namespace SalonDeBellezaCarlitos.Entities.Entities
         public DateTime empl_FechaNacimiento { get; set; }
         public DateTime empl_FechaContratacion { get; set; }
         public int carg_Id { get; set; }
+        public int sucu_Id { get; set; }
         public DateTime empl_FechaCreacion { get; set; }
         public int empl_UsuarioCreacion { get; set; }
         public DateTime? empl_FechaModificacion { get; set; }
@@ -40,6 +41,7 @@ namespace SalonDeBellezaCarlitos.Entities.Entities
         public virtual tbUsuarios empl_UsuarioModificacionNavigation { get; set; }
         public virtual tbEstadosCiviles estc { get; set; }
         public virtual tbMunicipios muni { get; set; }
+        public virtual tbSucursales sucu { get; set; }
         public virtual tbUsuarios tbUsuarios { get; set; }
         public virtual ICollection<tbFacturas> tbFacturasempl_Id_AtendidoNavigation { get; set; }
         public virtual ICollection<tbFacturas> tbFacturasempl_Id_CajaNavigation { get; set; }

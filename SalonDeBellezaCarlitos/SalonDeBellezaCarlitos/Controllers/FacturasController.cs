@@ -7,8 +7,7 @@ using SalonDeBellezaCarlitos.WebUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-  
+
 namespace SalonDeBellezaCarlitos.WebUI.Controllers
 {
     public class FacturasController : Controller
@@ -41,9 +40,10 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Facturas/Crear")]
         public IActionResult Create()
         {
+
+            ViewBag.FecturaPreInsertadahidden = "hidden";
             ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
             ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
-            ViewBag.FecturaPreInsertadahidden = "hidden";
             ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error).ToList(), "empl_Id", "empl_Nombre");
             ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error3).ToList(), "empl_Id", "empl_Nombre");
             ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error221).ToList(), "clie_Id", "clie_Nombre");
@@ -60,6 +60,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             var result = 0;
 
+            //Eliminar registro
             if (Convert.ToInt32(factura.fade_UsuarioModificacion) == 1)
             {
                 factura.fact_UsuarioCreacion = factura.fade_Id;
@@ -68,7 +69,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 if (result == 0)
                 {
-                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    #region Error
+                    ModelState.AddModelError("", "Ocurrió un error al eliminar este registro");
                     ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error241).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
                     ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error141).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
 
@@ -77,9 +79,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                     ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error24).ToList(), "prod_Id", "prod_Nombre");
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error14).ToList(), "serv_Id", "serv_Nombre");
-
+                    
                     return View(factura);
+
+                    #endregion
                 }
+
+                #region success
 
                 ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
                 ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
@@ -100,10 +106,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
 
                 return View();
-
+                #endregion
 
             }
 
+            //crear encabezado de la factura
             if ((factura.prod_Id == 0 && factura.serv_Id == 0) || (factura.prod_Id == null && factura.serv_Id == null))
             {
                 var fac = _mapper.Map<tbFacturas>(factura);
@@ -112,8 +119,10 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 if (result == 0)
                 {
 
+                    #region error
+
                     ViewBag.FecturaPreInsertadahidden = "hidden";
-                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    ModelState.AddModelError("", "Ocurrió un error al crear el encabezado");
                     ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
                     ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error3).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
                     ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error22).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
@@ -124,8 +133,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.Clientes = lista2;
 
                     return View(factura);
+                    #endregion
+
                 }
 
+                #region success
+                
                 ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
                 ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
                 ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error21).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
@@ -142,8 +155,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 ViewBag.logrado = "true";
                 return View(factura);
+
+                #endregion
+               
             }
-            else
+            else//Insertar detalles
             {
 
                 factura.fact_UsuarioCreacion = factura.fade_Cantidad;
@@ -155,7 +171,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 if (result == 0)
                 {
-                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    #region error
+
+                    ModelState.AddModelError("", "Ocurrió un error al crear este registro");
                     ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error241).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
                     ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error141).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
 
@@ -170,7 +188,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.Clientes = lista3;
 
                     return View(factura);
+
+                    #endregion
+                    
                 }
+
+                #region success
 
                 ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
                 ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
@@ -191,15 +214,21 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
 
                 return View();
+
+                #endregion
+
             }
 
         }
 
-        [HttpGet("/Facturas/Editar/{id}")]
+        [HttpGet("/Facturas/Editar")]
         public IActionResult Edit(int? id)
         {
             var factura = _generalesService.BuscarFactura(id);
             var facturaMapeado = _mapper.Map<IEnumerable<VWFacturasViewModel>>(factura);
+
+            #region Cargar datos...
+
             foreach (var item in factura)
             {
                 ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", item.empl_Id_Atendido);
@@ -220,6 +249,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 return View();
             }
 
+            #endregion
+            
             return View();
         }
 
@@ -228,6 +259,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             var result = 0;
 
+            //Eliminar registro
             if (Convert.ToInt32(factura.fade_UsuarioModificacion) == 1)
             {
                 factura.fact_UsuarioCreacion = factura.fade_Id;
@@ -236,7 +268,10 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 if (result == 0)
                 {
-                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+
+                    #region error
+
+                    ModelState.AddModelError("", "Ocurrió un error al eliminar este registro");
                     ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error241).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
                     ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error141).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
 
@@ -247,7 +282,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error14).ToList(), "serv_Id", "serv_Nombre");
 
                     return View(factura);
+
+                    #endregion
+                    
                 }
+
+                #region success
 
                 ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
                 ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
@@ -261,7 +301,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre", 0);
 
                 ViewBag.fact_Id = factura.fact_Id;
-                ViewBag.logrado = "true";
+                ViewBag.logrado = "edit";
 
                 var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                 ViewBag.Clientes = lista;
@@ -269,6 +309,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 return View();
 
+                #endregion
 
             }
 
@@ -280,8 +321,10 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 if (result == 0)
                 {
 
+                    #region error
+
                     ViewBag.FecturaPreInsertadahidden = "hidden";
-                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    ModelState.AddModelError("", "Ocurrió un error al crear este registro");
                     ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
                     ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error3).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
                     ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error22).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
@@ -292,7 +335,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.Clientes = lista2;
 
                     return View(factura);
+
+                    #endregion
+
                 }
+
+                #region success
 
                 ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
                 ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
@@ -308,8 +356,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                 ViewBag.Clientes = lista;
 
-                ViewBag.logrado = "true";
+                ViewBag.logrado = "edit";
                 return View(factura);
+
+                #endregion
+
             }
             else
             {
@@ -323,7 +374,10 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 if (result == 0)
                 {
-                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+
+                    #region error
+
+                    ModelState.AddModelError("", "Ocurrió un error al crear este registro");
                     ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error241).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
                     ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error141).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
 
@@ -338,7 +392,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.Clientes = lista3;
 
                     return View(factura);
+
+                    #endregion
+
                 }
+
+                #region success
 
                 ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
                 ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
@@ -352,13 +411,16 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre", 0);
 
                 ViewBag.fact_Id = factura.fact_Id;
-                ViewBag.logrado = "true";
+                ViewBag.logrado = "edit";
 
                 var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                 ViewBag.Clientes = lista;
 
 
                 return View();
+
+                #endregion 
+
             }
 
         }
@@ -378,7 +440,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
                 subtotal += item.fade_Cantidad * item.fade_Precio;
             }
-            
+
             decimal iva = (subtotal * Convert.ToDecimal(0.12));
             decimal Total = iva + subtotal;
 

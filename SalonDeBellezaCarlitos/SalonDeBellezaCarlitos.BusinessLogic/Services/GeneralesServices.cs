@@ -484,6 +484,19 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return null;
             }
         }
+
+        public tbDepartamentos findDepartameto(int? id)
+        {
+            try
+            {
+                return _DepartamentosRepository.find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public int EliminarDepartamento(tbDepartamentos departamentos)
         {
 
@@ -743,6 +756,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         #endregion
 
         #region Sucursales
+
+
+        public tbSucursales BuscarSucursal(int? id)
+        {
+            try
+            {
+                var resultado = _SucursalesRepository.find(id);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         public IEnumerable<tbSucursales> ListadoSucursales(out string error) 
         {

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
 using SalonDeBellezaCarlitos.Entities.Entities;
@@ -24,6 +25,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Cargos/Listado")]
         public IActionResult Index()
         {
+
+            HttpContext.Session.SetString("MiClave", "MiValor");
 
             var listado = _generalesService.ListadoCargos(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<CargoViewModel>>(listado);

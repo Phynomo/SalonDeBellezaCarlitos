@@ -90,7 +90,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form asp-action="Create" id="formFacturaDetalle">
+                        <form asp-action="Edit" id="formFacturaDetalle">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                             <input type="hidden" asp-for="clie_Id" value="@ViewBag.clie_IdD" />
@@ -132,7 +132,7 @@
                                 <div class="col d-flex justify-content-end">
                                     <button type="button" id="btnDetalles" onclick="EnviarFormDetalles()" class="btn btn-primary mx-1">Ingresar producto</button>
                                     @*<a class="btn btn-danger me-3" asp asp-action="Index"></a>*@
-                                    <a asp-action="Details" asp-route-id="@ViewBag.fact_Id" class="btn btn-danger me-3">Finalizar compra</a>
+                                    <a asp-action="Details" asp-route-id="@ViewBag.fact_Id" class="btn btn-info me-3">Ver Factura</a>
                                 </div>
                             </div>
                         </form>
@@ -193,7 +193,7 @@
 
 
 
-@Html.Partial("_DetallesDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.FacturasViewModel())
+@Html.Partial("_EDetallesDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.FacturasViewModel())
 
 
 

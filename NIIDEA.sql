@@ -98,6 +98,25 @@ CREATE TABLE salo.tbCargos(
 	CONSTRAINT FK_salo_tbCargos_acce_tbUsuarios_carg_UsuarioModificacion_usur_Id FOREIGN KEY(carg_UsuarioModificacion) REFERENCES acce.tbUsuarios(usur_Id)
 );
 
+
+CREATE TABLE salo.tbSucursales(
+    sucu_Id                             INT IDENTITY(1,1), 
+    sucu_Descripcion                    NVARCHAR(200) NOT NULL,
+    muni_Id                             INT,
+	sucu_DireccionExacta				NVARCHAR(500) NOT NULL,
+    sucu_FechaCreacion					DATETIME NOT NULL DEFAULT GETDATE(),
+    sucu_UsuarioCreacion				INT not null,
+    sucu_FechaModificacion				DATETIME,
+    sucu_UsuarioModificacion			INT,
+    sucu_Estado							BIT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_salo_tbSucursales_sucu_Id PRIMARY KEY(sucu_Id),
+    CONSTRAINT FK_salo_tbSucursales_gnrl_tbMunicipios_muni_Id FOREIGN KEY(muni_Id) REFERENCES gnrl.tbMunicipios(muni_Id),
+
+    CONSTRAINT FK_salo_tbSucursales_acce_tbUsuarios_sucu_UsuarioCreacion_usur_Id FOREIGN KEY(sucu_UsuarioCreacion) REFERENCES acce.tbUsuarios(usur_Id),
+    CONSTRAINT FK_salo_tbSucursales_acce_tbUsuarios_sucu_UsuarioModificacion_usur_Id FOREIGN KEY(sucu_UsuarioModificacion) REFERENCES acce.tbUsuarios(usur_Id)
+
+);
+
 CREATE TABLE salo.tbEmpleados(
 	empl_Id                             INT IDENTITY (1,1),
 	empl_Nombre							NVARCHAR(150) NOT NULL,
@@ -111,6 +130,7 @@ CREATE TABLE salo.tbEmpleados(
 	empl_FechaNacimiento				Date NOT NULL,
 	empl_FechaContratacion				Date NOT NULL,
 	carg_Id								INT NOT NULL,
+	sucu_Id								INT NOT NULL,
 	empl_FechaCreacion					DATETIME NOT NULL DEFAULT GETDATE(),
 	empl_UsuarioCreacion				INT not null,
 	empl_FechaModificacion				DATETIME,
@@ -121,6 +141,7 @@ CONSTRAINT PK_salo_tbEmpleados_empl_Id PRIMARY KEY(empl_Id),
 CONSTRAINT FK_salo_tbEmpleados_gnrl_tbMunicipios_muni_Id FOREIGN KEY(muni_Id) REFERENCES gnrl.tbMunicipios(muni_Id),
 CONSTRAINT FK_salo_tbEmpleados_gnrl_tbEstadosCiviles_estc_Id FOREIGN KEY(estc_Id) REFERENCES gnrl.tbEstadosCiviles(estc_Id),
 CONSTRAINT FK_salo_tbEmpleados_salo_tbCargos_carg_Id FOREIGN KEY(carg_Id) REFERENCES salo.tbCargos(carg_Id),
+CONSTRAINT FK_salo_tbEmpleados_salo_tbSucursales_sucu_Id FOREIGN KEY(sucu_Id) REFERENCES salo.tbSucursales(sucu_Id),
 CONSTRAINT FK_salo_tbEmpleados_acce_tbUsuarios_empl_UsuarioCreacion_usur_Id FOREIGN KEY(empl_UsuarioCreacion) REFERENCES acce.tbUsuarios(usur_Id),
 CONSTRAINT FK_salo_tbEmpleados_acce_tbUsuarios_empl_UsuarioModificacion_usur_Id FOREIGN KEY(empl_UsuarioModificacion) REFERENCES acce.tbUsuarios(usur_Id)
 
@@ -261,23 +282,6 @@ CONSTRAINT FK_salo_tbFacturasDetalles_acce_tbUsuarios_fade_UsuarioModificacion_u
 
 );
 
-CREATE TABLE salo.tbSucursales(
-    sucu_Id                             INT IDENTITY(1,1), 
-    sucu_Descripcion                    NVARCHAR(200) NOT NULL,
-    muni_Id                             INT,
-	sucu_DireccionExacta				NVARCHAR(500) NOT NULL,
-    sucu_FechaCreacion					DATETIME NOT NULL DEFAULT GETDATE(),
-    sucu_UsuarioCreacion				INT not null,
-    sucu_FechaModificacion				DATETIME,
-    sucu_UsuarioModificacion			INT,
-    sucu_Estado							BIT NOT NULL DEFAULT 1,
-    CONSTRAINT PK_salo_tbSucursales_sucu_Id PRIMARY KEY(sucu_Id),
-    CONSTRAINT FK_salo_tbSucursales_gnrl_tbMunicipios_muni_Id FOREIGN KEY(muni_Id) REFERENCES gnrl.tbMunicipios(muni_Id),
-
-    CONSTRAINT FK_salo_tbSucursales_acce_tbUsuarios_sucu_UsuarioCreacion_usur_Id FOREIGN KEY(sucu_UsuarioCreacion) REFERENCES acce.tbUsuarios(usur_Id),
-    CONSTRAINT FK_salo_tbSucursales_acce_tbUsuarios_sucu_UsuarioModificacion_usur_Id FOREIGN KEY(sucu_UsuarioModificacion) REFERENCES acce.tbUsuarios(usur_Id)
-
-);
 
 CREATE TABLE salo.tbReservaciones(
 rese_Id                             INT IDENTITY(1,1),
@@ -468,6 +472,8 @@ VALUES ( 'Casado(a)',  GETDATE(), 1, NULL, NULL, 1),
                 ('Recepcionista',GetDate(),1,null,null,1)
 
 
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 1', 1, 'Calle 1 #123', GETDATE(), 1, NULL, NULL, 1);
 
 INSERT INTO [salo].[tbEmpleados]
            ([empl_Nombre]
@@ -481,24 +487,25 @@ INSERT INTO [salo].[tbEmpleados]
            ,[empl_FechaNacimiento]
            ,[empl_FechaContratacion]
            ,[carg_Id]
+           ,[sucu_Id]
            ,[empl_FechaCreacion]
            ,[empl_UsuarioCreacion]
            ,[empl_FechaModificacion]
            ,[empl_UsuarioModificacion]
            ,[empl_Estado])
      VALUES
-           ('Daniel','Espinoza' ,'M','10' ,'Col. Municipal','1' ,'87756952' ,'daniele09099@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Selvin','Medina' ,'M','10' ,'Rivera','2' ,'98552231' ,'selvinmedi@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Christpher','Aguilar' ,'M','10' ,'Col. Satelite','3' ,'77450210' ,'agilarchris@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Alessia','Medina' ,'F','10' ,'Col. Miguel Angel Pavon','1' ,'99864520' ,'aless65@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Axel','Gomez' ,'M','10' ,'Bosques de Jucutuma','2' ,'50220345' ,'Gomez03@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Angie','Rolitas' ,'F','10' ,'Col. Felipe','1' ,'88541230' ,'rolitaAngie@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Dua','Lipa' ,'F','10' ,'Rio de piedras','1' ,'00000000' ,'lipa1995@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Pitbull','Perez' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'pitbull@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Michael','Jackson' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'Jackson@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Lady','Gaga' ,'F','10' ,'Rio de piedras','1' ,'00000000' ,'gaga@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Lionel','Messi' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'Messi@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Cristiano','Ronaldo' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'ElBicho@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1)
+           ('Daniel','Espinoza' ,'M','10' ,'Col. Municipal','1' ,'87756952' ,'daniele09099@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Selvin','Medina' ,'M','10' ,'Rivera','2' ,'98552231' ,'selvinmedi@gmail.com',GETDATE() ,GetDate() ,1 ,1,GetDate() ,1 ,null ,null,1),
+           ('Christpher','Aguilar' ,'M','10' ,'Col. Satelite','3' ,'77450210' ,'agilarchris@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Alessia','Medina' ,'F','10' ,'Col. Miguel Angel Pavon','1' ,'99864520' ,'aless65@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Axel','Gomez' ,'M','10' ,'Bosques de Jucutuma','2' ,'50220345' ,'Gomez03@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Angie','Rolitas' ,'F','10' ,'Col. Felipe','1' ,'88541230' ,'rolitaAngie@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Dua','Lipa' ,'F','10' ,'Rio de piedras','1' ,'00000000' ,'lipa1995@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Pitbull','Perez' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'pitbull@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Michael','Jackson' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'Jackson@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Lady','Gaga' ,'F','10' ,'Rio de piedras','1' ,'00000000' ,'gaga@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Lionel','Messi' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'Messi@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Cristiano','Ronaldo' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'ElBicho@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1)
 GO
 
 
@@ -553,6 +560,7 @@ BEGIN
                 ,[usur_Contrasenia]
                 ,T1.[empl_Id]
                 ,t2.empl_Nombre + ' ' + t2.empl_Apellido as empl_Nombre 
+				,t2.sucu_Id
                 ,[usur_UsuarioCreacion]
                 ,[usur_FechaCreacion]
                 ,[usur_UsuarioModificacion]
@@ -867,6 +875,8 @@ SELECT	empl_Id,
 		empl_FechaContratacion, 
 		T1.carg_Id,
 		T5.carg_Descripcion,
+		T1.sucu_Id,
+		T6.sucu_Descripcion,
 		empl_FechaCreacion, 
 		empl_UsuarioCreacion, 
 		empl_FechaModificacion, 
@@ -876,7 +886,8 @@ FROM salo.tbEmpleados T1 INNER JOIN gnrl.tbMunicipios T2
 ON t1.muni_Id = t2.muni_Id INNER JOIN gnrl.tbDepartamentos T3
 ON T3.depa_Id = t2.depa_Id INNER JOIN gnrl.tbEstadosCiviles T4
 ON T4.estc_Id = T1.estc_Id INNER JOIN salo.tbCargos T5
-ON t5.carg_Id = t1.carg_Id
+ON t5.carg_Id = t1.carg_Id INNER JOIN salo.tbSucursales T6
+ON T6.sucu_Id = T1.sucu_Id
 WHERE empl_Estado = 1
 
 END
@@ -896,6 +907,7 @@ CREATE OR ALTER PROCEDURE salo.UDP_tbEmpleados_Insert
 	@empl_FechaNacimiento Nvarchar(100),
 	@empl_FechaContratacion Nvarchar(100),
 	@carg_Id INT,
+	@sucu_Id INT,
 	@empl_UsuarioCreacion INT
 AS
 BEGIN
@@ -914,6 +926,7 @@ INSERT INTO [salo].[tbEmpleados]
            ,[empl_FechaNacimiento]
            ,[empl_FechaContratacion]
            ,[carg_Id]
+		   ,[sucu_Id]
            ,[empl_FechaCreacion]
            ,[empl_UsuarioCreacion]
            ,[empl_FechaModificacion]
@@ -931,6 +944,7 @@ INSERT INTO [salo].[tbEmpleados]
            ,@empl_FechaNacimiento
            ,@empl_FechaContratacion
            ,@carg_Id
+		   ,@sucu_Id
            ,GETDATE()
            ,@empl_UsuarioCreacion
            ,null
@@ -949,7 +963,7 @@ END CATCH
 END
 GO
 
-EXEC salo.UDP_tbEmpleados_Insert 'Francis','Antunez','M','1','Gainasd','2','885996123','','10-10-2000','10-10-2022','1','1'
+--EXEC salo.UDP_tbEmpleados_Insert 'Francis','Antunez','M','1','Gainasd','2','885996123','','10-10-2000','10-10-2022','1','1'
 
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbEmpleados_Update
@@ -965,6 +979,7 @@ CREATE OR ALTER PROCEDURE salo.UDP_tbEmpleados_Update
 	@empl_FechaNacimiento Nvarchar(100),
 	@empl_FechaContratacion Nvarchar(100),
 	@carg_Id INT,
+	@sucu_Id INT,
 	@empl_UsuarioModificacion int
 AS
 BEGIN
@@ -982,6 +997,7 @@ UPDATE [salo].[tbEmpleados]
       ,[empl_FechaNacimiento] = @empl_FechaNacimiento
       ,[empl_FechaContratacion] = @empl_FechaContratacion
       ,[carg_Id] = @carg_Id
+	  ,[sucu_Id] = @sucu_Id
       ,[empl_FechaModificacion] = GETDATE()
       ,[empl_UsuarioModificacion] = @empl_UsuarioModificacion
  WHERE empl_Id = @empl_Id
@@ -1042,6 +1058,8 @@ SELECT	empl_Id,
 		empl_FechaContratacion, 
 		T1.carg_Id,
 		T5.carg_Descripcion,
+		T1.sucu_Id,
+		T6.sucu_Descripcion,
 		empl_FechaCreacion, 
 		empl_UsuarioCreacion, 
 		empl_FechaModificacion, 
@@ -1051,7 +1069,8 @@ FROM salo.tbEmpleados T1 INNER JOIN gnrl.tbMunicipios T2
 ON t1.muni_Id = t2.muni_Id INNER JOIN gnrl.tbDepartamentos T3
 ON T3.depa_Id = t2.depa_Id INNER JOIN gnrl.tbEstadosCiviles T4
 ON T4.estc_Id = T1.estc_Id INNER JOIN salo.tbCargos T5
-ON t5.carg_Id = t1.carg_Id
+ON t5.carg_Id = t1.carg_Id INNER JOIN salo.tbSucursales T6
+ON T6.sucu_Id = T1.sucu_Id
 WHERE empl_Estado = 1 AND T1.empl_Id = @empl_Id
 
 END
@@ -1158,7 +1177,7 @@ END CATCH
 
 END
 GO
-//
+
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbCategorias_Delete
 	@cate_Id INT
@@ -2333,6 +2352,7 @@ SELECT [fact_Id]
 	  ,caja.empl_Nombre	AS NombreCaja
 	  ,caja.empl_Apellido AS ApellidoCaja
 	  ,caja.empl_Telefono AS TelefonoCaja
+	  ,caja.sucu_Id
       ,T1.[metp_Id]
 	  ,T3.metp_Descripcion
       ,[fact_Fecha]
@@ -3025,8 +3045,6 @@ INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_Cor
 VALUES ('Laura', 'Diaz', '555-8246', 'lauradiaz@example.com', GETDATE(), 1, NULL, NULL, 1);
 
 
-INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
-VALUES ('Sucursal 1', 1, 'Calle 1 #123', GETDATE(), 1, NULL, NULL, 1);
 
 INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
 VALUES ('Sucursal 2', 2, 'Avenida 2 #456', GETDATE(), 1, NULL, NULL, 1);
