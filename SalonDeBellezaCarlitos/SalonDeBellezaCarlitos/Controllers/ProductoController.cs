@@ -117,7 +117,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             foreach (var item in producto)
             {   
                 var cate_Id = _generalesService.BuscarCategoria(item.cate_Id);
-                var prov_Id = _generalesService.BuscarProveedor(item.prov_id);
+                var prov_Id = _generalesService.findProveedor(item.prov_id);
 
                 ViewBag.cate_Id = cate_Id.cate_Descripcion;
                 ViewBag.prov_Id = prov_Id.prov_NombreContacto;
