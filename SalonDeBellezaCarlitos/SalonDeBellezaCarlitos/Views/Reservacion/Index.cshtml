@@ -1,15 +1,24 @@
-﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.ReservacionesViewModel>
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWReservacionesViewModel>
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<input type="hidden" value="@ViewBag.Toast" id="toast" />
+@{ ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row text-center">
+    <div class="col">
+        <h1>Reservaciones</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row mb-3 text-center">
+    <div class="col">
+        <a class="btn btn-primary" asp-action="Create">Agregar una reservacion</a>
+    </div>
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -17,7 +26,7 @@
                 @Html.DisplayNameFor(model => model.clie_Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.sucu_Id)
+                @Html.DisplayNameFor(model => model.sucu_Descripcion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.rese_DiaReservado)
@@ -32,29 +41,34 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.clie_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sucu_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.rese_DiaReservado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.rese_HoraInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.rese_HoraFin)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.rese_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.rese_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.rese_Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.clie_Nombre) @Html.DisplayFor(modelItem => item.clie_Apellido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.sucu_Descripcion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.rese_DiaReservado)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.rese_HoraInicio)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.rese_HoraFin)
+    </td>
+    <td>
+        <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.rese_Id">Editar</a> |
+        <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.rese_Id">Detalles</a> |
+        <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.rese_Id')">Eliminar</button>
+    </td>
+</tr>}
     </tbody>
 </table>
+
+
+@Html.Partial("_ReservacionDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.ReservacionesViewModel())
+
+<script src="~/js/App/Salon/Reservaciones.js"></script>

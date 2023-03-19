@@ -14,7 +14,14 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
     {
         public int Delete(tbUsuarios item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+
+            var parametros = new DynamicParameters();
+            parametros.Add("@usur_Id", item.usur_Id, DbType.String, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Borrar_Usuarios, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public tbUsuarios find(int? id)
@@ -26,9 +33,17 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
         public int Insert(tbUsuarios item)
         {
-            using var db = new SalonCarlitosContext();
-            db.tbUsuarios.Add(item);
-            return item.usur_Id;
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@usur_Usuario", item.usur_Usuario, DbType.String, ParameterDirection.Input);
+            parametros.Add("@usur_Contrasenia", item.usur_Contrasenia, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empl_Id", item.empl_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@usur_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Usuarios, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public IEnumerable<tbUsuarios> List()
@@ -37,12 +52,32 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             return db.Query<tbUsuarios>(ScriptsDataBase.UDP_Listado_Usuarios, null, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<VW_tbUsuarios_View> ListView()
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            return db.Query<VW_tbUsuarios_View>(ScriptsDataBase.UDP_Listado_Usuarios, null, commandType: CommandType.StoredProcedure);
+        }
+
+        public IEnumerable<VW_tbUsuarios_View> BuscarView(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@usur_Id", id, DbType.String, ParameterDirection.Input);
+            return db.Query<VW_tbUsuarios_View>(ScriptsDataBase.UDP_Buscar_Usuarios, parametros, commandType: CommandType.StoredProcedure);
+        }
+
         public int Update(tbUsuarios item)
         {
-            using var db = new SalonCarlitosContext();
-            db.Entry(item).State = EntityState.Modified;
-            db.SaveChanges();
-            return item.usur_Id;
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@usur_Id", item.usur_Id, DbType.String, ParameterDirection.Input);
+            parametros.Add("@empl_Id", item.empl_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@usuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Usuarios, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
     }
 }

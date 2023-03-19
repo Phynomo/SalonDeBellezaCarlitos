@@ -55,15 +55,30 @@ function AbrirModalEdit(cadena) {
 
 
 function GuardarModalEdit() {
-    var carg_Descripcion = $('#carg_Descripcion_Edit').val();
+    var muni_Descripcion = $('#muni_DescripcionE').val();
+    var muni_Codigo = $('#muni_CodigoE').val();
+    var depa_Id = $('#depa_IdE').val();
 
-    $("#lbl_DescripcionEditError").attr('hidden', true);
 
-    if (carg_Descripcion != "") {
+    $("#lbl_MunicipioCreateErrorE").attr('hidden', true);
+    $("#lbl_DescripcionCreateErrorE").attr('hidden', true);
+    $("#lbl_DepartamentoCreateErrorE").attr('hidden', true);
+
+    if (muni_Descripcion != "" && muni_Codigo != "" && depa_Id != "") {
         $("#formEdit").submit();
 
     } else {
-        $("#lbl_DescripcionEditError").attr('hidden', false);
+        MostrarMensajeWarning("Complete los campos");
+        if (muni_Descripcion == "") {
+            $("#lbl_DescripcionEditErrorE").attr('hidden', false);
+        }
+        if (muni_Codigo == "") {
+            $("#lbl_MunicipioEditErrorE").attr('hidden', false);
+        }
+        if (depa_Id == "") {
+            $("#lbl_DepartamentoEditErrorE").attr('hidden', false);
+        }
+
     }
 
 }
@@ -79,11 +94,11 @@ function AbrirModalDelete(id) {
 
 
 function GuardarModalDelete() {
-    var carg_Descripcion = $('#muni_IdE').val();
+    var muni_IdD = $('#muni_IdD').val();
 
     $("#lbl_DescripcionDeleteError").attr('hidden', true);
 
-    if (carg_Descripcion != "") {
+    if (muni_IdD != "") {
         $("#formDelete").submit();
 
     } else {

@@ -561,13 +561,16 @@ BEGIN
                 ,T1.[empl_Id]
                 ,t2.empl_Nombre + ' ' + t2.empl_Apellido as empl_Nombre 
 				,t2.sucu_Id
+				,t3.carg_Id
+				,t3.carg_Descripcion
                 ,[usur_UsuarioCreacion]
                 ,[usur_FechaCreacion]
                 ,[usur_UsuarioModificacion]
                 ,[usur_FechaModificacion]
                 ,[usur_Estado]
         FROM    acce.[tbUsuarios] T1 INNER JOIN [salo].[tbEmpleados] T2
-        ON      T1.empl_Id = T2.empl_Id
+        ON      T1.empl_Id = T2.empl_Id INNER JOIN [salo].tbCargos T3
+		ON		T2.carg_Id = T3.carg_Id
         WHERE   t1.usur_Contrasenia = @Password 
         AND     t1.usur_Usuario = @usur_Usuario
 
@@ -611,20 +614,12 @@ END
 GO
 
 
-
-
-
------Procedimientos almacenados de tbUsuarios
-GO
-CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_Listado
+CREATE OR ALTER VIEW acce.VW_tbUsuarios_View
 AS
-BEGIN
-
-        SELECT	 [usur_Id]
+ SELECT	 [usur_Id]
                 ,[usur_Usuario]
                 ,[usur_Contrasenia]
                 ,T1.[empl_Id]
-                ,t2.empl_Nombre + ' ' + t2.empl_Apellido as empl_NombreCompleto 
 				,t2.empl_Nombre
 				,t2.empl_Apellido
                 ,[usur_UsuarioCreacion]
@@ -634,11 +629,29 @@ BEGIN
                 ,[usur_Estado]
         FROM    acce.[tbUsuarios] T1 INNER JOIN [salo].[tbEmpleados] T2
         ON      T1.empl_Id = T2.empl_Id
+		WHERE usur_Estado = 1
 
+
+-----Procedimientos almacenados de tbUsuarios
+GO
+CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_Listado
+AS
+BEGIN
+   
+   SELECT * FROM [acce].[VW_tbUsuarios_View]
 
 END
-
 GO
+CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_Buscar
+@usur_Id int
+AS
+BEGIN
+   
+   SELECT * FROM [acce].[VW_tbUsuarios_View]
+   WHERE usur_Id = @usur_Id
+END
+GO
+
 CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_Insert
 	@usur_Usuario Nvarchar(100),
 	@usur_Contrasenia Nvarchar(max),
@@ -1801,12 +1814,8 @@ END
 GO
 --Procedimientos Alemacenados Reservaciones
 
-GO
-CREATE OR ALTER PROCEDURE salo.UDP_tbReservaciones_Listado
+CREATE VIEW salo.VW_tbReservaciones_View
 AS
-BEGIN
-
-
 SELECT [rese_Id]
       ,T1.[clie_Id]
 	  ,T2.clie_Nombre
@@ -1828,10 +1837,29 @@ SELECT [rese_Id]
   ON t3.sucu_Id = T1.sucu_Id
   WHERE rese_Estado = 1
 
+
+
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbReservaciones_Listado
+AS
+BEGIN
+
+select * from [salo].[VW_tbReservaciones_View]
+
 END
 
 GO
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbReservaciones_Buscar
+@rese_Id int
+AS
+BEGIN
 
+select * from [salo].[VW_tbReservaciones_View]
+WHERE rese_Id = @rese_Id
+END
+
+GO
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbReservaciones_Insert
 @clie_Id				INT,
@@ -1867,6 +1895,7 @@ INSERT INTO [salo].[tbReservaciones]
            ,NULL
            ,1)
 
+SELECT 1 as Proceso
 
 END TRY
 BEGIN CATCH
@@ -1899,6 +1928,9 @@ UPDATE [salo].[tbReservaciones]
       ,[rese_UsuarioModificacion] = @rese_UsuarioModificacion
  WHERE rese_Id = @rese_Id
 
+ 
+SELECT 1 as Proceso
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -1917,7 +1949,8 @@ UPDATE [salo].[tbReservaciones]
    SET [rese_Estado] = 0
  WHERE rese_Id = @rese_Id
 
-
+ 
+SELECT 1 as Proceso
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -3102,8 +3135,7 @@ CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Update
 AS
 BEGIN
 BEGIN TRY
-IF NOT EXISTS (SELECT * FROM salo.tbProveedores
-				WHERE @prov_NombreEmpresa = prov_NombreEmpresa)
+IF NOT EXISTS (SELECT * FROM salo.tbProveedores WHERE @prov_NombreEmpresa = prov_NombreEmpresa) OR @prov_Id = (SELECT prov_Id FROM salo.tbProveedores WHERE @prov_NombreEmpresa = prov_NombreEmpresa)
 BEGIN
 
 UPDATE [salo].[tbProveedores]
@@ -3124,8 +3156,6 @@ END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
 END CATCH
-
-
 END
 GO
 

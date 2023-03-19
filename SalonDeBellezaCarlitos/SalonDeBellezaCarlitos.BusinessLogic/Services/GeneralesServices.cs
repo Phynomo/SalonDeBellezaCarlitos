@@ -276,6 +276,79 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
         }
 
+        public IEnumerable<VW_tbUsuarios_View> ListadoUsuariosView(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _UsuariosRepository.ListView();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<VW_tbUsuarios_View>();
+            }
+        }
+
+        public int InsertarUsuario(tbUsuarios item)
+        {
+            try
+            {
+                var resultado = _UsuariosRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+
+        public int EditarUsuario(tbUsuarios item)
+        {
+            try
+            {
+                var resultado = _UsuariosRepository.Update(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public int EliminarUsuario(tbUsuarios item)
+        {
+            try
+            {
+                var resultado = _UsuariosRepository.Delete(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+
+        public IEnumerable<VW_tbUsuarios_View> BuscarUsuarioView(int? id)
+        {
+            try
+            {
+                return _UsuariosRepository.BuscarView(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         #endregion
 
         #region Servicios
@@ -894,6 +967,39 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #region Reservaciones
 
+
+        public int EliminarReservacion(tbReservaciones reservaciones)
+        {
+
+            try
+            {
+                var resultado = _ReservacionRepository.Delete(reservaciones);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public int EditarReservacion(tbReservaciones item)
+        {
+
+            try
+            {
+                var resultado = _ReservacionRepository.Update(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
         public IEnumerable<tbReservaciones> ListadoReservaciones(out string error)
         {
             error = string.Empty;
@@ -905,6 +1011,19 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             {
                 error = e.Message;
                 return Enumerable.Empty<tbReservaciones>();
+            }
+        }
+        public IEnumerable<VW_tbReservaciones_View> ListadoReservacionesView(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _ReservacionRepository.ListView();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<VW_tbReservaciones_View>();
             }
         }
         public int InsertarReservaciones(tbReservaciones item)
@@ -921,6 +1040,30 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return 0;
             }
 
+        }
+
+        public tbReservaciones findReservaciones(int? id)
+        {
+            try
+            {
+                return _ReservacionRepository.find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<VW_tbReservaciones_View> BuscarReservaciones(int? id)
+        {
+            try
+            {
+                return _ReservacionRepository.BuscarView(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         #endregion

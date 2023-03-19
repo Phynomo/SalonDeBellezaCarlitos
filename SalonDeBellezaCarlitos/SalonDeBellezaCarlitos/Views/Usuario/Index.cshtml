@@ -1,15 +1,21 @@
-﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.UsuariosViewModel>
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWUsuariosViewModel>
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-<h1>Index</h1>
+<div class="row text-center">
+    <div class="col">
+        <h1>Index</h1>
+        <hr />
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row mb-3 text-center">
+    <div class="col">
+        @*<a asp-action="Create">Create New</a>*@
+        <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar un usuario</button>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -17,44 +23,33 @@
                 @Html.DisplayNameFor(model => model.usur_Usuario)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.usur_Contrasenia)
+                @Html.DisplayNameFor(model => model.empl_Nombre)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.usur_FechaCreacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.usur_FechaModificacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.usur_Estado)
-            </th>
-            <th></th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.usur_Usuario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.usur_Contrasenia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.usur_FechaCreacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.usur_FechaModificacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.usur_Estado)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.usur_Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.usur_Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.usur_Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.usur_Usuario)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.empl_Nombre) @Html.DisplayFor(modelItem => item.empl_Apellido)
+    </td>
+    <td>
+        <button style="padding-top: 1.5%; font-size: 10px; height: 25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.usur_Id,@item.empl_Id')">Editar</button> |
+        <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.usur_Id">Detalles</a>
+        <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.usur_Id')">Eliminar</button>
+    </td>
+</tr>}
     </tbody>
 </table>
+
+
+@Html.Partial("_UsuarioCreateModalViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.UsuariosViewModel())
+@Html.Partial("_UsuarioEditModalViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.UsuariosViewModel())
+@Html.Partial("_UsuarioDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.UsuariosViewModel())
+<script src="~/js/App/Seguridad/Usuarios.js"></script>
+

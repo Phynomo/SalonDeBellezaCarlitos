@@ -32,6 +32,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_Usuarios = "acce.UDP_tbUsuarios_Insert";
         public static string UDP_Editar_Usuarios = "acce.UDP_tbUsuarios_Update";
         public static string UDP_Borrar_Usuarios = "acce.UDP_tbUsuario_Delete";
+        public static string UDP_Buscar_Usuarios = "acce.UDP_tbUsuarios_Buscar";
 
         #endregion
 
@@ -89,6 +90,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_Reservaciones = "salo.UDP_tbReservaciones_Insert";
         public static string UDP_Editar_Reservaciones = "salo.UDP_tbReservaciones_Update";
         public static string UDP_Borrar_Reservaciones = "salo.UDP_tbReservaciones_Delete";
+        public static string UDP_Buscar_Reservaciones = "salo.UDP_tbReservaciones_Buscar";
 
         #endregion
 

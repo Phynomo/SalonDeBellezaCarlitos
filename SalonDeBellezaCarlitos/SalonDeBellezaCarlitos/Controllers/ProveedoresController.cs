@@ -7,7 +7,6 @@ using SalonDeBellezaCarlitos.WebUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SalonDeBellezaCarlitos.WebUI.Controllers
 {
@@ -28,7 +27,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public IActionResult Index()
         {
 
-            ViewBag.Toast = TempData["Proveedores"] as string;
+            ViewBag.Toast = TempData["Proveedor"] as string;
             var listado = _generalesService.ListadoProveedores(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<ProveedorViewModel>>(listado);
 
@@ -53,46 +52,65 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             var prov = _mapper.Map<tbProveedores>(proveedor);
             result = _generalesService.InsertarProveedor(prov);
 
-            if (result != 1)
+            switch (result)
             {
-                if (result == 0)
-                {
-                    ModelState.AddModelError("", "Ocurrió un error al crear este registro");
-                    ViewBag.Toast = "Fatal";
-                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error3).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
-                    ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
-                    return View();
-                }
-                if (result == 2)
-                {
-                    ModelState.AddModelError("", "El nombre de la empresa ya esta registrado");
+                case 1:
+                    TempData["Proveedor"] = "success";
+                    return RedirectToAction("Listado");
+                case 2:
                     ViewBag.Toast = "repetido";
-                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error2).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
+                    ModelState.AddModelError("", "El nombre de la empresa ya esta registrado");
+                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
                     ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
-                    return View();
-                }
-
-                ModelState.AddModelError("", "Ocurrió un error al crear este registro");
-                ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
-                ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
-                return View();
+                    return View(proveedor);
+                case 44:
+                    ViewBag.Toast = "fatal";
+                    ModelState.AddModelError("", "Ocurrió un error al crear este registro");
+                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error7).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
+                    ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
+                    return View(proveedor);
+                default:
+                    TempData["Proveedor"] = "noprevisto";
+                    ModelState.AddModelError("", "Ocurrió un error al crear este registro");
+                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error77).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
+                    ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
+                    return View(proveedor);
             }
-            return RedirectToAction("Listado");
+
+
         }
 
 
         [HttpGet("/Proveedores/Editar")]
         public IActionResult Edit(int? id)
         {
-            var proveedor = _generalesService.findProveedor(id);
-            var proveedorMapeado = _mapper.Map<ProveedorViewModel>(proveedor);
+            try
+            {
+                var proveedor = _generalesService.findProveedor(id);
+                var proveedorMapeado = _mapper.Map<ProveedorViewModel>(proveedor);
 
-            var depa_Id = _generalesService.BuscarMunicipio(proveedor.muni_Id);
-            ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion", depa_Id.depa_Id);
-            ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(depa_Id.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
+                #region Cargando datos...
+                if (proveedor == null)
+                {
+                    Convert.ToInt32("a");
+                }
 
-            proveedorMapeado.depa_Id = depa_Id.depa_Id;
-            return View(proveedorMapeado);
+                var depa_Id = _generalesService.BuscarMunicipio(proveedor.muni_Id);
+                ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion", depa_Id.depa_Id);
+                ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(depa_Id.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
+
+                proveedorMapeado.depa_Id = depa_Id.depa_Id;
+
+                #endregion
+
+                return View(proveedorMapeado);
+            }
+            catch (Exception)
+            {
+                TempData["Proveedor"] = "errorC";
+                return RedirectToAction("Listado");
+            }
+
         }
 
         [HttpPost("/Proveedores/Editar")]
@@ -100,7 +118,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             var result = 0;
             var prov = _mapper.Map<tbProveedores>(proveedor);
-            result = _generalesService.InsertarProveedor(prov);
+            result = _generalesService.EditarProveedor(prov);
 
             switch (result)
             {
@@ -109,56 +127,74 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     return RedirectToAction("Listado");
                 case 2:
                     ViewBag.Toast = "repetido";
-                    ModelState.AddModelError("", "Ocurrió un error al crear este registro");
+                    ModelState.AddModelError("", "El nombre de la empresa ya esta registrado");
                     ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
                     ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
-                    return View(prov);
+                    return View(proveedor);
                 case 0:
                     ViewBag.Toast = "fatal";
                     ModelState.AddModelError("", "Ocurrió un error al crear este registro");
                     ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error7).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
                     ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
-                    return View(prov);
+                    return View(proveedor);
                 default:
-                    ModelState.AddModelError("", "ocurrio un error inesperado");
-                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error2).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
+                    TempData["Proveedor"] = "noprevisto";
+                    ModelState.AddModelError("", "Ocurrió un error al crear este registro");
+                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error77).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
                     ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
-                    return View(prov);
+                    return View(proveedor);
             }
         }
 
         [HttpGet("/Proveedores/Detalles")]
         public IActionResult Details(int? id)
         {
-            var proveedor = _generalesService.findProveedor(id);
-            var proveedorMapeado = _mapper.Map<ProveedorViewModel>(proveedor);
-
-            var muni_Id = _generalesService.BuscarMunicipio(proveedorMapeado.muni_Id);
-            var depa_Id = _generalesService.findDepartameto(muni_Id.depa_Id);
-
-            ViewBag.depa_Id = depa_Id.depa_Descripcion;
-            ViewBag.muni_Id = muni_Id.muni_Descripcion;
-
-            var UsuarioCreacion = _generalesService.BuscarUsuario(proveedorMapeado.prov_UsuarioCreacion);
-            var nombreCreacion = _generalesService.BuscarEmpleados(UsuarioCreacion.empl_Id);
-            foreach (var item in nombreCreacion)
+            try
             {
-                ViewBag.UsuarioCreacion = item.empl_Nombre + " " + item.empl_Apellido;
-            }
+                var proveedor = _generalesService.findProveedor(id);
+                var proveedorMapeado = _mapper.Map<ProveedorViewModel>(proveedor);
 
-
-            if (!string.IsNullOrEmpty(proveedorMapeado.prov_UsuarioModificacion.ToString()))
-            {
-                var UsuarioModificacion = _generalesService.BuscarUsuario(proveedorMapeado.prov_UsuarioModificacion);
-                var nombreModificacion = _generalesService.BuscarEmpleados(UsuarioModificacion.empl_Id);
-                foreach (var item in nombreModificacion)
+                #region Cargando datos ...
+                if (proveedor == null)
                 {
-                    ViewBag.UsuarioModificacion = item.empl_Nombre + " " + item.empl_Apellido;
+                    Convert.ToInt32("a");
                 }
 
+                var muni_Id = _generalesService.BuscarMunicipio(proveedorMapeado.muni_Id);
+                var depa_Id = _generalesService.findDepartameto(muni_Id.depa_Id);
+
+                ViewBag.depa_Id = depa_Id.depa_Descripcion;
+                ViewBag.muni_Id = muni_Id.muni_Descripcion;
+
+                var UsuarioCreacion = _generalesService.BuscarUsuario(proveedorMapeado.prov_UsuarioCreacion);
+                var nombreCreacion = _generalesService.BuscarEmpleados(UsuarioCreacion.empl_Id);
+                foreach (var item in nombreCreacion)
+                {
+                    ViewBag.UsuarioCreacion = item.empl_Nombre + " " + item.empl_Apellido;
+                }
+
+
+                if (!string.IsNullOrEmpty(proveedorMapeado.prov_UsuarioModificacion.ToString()))
+                {
+                    var UsuarioModificacion = _generalesService.BuscarUsuario(proveedorMapeado.prov_UsuarioModificacion);
+                    var nombreModificacion = _generalesService.BuscarEmpleados(UsuarioModificacion.empl_Id);
+                    foreach (var item in nombreModificacion)
+                    {
+                        ViewBag.UsuarioModificacion = item.empl_Nombre + " " + item.empl_Apellido;
+                    }
+
+                }
+                #endregion
+
+                return View(proveedorMapeado);
+            }
+            catch
+            {
+
+                TempData["Proveedor"] = "errorC";
+                return RedirectToAction("Listado");
             }
 
-            return View(proveedorMapeado);
         }
 
         [HttpPost("/Proveedores/Eliminar")]

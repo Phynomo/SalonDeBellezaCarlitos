@@ -163,7 +163,18 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     string FN = fechaNacimineto.ToString("yyyy-MM-dd");
                     string FC = fechaContratacion.ToString("yyyy-MM-dd");
 
-                    ViewBag.empl_FechaNacimiento = FN;
+
+                if (emp.empl_Sexo == "M")
+                {
+                    ViewBag.empl_SexoM = "checked";
+                }
+                else
+                {
+                    ViewBag.empl_SexoF = "checked";
+                }
+
+
+                ViewBag.empl_FechaNacimiento = FN;
                     ViewBag.empl_FechaContratacion = FC;
                 
 

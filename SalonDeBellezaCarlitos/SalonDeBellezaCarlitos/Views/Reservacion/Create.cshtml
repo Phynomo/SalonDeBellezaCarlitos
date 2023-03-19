@@ -1,29 +1,38 @@
-﻿@model SalonDeBellezaCarlitos.Entities.Entities.tbReservaciones
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.ReservacionesViewModel
 
+<input type="hidden" value="@ViewBag.Toast" id="toast" />
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>tbReservaciones</h4>
+<h1 class="text-center">Crear</h1>
+
+<h4 class="text-center">Reservaciones</h4>
 <hr />
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="Create">
+        <form asp-action="Create" id="fromCreate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group col">
                         <label asp-for="clie_Id" class="control-label"></label>
-                        <select asp-for="clie_Id" class="form-control" asp-items="ViewBag.clie_Id"></select>
+                        <select asp-for="clie_Id" id="clie_Id" class="form-select" asp-items="ViewBag.clie_Id">
+                            <option value="">-- Seleccione un cliente --</option>
+                        </select>
+                        <label hidden id="lblclie_Id" class="text-danger">El campo de cliente es requerido</label>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="sucu_Id" class="control-label">Id Sucursal</label>
-                        <select asp-for="sucu_Id" class="form-control" asp-items="ViewBag.sucu_Id"></select>
+                    <div class="form-group col">
+                        <label asp-for="sucu_Id" class="control-label"></label>
+                        <select asp-for="sucu_Id" id="sucu_Id" class="form-select" asp-items="ViewBag.sucu_Id">
+                            <option value="">-- Selecciones una sucursal --</option>
+                        </select>
+                        <label hidden id="lblsucu_Id" class="text-danger">El campo de sucursales es requerido</label>
+
                     </div>
                 </div>
             </div>
@@ -31,15 +40,15 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="rese_DiaReservado" class="control-label"></label>
-                        <input asp-for="rese_DiaReservado" class="form-control" />
-                        <span asp-validation-for="rese_DiaReservado" class="text-danger"></span>
+                        <input asp-for="rese_DiaReservado" id="rese_DiaReservado" class="form-control" type="date" />
+                        <label hidden id="lblrese_DiaReservado" class="text-danger">El campo de dia reservado es requerido</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="rese_HoraInicio" class="control-label"></label>
-                        <input asp-for="rese_HoraInicio" class="form-control" />
-                        <span asp-validation-for="rese_HoraInicio" class="text-danger"></span>
+                        <input asp-for="rese_HoraInicio" id="rese_HoraInicio" class="form-control" type="time" />
+                        <label hidden id="lblrese_HoraInicio" class="text-danger">El campo de hora-inicio es requerido</label>
                     </div>
                 </div>
             </div>
@@ -47,20 +56,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="rese_HoraFin" class="control-label"></label>
-                        <input asp-for="rese_HoraFin" class="form-control" />
-                        <span asp-validation-for="rese_HoraFin" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="rese_UsuarioCreacion" class="control-label">Usuario Creacion</label>
-                        <select asp-for="rese_UsuarioCreacion" class="form-control" asp-items="ViewBag.rese_UsuarioCreacion"></select>
+                        <input asp-for="rese_HoraFin" id="rese_HoraFin" class="form-control" type="time" />
+                        <label hidden id="lblrese_HoraFin" class="text-danger">El campo de hora-fin es requerido</label>
                     </div>
                 </div>
             </div>
             <div class="row d-flex justify-content-end">
                 <div class="col d-flex justify-content-end">
-                    <input type="submit" value="Create" class="btn btn-primary mx-1" />
+                    <button type="button" onclick="btnCreate()" class="btn btn-primary mx-1">Crear reservacion</button>
                     <a class="btn btn-dark" asp asp-action="Index">Regresar</a>
                 </div>
             </div>
@@ -68,3 +71,4 @@
     </div>
 </div>
 
+<script src="~/js/App/Salon/Reservaciones.js"></script>

@@ -62,6 +62,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
             var parametros = new DynamicParameters();
 
+            parametros.Add("@prov_Id", item.prov_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@prov_NombreEmpresa", item.prov_NombreEmpresa, DbType.String, ParameterDirection.Input);
             parametros.Add("@prov_NombreContacto", item.prov_NombreContacto, DbType.String, ParameterDirection.Input);
             parametros.Add("@muni_Id", item.muni_Id, DbType.Int32, ParameterDirection.Input);
