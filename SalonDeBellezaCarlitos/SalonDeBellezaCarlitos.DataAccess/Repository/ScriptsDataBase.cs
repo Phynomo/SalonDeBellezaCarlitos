@@ -79,6 +79,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_Sucursales = "salo.UDP_tbSucursales_Insert";
         public static string UDP_Editar_Sucursales = "salo.UDP_tbSucursales_Update";
         public static string UDP_Borrar_Sucursales = "salo.UDP_tbSucuesales_Delete";
+        public static string UDP_Buscar_Sucursales = "salo.UDP_tbSucursalesVW_Buscar";
 
         #endregion
 

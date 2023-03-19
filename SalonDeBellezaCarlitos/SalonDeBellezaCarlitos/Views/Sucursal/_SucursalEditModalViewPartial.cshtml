@@ -1,51 +1,52 @@
 ﻿@model SalonDeBellezaCarlitos.WebUI.Models.SucursalViewModel
 
 
-<div class="modal" id="modalCreate" tabindex="-1" role="dialog">
+<div class="modal" id="modalEdit" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Agregar sucursal</h5>
+                <h5 class="modal-title">Editar sucursal</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form asp-action="Create" id="formCreate">
+            <form asp-action="Edit" id="formEdit">
                 <div class="modal-body">
+                    <input asp-for="sucu_Id" class="form-control" type="hidden" id="sucu_IdE" name="sucu_Id" />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
                         <div class="form-group col">
                             <label asp-for="sucu_Descripcion" class="control-label"></label>
-                            <input asp-for="sucu_Descripcion" class="form-control" id="sucu_Descripcion" name="sucu_Descripcion" />
-                            <label name="lbl_sucu_Descripcion" id="lbl_sucu_Descripcion" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            <input asp-for="sucu_Descripcion" class="form-control" id="sucu_DescripcionE" name="sucu_Descripcion" />
+                            <label name="lbl_sucu_Descripcion" id="lbl_sucu_DescripcionE" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col">
                             <label asp-for="depa_Id" class="control-label"></label>
-                            <select asp-for="depa_Id" id="depa_Id" class="form-select" asp-items="ViewBag.depa_Id">
+                            <select asp-for="depa_Id" id="depa_IdE" class="form-select" asp-items="ViewBag.depa_Id">
                                 <option value="">-- Seleccione un Departamento --</option>
                             </select>
-                            <label name="lbl_depa_Id" id="lbl_depa_Id" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            <label name="lbl_depa_Id" id="lbl_depa_IdE" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                         </div>
                         <div class="form-group col">
                             <label asp-for="muni_Id" class="control-label"></label>
-                            <select asp-for="muni_Id" id="muni_Id" class="form-select" asp-items="ViewBag.muni_Id">
+                            <select asp-for="muni_Id" id="muni_IdE" class="form-select" asp-items="ViewBag.muni_Id">
                                 <option value="">-- Seleccione un Municipio --</option>
                             </select>
-                            <label name="lbl_muni_Id" id="lbl_muni_Id" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            <label name="lbl_muni_Id" id="lbl_muni_IdE" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col">
                             <label asp-for="sucu_DireccionExacta" class="control-label"></label>
-                            <input asp-for="sucu_DireccionExacta" class="form-control" id="sucu_DireccionExacta" name="sucu_DireccionExacta" />
-                            <label name="lbl_sucu_DireccionExacta" id="lbl_sucu_DireccionExacta" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            <input asp-for="sucu_DireccionExacta" class="form-control" id="sucu_DireccionExactaE" name="sucu_DireccionExacta" />
+                            <label name="lbl_sucu_DireccionExacta" id="lbl_sucu_DireccionExactaE" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="GuardarModalCreate()">Guardar registro</button>
+                    <button type="button" class="btn btn-primary" onclick="GuardarModalEdit()">Guardar cambios</button>
                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </form>

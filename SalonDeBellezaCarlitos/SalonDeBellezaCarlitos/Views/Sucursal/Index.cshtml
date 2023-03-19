@@ -53,9 +53,9 @@
                     @Html.DisplayFor(modelItem => item.depa_Descripcion)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.sucu_Id">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.sucu_Id">Detalles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.sucu_Id">Eliminar</a>
+                    <button style="padding-top: 1.5%; font-size: 10px; height: 25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.sucu_Descripcion,@item.depa_Id,@item.muni_Id,@item.sucu_DireccionExacta,@item.sucu_Id')">Editar</button> |
+                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.sucu_Id">Detalles</a>
+                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.sucu_Id')">Eliminar</button>
                 </td>
             </tr>
         }
@@ -64,4 +64,6 @@
 
 
 @Html.Partial("_SucursalCreateModalViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.SucursalViewModel())
+@Html.Partial("_SucursalEditModalViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.SucursalViewModel())
+@Html.Partial("_SucursalDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.SucursalViewModel())
 <script src="~/js/App/Salon/Sucursales.js"></script>

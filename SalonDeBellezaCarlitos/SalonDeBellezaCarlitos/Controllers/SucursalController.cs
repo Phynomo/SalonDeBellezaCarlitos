@@ -50,9 +50,72 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             if (result == 0)
             {
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                return RedirectToAction("Listado");
             }
             return RedirectToAction("Listado");
         }
+
+        [HttpPost("/Sucursal/Editar")]
+        public ActionResult Edit(SucursalViewModel sucursal)
+        {
+            var result = 0;
+            var suc = _mapper.Map<tbSucursales>(sucursal);
+            result = _generalesService.EditarSucursal(suc);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return RedirectToAction("Listado");
+            }
+            return RedirectToAction("Listado");
+        }
+
+        [HttpPost("/Sucursal/Eliminar")]
+        public IActionResult Delete(SucursalViewModel sucursal)
+        {
+            var result = 0;
+            var suc = _mapper.Map<tbSucursales>(sucursal);
+            result = _generalesService.EliminarSucursal(suc);
+
+            if (result == 0)
+            {
+                ModelState.AddModelError("", "Ocurrió un error al eliminar este registro");
+                return RedirectToAction("Listado");
+            }
+            return RedirectToAction("Listado");
+
+        }
+
+        [HttpGet("/Sucursal/Detalles")]
+        public IActionResult Details(int? id)
+        {
+
+            ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion");
+            var listado = _generalesService.BuscarSucursalesView(id);
+            var listadoMapeado = _mapper.Map<IEnumerable<VWSucursalesViewModel>>(listado);
+
+            foreach (var item in listadoMapeado)
+            {
+                 var UsuarioCreacion = _generalesService.BuscarUsuario(item.sucu_UsuarioCreacion);
+                var nombreCreacion = _generalesService.BuscarEmpleados(UsuarioCreacion.empl_Id);
+                foreach (var item2 in nombreCreacion)
+                {
+                    ViewBag.UsuarioCreacion = item2.empl_Nombre + " " + item2.empl_Apellido;
+                }
+
+                if (!string.IsNullOrEmpty(item.sucu_UsuarioModificacion.ToString()))
+                {
+                    var UsuarioModificacion = _generalesService.BuscarUsuario(item.sucu_UsuarioModificacion);
+                    var nombreModificacion = _generalesService.BuscarEmpleados(UsuarioModificacion.empl_Id);
+                    foreach (var item2 in nombreModificacion)
+                    {
+                        ViewBag.UsuarioModificacion = item2.empl_Nombre + " " + item2.empl_Apellido;
+                    }
+                }
+            }
+            
+            return View(listadoMapeado);
+        }
+
     }
 }

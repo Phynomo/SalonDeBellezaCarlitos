@@ -772,6 +772,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
         }
 
+        public int EliminarSucursal(tbSucursales Sucursal)
+        {
+
+            try
+            {
+                var resultado = _SucursalesRepository.Delete(Sucursal);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
         public IEnumerable<tbSucursales> ListadoSucursales(out string error) 
         {
             error = string.Empty;
@@ -800,6 +815,18 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
         }
 
+        public IEnumerable<VW_tbSucursales_View> BuscarSucursalesView(int? id)
+        {
+            try
+            {
+                return _SucursalesRepository.findView(id);
+            }
+            catch (Exception)
+            {
+                return Enumerable.Empty<VW_tbSucursales_View>();
+            }
+        }
+
         public int InsertarSucursal(tbSucursales item)
         {
 
@@ -815,7 +842,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public int EditarSucursal(tbSucursales item)
+        {
 
+            try
+            {
+                var resultado = _SucursalesRepository.Update(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
         #endregion
 
         #region Productos

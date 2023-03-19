@@ -1,0 +1,79 @@
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWSucursalesViewModel>
+
+@{ ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+
+@foreach (var item in Model)
+{
+
+<h1 class="text-center">Detalles</h1>
+
+                <div>
+                    <h4 class="text-center">Sucursales</h4>
+                    <hr />
+
+                    <div class="row">
+                        <div class="col">
+                            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => item.sucu_Descripcion)</label><br />
+                            <label>@Html.DisplayFor(model => item.sucu_Descripcion)</label>
+                        </div>
+                        <div class="col">
+                            <label class="text-black font-weight-bold"> @Html.DisplayNameFor(model => item.sucu_DireccionExacta)</label><br />
+                            <label>@Html.DisplayFor(model => item.sucu_DireccionExacta)</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="text-black font-weight-bold"> @Html.DisplayNameFor(model => item.depa_Descripcion)</label><br />
+                            <label>@Html.DisplayFor(model => item.depa_Descripcion)</label>
+                        </div>
+                        <div class="col">
+                            <label class="text-black font-weight-bold"> @Html.DisplayNameFor(model => item.muni_Descripcion)</label><br />
+                            <label>@Html.DisplayFor(model => item.muni_Descripcion)</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col d-flex justify-content-end">
+                            <button  class="btn btn-warning btn-sm mx-1" onclick="AbrirModalEdit('@item.sucu_Descripcion,@item.depa_Id,@item.muni_Id,@item.sucu_DireccionExacta,@item.sucu_Id')">Editar</button>
+                            <a class="btn btn-dark" asp-action="Index">Regresar al listado</a>
+                        </div>
+
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-header" style="background-color:#2a0637;">
+                            <h3 class="text-white ">Auditoria</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Accion</th>
+                                        <th>Usuario</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Creado</td>
+                                        <td>@ViewBag.UsuarioCreacion</td>
+                                        <td>@Html.DisplayFor(model => item.sucu_FechaCreacion)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Modificado</td>
+                                        <td>@ViewBag.UsuarioModificacion</td>
+                                        <td>@Html.DisplayFor(model => item.sucu_FechaModificacion)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>}
+
+
+@Html.Partial("_SucursalEditModalViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.SucursalViewModel())
+<script src="~/js/App/Salon/Sucursales.js"></script>

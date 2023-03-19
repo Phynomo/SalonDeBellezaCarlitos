@@ -1617,6 +1617,19 @@ END
 
 GO
 
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbSucursalesVW_Buscar
+@sucu_Id int
+AS
+BEGIN
+
+
+SELECT * FROM salo.VW_tbSucursales_View
+WHERE sucu_Id = @sucu_Id
+
+END
+
+GO
 
 
 CREATE OR ALTER PROCEDURE salo.UDP_tbSucursales_Insert
@@ -1673,11 +1686,16 @@ UPDATE [salo].[tbSucursales]
       ,[sucu_UsuarioModificacion] = @sucu_UsuarioModificacion
  WHERE sucu_Id = @sucu_Id
 
+
+SELECT 1 as Proceso
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
 END CATCH
 END
+GO
+
+
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbSucuesales_Delete
 @sucu_Id        INT
@@ -1688,6 +1706,9 @@ BEGIN TRY
 UPDATE [salo].[tbSucursales]
    SET sucu_Estado = 0
  WHERE sucu_Id = @sucu_Id
+
+ 
+SELECT 1 as Proceso
 
 END TRY
 BEGIN CATCH
@@ -3181,4 +3202,43 @@ VALUES (8, 6, GETDATE(), 1, NULL, NULL, 1);
 
 
 
---view 
+--Triggers
+
+go
+
+CREATE TRIGGER trg_AumentarStockluegoBorrar
+   ON  [salo].[tbFacturasDetalles]
+   AFTER Delete
+AS 
+BEGIN
+	
+
+	DECLARE @NuevoStock int = (select t1.prod_Stock from salo.[tbProductos] as t1 WHERE t1.prod_Id = (select t1.prod_Id from deleted as t1)) + (select t1.fade_Cantidad from deleted as t1 WHERE t1.prod_Id = (select t1.prod_Id from deleted as t1))
+
+UPDATE [salo].[tbProductos]
+   SET [prod_Stock] = @NuevoStock
+ WHERE prod_Id = (select t1.prod_Id from deleted as t1)
+
+
+END
+GO
+go
+
+CREATE TRIGGER trg_DisminuirStock
+   ON  [salo].[tbFacturasDetalles]
+   AFTER INSERT
+AS 
+BEGIN
+	
+
+
+	DECLARE @NuevoStock int = (select top(1) T1.[prod_Stock] from [salo].[tbProductos] as T1 WHERE T1.prod_Id = (select top(1) T1.prod_Id from inserted as T1)) - (select top(1) T1.[fade_Cantidad] from inserted as T1 WHERE T1.prod_Id = (select top(1) T1.prod_Id from inserted as T1))
+
+UPDATE [salo].[tbProductos]
+   SET [prod_Stock] = @NuevoStock
+ WHERE prod_Id in (select t1.prod_Id from inserted as t1)
+
+
+END
+GO
+go

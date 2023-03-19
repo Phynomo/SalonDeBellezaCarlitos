@@ -56,7 +56,6 @@ function AbrirModalEdit(cadena) {
 
 function GuardarModalEdit() {
     var carg_Descripcion = $('#carg_Descripcion_Edit').val();
-    console.log('hola');
 
     $("#lbl_DescripcionEditError").attr('hidden', true);
 
@@ -65,7 +64,6 @@ function GuardarModalEdit() {
 
     } else {
         $("#lbl_DescripcionEditError").attr('hidden', false);
-        console.log('holperra');
     }
 
 }

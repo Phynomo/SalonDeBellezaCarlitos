@@ -1501,6 +1501,14 @@
                     }
                 },
             });
+
+
+            $('input').keypress(function (e) {
+                if (e.which == 39 || e.which == 34 || e.which == 44) { // Código ASCII para ' " y ,
+                    return false; // Bloquear la entrada del caracter
+                }
+            });
+
         });
     </script>
 
