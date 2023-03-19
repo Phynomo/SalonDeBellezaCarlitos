@@ -26,7 +26,7 @@ CREATE TABLE acce.tbUsuarios(
 
 CREATE TABLE gnrl.tbMetodoPago(
     metp_Id                         INT IDENTITY(1,1) not null,
-    metp_Descripcion                NVARCHAR (100) NOT NULL,
+    metp_Descripcion                NVARCHAR (100) NOT NULL UNIQUE,
 	metp_FechaCreacion		        DATETIME NOT NULL DEFAULT GETDATE(),
 	metp_UsuarioCreacion		    INT not null,
 	metp_FechaModificacion	        DATETIME,
@@ -182,7 +182,7 @@ CONSTRAINT FK_salo_tbCategoria_acce_tbUsuarios_cate_UsuarioModificacion_usur_Id 
 
 CREATE TABLE salo.tbProductos(
     prod_Id			                    INT IDENTITY(1,1),
-    prod_Nombre		                    NVARCHAR (200) NOT NULL,
+    prod_Nombre		                    NVARCHAR (200) NOT NULL UNIQUE,
     prod_Precio		                    DECIMAL (18,2) NOT NULL,
     cate_Id			                    INT not null,
     prod_Stock		                    INT not null,
@@ -222,7 +222,7 @@ CONSTRAINT FK_salo_tbClientes_acce_tbUsuarios_clie_UsuarioModificacion_usur_Id F
 
 CREATE TABLE salo.tbServicios(
     serv_Id                         INT IDENTITY(1,1),
-    serv_Nombre                     NVARCHAR(150) NOT NULL,
+    serv_Nombre                     NVARCHAR(150) NOT NULL unique,
     serv_Descripcion                NVARCHAR(500) ,
     serv_Precio                     DECIMAL(18,2) NOT NULL,
     serv_FechaCreacion				DATETIME NOT NULL DEFAULT GETDATE(),
@@ -651,26 +651,40 @@ BEGIN
 BEGIN TRY
 Declare @Password Nvarchar(max) = (HASHBYTES('SHA2_512',@usur_Contrasenia))
 
-INSERT INTO [acce].[tbUsuarios]
-           ([usur_Usuario]
-           ,[usur_Contrasenia]
-           ,[empl_Id]
-           ,[usur_UsuarioCreacion]
-           ,[usur_FechaCreacion]
-           ,[usur_UsuarioModificacion]
-           ,[usur_FechaModificacion]
-           ,[usur_Estado])
-     VALUES
-           (@usur_Usuario
-           ,@Password
-           ,@empl_Id
-           ,@usur_UsuarioCreacion
-           ,GetDate()
-           ,null
-           ,null
-           ,1)
+IF NOT EXISTS (select * from acce.tbUsuarios
+				WHERE usur_Usuario = @usur_Usuario AND empl_Id = @empl_Id)
+				BEGIN
+				INSERT INTO [acce].[tbUsuarios]
+							   ([usur_Usuario]
+							   ,[usur_Contrasenia]
+							   ,[empl_Id]
+							   ,[usur_UsuarioCreacion]
+							   ,[usur_FechaCreacion]
+							   ,[usur_UsuarioModificacion]
+							   ,[usur_FechaModificacion]
+							   ,[usur_Estado])
+						 VALUES
+							   (@usur_Usuario
+							   ,@Password
+							   ,@empl_Id
+							   ,@usur_UsuarioCreacion
+							   ,GetDate()
+							   ,null
+							   ,null
+							   ,1)
 
-SELECT 1 as Proceso
+					SELECT 1 as Proceso
+				END
+ELSE IF EXISTS	(select * from acce.tbUsuarios
+				WHERE usur_Usuario = @usur_Usuario AND empl_Id = @empl_Id AND usur_Estado = 1)
+				SELECT 0 AS Proceso
+ELSE
+	UPDATE acce.tbUsuarios
+	set usur_Estado = 1,
+		usur_Contrasenia = @Password
+	WHERE usur_Usuario = @usur_Usuario AND empl_Id = @empl_Id
+	SELECT 1 as PROCESO
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -1127,6 +1141,10 @@ AS
 BEGIN
 BEGIN TRY
 
+IF NOT EXISTS (SELECT * FROM salo.tbCategorias
+				WHERE cate_Descripcion = @cate_Descripcion)		
+BEGIN
+
 INSERT INTO [salo].tbCategorias
            ([cate_Descripcion]
            ,[cate_FechaCreacion]
@@ -1143,6 +1161,22 @@ INSERT INTO [salo].tbCategorias
            ,1)
 
 SELECT 1 as Proceso
+
+END
+ELSE IF EXISTS (SELECT * FROM salo.tbCategorias
+				WHERE cate_Descripcion = @cate_Descripcion AND cate_Estado = 1)
+SELECT 0 as Proceso
+ELSE 
+BEGIN
+
+UPDATE salo.tbCategorias
+SET cate_Estado = 1
+WHERE cate_Descripcion = @cate_Descripcion
+
+SELECT 1 as Proceso
+
+END
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -1251,6 +1285,10 @@ AS
 BEGIN
 BEGIN TRY
 
+IF NOT EXISTS (SELECT * FROM salo.tbCargos
+				WHERE carg_Descripcion = @carg_Descripcion)
+BEGIN
+
 INSERT INTO [salo].[tbCargos]
            ([carg_Descripcion]
            ,[carg_FechaCreacion]
@@ -1267,6 +1305,16 @@ INSERT INTO [salo].[tbCargos]
            ,1)
 
 SELECT 1 as Proceso
+
+END
+ELSE IF EXISTS (SELECT * FROM salo.tbCargos
+				WHERE carg_Descripcion = @carg_Descripcion AND carg_Estado = 1)
+SELECT 0 as Proceso
+ELSE
+UPDATE salo.tbCargos
+SET carg_Estado = 1
+WHERE carg_Descripcion = @carg_Descripcion
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -1275,7 +1323,7 @@ END CATCH
 
 END
 GO
-EXEC salo.UDP_tbCargos_Insert 'lupa', 1
+--EXEC salo.UDP_tbCargos_Insert 'lupa', 1
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbCargos_Update
 	@carg_Id INT,
@@ -1374,6 +1422,10 @@ AS
 BEGIN
 BEGIN TRY
 
+IF NOT EXISTS (SELECT * FROM salo.tbServicios
+				WHERE serv_Nombre = @serv_Nombre)
+BEGIN 
+
 INSERT INTO [salo].[tbServicios]
            ([serv_Nombre]
            ,[serv_Descripcion]
@@ -1394,12 +1446,23 @@ INSERT INTO [salo].[tbServicios]
            ,1)
 
 SELECT 1 as Proceso
+END
+ELSE IF EXISTS (SELECT * FROM salo.tbServicios
+				WHERE serv_Nombre = @serv_Nombre AND serv_Estado = 1)
+				SELECT 0 as Proceso
+ELSE
+UPDATE salo.tbServicios
+SET serv_Estado = 1
+	,serv_Descripcion = @serv_Descripcion
+	,serv_Precio = @serv_Precio
+WHERE serv_Nombre = @serv_Nombre
+
+SELECT 1 as Proceso
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
 END CATCH
-
-
 END
 GO
 
@@ -1498,7 +1561,10 @@ AS
 BEGIN
 BEGIN TRY
 
-    INSERT INTO salo.tbProductos ([prod_Nombre], 
+IF NOT EXISTS (SELECT * FROM salo.tbProductos
+				WHERE prod_Nombre = @prod_Nombre)
+BEGIN 
+INSERT INTO salo.tbProductos ([prod_Nombre], 
                             [prod_Precio], 
                             [cate_Id],  
                             [prov_Id], 
@@ -1520,6 +1586,22 @@ BEGIN TRY
             1);
 
 SELECT 1 as Proceso
+END
+ELSE IF EXISTS (SELECT * FROM salo.tbProductos
+				WHERE prod_Nombre = @prod_Nombre and prod_Estado = 1)
+SELECT 0 as Proceso
+ELSE
+UPDATE salo.tbProductos
+SET prod_Estado = 1
+	,prod_Precio = @prod_Precio
+	,prod_Stock = @prod_Stock
+	,prov_id = @prov_Id
+	,cate_Id = @cate_Id
+	WHERE prod_Nombre = @prod_Nombre
+    
+	
+SELECT 1 as Proceso
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -1888,7 +1970,7 @@ END
 
 GO
 
-CREATE PROCEDURE gnrl.UDP_tbMetodoPago_Insert
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbMetodoPago_Insert
 (
     @metp_Descripcion             NVARCHAR (100),
     @metp_UsuarioCreacion         INT
@@ -1896,6 +1978,10 @@ CREATE PROCEDURE gnrl.UDP_tbMetodoPago_Insert
 AS
 BEGIN
 BEGIN TRY
+
+IF NOT EXISTS (SELECT * FROM gnrl.tbMetodoPago
+				WHERE @metp_Descripcion = metp_Descripcion)
+BEGIN
 
 INSERT INTO gnrl.tbMetodoPago ( [metp_Descripcion], 
                                 [metp_FechaCreacion], 
@@ -1911,6 +1997,16 @@ INSERT INTO gnrl.tbMetodoPago ( [metp_Descripcion],
             1);
 
 SELECT 1 as Proceso
+END
+ELSE IF EXISTS (SELECT * FROM gnrl.tbMetodoPago
+				WHERE @metp_Descripcion = metp_Descripcion and metp_Estado = 1)
+SELECT 0 as Proceso
+ELSE
+UPDATE gnrl.tbMetodoPago
+SET metp_Estado = 1
+WHERE @metp_Descripcion = metp_Descripcion
+SELECT 1 as Proceso
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -2008,6 +2104,10 @@ as
 begin
 BEGIN TRY
 
+IF NOT EXISTS (SELECT * FROM gnrl.tbEstadosCiviles
+				WHERE estc_Descripcion = @estc_Descripcion)
+BEGIN
+
 INSERT INTO [gnrl].[tbEstadosCiviles]
            ([estc_Descripcion]
            ,[estc_FechaCreacion]
@@ -2024,6 +2124,15 @@ INSERT INTO [gnrl].[tbEstadosCiviles]
            ,1)
 
 SELECT 1 as Proceso
+END
+ELSE IF EXISTS (SELECT * FROM gnrl.tbEstadosCiviles
+				WHERE estc_Descripcion = @estc_Descripcion and estc_Estado = 1)
+SELECT 0 as Proceso
+ELSE 
+UPDATE gnrl.tbEstadosCiviles
+SET estc_Estado = 1
+WHERE estc_Descripcion = @estc_Descripcion
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -2138,7 +2247,9 @@ AS
 BEGIN
 BEGIN TRY
 
-
+IF NOT EXISTS (SELECT * FROM gnrl.tbDepartamentos
+				WHERE @depa_Descripcion = depa_Descripcion AND @depa_Codigo = depa_Codigo)
+BEGIN
     INSERT INTO gnrl.tbDepartamentos(   [depa_Descripcion], 
                                         depa_Codigo, 
                                         [depa_FechaCreacion], 
@@ -2154,6 +2265,16 @@ BEGIN TRY
             NULL, 
             1);
 
+SELECT 1 as Proceso
+
+END
+ELSE IF EXISTS (SELECT * FROM gnrl.tbDepartamentos
+				WHERE @depa_Descripcion = depa_Descripcion AND @depa_Codigo = depa_Codigo AND depa_Estado = 1)
+SELECT 0 as Proceso
+ELSE
+UPDATE gnrl.tbDepartamentos
+SET depa_Estado = 1
+WHERE @depa_Descripcion = depa_Descripcion AND @depa_Codigo = depa_Codigo
 SELECT 1 as Proceso
 END TRY
 BEGIN CATCH
@@ -2261,6 +2382,10 @@ as
 begin
 BEGIN TRY
 
+IF NOT EXISTS (SELECT * FROM gnrl.tbMunicipios
+				WHERE muni_Codigo = @muni_Codigo and @muni_Descripcion = muni_Descripcion)
+BEGIN
+
 INSERT INTO [gnrl].[tbMunicipios]
            ([muni_Descripcion]
 		   ,muni_Codigo
@@ -2280,6 +2405,19 @@ INSERT INTO [gnrl].[tbMunicipios]
            ,NULL
            ,1)
 
+SELECT 1 as Proceso
+
+END
+ELSE IF EXISTS (SELECT * FROM gnrl.tbMunicipios
+				WHERE muni_Codigo = @muni_Codigo and @muni_Descripcion = muni_Descripcion and muni_Estado = 1)
+SELECT 0 as Proceso
+ELSE 
+UPDATE gnrl.tbMunicipios
+SET muni_Estado = 1
+	,depa_Id = @depa_Id 
+	WHERE muni_Codigo = @muni_Codigo and @muni_Descripcion = muni_Descripcion
+
+	
 SELECT 1 as Proceso
 END TRY
 BEGIN CATCH
@@ -2889,6 +3027,9 @@ BEGIN
 
 BEGIN TRY
 
+IF NOT EXISTS (SELECT * FROM salo.tbProveedores
+				WHERE @prov_NombreEmpresa = prov_NombreEmpresa)
+BEGIN
 
 INSERT INTO [salo].[tbProveedores]
            ([prov_NombreEmpresa]
@@ -2915,6 +3056,22 @@ INSERT INTO [salo].[tbProveedores]
 
 
 SELECT 1 as Proceso
+END
+ELSE IF  EXISTS (SELECT * FROM salo.tbProveedores
+				WHERE @prov_NombreEmpresa = prov_NombreEmpresa and prov_Estado = 1)
+SELECT 0 as Proceso
+ELSE
+UPDATE salo.tbProveedores
+SET prov_NombreContacto = @prov_NombreContacto
+	,muni_Id = @muni_Id
+	,prov_Estado = 1
+	,prov_Telefono = @prov_Telefono
+	,prov_DireccionExacta = @prov_DireccionExacta
+	WHERE @prov_NombreEmpresa = prov_NombreEmpresa
+	
+SELECT 1 as Proceso
+
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
