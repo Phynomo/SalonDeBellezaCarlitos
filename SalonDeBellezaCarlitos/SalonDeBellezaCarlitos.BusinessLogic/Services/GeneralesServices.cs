@@ -244,6 +244,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
         }
 
+
         #endregion
 
         #region Usuarios
@@ -414,11 +415,11 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
-        public IEnumerable<tbCategorias> BuscarCategoria(int? id)
+        public tbCategorias BuscarCategoria(int? id)
         {
             try
             {
-                return _CategoriaRepository.BuscarCategoria(id);
+                return _CategoriaRepository.find(id);
             }
             catch (Exception)
             {
@@ -667,6 +668,18 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return 0;
             }
 
+        }
+
+        public IEnumerable<tbClientes> BuscarCliente(int? id)
+        {
+            try
+            {
+                return _ClientesRepository.BuscarCliente(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         #endregion
@@ -1051,6 +1064,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public tbProveedores BuscarProveedor(int? id)
+        {
+            try
+            {
+                return _ProveedoresRepository.find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         #endregion
 
         #region Metodo pago
@@ -1066,6 +1090,18 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             {
                 error = e.Message;
                 return Enumerable.Empty<tbMetodoPago>();
+            }
+        }
+
+        public tbMetodoPago findMetodo(int? id)
+        {
+            try
+            {
+                return _MetodopagoRepository.find(id);
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
 

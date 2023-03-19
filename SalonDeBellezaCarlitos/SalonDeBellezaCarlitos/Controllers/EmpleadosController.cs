@@ -177,7 +177,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             var empleado = _generalesService.BuscarEmpleados(id);
             foreach (var item in empleado)
             {
-                ViewBag.empl_Id = item.empl_Id;
+                    
                 var muni_Id = _generalesService.BuscarMunicipio(item.muni_Id);
                 var carg_Id = _generalesService.FindCargo(item.carg_Id);
                 var depa_Id = _generalesService.BuscarDepartameto(item.depa_Id);

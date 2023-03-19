@@ -1,6 +1,34 @@
 ﻿function AbrirModalCreate() {
     $("#modalCreate").appendTo('body').modal('show');
+
+    var input = document.getElementById("clie_Nombre",);
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
+
+    var input = document.getElementById("clie_Apellido",);
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
 }
+
+function soloNumeros(event) {
+    var charCode = event.keyCode || event.which;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
+}
+
 
 function GuardarModalCreate() {
     var clie_Nombre = $('#clie_Nombre').val();
@@ -36,7 +64,6 @@ function GuardarModalCreate() {
 
 function AbrirModalEdit(cadena) {
     var datastring = cadena;
-    console.log('Hola');
     var data = datastring.split(',');
     $("#clie_Id_Edit").val(data[0]);
     $("#clie_Nombre_Edit").val(data[1]);
@@ -44,6 +71,24 @@ function AbrirModalEdit(cadena) {
     $("#clie_Telefono_Edit").val(data[3]);
     $("#clie_CorreoElectronico_Edit").val(data[4]);
     $("#EditarCliente").appendTo('body').modal('show');
+
+    var input = document.getElementById("clie_Nombre_Edit",);
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
+
+    var input = document.getElementById("clie_Apellido_Edit",);
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
 };
 
 

@@ -46,30 +46,46 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/EstadosCiviles/Crear")]
         public ActionResult Create(EstadoCivilViewModel estadociv)
         {
-            var result = 0;
-            var civ = _mapper.Map<tbEstadosCiviles>(estadociv);
-            result = _generalesService.InsertarEstadoCivil(civ);
-
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return RedirectToAction("Listado");
+                var result = 0;
+                var civ = _mapper.Map<tbEstadosCiviles>(estadociv);
+                result = _generalesService.InsertarEstadoCivil(civ);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return RedirectToAction("Listado");
+                }
             }
+            catch (Exception)
+            {
+
+            }
+            
             return RedirectToAction("Listado");
         }
 
         [HttpPost("/EstadosCiviles/Eliminar")]
         public IActionResult Delete(EstadoCivilViewModel estado)
         {
-            var result = 0;
-            var est = _mapper.Map<tbEstadosCiviles>(estado);
-            result = _generalesService.EliminarEstadoCivil(est);
-
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                var result = 0;
+                var est = _mapper.Map<tbEstadosCiviles>(estado);
+                result = _generalesService.EliminarEstadoCivil(est);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return View();
+                }
             }
+            catch (Exception)
+            {
+
+            }
+            
             return RedirectToAction("Listado");
 
         }
@@ -84,15 +100,23 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/EstadosCiviles/Editar")]
         public IActionResult Edit(EstadoCivilViewModel estado)
         {
-            var result = 0;
-            var est = _mapper.Map<tbEstadosCiviles>(estado);
-            result = _generalesService.EditarEstadoCivil(est);
-
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                var result = 0;
+                var est = _mapper.Map<tbEstadosCiviles>(estado);
+                result = _generalesService.EditarEstadoCivil(est);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return View();
+                }
             }
+            catch (Exception)
+            {
+
+            }
+            
             return RedirectToAction("Listado");
 
         }
@@ -100,9 +124,17 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/EstadoCivil/Detalles")]
         public IActionResult Details(int? id)
         {
-            var servicio = _generalesService.BuscarEstadoCivil_IEnumerable(id);
-            var servicioMapeado = _mapper.Map<IEnumerable<EstadoCivilViewModel>>(servicio);
-            return View(servicioMapeado);
+            try
+            {
+                var servicio = _generalesService.BuscarEstadoCivil_IEnumerable(id);
+                var servicioMapeado = _mapper.Map<IEnumerable<EstadoCivilViewModel>>(servicio);
+                return View(servicioMapeado);
+            }
+            catch (Exception)
+            {
+
+            }
+            return RedirectToAction("Listado");
         }
 
     }

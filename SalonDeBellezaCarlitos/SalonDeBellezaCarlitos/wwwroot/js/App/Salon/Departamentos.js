@@ -1,6 +1,15 @@
 ﻿function AbrirModalCreate()
 {
     $("#modalCreate").appendTo('body').modal('show');
+
+    var input = document.getElementById("depa_Descripcion",);
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
 }
 
 function GuardarModalCreate() {
@@ -24,6 +33,15 @@ function GuardarModalCreate() {
 
 }
 
+function soloNumeros(event) {
+    var charCode = event.keyCode || event.which;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
+}
+
 function AbrirModalEdit(cadena) {
     var datastring = cadena;
     var data = datastring.split(',');
@@ -31,6 +49,15 @@ function AbrirModalEdit(cadena) {
     $("#depa_Descripcion_Edit").val(data[1]);
     $("#depa_Codigo_Edit").val(data[2]);
     $("#EditarDepartamento").appendTo('body').modal('show');
+
+    var input = document.getElementById("depa_Descripcion_Edit",);
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
 };
 
 

@@ -5,8 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>tbProductos</h4>
+<h1 class="text-decoration-underline text-center">AGREGAR PRODUCTOS</h1>
 <hr />
+<br />
 <div class="row">
     <div class="col-md-12">
         <form asp-action="Create">
@@ -15,14 +16,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="prod_Nombre" class="control-label"></label>
-                        <input asp-for="prod_Nombre" class="form-control" />
+                        <input asp-for="prod_Nombre" class="form-control" id="prod_Nombre"/>
                         <span asp-validation-for="prod_Nombre" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="prod_Precio" class="control-label"></label>
-                        <input asp-for="prod_Precio" class="form-control" />
+                        <input asp-for="prod_Precio" class="form-control" id="prod_Precio" onkeypress="return soloNumeros(event)"/>
                         <span asp-validation-for="prod_Precio" class="text-danger"></span>
                     </div>
                 </div>
@@ -32,7 +33,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="cate_Id" class="control-label">Id Categoria</label>
-                        <select asp-for="cate_Id" class="form-control" asp-items="ViewBag.cate_Id">
+                        <select asp-for="cate_Id" class="form-control" id="cate_Id" asp-items="ViewBag.cate_Id">
                             <option value="">-- Selecciones una Categoria --</option>
                         </select>
                         <span asp-validation-for="cate_Id" class="text-danger" />
@@ -41,7 +42,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="prod_Stock" class="control-label"></label>
-                        <input asp-for="prod_Stock" class="form-control" />
+                        <input asp-for="prod_Stock" class="form-control" id="prod_Stock" onkeypress="return soloNumeros(event)"/>
                         <span asp-validation-for="prod_Stock" class="text-danger"></span>
                     </div>
                 </div>
@@ -51,7 +52,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="prov_id" class="control-label">Id Proveedor</label>
-                        <select asp-for="prov_id" class="form-control" asp-items="ViewBag.prov_Id">
+                        <select asp-for="prov_id" class="form-control" id="prov_id" asp-items="ViewBag.prov_Id">
                             <option value="">-- Selecciones un Proveedor --</option>
                         </select>
                     </div>
@@ -61,7 +62,7 @@
             </div>
             <div class="row d-flex justify-content-end">
                 <div class="col d-flex justify-content-end">
-                    <input type="submit" value="Create" class="btn btn-primary mx-1" />
+                    <input type="submit" value="Guardar" class="btn btn-primary mx-1" />
                     <a class="btn btn-dark" asp asp-action="Index">Regresar</a>
                 </div>
             </div>
@@ -69,4 +70,22 @@
     </div>
 </div>
 
+<script>
+    var input = document.getElementById("prod_Nombre",);
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
 
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
+
+    function soloNumeros(event) {
+        var charCode = event.keyCode || event.which;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            event.preventDefault();
+            return false;
+        }
+        return true;
+    }
+</script>

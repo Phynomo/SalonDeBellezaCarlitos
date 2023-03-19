@@ -748,6 +748,30 @@ SELECT [clie_Id]
 END
 
 GO
+
+CREATE OR ALTER PROCEDURE salo.UDP_tbClientes_Buscar
+	@clie_Id	INT
+AS
+BEGIN
+
+SELECT [clie_Id]
+      ,[clie_Nombre]
+      ,[clie_Apellido]
+      ,[clie_Telefono]
+      ,[clie_CorreoElectronico]
+      ,[clie_FechaCreacion]
+      ,[clie_UsuarioCreacion]
+      ,[clie_FechaModificacion]
+      ,[clie_UsuarioModificacion]
+      ,[clie_Estado]
+  FROM [salo].[tbClientes]
+  WHERE clie_Estado = 1
+  AND	clie_Id = @clie_Id
+
+END
+
+GO
+
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbClientes_Insert
     @clie_Nombre NVARCHAR(100),

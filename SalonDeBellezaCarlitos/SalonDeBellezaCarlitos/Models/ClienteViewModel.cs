@@ -11,7 +11,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
 
         [Display(Name = "Id")]
         public int clie_Id { get; set; }
-        [Display(Name = "Nobre")]
+        [Display(Name = "Nombre")]
         [Required(ErrorMessage = "El campo {0} es necesario!")]
         public string clie_Nombre { get; set; }
         [Display(Name = "Apellido")]

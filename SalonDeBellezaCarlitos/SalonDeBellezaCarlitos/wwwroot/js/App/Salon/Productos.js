@@ -4,7 +4,23 @@
     $("#EliminarProducto").appendTo('body').modal('show');
 };
 
+var input = document.getElementById("prod_Nombre",);
+input.addEventListener("keydown", function (event) {
+    var key = event.key;
 
+    if (!isNaN(parseFloat(key)) && isFinite(key)) {
+        event.preventDefault();
+    }
+});
+
+function soloNumeros(event) {
+    var charCode = event.keyCode || event.which;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
+}
 
 function GuardarModalDelete() {
     var prod_Descripcion = $('#prod_Id_Delete').val();

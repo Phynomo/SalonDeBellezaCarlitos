@@ -1,5 +1,14 @@
 ﻿function AbrirModalCreate() {
     $("#modalCreate").appendTo('body').modal('show');
+
+    var input = document.getElementById("cate_Descripcion");
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
 }
 
 function GuardarModalCreate() {
@@ -24,6 +33,15 @@ function AbrirModalEdit(cadena) {
     $("#cate_Id_Edit").val(data[0]);
     $("#cate_Descripcion_Edit").val(data[1]);
     $("#EditarCategoria").appendTo('body').modal('show');
+
+    var input = document.getElementById("cate_Descripcion_Edit");
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
 };
 
 

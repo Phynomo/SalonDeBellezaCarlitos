@@ -34,7 +34,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label asp-for="clie_Telefono" class="control-label"></label>
-                                <input asp-for="clie_Telefono" class="form-control" id="clie_Telefono_Edit" name="clie_Telefono" />
+                                <input asp-for="clie_Telefono" class="form-control" id="clie_Telefono_Edit" name="clie_Telefono" onkeypress="return soloNumeros(event)"/>
                                 <label name="lbl_TelefonoEditError" id="lbl_TelefonoEditError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                             </div>
                         </div>

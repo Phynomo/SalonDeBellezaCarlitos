@@ -34,7 +34,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label asp-for="serv_Precio" class="control-label"></label>
-                                <input asp-for="serv_Precio" class="form-control" id="serv_Precio_Edit" name="serv_Precio" />
+                                <input asp-for="serv_Precio" class="form-control" id="serv_Precio_Edit" name="serv_Precio" onkeypress="return soloNumeros(event)"/>
                                 <label name="lbl_PrecioEditError" id="lbl_PrecioEditError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                             </div>
                         </div>

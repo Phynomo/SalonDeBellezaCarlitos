@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.ProductoViewModel>
 
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +8,7 @@
 
 <div class="row text-center">
     <div class="col">
-        <h1>Productos</h1>
+        <h1 class="text-decoration-underline text-center">LISTADO PRODUCTOS</h1>
         <hr />
     </div>
 </div>
@@ -29,15 +30,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.prod_Stock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.prod_FechaCreacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.prod_FechaModificacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.prod_Estado)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.cate_Id)
@@ -62,24 +54,15 @@
                     @Html.DisplayFor(modelItem => item.prod_Stock)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.prod_FechaCreacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.prod_FechaModificacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.prod_Estado)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.cate_Id)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.prov_id)
                 </td>
-                <td>
-                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.prod_Id">Editar</a> |
-                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.prod_Id">Detalles</a> |
-                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.prod_Id')">Eliminar</button>
+                <td class="text-end">
+                    <a style="padding-top: 1.0%; font-size: 10px; height:25px;" class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.prod_Id">Editar</a> |
+                    <a style="padding-top: 1.0%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.prod_Id">Detalles</a> |
+                    <button style="padding-top: 1.0%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.prod_Id')">Eliminar</button>
                 </td>
             </tr>
         }

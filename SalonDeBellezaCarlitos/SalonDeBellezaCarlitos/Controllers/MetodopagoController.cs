@@ -1,5 +1,6 @@
 ﻿    using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
 using SalonDeBellezaCarlitos.Entities.Entities;
 using SalonDeBellezaCarlitos.WebUI.Models;
@@ -47,15 +48,23 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Metodopago/Crear")]
         public ActionResult Create(MetodoPagoViewModel Metodopagos)
         {
-            var result = 0;
-            var met = _mapper.Map<tbMetodoPago>(Metodopagos);
-            result = _generalesService.InsertarMetodoPago(met);
-
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                var result = 0;
+                var met = _mapper.Map<tbMetodoPago>(Metodopagos);
+                result = _generalesService.InsertarMetodoPago(met);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return View();
+                }
             }
+            catch (Exception)
+            {
+                
+            }
+            
             return RedirectToAction("Listado");
         }
 
@@ -70,30 +79,47 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Metodopago/Eliminar")]
         public IActionResult Delete(MetodoPagoViewModel Metodopago)
         {
-            var result = 0;
-            var met = _mapper.Map<tbMetodoPago>(Metodopago);
-            result = _generalesService.EliminarMetodoPago(met);
 
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                var result = 0;
+                var met = _mapper.Map<tbMetodoPago>(Metodopago);
+                result = _generalesService.EliminarMetodoPago(met);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return View();
+                }
             }
+            catch (Exception)
+            {
+
+            }
+            
             return RedirectToAction("Listado");
 
         }
         [HttpPost("/Metodopago/Editar")]
         public IActionResult Edit(MetodoPagoViewModel metodo)
         {
-            var result = 0;
-            var met = _mapper.Map<tbMetodoPago>(metodo);
-            result = _generalesService.EditarMetodoPago(met);
-
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                var result = 0;
+                var met = _mapper.Map<tbMetodoPago>(metodo);
+                result = _generalesService.EditarMetodoPago(met);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return View();
+                }
             }
+            catch (Exception)
+            {
+
+            }
+
             return RedirectToAction("Listado");
 
         }
@@ -101,9 +127,18 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Metodopago/Detalles")]
         public IActionResult Details(int? id)
         {
-            var servicio = _generalesService.BuscarMetodoPago(id);
-            var servicioMapeado = _mapper.Map<IEnumerable<MetodoPagoViewModel>>(servicio);
-            return View(servicioMapeado);
+            try
+            {
+                var servicio = _generalesService.BuscarMetodoPago(id);
+                var servicioMapeado = _mapper.Map<IEnumerable<MetodoPagoViewModel>>(servicio);
+                return View(servicioMapeado);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return RedirectToAction("Listado");
         }
 
 

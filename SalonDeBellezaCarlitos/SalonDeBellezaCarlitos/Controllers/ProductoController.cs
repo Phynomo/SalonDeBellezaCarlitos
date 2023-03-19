@@ -27,7 +27,6 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Producto/Listado")]
         public IActionResult Index()
         {
-
             var listado = _generalesService.ListadoProductos(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<ProductoViewModel>>(listado);
 
@@ -115,21 +114,36 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public IActionResult Details(int? id)
         {
             var producto = _generalesService.BuscarProducto(id);
-            var servicioMapeado = _mapper.Map<IEnumerable<ProductoViewModel>>(producto);
             foreach (var item in producto)
-            {
-                ViewBag.prov_Id = new SelectList(_generalesService.ListadoProveedores(out string error2).ToList(), "prov_Id", "prov_NombreContacto");
+            {   
+                ViewBag.prod_Id = item.prod_Id;
+                var cate_Id = _generalesService.BuscarCategoria(item.cate_Id);
+                var prov_Id = _generalesService.BuscarProveedor(item.prov_id);
+
+                ViewBag.cate_Id = cate_Id.cate_Descripcion;
+                ViewBag.prov_Id = prov_Id.prov_NombreContacto;
 
                 ViewBag.prod_Id = item.prod_Id;
                 ViewBag.prod_Nombre = item.prod_Nombre;
                 ViewBag.prod_Precio = item.prod_Precio;
                 ViewBag.prod_Stock = item.prod_Stock;
-            }
+                ViewBag.cate_Id = item.cate_Id;
+                ViewBag.prov_Id = item.prov_id;
 
-            //var servicio = _generalesService.BuscarProduc(id);
-            //var servicioMapeado = _mapper.Map<IEnumerable<ServicioViewModel>>(servicio);
-            //return View(servicioMapeado);
-            return View(servicioMapeado);
+                var UsuarioCreacion = _generalesService.BuscarUsuario(item.prod_UsuarioCreacion);
+                var nombreCreacion = _generalesService.findEmpleado(UsuarioCreacion.empl_Id);
+                ViewBag.UsuarioCreacion = nombreCreacion.empl_Nombre + " " + nombreCreacion.empl_Apellido;
+                ViewBag.FechaCreacion = item.prod_FechaCreacion;
+
+                if (!string.IsNullOrEmpty(item.prod_UsuarioModificacion.ToString()))
+                {
+                    var UsuarioModificacion = _generalesService.BuscarUsuario(item.prod_UsuarioModificacion);
+                    var nombreModificacion = _generalesService.findEmpleado(UsuarioModificacion.empl_Id);
+                    ViewBag.UsuarioModificacion = nombreModificacion.empl_Nombre + " " + nombreModificacion.empl_Apellido;
+                    ViewBag.FechaModificacion = item.prod_FechaModificacion;
+                }
+            }   
+            return View();
         }
     }
 }

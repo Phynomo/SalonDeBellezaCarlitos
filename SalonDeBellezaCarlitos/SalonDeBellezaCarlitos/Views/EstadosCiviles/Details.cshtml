@@ -5,30 +5,15 @@
 }
 
 
-<h1>Details</h1>
+<h1 class="text-decoration-underline text-center">DETALLE ESTADO CIVIL</h1>
 @foreach (var item in Model)
 {
     <div>
-        <h4>tbServicios</h4>
         <hr />
         <div class="row">
             <div class="col">
                 <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.estc_Descripcion)</label><br />
                 <label>@Html.DisplayFor(model => item.estc_Descripcion)</label>
-            </div>
-            <div class="col">
-                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.estc_FechaCreacion)</label><br />
-                <label>@Html.DisplayFor(model => item.estc_FechaModificacion)</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.estc_FechaModificacion)</label><br />
-                <label>@Html.DisplayFor(model => item.estc_FechaModificacion)</label>
-            </div>
-            <div class="col">
-                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.estc_Estado)</label><br />
-                <label>@Html.DisplayFor(model => item.estc_Estado)</label>
             </div>
         </div>
 
@@ -64,8 +49,8 @@
         </div>
     </div>
 
+    <hr />
     <div>
-        @*<a asp-action="Edit" asp-route-id="@Model.estc_Id">Edit</a> |*@
-        <a asp-action="Index">Back to List</a>
+        <a style="padding-top: 0.5%; font-size: 10px; height:25px;" class="btn btn-outline-dark btn-lg" asp-action="Index">Regresar a la Lista</a>
     </div>
 }

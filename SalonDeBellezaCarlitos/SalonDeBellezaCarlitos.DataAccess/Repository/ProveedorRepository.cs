@@ -49,5 +49,14 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<tbProveedores> BuscarProveedor(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@prov_Id", id, DbType.String, ParameterDirection.Input);
+            return db.Query<tbProveedores>(ScriptsDataBase.UDP_Buscar_Proveedores, parametros, commandType: CommandType.StoredProcedure);
+
+        }
     }
 }

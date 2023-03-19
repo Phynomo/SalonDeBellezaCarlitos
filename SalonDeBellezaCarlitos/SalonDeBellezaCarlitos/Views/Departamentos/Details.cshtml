@@ -6,11 +6,10 @@
 }
 
 
-<h1>Details</h1>
+<h1 class="text-decoration-underline text-center">DETALLE DEPARTAMENTO</h1>
 @foreach (var item in Model)
 {
     <div>
-        <h4>Departamentos</h4>
         <hr />
         <div class="row">
             <div class="col">
@@ -20,22 +19,6 @@
             <div class="col">
                 <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.depa_Codigo)</label><br />
                 <label>@Html.DisplayFor(model => item.depa_Codigo)</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.depa_FechaCreacion)</label><br />
-                <label>@Html.DisplayFor(model => item.depa_FechaCreacion)</label>
-            </div>
-            <div class="col">
-                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.depa_FechaModificacion)</label><br />
-                <label>@Html.DisplayFor(model => item.depa_FechaModificacion)</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.depa_Estado)</label><br />
-                <label>@Html.DisplayFor(model => item.depa_Estado)</label>
             </div>
         </div>
 
@@ -68,9 +51,9 @@
             </div>
         </div>
     </div>
+    <hr />
     <div>
-        @*<a asp-action="Edit" asp-route-id="@Model.depa_Id">Edit</a>*@ |
-        <a asp-action="Index">Back to List</a>
+        <a style="padding-top: 0.5%; font-size: 10px; height:25px;" class="btn btn-outline-dark btn-lg" asp-action="Index">Regresar a la Lista</a>
     </div>
 }
 

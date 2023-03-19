@@ -7,7 +7,7 @@
 
 <div class="row text-center">
     <div class="col">
-        <h1>Index</h1>
+        <h1 class="text-decoration-underline text-center">LISTADO CLIENTES</h1>
         <hr />
     </div>
 </div>
@@ -18,7 +18,7 @@
         <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar Un Cliente</button>
     </div>
 </div>
-<table class="table">
+<table id="example" class="table dataTable compact hover stripe" style="width: 100%;" aria-describedby="example_info">
     <thead>
         <tr>
             <th>
@@ -32,9 +32,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.clie_CorreoElectronico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.clie_FechaCreacion)
             </th>
             <th></th>
         </tr>
@@ -55,12 +52,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.clie_CorreoElectronico)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.clie_FechaCreacion)
-                </td>
-                <td>
+                <td class="text-end">
                     <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.clie_Id,@item.clie_Nombre,@item.clie_Apellido,@item.clie_Telefono,@item.clie_CorreoElectronico')">Editar</button> |
-                    <a asp-action="Details" asp-route-id="@item.clie_Id">Details</a> |
+                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.clie_Id">Detalles</a>|
                     <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.clie_Id')">Eliminar</button>
                 </td>
             </tr>

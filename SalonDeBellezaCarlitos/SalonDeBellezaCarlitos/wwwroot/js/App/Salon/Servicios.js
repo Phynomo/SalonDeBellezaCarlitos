@@ -1,6 +1,22 @@
 ﻿function AbrirModalCreate()
 {
     $("#modalCreate").appendTo('body').modal('show');
+    var input = document.getElementById("serv_Nombre",);
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
+    var input = document.getElementById("serv_Descripcion",);
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
 }
 
 function GuardarModalCreate() {
@@ -29,6 +45,15 @@ function GuardarModalCreate() {
 
 }
 
+function soloNumeros(event) {
+    var charCode = event.keyCode || event.which;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
+}
+
 function AbrirModalEdit(cadena) {
     var datastring = cadena;
     console.log(datastring);
@@ -38,6 +63,23 @@ function AbrirModalEdit(cadena) {
     $("#serv_Descripcion_Edit").val(data[2]);
     $("#serv_Precio_Edit").val(data[3]);
     $("#EditarServicio").appendTo('body').modal('show');
+
+    var input = document.getElementById("serv_Nombre_Edit",);
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });
+    var input = document.getElementById("serv_Descripcion_Edit",);
+    input.addEventListener("keydown", function (event) {
+        var key = event.key;
+
+        if (!isNaN(parseFloat(key)) && isFinite(key)) {
+            event.preventDefault();
+        }
+    });v
 };
 
 

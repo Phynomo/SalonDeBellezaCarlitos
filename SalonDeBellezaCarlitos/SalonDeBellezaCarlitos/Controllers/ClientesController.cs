@@ -38,15 +38,23 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Clientes/Crear")]
         public ActionResult Create(ClienteViewModel cliente)
         {
-            var result = 0;
-            var cli = _mapper.Map<tbClientes>(cliente);
-            result = _generalesService.InsertarCLientes(cli);
-
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return RedirectToAction("Listado");
+                var result = 0;
+                var cli = _mapper.Map<tbClientes>(cliente);
+                result = _generalesService.InsertarCLientes(cli);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return RedirectToAction("Listado");
+                }
             }
+            catch (Exception)
+            {
+
+            }
+            
             return RedirectToAction("Listado");
         }
         [HttpGet("/Clientes/Editar/{id}")]
@@ -59,15 +67,23 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Clientes/Editar")]
         public IActionResult Edit(ClienteViewModel cliente)
         {
-            var result = 0;
-            var cli = _mapper.Map<tbClientes>(cliente);
-            result = _generalesService.EditarCliente(cli);
-
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                var result = 0;
+                var cli = _mapper.Map<tbClientes>(cliente);
+                result = _generalesService.EditarCliente(cli);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return View();
+                }
             }
+            catch (Exception)
+            {
+
+            }
+            
             return RedirectToAction("Listado");
 
         }
@@ -75,17 +91,41 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Clientes/Eliminar")]
         public IActionResult Delete(ClienteViewModel cliente)
         {
-            var result = 0;
-            var cli = _mapper.Map<tbClientes>(cliente);
-            result = _generalesService.EliminarCliente(cli);
-
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                var result = 0;
+                var cli = _mapper.Map<tbClientes>(cliente);
+                result = _generalesService.EliminarCliente(cli);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return View();
+                }
             }
+            catch (Exception)
+            {
+
+            }
+            
             return RedirectToAction("Listado");
 
+        }
+
+        [HttpGet("/Clientes/Detalles")]
+        public IActionResult Details(int? id)
+        {
+            try
+            {
+                var cliente = _generalesService.BuscarCliente(id);
+                var clienteMapeado = _mapper.Map<IEnumerable<ClienteViewModel>>(cliente);
+                return View(clienteMapeado);
+            }
+            catch (Exception)
+            {
+
+            }
+            return RedirectToAction("Listado");
         }
 
     }

@@ -1,10 +1,15 @@
 ﻿using AutoMapper;
+using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
+using SalonDeBellezaCarlitos.DataAccess;
+using SalonDeBellezaCarlitos.DataAccess.Repository;
 using SalonDeBellezaCarlitos.Entities.Entities;
 using SalonDeBellezaCarlitos.WebUI.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -56,6 +61,15 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 return View();
             }
             return RedirectToAction("Listado");
+        }
+
+        public IEnumerable<tbProveedores> BuscarProveedor(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@prov_Id", id, DbType.String, ParameterDirection.Input);
+            return db.Query<tbProveedores>(ScriptsDataBase.UDP_Buscar_Proveedores, parametros, commandType: CommandType.StoredProcedure);
+
         }
 
     }

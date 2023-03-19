@@ -47,30 +47,46 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Departamentos/Crear")]
         public ActionResult Create(DepartamentoViewModel departamento)
         {
-            var result = 0;
-            var car = _mapper.Map<tbDepartamentos>(departamento);
-            result = _generalesService.InsertarDepartamento(car);
-
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                var result = 0;
+                var car = _mapper.Map<tbDepartamentos>(departamento);
+                result = _generalesService.InsertarDepartamento(car);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return View();
+                }
             }
+            catch (Exception)
+            {
+
+            }
+            
             return RedirectToAction("Listado");
         }
 
         [HttpPost("/Departamentos/Editar")]
         public IActionResult Edit(DepartamentoViewModel departamento)
         {
-            var result = 0;
-            var dep = _mapper.Map<tbDepartamentos>(departamento);
-            result = _generalesService.EditarDepartamento(dep);
-
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                var result = 0;
+                var dep = _mapper.Map<tbDepartamentos>(departamento);
+                result = _generalesService.EditarDepartamento(dep);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return View();
+                }
             }
+            catch (Exception)
+            {
+
+            }
+            
             return RedirectToAction("Listado");
 
         }
@@ -85,15 +101,23 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Departamentos/Eliminar")]
         public IActionResult Delete(DepartamentoViewModel departamento)
         {
-            var result = 0;
-            var dep = _mapper.Map<tbDepartamentos>(departamento);
-            result = _generalesService.EliminarDepartamento(dep);
-
-            if (result == 0)
+            try
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                var result = 0;
+                var dep = _mapper.Map<tbDepartamentos>(departamento);
+                result = _generalesService.EliminarDepartamento(dep);
+
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                    return View();
+                }
             }
+            catch (Exception)
+            {
+
+            }
+            
             return RedirectToAction("Listado");
 
         }
@@ -101,9 +125,17 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Departamentos/Detalles")]
         public IActionResult Details(int? id)
         {
-            var servicio = _generalesService.BuscarDepartameto(id);
-            var servicioMapeado = _mapper.Map<IEnumerable<DepartamentoViewModel>>(servicio);
-            return View(servicioMapeado);
+            try
+            {
+                var servicio = _generalesService.BuscarDepartameto(id);
+                var servicioMapeado = _mapper.Map<IEnumerable<DepartamentoViewModel>>(servicio);
+                return View(servicioMapeado);
+            }
+            catch (Exception)
+            {
+
+            }
+            return RedirectToAction("Listado");
         }
     }
 }

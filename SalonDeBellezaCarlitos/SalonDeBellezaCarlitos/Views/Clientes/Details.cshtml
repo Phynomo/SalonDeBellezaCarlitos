@@ -1,19 +1,33 @@
-﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.CategoriaViewModel>
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.ClienteViewModel>
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-decoration-underline text-center">DETALLE CATEGORIA</h1>
+<h1 class="text-decoration-underline text-center">DETALLE CLIENTE</h1>
 @foreach (var item in Model)
 {
 <div>
     <hr />
     <div class="row">
         <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.cate_Descripcion)</label><br />
-            <label>@Html.DisplayFor(model => item.cate_Descripcion)</label>
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.clie_Nombre)</label><br />
+            <label>@Html.DisplayFor(model => item.clie_Nombre)</label>
+        </div>
+        <div class="col">
+            <label class="text-black font-weight-bold"> @Html.DisplayNameFor(model => model.clie_Apellido)</label><br />
+            <label> @Html.DisplayFor(model => item.clie_Apellido)</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.clie_Telefono)</label><br />
+            <label>@Html.DisplayFor(model => item.clie_Telefono)</label>
+        </div>
+        <div class="col">
+            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.clie_CorreoElectronico)</label><br />
+            <label>@Html.DisplayFor(model => item.clie_CorreoElectronico)</label>
         </div>
     </div>
 

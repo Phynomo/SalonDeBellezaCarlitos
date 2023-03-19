@@ -7,28 +7,21 @@
 
 <div class="row text-center">
     <div class="col">
-        <h1>Index</h1>
+        <h1 class="text-decoration-underline text-center">LISTADO ESTADOS CIVILES</h1>
         <hr />
     </div>
 </div>
 
 <div class="row mb-3 text-center">
     <div class="col">
-        @*<a asp-action="Create">Create New</a>*@
         <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar Un Estado Civil</button>
     </div>
 </div>
-<table class="table">
+<table id="example" class="table dataTable compact hover stripe" style="width: 100%;" aria-describedby="example_info">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.estc_Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.estc_FechaCreacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.estc_FechaModificacion)
             </th>
             <th></th>
         </tr>
@@ -40,16 +33,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.estc_Descripcion)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estc_FechaCreacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estc_FechaModificacion)
-                </td>
-                <td>
-                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.estc_Id,@item.estc_Descripcion')">Editar</button> |
-                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.estc_Id">Details</a> |
-                    <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.estc_Id')">Delete</button>
+                <td class="text-end">
+                    <button style="padding-top: 1.0%; font-size: 10px; height:25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.estc_Id,@item.estc_Descripcion')">Editar</button> |
+                    <a style="padding-top: 1.0%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.estc_Id">Details</a> |
+                    <button style="padding-top: 1.0%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.estc_Id')">Delete</button>
                 </td>
             </tr>
         }
