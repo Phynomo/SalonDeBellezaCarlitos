@@ -13,7 +13,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
         [Display(Name = "Descripción")]
         [Required(ErrorMessage = "El Campo {0} es necesario!")]
         public string sucu_Descripcion { get; set; }
-        [Display(Name = "Id Municipio")]
+        [Display(Name = "Municipio")]
         [Required(ErrorMessage = "El Campo {0} es necesario!")]
         public int? muni_Id { get; set; }
         [Display(Name = "Dirección Exacta")]
@@ -29,5 +29,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
         public int? sucu_UsuarioModificacion { get; set; }
         [Display(Name = "Estado")]
         public bool? sucu_Estado { get; set; }
+        [Display(Name = "Departamento")]
+        public int depa_Id { get; set; }
     }
 }

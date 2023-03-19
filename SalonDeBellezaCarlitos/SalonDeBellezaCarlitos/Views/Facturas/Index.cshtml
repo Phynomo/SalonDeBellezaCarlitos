@@ -1,26 +1,31 @@
 ﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWFacturasViewModel>
 
+<input type="hidden" value="@ViewBag.Toast" id="toast" />
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row text-center">
+    <div class="col">
+        <h1>Facturas</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row mb-3 text-center">
+    <div class="col">
+        <a class="btn btn-primary" asp-action="Create">Comenzar factura</a>
+        @*<button class="btn btn-primary" onclick="AbrirModalCreate()">Crear un nuevo cargo</button>*@
+    </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.fact_Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.clie_Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.clie_Apellido)
+                <label>Nombre del cliente</label>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NombreCaja)
@@ -31,7 +36,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.metp_Descripcion)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.fact_Fecha)
+            </th>
+            <th>Accion</th>
         </tr>
     </thead>
     <tbody>
@@ -39,13 +47,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.fact_Fecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.clie_Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.clie_Apellido)
+                    @Html.DisplayFor(modelItem => item.clie_Nombre) @Html.DisplayFor(modelItem => item.clie_Apellido)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NombreCaja)
@@ -57,7 +59,11 @@
                     @Html.DisplayFor(modelItem => item.metp_Descripcion)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.fact_Id">Details</a>
+                    @Html.DisplayFor(modelItem => item.fact_Fecha)
+                </td>
+                <td>
+                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.fact_Id">Editar</a>
+                    <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.fact_Id">Detalles</a>
                 </td>
             </tr>
         }

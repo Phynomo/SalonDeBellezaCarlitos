@@ -30,6 +30,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Extensions
             CreateMap<VWMunicipiosViewModel, VW_tbMunicipios_View>().ReverseMap();
             CreateMap<VWFacturasViewModel, VW_tbFacturas_Listado>().ReverseMap();
             CreateMap<VWFacturaDetallesViewModel, VW_tbFacturaDetalle_View>().ReverseMap();
+            CreateMap<VWSucursalesViewModel, VW_tbSucursales_View>().ReverseMap();
+            CreateMap<VWReservacionesViewModel, VW_tbReservaciones_View>().ReverseMap();
+            CreateMap<VWUsuariosViewModel, VW_tbUsuarios_View>().ReverseMap();
         }
     }
 }

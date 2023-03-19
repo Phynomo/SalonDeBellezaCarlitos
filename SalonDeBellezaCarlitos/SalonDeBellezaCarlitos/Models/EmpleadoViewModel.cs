@@ -42,6 +42,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
         [Display(Name = "Cargo")]
         [Required(ErrorMessage = "El campo {0} es necesario!")]
         public int carg_Id { get; set; }
+        [Display(Name = "Sucursal")]
+        [Required(ErrorMessage = "El campo {0} es necesario!")]
+        public int sucu_Id { get; set; }
         [Display(Name = "Fecha Creacion")]
         public DateTime empl_FechaCreacion { get; set; }
         [Display(Name = "Usuario Creacion")]

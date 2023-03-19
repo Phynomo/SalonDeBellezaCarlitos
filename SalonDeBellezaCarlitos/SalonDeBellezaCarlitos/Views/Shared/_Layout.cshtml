@@ -23,6 +23,9 @@
 
     <!-- Premium solid icons [ OPTIONAL ] -->
     <link rel="stylesheet" href="~/premium/icon-sets/icons/solid-icons/premium-solid-icons.min.css">
+    
+    
+    <link rel="stylesheet" href="~/css/toastr/toastr.min.css">
 
 
 </head>
@@ -527,10 +530,10 @@
                                         <a href="/Facturas/Listado" class="nav-link" id="navFacturas">Facturas</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/Sucursales/Listado" class="nav-link" id="navSucursales">Sucursales</a>
+                                        <a href="/Sucursal/Listado" class="nav-link" id="navSucursales">Sucursales</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/Reservaciones/Listado" class="nav-link" id="navReservaciones">Reservaciones</a>
+                                        <a href="/Reservacion/Listado" class="nav-link" id="navReservaciones">Reservaciones</a>
                                     </li>
 
                                 </ul>
@@ -548,7 +551,7 @@
                                 <!-- Dashboard submenu list -->
                                 <ul class="mininav-content nav collapse" id="subnavSeguridad">
                                     <li class="nav-item">
-                                        <a href="/Usuarios/Listado" class="nav-link" id="navUsuarios">Usuarios</a>
+                                        <a href="/Usuario/Listado" class="nav-link" id="navUsuarios">Usuarios</a>
                                     </li>
 
                                 </ul>
@@ -1476,33 +1479,11 @@
     <script src="~/js/nifty.js" defer></script>
 
     
-    <script>
-        $(document).ready(function () {
-            $('.table').DataTable({
-                select: true,
-                language: {
-                    "decimal": "",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_ Entradas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "Sin resultados encontrados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                },
-            });
-        });
-    </script>
+    <script src="~/js/App/layout.js"></script>
+    <script src="~/js/toastr/toastr.min.js"></script>
+    <script src="~/js/toastr/toastr.js"></script>
+
+   
 
 </body>
 </html>

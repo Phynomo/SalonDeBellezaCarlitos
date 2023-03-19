@@ -36,6 +36,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Models
         public int? prov_UsuarioModificacion { get; set; }
         [Display(Name = "Estado")]
         public bool? prov_Estado { get; set; }
+        [Display(Name = "Departamento")]
+        public int depa_Id { get; set; }
 
     }
 }

@@ -31,11 +31,52 @@
 
     }
 
+    if (logrado == "edit") {
+        $("#clie_Id").prop("disabled", true);
+        $("#metp_Id").prop("disabled", true);
+        $("#empl_Id_Caja").prop("disabled", true);
+        $("#empl_Id_Atendido").prop("disabled", true);
+        $("#btnFacturar").attr("hidden", true);
+        $("#consumidor").attr("hidden", false);
+        $("#Servicio").attr("hidden", false);
+
+        $("#prod_Id").prop("disabled", false);
+        $("#serv_Id").prop("disabled", false);
+        $("#fade_Cantidad").prop("disabled", false);
+        $("#btnDetalles").prop("disabled", false);
+
+    }
 
     $('#prod_Id').val("0");
     $('#serv_Id').val("0");
     $('#fade_Cantidad').val("0");
 
+
+    if ($("#toast").val() == 'errorD') {
+        MostrarMensajeDanger("Ocurrio un error en esta operacion, intentalo de nuevo");
+    }
+    if ($("#toast").val() == 'successD') {
+        MostrarMensajeSuccess("La operacion se realizo con exito");
+    }
+
+    if ($("#toast").val() == 'errorH') {
+        MostrarMensajeDanger("Ocurrio un error en esta operacion, intentalo de nuevo");
+    }
+    if ($("#toast").val() == 'successH') {
+        MostrarMensajeSuccess("La factura se creo con exito");
+        MostrarMensajeInfo("Ya puedes insertar las compras que desees");
+    }
+
+    if ($("#toast").val() == 'errorB') {
+        MostrarMensajeDanger("Ocurrio un error en esta operacion, intentalo de nuevo");
+    }
+    if ($("#toast").val() == 'successB') {
+        MostrarMensajeSuccess("Se ha ingresado con exito la compra");
+        MostrarMensajeInfo("Puedes insertar mas compras si lo deseas");
+    }
+    if ($("#toast").val() == 'errorC') {
+        MostrarMensajeDanger("Ocurrio un error mientras se cargaba la informacion, intentalo de nuevo");
+    }
 
 });
 
@@ -76,6 +117,8 @@ function EnviarFormFactura()
     if (cliente != "" && metodo != "" && caja != "" && atent != "") {
         $("#formCreateFactura").submit();
     } else {
+
+        MostrarMensajeWarning("Llene todos los campos");
         if (cliente == "") {
             $("#lbl_clie_IdError").attr("hidden", false);
         }
@@ -109,6 +152,8 @@ function EnviarFormDetalles() {
     if ((Producto != "0" && Servicio != "0") || Cantidad > 0) {
         $("#formFacturaDetalle").submit();
     } else {
+
+        MostrarMensajeWarning("Llene todos los campos");
         if (Producto == "0" && Servicio == "0") {
             $("#lbl_prod_Id_AtendidoError").attr("hidden", false);
         }

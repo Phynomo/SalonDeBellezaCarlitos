@@ -1,0 +1,47 @@
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.UsuariosViewModel
+
+
+<div class="modal" id="modalCreate" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar sucursal</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Create" id="formCreate">
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label asp-for="usur_Usuario" class="control-label"></label>
+                            <input asp-for="usur_Usuario" class="form-control" id="usur_Usuario" name="usur_Usuario" />
+                            <label name="lbl_usur_Usuario" id="lbl_usur_Usuario" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row">
+                            <div class="form-group col">
+                                <label asp-for="usur_Contrasenia" class="control-label"></label>
+                                <input asp-for="usur_Contrasenia" type="password" class="form-control" id="usur_Contrasenia" name="usur_Contrasenia" />
+                                <label name="lbl_usur_Contrasenia" id="lbl_usur_Contrasenia" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label asp-for="empl_Id" class="control-label"></label>
+                            <select asp-for="empl_Id" id="empl_Id" class="form-select" asp-items="ViewBag.empl_Id">
+                                <option value="">-- Seleccione un empleado --</option>
+                            </select>
+                            <label name="lbl_empl_Id" id="lbl_empl_Id" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="GuardarModalCreate()">Guardar registro</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

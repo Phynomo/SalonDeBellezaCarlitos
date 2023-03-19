@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWUsuariosViewModel>
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+
+
+    <div>
+        <h1 class="text-center">Detalles</h1>
+
+        <h4 class="text-center">Usuario</h4>
+        <hr />
+
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => item.usur_Usuario)</label><br />
+                <label>@Html.DisplayFor(model => item.usur_Usuario)</label>
+            </div>
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => item.empl_Nombre)</label><br />
+                <label>@Html.DisplayFor(model => item.empl_Nombre) @Html.DisplayFor(model => item.empl_Apellido)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-end">
+                <button class="btn btn-warning btn-sm mx-1" type="button" id="btnEditar" onclick="AbrirModalEdit('@item.usur_Id,@item.empl_Id')">Editar</button>
+                <a class="btn btn-dark" asp-action="Index">Regresar al listado</a>
+            </div>
+
+        </div>
+
+
+        <div class="card mt-4">
+            <div class="card-header" style="background-color:#2a0637;">
+                <h3 class="text-white ">Auditoria</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Accion</th>
+                            <th>Usuario</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Creado</td>
+                            <td>@ViewBag.UsuarioCreacion</td>
+                            <td>@Html.DisplayFor(model => item.usur_FechaCreacion)</td>
+                        </tr>
+                        <tr>
+                            <td>Modificado</td>
+                            <td>@ViewBag.UsuarioModificacion</td>
+                            <td>@Html.DisplayFor(model => item.usur_FechaModificacion)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>}
+
+
+
+@Html.Partial("_UsuarioEditModalViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.UsuariosViewModel())
+<script src="~/js/App/Seguridad/Usuarios.js"></script>

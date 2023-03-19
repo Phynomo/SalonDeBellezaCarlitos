@@ -2,6 +2,14 @@
     $('#navSalon').addClass('active');
     $('#navCargos').addClass('active');
     $('#subnavSalon').addClass('show');
+
+    if ($("#toast").val() == 'error') {
+        MostrarMensajeDanger("Ese registro ya exite");
+        $("#modalCreate").appendTo('body').modal('show');
+    }
+    if ($("#toast").val() == 'success') {
+        MostrarMensajeSuccess("La operacion se realizo con exito");
+    }
 });
 
 
@@ -20,7 +28,8 @@ function GuardarModalCreate() {
         $("#formCreate").submit();
 
     } else {
-        console.log('false')
+
+        MostrarMensajeWarning("Complete los campos");
         $("#lbl_DescripcionCreateError").attr('hidden', false);
     }
 
@@ -46,8 +55,8 @@ function GuardarModalEdit() {
         $("#formEdit").submit();
 
     } else {
+        MostrarMensajeWarning("Complete los campos");
         $("#lbl_DescripcionEditError").attr('hidden', false);
-        console.log('holperra');
     }
 
 }
@@ -71,6 +80,7 @@ function GuardarModalDelete() {
         $("#formDelete").submit();
 
     } else {
+
         $("#lbl_DescripcionDeleteError").attr('hidden', false);
     }
 

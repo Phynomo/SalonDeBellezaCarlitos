@@ -26,7 +26,7 @@ CREATE TABLE acce.tbUsuarios(
 
 CREATE TABLE gnrl.tbMetodoPago(
     metp_Id                         INT IDENTITY(1,1) not null,
-    metp_Descripcion                NVARCHAR (100) NOT NULL,
+    metp_Descripcion                NVARCHAR (100) NOT NULL UNIQUE,
 	metp_FechaCreacion		        DATETIME NOT NULL DEFAULT GETDATE(),
 	metp_UsuarioCreacion		    INT not null,
 	metp_FechaModificacion	        DATETIME,
@@ -98,6 +98,25 @@ CREATE TABLE salo.tbCargos(
 	CONSTRAINT FK_salo_tbCargos_acce_tbUsuarios_carg_UsuarioModificacion_usur_Id FOREIGN KEY(carg_UsuarioModificacion) REFERENCES acce.tbUsuarios(usur_Id)
 );
 
+
+CREATE TABLE salo.tbSucursales(
+    sucu_Id                             INT IDENTITY(1,1), 
+    sucu_Descripcion                    NVARCHAR(200) NOT NULL,
+    muni_Id                             INT,
+	sucu_DireccionExacta				NVARCHAR(500) NOT NULL,
+    sucu_FechaCreacion					DATETIME NOT NULL DEFAULT GETDATE(),
+    sucu_UsuarioCreacion				INT not null,
+    sucu_FechaModificacion				DATETIME,
+    sucu_UsuarioModificacion			INT,
+    sucu_Estado							BIT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_salo_tbSucursales_sucu_Id PRIMARY KEY(sucu_Id),
+    CONSTRAINT FK_salo_tbSucursales_gnrl_tbMunicipios_muni_Id FOREIGN KEY(muni_Id) REFERENCES gnrl.tbMunicipios(muni_Id),
+
+    CONSTRAINT FK_salo_tbSucursales_acce_tbUsuarios_sucu_UsuarioCreacion_usur_Id FOREIGN KEY(sucu_UsuarioCreacion) REFERENCES acce.tbUsuarios(usur_Id),
+    CONSTRAINT FK_salo_tbSucursales_acce_tbUsuarios_sucu_UsuarioModificacion_usur_Id FOREIGN KEY(sucu_UsuarioModificacion) REFERENCES acce.tbUsuarios(usur_Id)
+
+);
+
 CREATE TABLE salo.tbEmpleados(
 	empl_Id                             INT IDENTITY (1,1),
 	empl_Nombre							NVARCHAR(150) NOT NULL,
@@ -111,6 +130,7 @@ CREATE TABLE salo.tbEmpleados(
 	empl_FechaNacimiento				Date NOT NULL,
 	empl_FechaContratacion				Date NOT NULL,
 	carg_Id								INT NOT NULL,
+	sucu_Id								INT NOT NULL,
 	empl_FechaCreacion					DATETIME NOT NULL DEFAULT GETDATE(),
 	empl_UsuarioCreacion				INT not null,
 	empl_FechaModificacion				DATETIME,
@@ -121,6 +141,7 @@ CONSTRAINT PK_salo_tbEmpleados_empl_Id PRIMARY KEY(empl_Id),
 CONSTRAINT FK_salo_tbEmpleados_gnrl_tbMunicipios_muni_Id FOREIGN KEY(muni_Id) REFERENCES gnrl.tbMunicipios(muni_Id),
 CONSTRAINT FK_salo_tbEmpleados_gnrl_tbEstadosCiviles_estc_Id FOREIGN KEY(estc_Id) REFERENCES gnrl.tbEstadosCiviles(estc_Id),
 CONSTRAINT FK_salo_tbEmpleados_salo_tbCargos_carg_Id FOREIGN KEY(carg_Id) REFERENCES salo.tbCargos(carg_Id),
+CONSTRAINT FK_salo_tbEmpleados_salo_tbSucursales_sucu_Id FOREIGN KEY(sucu_Id) REFERENCES salo.tbSucursales(sucu_Id),
 CONSTRAINT FK_salo_tbEmpleados_acce_tbUsuarios_empl_UsuarioCreacion_usur_Id FOREIGN KEY(empl_UsuarioCreacion) REFERENCES acce.tbUsuarios(usur_Id),
 CONSTRAINT FK_salo_tbEmpleados_acce_tbUsuarios_empl_UsuarioModificacion_usur_Id FOREIGN KEY(empl_UsuarioModificacion) REFERENCES acce.tbUsuarios(usur_Id)
 
@@ -161,7 +182,7 @@ CONSTRAINT FK_salo_tbCategoria_acce_tbUsuarios_cate_UsuarioModificacion_usur_Id 
 
 CREATE TABLE salo.tbProductos(
     prod_Id			                    INT IDENTITY(1,1),
-    prod_Nombre		                    NVARCHAR (200) NOT NULL,
+    prod_Nombre		                    NVARCHAR (200) NOT NULL UNIQUE,
     prod_Precio		                    DECIMAL (18,2) NOT NULL,
     cate_Id			                    INT not null,
     prod_Stock		                    INT not null,
@@ -201,7 +222,7 @@ CONSTRAINT FK_salo_tbClientes_acce_tbUsuarios_clie_UsuarioModificacion_usur_Id F
 
 CREATE TABLE salo.tbServicios(
     serv_Id                         INT IDENTITY(1,1),
-    serv_Nombre                     NVARCHAR(150) NOT NULL,
+    serv_Nombre                     NVARCHAR(150) NOT NULL unique,
     serv_Descripcion                NVARCHAR(500) ,
     serv_Precio                     DECIMAL(18,2) NOT NULL,
     serv_FechaCreacion				DATETIME NOT NULL DEFAULT GETDATE(),
@@ -261,23 +282,6 @@ CONSTRAINT FK_salo_tbFacturasDetalles_acce_tbUsuarios_fade_UsuarioModificacion_u
 
 );
 
-CREATE TABLE salo.tbSucursales(
-    sucu_Id                             INT IDENTITY(1,1), 
-    sucu_Descripcion                    NVARCHAR(200) NOT NULL,
-    muni_Id                             INT,
-	sucu_DireccionExacta				NVARCHAR(500) NOT NULL,
-    sucu_FechaCreacion					DATETIME NOT NULL DEFAULT GETDATE(),
-    sucu_UsuarioCreacion				INT not null,
-    sucu_FechaModificacion				DATETIME,
-    sucu_UsuarioModificacion			INT,
-    sucu_Estado							BIT NOT NULL DEFAULT 1,
-    CONSTRAINT PK_salo_tbSucursales_sucu_Id PRIMARY KEY(sucu_Id),
-    CONSTRAINT FK_salo_tbSucursales_gnrl_tbMunicipios_muni_Id FOREIGN KEY(muni_Id) REFERENCES gnrl.tbMunicipios(muni_Id),
-
-    CONSTRAINT FK_salo_tbSucursales_acce_tbUsuarios_sucu_UsuarioCreacion_usur_Id FOREIGN KEY(sucu_UsuarioCreacion) REFERENCES acce.tbUsuarios(usur_Id),
-    CONSTRAINT FK_salo_tbSucursales_acce_tbUsuarios_sucu_UsuarioModificacion_usur_Id FOREIGN KEY(sucu_UsuarioModificacion) REFERENCES acce.tbUsuarios(usur_Id)
-
-);
 
 CREATE TABLE salo.tbReservaciones(
 rese_Id                             INT IDENTITY(1,1),
@@ -468,6 +472,8 @@ VALUES ( 'Casado(a)',  GETDATE(), 1, NULL, NULL, 1),
                 ('Recepcionista',GetDate(),1,null,null,1)
 
 
+INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
+VALUES ('Sucursal 1', 1, 'Calle 1 #123', GETDATE(), 1, NULL, NULL, 1);
 
 INSERT INTO [salo].[tbEmpleados]
            ([empl_Nombre]
@@ -481,24 +487,25 @@ INSERT INTO [salo].[tbEmpleados]
            ,[empl_FechaNacimiento]
            ,[empl_FechaContratacion]
            ,[carg_Id]
+           ,[sucu_Id]
            ,[empl_FechaCreacion]
            ,[empl_UsuarioCreacion]
            ,[empl_FechaModificacion]
            ,[empl_UsuarioModificacion]
            ,[empl_Estado])
      VALUES
-           ('Daniel','Espinoza' ,'M','10' ,'Col. Municipal','1' ,'87756952' ,'daniele09099@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Selvin','Medina' ,'M','10' ,'Rivera','2' ,'98552231' ,'selvinmedi@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Christpher','Aguilar' ,'M','10' ,'Col. Satelite','3' ,'77450210' ,'agilarchris@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Alessia','Medina' ,'F','10' ,'Col. Miguel Angel Pavon','1' ,'99864520' ,'aless65@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Axel','Gomez' ,'M','10' ,'Bosques de Jucutuma','2' ,'50220345' ,'Gomez03@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Angie','Rolitas' ,'F','10' ,'Col. Felipe','1' ,'88541230' ,'rolitaAngie@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Dua','Lipa' ,'F','10' ,'Rio de piedras','1' ,'00000000' ,'lipa1995@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Pitbull','Perez' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'pitbull@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Michael','Jackson' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'Jackson@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Lady','Gaga' ,'F','10' ,'Rio de piedras','1' ,'00000000' ,'gaga@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Lionel','Messi' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'Messi@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1),
-           ('Cristiano','Ronaldo' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'ElBicho@gmail.com',GETDATE() ,GetDate() ,1 ,GetDate() ,1 ,null ,null,1)
+           ('Daniel','Espinoza' ,'M','10' ,'Col. Municipal','1' ,'87756952' ,'daniele09099@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Selvin','Medina' ,'M','10' ,'Rivera','2' ,'98552231' ,'selvinmedi@gmail.com',GETDATE() ,GetDate() ,1 ,1,GetDate() ,1 ,null ,null,1),
+           ('Christpher','Aguilar' ,'M','10' ,'Col. Satelite','3' ,'77450210' ,'agilarchris@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Alessia','Medina' ,'F','10' ,'Col. Miguel Angel Pavon','1' ,'99864520' ,'aless65@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Axel','Gomez' ,'M','10' ,'Bosques de Jucutuma','2' ,'50220345' ,'Gomez03@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Angie','Rolitas' ,'F','10' ,'Col. Felipe','1' ,'88541230' ,'rolitaAngie@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Dua','Lipa' ,'F','10' ,'Rio de piedras','1' ,'00000000' ,'lipa1995@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Pitbull','Perez' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'pitbull@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Michael','Jackson' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'Jackson@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Lady','Gaga' ,'F','10' ,'Rio de piedras','1' ,'00000000' ,'gaga@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Lionel','Messi' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'Messi@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1),
+           ('Cristiano','Ronaldo' ,'M','10' ,'Rio de piedras','1' ,'00000000' ,'ElBicho@gmail.com',GETDATE() ,GetDate() ,1 ,1 ,GetDate() ,1 ,null ,null,1)
 GO
 
 
@@ -553,13 +560,17 @@ BEGIN
                 ,[usur_Contrasenia]
                 ,T1.[empl_Id]
                 ,t2.empl_Nombre + ' ' + t2.empl_Apellido as empl_Nombre 
+				,t2.sucu_Id
+				,t3.carg_Id
+				,t3.carg_Descripcion
                 ,[usur_UsuarioCreacion]
                 ,[usur_FechaCreacion]
                 ,[usur_UsuarioModificacion]
                 ,[usur_FechaModificacion]
                 ,[usur_Estado]
         FROM    acce.[tbUsuarios] T1 INNER JOIN [salo].[tbEmpleados] T2
-        ON      T1.empl_Id = T2.empl_Id
+        ON      T1.empl_Id = T2.empl_Id INNER JOIN [salo].tbCargos T3
+		ON		T2.carg_Id = T3.carg_Id
         WHERE   t1.usur_Contrasenia = @Password 
         AND     t1.usur_Usuario = @usur_Usuario
 
@@ -603,20 +614,12 @@ END
 GO
 
 
-
-
-
------Procedimientos almacenados de tbUsuarios
-GO
-CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_Listado
+CREATE OR ALTER VIEW acce.VW_tbUsuarios_View
 AS
-BEGIN
-
-        SELECT	 [usur_Id]
+ SELECT	 [usur_Id]
                 ,[usur_Usuario]
                 ,[usur_Contrasenia]
                 ,T1.[empl_Id]
-                ,t2.empl_Nombre + ' ' + t2.empl_Apellido as empl_NombreCompleto 
 				,t2.empl_Nombre
 				,t2.empl_Apellido
                 ,[usur_UsuarioCreacion]
@@ -626,11 +629,29 @@ BEGIN
                 ,[usur_Estado]
         FROM    acce.[tbUsuarios] T1 INNER JOIN [salo].[tbEmpleados] T2
         ON      T1.empl_Id = T2.empl_Id
+		WHERE usur_Estado = 1
 
+
+-----Procedimientos almacenados de tbUsuarios
+GO
+CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_Listado
+AS
+BEGIN
+   
+   SELECT * FROM [acce].[VW_tbUsuarios_View]
 
 END
-
 GO
+CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_Buscar
+@usur_Id int
+AS
+BEGIN
+   
+   SELECT * FROM [acce].[VW_tbUsuarios_View]
+   WHERE usur_Id = @usur_Id
+END
+GO
+
 CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_Insert
 	@usur_Usuario Nvarchar(100),
 	@usur_Contrasenia Nvarchar(max),
@@ -643,26 +664,40 @@ BEGIN
 BEGIN TRY
 Declare @Password Nvarchar(max) = (HASHBYTES('SHA2_512',@usur_Contrasenia))
 
-INSERT INTO [acce].[tbUsuarios]
-           ([usur_Usuario]
-           ,[usur_Contrasenia]
-           ,[empl_Id]
-           ,[usur_UsuarioCreacion]
-           ,[usur_FechaCreacion]
-           ,[usur_UsuarioModificacion]
-           ,[usur_FechaModificacion]
-           ,[usur_Estado])
-     VALUES
-           (@usur_Usuario
-           ,@Password
-           ,@empl_Id
-           ,@usur_UsuarioCreacion
-           ,GetDate()
-           ,null
-           ,null
-           ,1)
+IF NOT EXISTS (select * from acce.tbUsuarios
+				WHERE usur_Usuario = @usur_Usuario AND empl_Id = @empl_Id)
+				BEGIN
+				INSERT INTO [acce].[tbUsuarios]
+							   ([usur_Usuario]
+							   ,[usur_Contrasenia]
+							   ,[empl_Id]
+							   ,[usur_UsuarioCreacion]
+							   ,[usur_FechaCreacion]
+							   ,[usur_UsuarioModificacion]
+							   ,[usur_FechaModificacion]
+							   ,[usur_Estado])
+						 VALUES
+							   (@usur_Usuario
+							   ,@Password
+							   ,@empl_Id
+							   ,@usur_UsuarioCreacion
+							   ,GetDate()
+							   ,null
+							   ,null
+							   ,1)
 
-SELECT 1 as Proceso
+					SELECT 1 as Proceso
+				END
+ELSE IF EXISTS	(select * from acce.tbUsuarios
+				WHERE usur_Usuario = @usur_Usuario AND empl_Id = @empl_Id AND usur_Estado = 1)
+				SELECT 0 AS Proceso
+ELSE
+	UPDATE acce.tbUsuarios
+	set usur_Estado = 1,
+		usur_Contrasenia = @Password
+	WHERE usur_Usuario = @usur_Usuario AND empl_Id = @empl_Id
+	SELECT 1 as PROCESO
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -891,6 +926,8 @@ SELECT	empl_Id,
 		empl_FechaContratacion, 
 		T1.carg_Id,
 		T5.carg_Descripcion,
+		T1.sucu_Id,
+		T6.sucu_Descripcion,
 		empl_FechaCreacion, 
 		empl_UsuarioCreacion, 
 		empl_FechaModificacion, 
@@ -900,7 +937,8 @@ FROM salo.tbEmpleados T1 INNER JOIN gnrl.tbMunicipios T2
 ON t1.muni_Id = t2.muni_Id INNER JOIN gnrl.tbDepartamentos T3
 ON T3.depa_Id = t2.depa_Id INNER JOIN gnrl.tbEstadosCiviles T4
 ON T4.estc_Id = T1.estc_Id INNER JOIN salo.tbCargos T5
-ON t5.carg_Id = t1.carg_Id
+ON t5.carg_Id = t1.carg_Id INNER JOIN salo.tbSucursales T6
+ON T6.sucu_Id = T1.sucu_Id
 WHERE empl_Estado = 1
 
 END
@@ -920,6 +958,7 @@ CREATE OR ALTER PROCEDURE salo.UDP_tbEmpleados_Insert
 	@empl_FechaNacimiento Nvarchar(100),
 	@empl_FechaContratacion Nvarchar(100),
 	@carg_Id INT,
+	@sucu_Id INT,
 	@empl_UsuarioCreacion INT
 AS
 BEGIN
@@ -938,6 +977,7 @@ INSERT INTO [salo].[tbEmpleados]
            ,[empl_FechaNacimiento]
            ,[empl_FechaContratacion]
            ,[carg_Id]
+		   ,[sucu_Id]
            ,[empl_FechaCreacion]
            ,[empl_UsuarioCreacion]
            ,[empl_FechaModificacion]
@@ -955,6 +995,7 @@ INSERT INTO [salo].[tbEmpleados]
            ,@empl_FechaNacimiento
            ,@empl_FechaContratacion
            ,@carg_Id
+		   ,@sucu_Id
            ,GETDATE()
            ,@empl_UsuarioCreacion
            ,null
@@ -973,7 +1014,7 @@ END CATCH
 END
 GO
 
-EXEC salo.UDP_tbEmpleados_Insert 'Francis','Antunez','M','1','Gainasd','2','885996123','','10-10-2000','10-10-2022','1','1'
+--EXEC salo.UDP_tbEmpleados_Insert 'Francis','Antunez','M','1','Gainasd','2','885996123','','10-10-2000','10-10-2022','1','1'
 
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbEmpleados_Update
@@ -989,6 +1030,7 @@ CREATE OR ALTER PROCEDURE salo.UDP_tbEmpleados_Update
 	@empl_FechaNacimiento Nvarchar(100),
 	@empl_FechaContratacion Nvarchar(100),
 	@carg_Id INT,
+	@sucu_Id INT,
 	@empl_UsuarioModificacion int
 AS
 BEGIN
@@ -1006,6 +1048,7 @@ UPDATE [salo].[tbEmpleados]
       ,[empl_FechaNacimiento] = @empl_FechaNacimiento
       ,[empl_FechaContratacion] = @empl_FechaContratacion
       ,[carg_Id] = @carg_Id
+	  ,[sucu_Id] = @sucu_Id
       ,[empl_FechaModificacion] = GETDATE()
       ,[empl_UsuarioModificacion] = @empl_UsuarioModificacion
  WHERE empl_Id = @empl_Id
@@ -1066,6 +1109,8 @@ SELECT	empl_Id,
 		empl_FechaContratacion, 
 		T1.carg_Id,
 		T5.carg_Descripcion,
+		T1.sucu_Id,
+		T6.sucu_Descripcion,
 		empl_FechaCreacion, 
 		empl_UsuarioCreacion, 
 		empl_FechaModificacion, 
@@ -1075,7 +1120,8 @@ FROM salo.tbEmpleados T1 INNER JOIN gnrl.tbMunicipios T2
 ON t1.muni_Id = t2.muni_Id INNER JOIN gnrl.tbDepartamentos T3
 ON T3.depa_Id = t2.depa_Id INNER JOIN gnrl.tbEstadosCiviles T4
 ON T4.estc_Id = T1.estc_Id INNER JOIN salo.tbCargos T5
-ON t5.carg_Id = t1.carg_Id
+ON t5.carg_Id = t1.carg_Id INNER JOIN salo.tbSucursales T6
+ON T6.sucu_Id = T1.sucu_Id
 WHERE empl_Estado = 1 AND T1.empl_Id = @empl_Id
 
 END
@@ -1132,6 +1178,10 @@ AS
 BEGIN
 BEGIN TRY
 
+IF NOT EXISTS (SELECT * FROM salo.tbCategorias
+				WHERE cate_Descripcion = @cate_Descripcion)		
+BEGIN
+
 INSERT INTO [salo].tbCategorias
            ([cate_Descripcion]
            ,[cate_FechaCreacion]
@@ -1148,6 +1198,22 @@ INSERT INTO [salo].tbCategorias
            ,1)
 
 SELECT 1 as Proceso
+
+END
+ELSE IF EXISTS (SELECT * FROM salo.tbCategorias
+				WHERE cate_Descripcion = @cate_Descripcion AND cate_Estado = 1)
+SELECT 0 as Proceso
+ELSE 
+BEGIN
+
+UPDATE salo.tbCategorias
+SET cate_Estado = 1
+WHERE cate_Descripcion = @cate_Descripcion
+
+SELECT 1 as Proceso
+
+END
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -1256,6 +1322,10 @@ AS
 BEGIN
 BEGIN TRY
 
+IF NOT EXISTS (SELECT * FROM salo.tbCargos
+				WHERE carg_Descripcion = @carg_Descripcion)
+BEGIN
+
 INSERT INTO [salo].[tbCargos]
            ([carg_Descripcion]
            ,[carg_FechaCreacion]
@@ -1272,6 +1342,16 @@ INSERT INTO [salo].[tbCargos]
            ,1)
 
 SELECT 1 as Proceso
+
+END
+ELSE IF EXISTS (SELECT * FROM salo.tbCargos
+				WHERE carg_Descripcion = @carg_Descripcion AND carg_Estado = 1)
+SELECT 0 as Proceso
+ELSE
+UPDATE salo.tbCargos
+SET carg_Estado = 1
+WHERE carg_Descripcion = @carg_Descripcion
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -1280,7 +1360,7 @@ END CATCH
 
 END
 GO
-EXEC salo.UDP_tbCargos_Insert 'lupa', 1
+--EXEC salo.UDP_tbCargos_Insert 'lupa', 1
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbCargos_Update
 	@carg_Id INT,
@@ -1379,6 +1459,10 @@ AS
 BEGIN
 BEGIN TRY
 
+IF NOT EXISTS (SELECT * FROM salo.tbServicios
+				WHERE serv_Nombre = @serv_Nombre)
+BEGIN 
+
 INSERT INTO [salo].[tbServicios]
            ([serv_Nombre]
            ,[serv_Descripcion]
@@ -1399,12 +1483,23 @@ INSERT INTO [salo].[tbServicios]
            ,1)
 
 SELECT 1 as Proceso
+END
+ELSE IF EXISTS (SELECT * FROM salo.tbServicios
+				WHERE serv_Nombre = @serv_Nombre AND serv_Estado = 1)
+				SELECT 0 as Proceso
+ELSE
+UPDATE salo.tbServicios
+SET serv_Estado = 1
+	,serv_Descripcion = @serv_Descripcion
+	,serv_Precio = @serv_Precio
+WHERE serv_Nombre = @serv_Nombre
+
+SELECT 1 as Proceso
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
 END CATCH
-
-
 END
 GO
 
@@ -1531,7 +1626,10 @@ AS
 BEGIN
 BEGIN TRY
 
-    INSERT INTO salo.tbProductos ([prod_Nombre], 
+IF NOT EXISTS (SELECT * FROM salo.tbProductos
+				WHERE prod_Nombre = @prod_Nombre)
+BEGIN 
+INSERT INTO salo.tbProductos ([prod_Nombre], 
                             [prod_Precio], 
                             [cate_Id],  
                             [prov_Id], 
@@ -1553,6 +1651,22 @@ BEGIN TRY
             1);
 
 SELECT 1 as Proceso
+END
+ELSE IF EXISTS (SELECT * FROM salo.tbProductos
+				WHERE prod_Nombre = @prod_Nombre and prod_Estado = 1)
+SELECT 0 as Proceso
+ELSE
+UPDATE salo.tbProductos
+SET prod_Estado = 1
+	,prod_Precio = @prod_Precio
+	,prod_Stock = @prod_Stock
+	,prov_id = @prov_Id
+	,cate_Id = @cate_Id
+	WHERE prod_Nombre = @prod_Nombre
+    
+	
+SELECT 1 as Proceso
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -1616,12 +1730,8 @@ GO
 
 --Procedimientos Almacenados de Sucursales
 
-GO
-CREATE OR ALTER PROCEDURE salo.UDP_tbSucursales_Listado
-AS
-BEGIN
-
-
+CREATE OR ALTER VIEW salo.VW_tbSucursales_View
+as
 SELECT [sucu_Id]
       ,[sucu_Descripcion]
       ,T1.[muni_Id]
@@ -1641,10 +1751,32 @@ SELECT [sucu_Id]
   ON T3.depa_Id = T2.depa_Id
   WHERE sucu_Estado = 1
 
+
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbSucursales_Listado
+AS
+BEGIN
+
+
+SELECT * FROM salo.VW_tbSucursales_View
+
 END
 
 GO
 
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbSucursalesVW_Buscar
+@sucu_Id int
+AS
+BEGIN
+
+
+SELECT * FROM salo.VW_tbSucursales_View
+WHERE sucu_Id = @sucu_Id
+
+END
+
+GO
 
 
 CREATE OR ALTER PROCEDURE salo.UDP_tbSucursales_Insert
@@ -1655,7 +1787,7 @@ CREATE OR ALTER PROCEDURE salo.UDP_tbSucursales_Insert
 AS
 BEGIN
 BEGIN TRY
-
+--para guardar xd
 INSERT INTO [salo].[tbSucursales]
            ([sucu_Descripcion]
            ,[muni_Id]
@@ -1701,11 +1833,16 @@ UPDATE [salo].[tbSucursales]
       ,[sucu_UsuarioModificacion] = @sucu_UsuarioModificacion
  WHERE sucu_Id = @sucu_Id
 
+
+SELECT 1 as Proceso
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
 END CATCH
 END
+GO
+
+
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbSucuesales_Delete
 @sucu_Id        INT
@@ -1717,6 +1854,9 @@ UPDATE [salo].[tbSucursales]
    SET sucu_Estado = 0
  WHERE sucu_Id = @sucu_Id
 
+ 
+SELECT 1 as Proceso
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -1726,12 +1866,8 @@ END
 GO
 --Procedimientos Alemacenados Reservaciones
 
-GO
-CREATE OR ALTER PROCEDURE salo.UDP_tbReservaciones_Listado
+CREATE VIEW salo.VW_tbReservaciones_View
 AS
-BEGIN
-
-
 SELECT [rese_Id]
       ,T1.[clie_Id]
 	  ,T2.clie_Nombre
@@ -1753,10 +1889,29 @@ SELECT [rese_Id]
   ON t3.sucu_Id = T1.sucu_Id
   WHERE rese_Estado = 1
 
+
+
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbReservaciones_Listado
+AS
+BEGIN
+
+select * from [salo].[VW_tbReservaciones_View]
+
 END
 
 GO
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbReservaciones_Buscar
+@rese_Id int
+AS
+BEGIN
 
+select * from [salo].[VW_tbReservaciones_View]
+WHERE rese_Id = @rese_Id
+END
+
+GO
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbReservaciones_Insert
 @clie_Id				INT,
@@ -1792,6 +1947,7 @@ INSERT INTO [salo].[tbReservaciones]
            ,NULL
            ,1)
 
+SELECT 1 as Proceso
 
 END TRY
 BEGIN CATCH
@@ -1824,6 +1980,9 @@ UPDATE [salo].[tbReservaciones]
       ,[rese_UsuarioModificacion] = @rese_UsuarioModificacion
  WHERE rese_Id = @rese_Id
 
+ 
+SELECT 1 as Proceso
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -1842,7 +2001,8 @@ UPDATE [salo].[tbReservaciones]
    SET [rese_Estado] = 0
  WHERE rese_Id = @rese_Id
 
-
+ 
+SELECT 1 as Proceso
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -1895,7 +2055,7 @@ END
 
 GO
 
-CREATE PROCEDURE gnrl.UDP_tbMetodoPago_Insert
+CREATE OR ALTER PROCEDURE gnrl.UDP_tbMetodoPago_Insert
 (
     @metp_Descripcion             NVARCHAR (100),
     @metp_UsuarioCreacion         INT
@@ -1903,6 +2063,10 @@ CREATE PROCEDURE gnrl.UDP_tbMetodoPago_Insert
 AS
 BEGIN
 BEGIN TRY
+
+IF NOT EXISTS (SELECT * FROM gnrl.tbMetodoPago
+				WHERE @metp_Descripcion = metp_Descripcion)
+BEGIN
 
 INSERT INTO gnrl.tbMetodoPago ( [metp_Descripcion], 
                                 [metp_FechaCreacion], 
@@ -1918,6 +2082,16 @@ INSERT INTO gnrl.tbMetodoPago ( [metp_Descripcion],
             1);
 
 SELECT 1 as Proceso
+END
+ELSE IF EXISTS (SELECT * FROM gnrl.tbMetodoPago
+				WHERE @metp_Descripcion = metp_Descripcion and metp_Estado = 1)
+SELECT 0 as Proceso
+ELSE
+UPDATE gnrl.tbMetodoPago
+SET metp_Estado = 1
+WHERE @metp_Descripcion = metp_Descripcion
+SELECT 1 as Proceso
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -2015,6 +2189,10 @@ as
 begin
 BEGIN TRY
 
+IF NOT EXISTS (SELECT * FROM gnrl.tbEstadosCiviles
+				WHERE estc_Descripcion = @estc_Descripcion)
+BEGIN
+
 INSERT INTO [gnrl].[tbEstadosCiviles]
            ([estc_Descripcion]
            ,[estc_FechaCreacion]
@@ -2031,6 +2209,15 @@ INSERT INTO [gnrl].[tbEstadosCiviles]
            ,1)
 
 SELECT 1 as Proceso
+END
+ELSE IF EXISTS (SELECT * FROM gnrl.tbEstadosCiviles
+				WHERE estc_Descripcion = @estc_Descripcion and estc_Estado = 1)
+SELECT 0 as Proceso
+ELSE 
+UPDATE gnrl.tbEstadosCiviles
+SET estc_Estado = 1
+WHERE estc_Descripcion = @estc_Descripcion
+
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
@@ -2145,7 +2332,9 @@ AS
 BEGIN
 BEGIN TRY
 
-
+IF NOT EXISTS (SELECT * FROM gnrl.tbDepartamentos
+				WHERE @depa_Descripcion = depa_Descripcion AND @depa_Codigo = depa_Codigo)
+BEGIN
     INSERT INTO gnrl.tbDepartamentos(   [depa_Descripcion], 
                                         depa_Codigo, 
                                         [depa_FechaCreacion], 
@@ -2162,9 +2351,19 @@ BEGIN TRY
             1);
 
 SELECT 1 as Proceso
+
+END
+ELSE IF EXISTS (SELECT * FROM gnrl.tbDepartamentos
+				WHERE @depa_Descripcion = depa_Descripcion AND @depa_Codigo = depa_Codigo AND depa_Estado = 1)
+SELECT 0 as Proceso
+ELSE
+UPDATE gnrl.tbDepartamentos
+SET depa_Estado = 1
+WHERE @depa_Descripcion = depa_Descripcion AND @depa_Codigo = depa_Codigo
+SELECT 1 as Proceso
 END TRY
 BEGIN CATCH
-SELECT 0 as Proceso
+SELECT 44 as Proceso
 END CATCH
 END
 
@@ -2203,15 +2402,24 @@ AS
 BEGIN
 BEGIN TRY
 
+IF EXISTS (SELECT * FROM tbMunicipios
+			WHERE depa_Id = @depa_Id and muni_Estado = 1)
+BEGIN
+select 2 as proceso
+END
+ELSE
+BEGIN
+
 UPDATE [gnrl].[tbDepartamentos]
    SET [depa_Estado] = 0
  WHERE [depa_Id] = @depa_Id
-
-
 SELECT 1 as Proceso
+END
+
+
 END TRY
 BEGIN CATCH
-SELECT 0 as Proceso
+SELECT 44 as Proceso
 END CATCH
 END
 GO
@@ -2268,6 +2476,10 @@ as
 begin
 BEGIN TRY
 
+IF NOT EXISTS (SELECT * FROM gnrl.tbMunicipios
+				WHERE muni_Codigo = @muni_Codigo and @muni_Descripcion = muni_Descripcion)
+BEGIN
+
 INSERT INTO [gnrl].[tbMunicipios]
            ([muni_Descripcion]
 		   ,muni_Codigo
@@ -2287,6 +2499,19 @@ INSERT INTO [gnrl].[tbMunicipios]
            ,NULL
            ,1)
 
+SELECT 1 as Proceso
+
+END
+ELSE IF EXISTS (SELECT * FROM gnrl.tbMunicipios
+				WHERE muni_Codigo = @muni_Codigo and @muni_Descripcion = muni_Descripcion and muni_Estado = 1)
+SELECT 0 as Proceso
+ELSE 
+UPDATE gnrl.tbMunicipios
+SET muni_Estado = 1
+	,depa_Id = @depa_Id 
+	WHERE muni_Codigo = @muni_Codigo and @muni_Descripcion = muni_Descripcion
+
+	
 SELECT 1 as Proceso
 END TRY
 BEGIN CATCH
@@ -2385,6 +2610,7 @@ SELECT [fact_Id]
 	  ,caja.empl_Nombre	AS NombreCaja
 	  ,caja.empl_Apellido AS ApellidoCaja
 	  ,caja.empl_Telefono AS TelefonoCaja
+	  ,caja.sucu_Id
       ,T1.[metp_Id]
 	  ,T3.metp_Descripcion
       ,[fact_Fecha]
@@ -2815,6 +3041,42 @@ END CATCH
 END
 GO
 --Procedimientos almacenados de proveedor
+
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Buscar
+@prov_Id int
+AS
+BEGIN
+
+SELECT [prov_Id]
+      ,[prov_NombreEmpresa]
+      ,[prov_NombreContacto]
+      ,T1.[muni_Id]
+	  ,T2.muni_Descripcion
+	  ,T2.muni_Codigo
+	  ,T3.depa_Id
+	  ,T3.depa_Descripcion
+	  ,T3.depa_Codigo
+      ,[prov_DireccionExacta]
+      ,[prov_Telefono]
+      ,[prov_FechaCreacion]
+      ,[prov_UsuarioCreacion]
+      ,[prov_FechaModificacion]
+      ,[prov_UsuarioModificacion]
+      ,[prov_Estado]
+  FROM [salo].[tbProveedores] T1 INNER JOIN gnrl.tbMunicipios T2
+  ON t1.muni_Id = t2.muni_Id INNER JOIN gnrl.tbDepartamentos T3
+  ON t3.depa_Id = T2.depa_Id
+  WHERE T1.prov_Estado = 1
+  AND t1.prov_Id = @prov_Id
+
+
+END
+
+
+
+GO
+
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Listado
 AS
@@ -2859,13 +3121,9 @@ BEGIN
 
 BEGIN TRY
 
-
-
-SELECT 1 as Proceso
-END TRY
-BEGIN CATCH
-SELECT 0 as Proceso
-END CATCH
+IF NOT EXISTS (SELECT * FROM salo.tbProveedores
+				WHERE @prov_NombreEmpresa = prov_NombreEmpresa)
+BEGIN
 
 INSERT INTO [salo].[tbProveedores]
            ([prov_NombreEmpresa]
@@ -2890,6 +3148,29 @@ INSERT INTO [salo].[tbProveedores]
            ,null
            ,1)
 
+
+SELECT 1 as Proceso
+END
+ELSE IF  EXISTS (SELECT * FROM salo.tbProveedores
+				WHERE @prov_NombreEmpresa = prov_NombreEmpresa and prov_Estado = 1)
+SELECT 2 as Proceso
+ELSE
+UPDATE salo.tbProveedores
+SET prov_NombreContacto = @prov_NombreContacto
+	,muni_Id = @muni_Id
+	,prov_Estado = 1
+	,prov_Telefono = @prov_Telefono
+	,prov_DireccionExacta = @prov_DireccionExacta
+	WHERE @prov_NombreEmpresa = prov_NombreEmpresa
+	
+SELECT 1 as Proceso
+
+
+END TRY
+BEGIN CATCH
+SELECT 44 as Proceso
+END CATCH
+
 END
 GO
 
@@ -2906,6 +3187,8 @@ CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Update
 AS
 BEGIN
 BEGIN TRY
+IF NOT EXISTS (SELECT * FROM salo.tbProveedores WHERE @prov_NombreEmpresa = prov_NombreEmpresa) OR @prov_Id = (SELECT prov_Id FROM salo.tbProveedores WHERE @prov_NombreEmpresa = prov_NombreEmpresa)
+BEGIN
 
 UPDATE [salo].[tbProveedores]
    SET [prov_NombreEmpresa] = @prov_NombreEmpresa
@@ -2918,12 +3201,13 @@ UPDATE [salo].[tbProveedores]
  WHERE prov_Id = @prov_Id
 
 SELECT 1 as Proceso
+END
+ELSE
+SELECT 2
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
 END CATCH
-
-
 END
 GO
 
@@ -3077,8 +3361,6 @@ INSERT INTO salo.tbClientes (clie_Nombre, clie_Apellido, clie_Telefono, clie_Cor
 VALUES ('Laura', 'Diaz', '555-8246', 'lauradiaz@example.com', GETDATE(), 1, NULL, NULL, 1);
 
 
-INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
-VALUES ('Sucursal 1', 1, 'Calle 1 #123', GETDATE(), 1, NULL, NULL, 1);
 
 INSERT INTO salo.tbSucursales (sucu_Descripcion, muni_Id, sucu_DireccionExacta, sucu_FechaCreacion, sucu_UsuarioCreacion, sucu_FechaModificacion, sucu_UsuarioModificacion, sucu_Estado)
 VALUES ('Sucursal 2', 2, 'Avenida 2 #456', GETDATE(), 1, NULL, NULL, 1);
@@ -3174,4 +3456,43 @@ VALUES (8, 6, GETDATE(), 1, NULL, NULL, 1);
 
 
 
---view 
+--Triggers
+
+go
+
+CREATE TRIGGER trg_AumentarStockluegoBorrar
+   ON  [salo].[tbFacturasDetalles]
+   AFTER Delete
+AS 
+BEGIN
+	
+
+	DECLARE @NuevoStock int = (select t1.prod_Stock from salo.[tbProductos] as t1 WHERE t1.prod_Id = (select t1.prod_Id from deleted as t1)) + (select t1.fade_Cantidad from deleted as t1 WHERE t1.prod_Id = (select t1.prod_Id from deleted as t1))
+
+UPDATE [salo].[tbProductos]
+   SET [prod_Stock] = @NuevoStock
+ WHERE prod_Id = (select t1.prod_Id from deleted as t1)
+
+
+END
+GO
+go
+
+CREATE TRIGGER trg_DisminuirStock
+   ON  [salo].[tbFacturasDetalles]
+   AFTER INSERT
+AS 
+BEGIN
+	
+
+
+	DECLARE @NuevoStock int = (select top(1) T1.[prod_Stock] from [salo].[tbProductos] as T1 WHERE T1.prod_Id = (select top(1) T1.prod_Id from inserted as T1)) - (select top(1) T1.[fade_Cantidad] from inserted as T1 WHERE T1.prod_Id = (select top(1) T1.prod_Id from inserted as T1))
+
+UPDATE [salo].[tbProductos]
+   SET [prod_Stock] = @NuevoStock
+ WHERE prod_Id in (select t1.prod_Id from inserted as t1)
+
+
+END
+GO
+go

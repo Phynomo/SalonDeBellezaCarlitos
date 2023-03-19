@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
 using SalonDeBellezaCarlitos.Entities.Entities;
@@ -24,6 +25,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Cargos/Listado")]
         public IActionResult Index()
         {
+            ViewBag.Toast = TempData["myData"] as string;
+
+            HttpContext.Session.SetString("MiClave", "MiValor");
 
             var listado = _generalesService.ListadoCargos(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<CargoViewModel>>(listado);
@@ -52,9 +56,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             if (result == 0)
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                TempData["myData"] = "error";
                 return RedirectToAction("Listado");
             }
+
+            TempData["myData"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -74,9 +80,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             if (result == 0)
             {
+                TempData["myData"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return View();
             }
+
+            TempData["myData"] = "success";
             return RedirectToAction("Listado");
            
         }
@@ -100,6 +109,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return View();
             }
+
+            TempData["myData"] = "success";
             return RedirectToAction("Listado");
 
         }

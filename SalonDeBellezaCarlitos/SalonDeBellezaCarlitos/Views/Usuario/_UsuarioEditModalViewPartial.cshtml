@@ -1,0 +1,36 @@
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.UsuariosViewModel
+
+
+<div class="modal" id="modalEdit" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar sucursal</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Edit" id="formEdit">
+
+                <input asp-for="usur_Id" class="form-control" type="hidden" id="usur_IdE" name="usur_Id" />
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                   
+                    <div class="row">
+                        <div class="form-group col">
+                            <label asp-for="empl_Id" class="control-label"></label>
+                            <select asp-for="empl_Id" id="empl_IdE" class="form-select" asp-items="ViewBag.empl_Id">
+                                <option value="">-- Seleccione un empleado --</option>
+                            </select>
+                            <label name="lbl_empl_Id" id="lbl_empl_IdE" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="GuardarModalEdit()">Guardar registro</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -82,6 +82,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[acce].[VW_tbUsuarios_View]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[dbo].[VW_tbFacturas_Listado]",
          "ObjectType": 3
       },
@@ -91,6 +95,14 @@
       },
       {
          "Name": "[salo].[VW_tbFacturaDetalle_View]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[salo].[VW_tbReservaciones_View]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[salo].[VW_tbSucursales_View]",
          "ObjectType": 3
       }
    ],

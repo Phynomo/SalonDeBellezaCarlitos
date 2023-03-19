@@ -21,6 +21,7 @@ namespace SalonDeBellezaCarlitos.Entities.Entities
         public string NombreCaja { get; set; }
         public string ApellidoCaja { get; set; }
         public string TelefonoCaja { get; set; }
+        public int sucu_Id { get; set; }
         public int metp_Id { get; set; }
         public string metp_Descripcion { get; set; }
         public DateTime fact_Fecha { get; set; }

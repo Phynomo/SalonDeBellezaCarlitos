@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
@@ -32,6 +33,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Empleados/Listado")]
         public IActionResult Index()
         {
+
+            string miValor = HttpContext.Session.GetString("MiClave");
+
+            ViewBag.hola = miValor;
+
             var listado = _generalesService.ListadoEmpleados(out string error);
             
             var listadoMapeado = _mapper.Map<IEnumerable<EmpleadoViewModel>>(listado);
@@ -52,6 +58,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion");
             ViewBag.carg_Id = new SelectList(_generalesService.ListadoCargos(out string error2).ToList(), "carg_Id", "carg_Descripcion");
             ViewBag.estc_Id = new SelectList(_generalesService.ListadoEstadosCiviles(out string error1).ToList(), "estc_Id", "estc_Descripcion");
+            ViewBag.sucu_Id = new SelectList(_generalesService.ListadoSucursales(out string error11).ToList(), "sucu_Id", "sucu_Descripcion");
             return View();
         }
 
@@ -64,19 +71,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             if (result == 0)
             {
-                if (empleado.carg_Id == 0)
-                    //ModelState.AddModelError("carg_Id", "Seleccione un valor en este campo");
-                if (empleado.muni_Id == 0)
-                    //ModelState.AddModelError("muni_Id", "Seleccione un valor en este campo");
-                if (empleado.depa_Id == 0)
-                    //ModelState.AddModelError("depa_Id", "Seleccione un valor en este campo");
-                if (empleado.estc_Id == 0)
-                    //ModelState.AddModelError("estc_Id", "Seleccione un valor en este campo");
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro"); 
                 ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion",empleado.depa_Id);
                 ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(empleado.depa_Id), "muni_Id", "muni_Descripcion",empleado.muni_Id);
                 ViewBag.carg_Id = new SelectList(_generalesService.ListadoCargos(out string error2).ToList(), "carg_Id", "carg_Descripcion",empleado.carg_Id);
                 ViewBag.estc_Id = new SelectList(_generalesService.ListadoEstadosCiviles(out string error1).ToList(), "estc_Id", "estc_Descripcion",empleado.estc_Id);
+                ViewBag.sucu_Id = new SelectList(_generalesService.ListadoSucursales(out string error11).ToList(), "sucu_Id", "sucu_Descripcion",empleado.sucu_Id);
                 return View(empleado);
             }
             return RedirectToAction("Listado");
@@ -100,6 +100,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(depa_Id.depa_Id), "muni_Id", "muni_Descripcion", item.muni_Id);
                 ViewBag.carg_Id = new SelectList(_generalesService.ListadoCargos(out string error2).ToList(), "carg_Id", "carg_Descripcion", item.carg_Id);
                 ViewBag.estc_Id = new SelectList(_generalesService.ListadoEstadosCiviles(out string error1).ToList(), "estc_Id", "estc_Descripcion", item.estc_Id);
+                ViewBag.sucu_Id = new SelectList(_generalesService.ListadoSucursales(out string error11).ToList(), "sucu_Id", "sucu_Descripcion", item.sucu_Id);
 
                 ViewBag.empl_Id = item.empl_Id;
                 ViewBag.empl_Nombre = item.empl_Nombre;
@@ -142,13 +143,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             if (result == 0)
             {
                 var errores = _generalesService.BuscarEmpleados(emp.empl_Id);
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                ModelState.AddModelError("", "Ocurrió un error al editar este registro");
                 ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion", empleado.depa_Id);
                 ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(empleado.depa_Id), "muni_Id", "muni_Descripcion", empleado.muni_Id);
                 ViewBag.carg_Id = new SelectList(_generalesService.ListadoCargos(out string error2).ToList(), "carg_Id", "carg_Descripcion", empleado.carg_Id);
                 ViewBag.estc_Id = new SelectList(_generalesService.ListadoEstadosCiviles(out string error1).ToList(), "estc_Id", "estc_Descripcion", empleado.estc_Id);
+                ViewBag.sucu_Id = new SelectList(_generalesService.ListadoSucursales(out string error11).ToList(), "sucu_Id", "sucu_Descripcion", empleado.sucu_Id);
 
-                    ViewBag.empl_Id = emp.empl_Id;
+                ViewBag.empl_Id = emp.empl_Id;
                     ViewBag.empl_Nombre = emp.empl_Nombre;
                     ViewBag.empl_Apellido = emp.empl_Apellido;
                     ViewBag.empl_Sexo = emp.empl_Sexo;
@@ -161,7 +163,18 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     string FN = fechaNacimineto.ToString("yyyy-MM-dd");
                     string FC = fechaContratacion.ToString("yyyy-MM-dd");
 
-                    ViewBag.empl_FechaNacimiento = FN;
+
+                if (emp.empl_Sexo == "M")
+                {
+                    ViewBag.empl_SexoM = "checked";
+                }
+                else
+                {
+                    ViewBag.empl_SexoF = "checked";
+                }
+
+
+                ViewBag.empl_FechaNacimiento = FN;
                     ViewBag.empl_FechaContratacion = FC;
                 
 
@@ -180,13 +193,15 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     
                 var muni_Id = _generalesService.BuscarMunicipio(item.muni_Id);
                 var carg_Id = _generalesService.FindCargo(item.carg_Id);
-                var depa_Id = _generalesService.BuscarDepartameto(item.depa_Id);
+                var depa_Id = _generalesService.findDepartameto(item.depa_Id);
                 var estc_Id = _generalesService.BuscarEstadoCivil(item.estc_Id);
-                
-                //ViewBag.depa_Id = depa_Id.depa_Descripcion;
+                var sucu_Id = _generalesService.BuscarSucursal(item.sucu_Id);
+
+                ViewBag.depa_Id = depa_Id.depa_Descripcion;
                 ViewBag.muni_Id = muni_Id.muni_Descripcion;
                 ViewBag.carg_Id = carg_Id.carg_Descripcion;
                 ViewBag.estc_Id = estc_Id.estc_Descripcion;
+                ViewBag.sucu_Id = sucu_Id.sucu_Descripcion;
 
                 ViewBag.empl_Id = item.empl_Id;
                 ViewBag.empl_Nombre = item.empl_Nombre;
@@ -205,16 +220,24 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.empl_FechaContratacion = FC;
 
                 var UsuarioCreacion = _generalesService.BuscarUsuario(item.empl_UsuarioCreacion);
-                var nombreCreacion = _generalesService.findEmpleado(UsuarioCreacion.empl_Id);
-                ViewBag.UsuarioCreacion = nombreCreacion.empl_Nombre + " " + nombreCreacion.empl_Apellido;
+                var nombreCreacion = _generalesService.BuscarEmpleados(UsuarioCreacion.empl_Id);
+                foreach (var item2 in nombreCreacion)
+                {
+                ViewBag.UsuarioCreacion = item2.empl_Nombre + " " + item2.empl_Apellido;
                 ViewBag.FechaCreacion = item.empl_FechaCreacion;
+                }
+                
 
                 if (!string.IsNullOrEmpty(item.empl_UsuarioModificacion.ToString()))
                 {
                     var UsuarioModificacion = _generalesService.BuscarUsuario(item.empl_UsuarioModificacion);
-                    var nombreModificacion = _generalesService.findEmpleado(UsuarioModificacion.empl_Id);
-                    ViewBag.UsuarioModificacion = nombreModificacion.empl_Nombre + " " + nombreModificacion.empl_Apellido;
+                    var nombreModificacion = _generalesService.BuscarEmpleados(UsuarioModificacion.empl_Id);
+                    foreach (var item3 in nombreModificacion)
+                    {
+                    ViewBag.UsuarioModificacion = item3.empl_Nombre + " " + item3.empl_Apellido;
                     ViewBag.FechaModificacion = item.empl_FechaModificacion;
+                    }
+                    
                 }
             }
             return View();

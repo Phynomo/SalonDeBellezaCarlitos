@@ -1,11 +1,11 @@
-﻿@*@model SalonDeBellezaCarlitos.WebUI.Models.EstadoCivilViewModel
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.SucursalViewModel
 
 
 <div class="modal" id="modalCreate" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Crear cargo</h5>
+                <h5 class="modal-title">Agregar sucursal</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,17 +13,42 @@
             <form asp-action="Create" id="formCreate">
                 <div class="modal-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="estc_Descripcion" class="control-label"></label>
-                        <input asp-for="estc_Descripcion" class="form-control" id="estc_Descripcion" name="estc_Descripcion" />
-                        <label name="lbl_estc_Descripcion" id="lbl_estc_Descripcion" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label asp-for="sucu_Descripcion" class="control-label"></label>
+                            <input asp-for="sucu_Descripcion" class="form-control" id="sucu_Descripcion" name="sucu_Descripcion" />
+                            <label name="lbl_sucu_Descripcion" id="lbl_sucu_Descripcion" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label asp-for="depa_Id" class="control-label"></label>
+                            <select asp-for="depa_Id" id="depa_Id" class="form-select" asp-items="ViewBag.depa_Id">
+                                <option value="">-- Seleccione un Departamento --</option>
+                            </select>
+                            <label name="lbl_depa_Id" id="lbl_depa_Id" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                        </div>
+                        <div class="form-group col">
+                            <label asp-for="muni_Id" class="control-label"></label>
+                            <select asp-for="muni_Id" id="muni_Id" class="form-select" asp-items="ViewBag.muni_Id">
+                                <option value="">-- Seleccione un Municipio --</option>
+                            </select>
+                            <label name="lbl_muni_Id" id="lbl_muni_Id" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label asp-for="sucu_DireccionExacta" class="control-label"></label>
+                            <input asp-for="sucu_DireccionExacta" class="form-control" id="sucu_DireccionExacta" name="sucu_DireccionExacta" />
+                            <label name="lbl_sucu_DireccionExacta" id="lbl_sucu_DireccionExacta" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="GuardarModalCreate()">Guardar</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="GuardarModalCreate()">Guardar registro</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </form>
         </div>
     </div>
-</div>*@
+</div>

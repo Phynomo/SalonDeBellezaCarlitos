@@ -1,78 +1,69 @@
 ﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.ProveedorViewModel>
 
-    @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+<input type="hidden" value="@ViewBag.Toast" id="toast" />
 
-    <h1>Index</h1>
+@{ ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.prov_NombreEmpresa)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.prov_NombreContacto)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.prov_DireccionExacta)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.prov_Telefono)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.prov_FechaCreacion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.prov_UsuarioCreacion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.prov_FechaModificacion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.prov_UsuarioModificacion)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.prov_NombreEmpresa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.prov_NombreContacto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.prov_DireccionExacta)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.prov_Telefono)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.prov_FechaCreacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.prov_UsuarioCreacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.prov_FechaModificacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.prov_UsuarioModificacion)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.prov_Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.prov_Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.prov_Id">Delete</a>
-                </td>
-            </tr>
-}
-        </tbody>
-    </table>
+
+<div class="row text-center">
+    <div class="col">
+        <h1>Proveedores</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row mb-3 text-center">
+    <div class="col">
+        <a class="btn btn-primary" asp-action="Create">Agregar proveedor</a>
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.prov_NombreEmpresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prov_NombreContacto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prov_DireccionExacta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prov_Telefono)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.prov_NombreEmpresa)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.prov_NombreContacto)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.prov_DireccionExacta)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.prov_Telefono)
+    </td>
+    <td>
+        <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.prov_Id">Editar</a>
+        <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.prov_Id">Detalles</a>
+        <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.prov_Id')">Eliminar</button>
+    </td>
+</tr>}
+    </tbody>
+</table>
+
+
+@Html.Partial("_ProveedoresDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.ProveedorViewModel())
+
+<script src="~/js/App/Salon/Proveedores.js"></script>

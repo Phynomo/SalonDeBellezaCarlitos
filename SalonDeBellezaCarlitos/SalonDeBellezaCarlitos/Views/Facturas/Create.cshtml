@@ -1,5 +1,6 @@
 ﻿@model SalonDeBellezaCarlitos.WebUI.Models.FacturasViewModel
 
+<input type="hidden" value="@ViewBag.Toast" id="toast" />
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -181,7 +182,7 @@
                                 <td>@cliente.fade_Cantidad</td>
                                 <td>@cliente.fade_Precio</td>
                                 <td>
-                                    <button style="font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-danger btn-sm" onclick="AbrirModalDelete('@cliente.fade_Id')"><i class="bi bi-trash-fill"></i></button>
+                                    <button style="font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-danger btn-sm" onclick="AbrirModalDelete('@cliente.fade_Id')">Eliminar</button>
                                 </td>
                             </tr>
                         }

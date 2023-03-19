@@ -12,7 +12,12 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
     {
         public int Delete(tbSucursales item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@sucu_Id", item.sucu_Id, DbType.Int32, ParameterDirection.Input);
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Borrar_Sucursales, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
 
         public tbSucursales find(int? id)
@@ -27,8 +32,8 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
             var parametros = new DynamicParameters();
 
-            parametros.Add("@sucu_Nombre", item.sucu_Descripcion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
+            parametros.Add("@sucu_Decripcion", item.sucu_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@muni_Id", item.muni_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@sucu_DireccionExacta", item.sucu_DireccionExacta, DbType.String, ParameterDirection.Input);
             parametros.Add("@sucu_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
 
@@ -43,9 +48,34 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             return db.Query<tbSucursales>(ScriptsDataBase.UDP_Listado_Sucursales, null, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<VW_tbSucursales_View> ListView()
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            return db.Query<VW_tbSucursales_View>(ScriptsDataBase.UDP_Listado_Sucursales, null, commandType: CommandType.StoredProcedure);
+        }
+
+        public IEnumerable<VW_tbSucursales_View> findView(int? id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@sucu_Id", id, DbType.Int32, ParameterDirection.Input);
+            return db.Query<VW_tbSucursales_View>(ScriptsDataBase.UDP_Buscar_Sucursales, parametros, commandType: CommandType.StoredProcedure);
+        }
+
         public int Update(tbSucursales item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@sucu_Id", item.sucu_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@sucu_Decripcion", item.sucu_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@muni_Id", item.muni_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@sucu_DireccionExacta", item.sucu_DireccionExacta, DbType.String, ParameterDirection.Input);
+            parametros.Add("@sucu_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Sucursales, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
         }
     } 
 }

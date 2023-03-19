@@ -82,7 +82,7 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "DESKTOP-383CMQ3\\MSSQLSERVERLOCAL.SalonDeBellezaCarlitos",
+   "UiHint": "DESKTOP-51051C3\\SQLEXPRESS.SalonDeBellezaCarlitos",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

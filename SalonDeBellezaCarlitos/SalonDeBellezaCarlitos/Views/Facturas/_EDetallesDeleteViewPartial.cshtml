@@ -1,0 +1,37 @@
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.FacturasViewModel
+
+
+<div class="modal" id="EliminarDetalle" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="margin: auto;">Eliminar detatalle</h5>
+            </div>
+            <form asp-action="Edit" id="formDelete">
+                <div class="modal-body">
+                    <div class="modal-body text-center">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input type="hidden" asp-for="clie_Id" value="@ViewBag.clie_IdD" />
+                                <input type="hidden" asp-for="metp_Id" value="@ViewBag.metp_IdD" />
+                                <input type="hidden" asp-for="fact_Id" value="@ViewBag.fact_Id" />
+                                <input asp-for="fade_UsuarioModificacion" class="form-control" id="fade_UsuarioModificacion_Delete" name="fade_UsuarioModificacion" hidden />
+                                <input asp-for="fade_Id" class="form-control" id="fade_Id_Delete" name="fade_Id" hidden />
+                                <h4 class="padding-top-30 mb-30 weight-500">¿Desea eliminar este registro?</h4>
+                                <label name="lbl_DescripcionDeleteError" id="lbl_DescripcionDeleteError" class="control-label" hidden style="color: red;">Ocurrio un error con este delete</label>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-danger mx-1" onclick="GuardarModalDelete()">Eliminar</button>
+                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

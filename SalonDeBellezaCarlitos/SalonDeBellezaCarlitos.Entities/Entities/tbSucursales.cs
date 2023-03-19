@@ -10,6 +10,7 @@ namespace SalonDeBellezaCarlitos.Entities.Entities
     {
         public tbSucursales()
         {
+            tbEmpleados = new HashSet<tbEmpleados>();
             tbReservaciones = new HashSet<tbReservaciones>();
         }
 
@@ -26,6 +27,7 @@ namespace SalonDeBellezaCarlitos.Entities.Entities
         public virtual tbMunicipios muni { get; set; }
         public virtual tbUsuarios sucu_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios sucu_UsuarioModificacionNavigation { get; set; }
+        public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
         public virtual ICollection<tbReservaciones> tbReservaciones { get; set; }
     }
 }
