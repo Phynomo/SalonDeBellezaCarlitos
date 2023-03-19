@@ -26,6 +26,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Facturas/Listado")]
         public IActionResult Index()
         {
+            ViewBag.Toast = TempData["Factura"] as string;
 
             var listado = _generalesService.ListadoFacturas(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<VWFacturasViewModel>>(listado);
@@ -79,7 +80,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                     ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error24).ToList(), "prod_Id", "prod_Nombre");
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error14).ToList(), "serv_Id", "serv_Nombre");
-                    
+
+                    ViewBag.Toast = "errorD";
+
                     return View(factura);
 
                     #endregion
@@ -104,6 +107,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                 ViewBag.Clientes = lista;
 
+                ViewBag.Toast = "successD";
 
                 return View();
                 #endregion
@@ -132,13 +136,15 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     var lista2 = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                     ViewBag.Clientes = lista2;
 
+                    ViewBag.Toast = "errorH";
+
                     return View(factura);
                     #endregion
 
                 }
 
                 #region success
-                
+
                 ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
                 ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
                 ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error21).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
@@ -153,11 +159,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                 ViewBag.Clientes = lista;
 
+
+                ViewBag.Toast = "successH";
+
                 ViewBag.logrado = "true";
                 return View(factura);
 
                 #endregion
-               
+
             }
             else//Insertar detalles
             {
@@ -187,10 +196,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     var lista3 = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                     ViewBag.Clientes = lista3;
 
+                    ViewBag.Toast = "errorB";
+
                     return View(factura);
 
                     #endregion
-                    
+
                 }
 
                 #region success
@@ -212,6 +223,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                 ViewBag.Clientes = lista;
 
+                ViewBag.Toast = "successB";
 
                 return View();
 
@@ -224,34 +236,48 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Facturas/Editar")]
         public IActionResult Edit(int? id)
         {
-            var factura = _generalesService.BuscarFactura(id);
-            var facturaMapeado = _mapper.Map<IEnumerable<VWFacturasViewModel>>(factura);
-
-            #region Cargar datos...
-
-            foreach (var item in factura)
+            try
             {
-                ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", item.empl_Id_Atendido);
-                ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", item.empl_Id_Caja);
-                ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error21).ToList(), "clie_Id", "clie_Nombre", item.clie_Id);
-                ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error11).ToList(), "metp_Id", "metp_Descripcion", item.metp_Id);
+                var factura = _generalesService.BuscarFactura(id);
+                var facturaMapeado = _mapper.Map<IEnumerable<VWFacturasViewModel>>(factura);
 
-                ViewBag.clie_IdD = item.clie_Id;
-                ViewBag.metp_IdD = item.metp_Id;
-                ViewBag.fact_Id = id;
-                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
-                ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
+                #region Cargar datos...
+                if (factura.Count() == 0)
+                {
+                    Convert.ToInt32("a");
+                }
+                foreach (var item in factura)
+                {
+                    ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", item.empl_Id_Atendido);
+                    ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", item.empl_Id_Caja);
+                    ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error21).ToList(), "clie_Id", "clie_Nombre", item.clie_Id);
+                    ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error11).ToList(), "metp_Id", "metp_Descripcion", item.metp_Id);
 
-                var lista = _generalesService.BuscarFacturasDetalles(item.fact_Id).ToList();
-                ViewBag.Clientes = lista;
+                    ViewBag.clie_IdD = item.clie_Id;
+                    ViewBag.metp_IdD = item.metp_Id;
+                    ViewBag.fact_Id = id;
+                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
+                    ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
 
-                ViewBag.logrado = "edit";
+                    var lista = _generalesService.BuscarFacturasDetalles(item.fact_Id).ToList();
+
+                    ViewBag.Clientes = lista;
+
+                    ViewBag.logrado = "edit";
+                    return View();
+                }
+
+                #endregion
+
                 return View();
             }
+            catch (Exception)
+            {
+                ViewBag.Clientes = null;
+                TempData["Factura"] = "errorC";
+                return RedirectToAction("Listado");
+            }
 
-            #endregion
-            
-            return View();
         }
 
         [HttpPost("/Facturas/Editar")]
@@ -281,10 +307,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error24).ToList(), "prod_Id", "prod_Nombre");
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error14).ToList(), "serv_Id", "serv_Nombre");
 
+
+                    ViewBag.Toast = "errorD";
+
                     return View(factura);
 
                     #endregion
-                    
+
                 }
 
                 #region success
@@ -306,6 +335,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                 ViewBag.Clientes = lista;
 
+                ViewBag.Toast = "successD";
 
                 return View();
 
@@ -334,6 +364,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     var lista2 = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                     ViewBag.Clientes = lista2;
 
+                    ViewBag.Toast = "errorH";
                     return View(factura);
 
                     #endregion
@@ -356,6 +387,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                 ViewBag.Clientes = lista;
 
+                ViewBag.Toast = "successH";
                 ViewBag.logrado = "edit";
                 return View(factura);
 
@@ -391,6 +423,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     var lista3 = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                     ViewBag.Clientes = lista3;
 
+                    ViewBag.Toast = "errorB";
+
                     return View(factura);
 
                     #endregion
@@ -416,6 +450,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                 ViewBag.Clientes = lista;
 
+                ViewBag.Toast = "successB";
 
                 return View();
 
@@ -428,27 +463,45 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Facturas/Detalles")]
         public IActionResult Details(int? id)
         {
-            var Factura = _generalesService.BuscarFactura(id);
-            var listadoMapeado = _mapper.Map<IEnumerable<VWFacturasViewModel>>(Factura);
-
-            var lista = _generalesService.BuscarFacturasDetalles(id).ToList();
-            ViewBag.Clientes = lista;
-
-            decimal subtotal = 0;
-
-            foreach (var item in lista)
+            try
             {
-                subtotal += item.fade_Cantidad * item.fade_Precio;
+                var Factura = _generalesService.BuscarFactura(id);
+                var listadoMapeado = _mapper.Map<IEnumerable<VWFacturasViewModel>>(Factura);
+                if (Factura.Count() == 0)
+                {
+                    Convert.ToInt32("hola");
+                }
+                var lista = _generalesService.BuscarFacturasDetalles(id).ToList();
+
+
+                ViewBag.Clientes = lista;
+
+                decimal subtotal = 0;
+
+                foreach (var item in lista)
+                {
+                    subtotal += item.fade_Cantidad * item.fade_Precio;
+                }
+
+                decimal iva = (subtotal * Convert.ToDecimal(0.12));
+                decimal Total = iva + subtotal;
+
+
+
+                ViewBag.Total = Total;
+                ViewBag.Subtotal = subtotal;
+                ViewBag.IVA = iva;
+
+                return View(listadoMapeado);
+
+            }
+            catch (Exception)
+            {
+                ViewBag.Clientes = null;
+                TempData["Factura"] = "errorC";
+                return RedirectToAction("Listado");
             }
 
-            decimal iva = (subtotal * Convert.ToDecimal(0.12));
-            decimal Total = iva + subtotal;
-
-            ViewBag.Total = Total;
-            ViewBag.Subtotal = subtotal;
-            ViewBag.IVA = iva;
-
-            return View(listadoMapeado);
         }
 
 

@@ -25,6 +25,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Cargos/Listado")]
         public IActionResult Index()
         {
+            ViewBag.Toast = TempData["myData"] as string;
 
             HttpContext.Session.SetString("MiClave", "MiValor");
 
@@ -55,9 +56,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             if (result == 0)
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                TempData["myData"] = "error";
                 return RedirectToAction("Listado");
             }
+
+            TempData["myData"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -77,9 +80,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             if (result == 0)
             {
+                TempData["myData"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return View();
             }
+
+            TempData["myData"] = "success";
             return RedirectToAction("Listado");
            
         }
@@ -103,6 +109,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return View();
             }
+
+            TempData["myData"] = "success";
             return RedirectToAction("Listado");
 
         }

@@ -1,5 +1,6 @@
 ﻿@model SalonDeBellezaCarlitos.WebUI.Models.FacturasViewModel
 
+<input type="hidden" value="@ViewBag.Toast" id="toast" />
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,50 +27,50 @@
             </div>
             <div class="card-body">
 
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="form-group col">
-                                <label asp-for="clie_Id" class="control-label"></label>
-                                <select asp-for="clie_Id" id="clie_Id" class="form-control" asp-items="ViewBag.clie_Id">
-                                    <option value="">-- Selecciones un Cliente --</option>
-                                </select>
-                                <label name="lbl_clie_IdError" id="lbl_clie_IdError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group col">
-                                <label asp-for="metp_Id" class="control-label"></label>
-                                <select asp-for="metp_Id" id="metp_Id" class="form-control" asp-items="ViewBag.metp_Id">
-                                    <option value="">-- Selecciones un Metodo de pago --</option>
-                                </select>
-                                <label name="lbl_metp_IdError" id="lbl_metp_IdError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group col">
-                                <label asp-for="empl_Id_Caja" class="control-label"></label>
-                                <select asp-for="empl_Id_Caja" id="empl_Id_Caja" class="form-control" asp-items="ViewBag.empl_Id_Caja">
-                                    <option value="">-- Selecciones un Cajero --</option>
-                                </select>
-                                <label name="lbl_empl_Id_CajaError" id="lbl_empl_Id_CajaError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group col">
-                                <label asp-for="empl_Id_Atendido" class="control-label"></label>
-                                <select asp-for="empl_Id_Atendido" id="empl_Id_Atendido" class="form-control" asp-items="ViewBag.empl_Id_Atendido">
-                                    <option value="">-- Selecciones un Estilista --</option>
-                                </select>
-                                <label name="lbl_empl_Id_AtendidoError" id="lbl_empl_Id_AtendidoError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
-                            </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group col">
+                            <label asp-for="clie_Id" class="control-label"></label>
+                            <select asp-for="clie_Id" id="clie_Id" class="form-control" asp-items="ViewBag.clie_Id">
+                                <option value="">-- Selecciones un Cliente --</option>
+                            </select>
+                            <label name="lbl_clie_IdError" id="lbl_clie_IdError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                         </div>
                     </div>
-                        
-                    <div class="row d-flex justify-content-end">
-                        
+                    <div class="col-3">
+                        <div class="form-group col">
+                            <label asp-for="metp_Id" class="control-label"></label>
+                            <select asp-for="metp_Id" id="metp_Id" class="form-control" asp-items="ViewBag.metp_Id">
+                                <option value="">-- Selecciones un Metodo de pago --</option>
+                            </select>
+                            <label name="lbl_metp_IdError" id="lbl_metp_IdError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                        </div>
                     </div>
+                    <div class="col-3">
+                        <div class="form-group col">
+                            <label asp-for="empl_Id_Caja" class="control-label"></label>
+                            <select asp-for="empl_Id_Caja" id="empl_Id_Caja" class="form-control" asp-items="ViewBag.empl_Id_Caja">
+                                <option value="">-- Selecciones un Cajero --</option>
+                            </select>
+                            <label name="lbl_empl_Id_CajaError" id="lbl_empl_Id_CajaError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group col">
+                            <label asp-for="empl_Id_Atendido" class="control-label"></label>
+                            <select asp-for="empl_Id_Atendido" id="empl_Id_Atendido" class="form-control" asp-items="ViewBag.empl_Id_Atendido">
+                                <option value="">-- Selecciones un Estilista --</option>
+                            </select>
+                            <label name="lbl_empl_Id_AtendidoError" id="lbl_empl_Id_AtendidoError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row d-flex justify-content-end">
+
+                </div>
 
             </div>
         </div>

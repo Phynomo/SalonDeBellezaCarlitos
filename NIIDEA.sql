@@ -2278,7 +2278,7 @@ WHERE @depa_Descripcion = depa_Descripcion AND @depa_Codigo = depa_Codigo
 SELECT 1 as Proceso
 END TRY
 BEGIN CATCH
-SELECT 0 as Proceso
+SELECT 44 as Proceso
 END CATCH
 END
 
@@ -2317,15 +2317,24 @@ AS
 BEGIN
 BEGIN TRY
 
+IF EXISTS (SELECT * FROM tbMunicipios
+			WHERE depa_Id = @depa_Id and muni_Estado = 1)
+BEGIN
+select 2 as proceso
+END
+ELSE
+BEGIN
+
 UPDATE [gnrl].[tbDepartamentos]
    SET [depa_Estado] = 0
  WHERE [depa_Id] = @depa_Id
-
-
 SELECT 1 as Proceso
+END
+
+
 END TRY
 BEGIN CATCH
-SELECT 0 as Proceso
+SELECT 44 as Proceso
 END CATCH
 END
 GO
@@ -3059,7 +3068,7 @@ SELECT 1 as Proceso
 END
 ELSE IF  EXISTS (SELECT * FROM salo.tbProveedores
 				WHERE @prov_NombreEmpresa = prov_NombreEmpresa and prov_Estado = 1)
-SELECT 0 as Proceso
+SELECT 2 as Proceso
 ELSE
 UPDATE salo.tbProveedores
 SET prov_NombreContacto = @prov_NombreContacto
@@ -3074,7 +3083,7 @@ SELECT 1 as Proceso
 
 END TRY
 BEGIN CATCH
-SELECT 0 as Proceso
+SELECT 44 as Proceso
 END CATCH
 
 END
