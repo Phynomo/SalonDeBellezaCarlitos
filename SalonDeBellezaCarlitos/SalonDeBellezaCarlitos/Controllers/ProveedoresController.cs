@@ -28,6 +28,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public IActionResult Index()
         {
 
+            ViewBag.Toast = TempData["Proveedores"] as string;
             var listado = _generalesService.ListadoProveedores(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<ProveedorViewModel>>(listado);
 
@@ -52,8 +53,25 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             var prov = _mapper.Map<tbProveedores>(proveedor);
             result = _generalesService.InsertarProveedor(prov);
 
-            if (result == 0)
+            if (result != 1)
             {
+                if (result == 0)
+                {
+                    ModelState.AddModelError("", "Ocurrió un error al crear este registro");
+                    ViewBag.Toast = "Fatal";
+                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error3).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
+                    ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
+                    return View();
+                }
+                if (result == 2)
+                {
+                    ModelState.AddModelError("", "El nombre de la empresa ya esta registrado");
+                    ViewBag.Toast = "repetido";
+                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error2).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
+                    ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
+                    return View();
+                }
+
                 ModelState.AddModelError("", "Ocurrió un error al crear este registro");
                 ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
                 ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
@@ -84,14 +102,29 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             var prov = _mapper.Map<tbProveedores>(proveedor);
             result = _generalesService.InsertarProveedor(prov);
 
-            if (result == 0)
+            switch (result)
             {
-                ModelState.AddModelError("", "Ocurrió un error al crear este registro");
-                ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
-                ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
-                return View();
+                case 1:
+                    TempData["Proveedor"] = "success";
+                    return RedirectToAction("Listado");
+                case 2:
+                    ViewBag.Toast = "repetido";
+                    ModelState.AddModelError("", "Ocurrió un error al crear este registro");
+                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
+                    ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
+                    return View(prov);
+                case 0:
+                    ViewBag.Toast = "fatal";
+                    ModelState.AddModelError("", "Ocurrió un error al crear este registro");
+                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error7).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
+                    ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
+                    return View(prov);
+                default:
+                    ModelState.AddModelError("", "ocurrio un error inesperado");
+                    ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error2).ToList(), "depa_Id", "depa_Descripcion", proveedor.depa_Id);
+                    ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
+                    return View(prov);
             }
-            return RedirectToAction("Listado");
         }
 
         [HttpGet("/Proveedores/Detalles")]

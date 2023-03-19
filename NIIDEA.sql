@@ -3102,6 +3102,9 @@ CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Update
 AS
 BEGIN
 BEGIN TRY
+IF NOT EXISTS (SELECT * FROM salo.tbProveedores
+				WHERE @prov_NombreEmpresa = prov_NombreEmpresa)
+BEGIN
 
 UPDATE [salo].[tbProveedores]
    SET [prov_NombreEmpresa] = @prov_NombreEmpresa
@@ -3114,6 +3117,9 @@ UPDATE [salo].[tbProveedores]
  WHERE prov_Id = @prov_Id
 
 SELECT 1 as Proceso
+END
+ELSE
+SELECT 2
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso
