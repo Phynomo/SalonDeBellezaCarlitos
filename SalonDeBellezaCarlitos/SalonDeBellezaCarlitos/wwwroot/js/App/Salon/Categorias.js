@@ -1,6 +1,6 @@
 ﻿function AbrirModalCreate() {
     $("#modalCreate").appendTo('body').modal('show');
-
+    $("#lbl_DescripcionCreateError").attr('hidden', true);
     var input = document.getElementById("cate_Descripcion");
     input.addEventListener("keydown", function (event) {
         var key = event.key;

@@ -1,6 +1,7 @@
 ﻿function AbrirModalCreate()
 {
     $("#modalCreate").appendTo('body').modal('show');
+    $("#lbl_DescripcionCreateError").attr('hidden', true);
 
     var input = document.getElementById("estc_Descripcion",);
     input.addEventListener("keydown", function (event) {

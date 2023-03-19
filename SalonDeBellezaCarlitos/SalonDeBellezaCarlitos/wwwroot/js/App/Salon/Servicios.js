@@ -1,6 +1,10 @@
 ﻿function AbrirModalCreate()
 {
     $("#modalCreate").appendTo('body').modal('show');
+    $("#lbl_serv_Nombre").attr('hidden', true);
+    $("#lbl_serv_Descripcion").attr('hidden', true);
+    $("#lbl_serv_Precio").attr('hidden', true);
+
     var input = document.getElementById("serv_Nombre",);
     input.addEventListener("keydown", function (event) {
         var key = event.key;

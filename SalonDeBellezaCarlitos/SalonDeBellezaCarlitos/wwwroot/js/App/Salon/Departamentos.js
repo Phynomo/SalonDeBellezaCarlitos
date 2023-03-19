@@ -1,7 +1,8 @@
 ﻿function AbrirModalCreate()
 {
     $("#modalCreate").appendTo('body').modal('show');
-
+    $("#lbl_depa_Codigo").attr('hidden', true);
+    $("#lbl_depa_Descripcion").attr('hidden', true);
     var input = document.getElementById("depa_Descripcion",);
     input.addEventListener("keydown", function (event) {
         var key = event.key;

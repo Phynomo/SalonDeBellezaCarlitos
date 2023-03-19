@@ -1,7 +1,7 @@
 ﻿function AbrirModalCreate()
 {
     $("#modalCreate").appendTo('body').modal('show');
-
+    $("#lbl_metp_Descripcion").attr('hidden', true);
 
     var input = document.getElementById("metp_Descripcion");
 

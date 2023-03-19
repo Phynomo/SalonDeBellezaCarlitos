@@ -1,5 +1,9 @@
 ﻿function AbrirModalCreate() {
     $("#modalCreate").appendTo('body').modal('show');
+    $("#lbl_clie_Nombre").attr('hidden', true);
+    $("#lbl_clie_Apellido").attr('hidden', true);
+    $("#lbl_clie_Telefono").attr('hidden', true);
+    $("#lbl_clie_CorreoElectronico").attr('hidden', true);
 
     var input = document.getElementById("clie_Nombre",);
     input.addEventListener("keydown", function (event) {

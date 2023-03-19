@@ -116,7 +116,6 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             var producto = _generalesService.BuscarProducto(id);
             foreach (var item in producto)
             {   
-                ViewBag.prod_Id = item.prod_Id;
                 var cate_Id = _generalesService.BuscarCategoria(item.cate_Id);
                 var prov_Id = _generalesService.BuscarProveedor(item.prov_id);
 
@@ -127,8 +126,6 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.prod_Nombre = item.prod_Nombre;
                 ViewBag.prod_Precio = item.prod_Precio;
                 ViewBag.prod_Stock = item.prod_Stock;
-                ViewBag.cate_Id = item.cate_Id;
-                ViewBag.prov_Id = item.prov_id;
 
                 var UsuarioCreacion = _generalesService.BuscarUsuario(item.prod_UsuarioCreacion);
                 var nombreCreacion = _generalesService.findEmpleado(UsuarioCreacion.empl_Id);
