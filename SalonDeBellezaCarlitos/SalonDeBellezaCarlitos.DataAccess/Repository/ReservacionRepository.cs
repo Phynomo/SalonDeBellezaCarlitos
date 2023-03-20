@@ -41,7 +41,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@rese_DiaReservado", rese_DiaReservado, DbType.Date, ParameterDirection.Input);
             parametros.Add("@rese_HoraInicio", item.rese_HoraInicio, DbType.Time, ParameterDirection.Input);
             parametros.Add("@rese_HoraFin", item.rese_HoraFin, DbType.Time, ParameterDirection.Input);
-            parametros.Add("@rese_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@rese_UsuarioCreacion", item.rese_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Reservaciones, parametros, commandType: CommandType.StoredProcedure);
 
@@ -84,7 +84,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@rese_DiaReservado", rese_DiaReservado, DbType.Date, ParameterDirection.Input);
             parametros.Add("@rese_HoraInicio", item.rese_HoraInicio, DbType.Time, ParameterDirection.Input);
             parametros.Add("@rese_HoraFin", item.rese_HoraFin, DbType.Time, ParameterDirection.Input);
-            parametros.Add("@rese_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@rese_UsuarioModificacion", item.rese_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Reservaciones, parametros, commandType: CommandType.StoredProcedure);
 

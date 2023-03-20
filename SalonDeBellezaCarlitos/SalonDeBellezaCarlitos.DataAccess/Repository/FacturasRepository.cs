@@ -105,5 +105,18 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         {
             throw new NotImplementedException();
         }
+
+        public int stockmax(int prod_Id, int serv_Id)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@prod_Id", prod_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@serv_Id", serv_Id, DbType.Int32, ParameterDirection.Input);
+
+            var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_StockMax_FacturasDetalle, parametros, commandType: CommandType.StoredProcedure);
+
+            return resultado;
+        }
+
     }
 }

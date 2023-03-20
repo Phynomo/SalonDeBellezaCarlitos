@@ -1,4 +1,17 @@
-﻿function AbrirModalCreate() {
+﻿$(document).ready(function () {
+    $('#navSalon').addClass('active');
+    $('#navClientes').addClass('active');
+    $('#subnavSalon').addClass('show');
+    
+    if ($("#toast").val() == 'error') {
+        MostrarMensajeDanger("Ocurrio un error al realizar la operacion!");
+        $("#modalCreate").appendTo('body').modal('show');
+    }
+    if ($("#toast").val() == 'success') {
+        MostrarMensajeSuccess("La operacion se realizo con exito!");
+    }
+});
+function AbrirModalCreate() {
     $("#modalCreate").appendTo('body').modal('show');
     $("#lbl_clie_Nombre").attr('hidden', true);
     $("#lbl_clie_Apellido").attr('hidden', true);

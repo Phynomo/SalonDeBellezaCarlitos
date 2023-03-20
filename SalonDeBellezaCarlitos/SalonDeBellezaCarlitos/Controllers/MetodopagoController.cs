@@ -1,4 +1,5 @@
 ﻿    using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
@@ -27,7 +28,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Metodopago/Listado")]
         public IActionResult Index()
         {
-
+            ViewBag.Toast = TempData["Metodopago"] as string;
             var listado = _generalesService.ListadoMetodoPago(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<MetodoPagoViewModel>>(listado);
 
@@ -50,21 +51,25 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
+                Metodopagos.metp_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                Metodopagos.metp_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
                 var result = 0;
                 var met = _mapper.Map<tbMetodoPago>(Metodopagos);
                 result = _generalesService.InsertarMetodoPago(met);
 
                 if (result == 0)
                 {
+                    TempData["Metodopago"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                    return View();
+                    return RedirectToAction("Listado");
                 }
             }
             catch (Exception)
             {
                 
             }
-            
+            TempData["Metodopago"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -88,15 +93,16 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 if (result == 0)
                 {
+                    TempData["Metodopago"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                    return View();
+                    return RedirectToAction("Listado");
                 }
             }
             catch (Exception)
             {
 
             }
-            
+            TempData["Metodopago"] = "success";
             return RedirectToAction("Listado");
 
         }
@@ -105,21 +111,25 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
+                metodo.metp_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                metodo.metp_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
                 var result = 0;
                 var met = _mapper.Map<tbMetodoPago>(metodo);
                 result = _generalesService.EditarMetodoPago(met);
 
                 if (result == 0)
                 {
+                    TempData["Metodopago"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                    return View();
+                    return RedirectToAction("Listado");
                 }
             }
             catch (Exception)
             {
 
             }
-
+            TempData["Metodopago"] = "success";
             return RedirectToAction("Listado");
 
         }

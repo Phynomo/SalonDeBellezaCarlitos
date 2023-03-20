@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
@@ -50,6 +51,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(ReservacionesViewModel reservacion)
         {
             var result = 0;
+            reservacion.rese_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            reservacion.rese_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var rese = _mapper.Map<tbReservaciones>(reservacion);
             result = _generalesService.InsertarReservaciones(rese);
 
@@ -97,6 +101,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Edit(ReservacionesViewModel reservaciones)
         {
             var result = 0;
+            reservaciones.rese_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            reservaciones.rese_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var rese = _mapper.Map<tbReservaciones>(reservaciones);
             result = _generalesService.EditarReservacion(rese);
 

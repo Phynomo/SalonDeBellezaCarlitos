@@ -541,7 +541,27 @@ INSERT INTO [gnrl].[tbMetodoPago]
            ('Tarjeta de Debito',GetDate(),1,null ,null,1)
 GO
 
-
+CREATE OR ALTER VIEW acce.VW_Login_View
+AS
+SELECT	 [usur_Id]
+                ,[usur_Usuario]
+                ,[usur_Contrasenia]
+                ,T1.[empl_Id]
+                ,t2.empl_Nombre + ' ' + t2.empl_Apellido as empl_NombreCompleto
+				,t2.empl_Nombre
+				,t2.empl_Apellido
+				,t2.sucu_Id
+				,t3.carg_Id
+				,t3.carg_Descripcion
+                ,[usur_UsuarioCreacion]
+                ,[usur_FechaCreacion]
+                ,[usur_UsuarioModificacion]
+                ,[usur_FechaModificacion]
+                ,[usur_Estado]
+        FROM    acce.[tbUsuarios] T1 INNER JOIN [salo].[tbEmpleados] T2
+        ON      T1.empl_Id = T2.empl_Id INNER JOIN [salo].tbCargos T3
+		ON		T2.carg_Id = T3.carg_Id
+        WHERE   usur_Estado = 1
 
 
 --Procedimientos almacenados del login
@@ -555,24 +575,9 @@ BEGIN
 
         BEGIN TRY
         Declare @Password Nvarchar(max) = (HASHBYTES('SHA2_512',@usur_Contrasenia))
-        SELECT	 [usur_Id]
-                ,[usur_Usuario]
-                ,[usur_Contrasenia]
-                ,T1.[empl_Id]
-                ,t2.empl_Nombre + ' ' + t2.empl_Apellido as empl_Nombre 
-				,t2.sucu_Id
-				,t3.carg_Id
-				,t3.carg_Descripcion
-                ,[usur_UsuarioCreacion]
-                ,[usur_FechaCreacion]
-                ,[usur_UsuarioModificacion]
-                ,[usur_FechaModificacion]
-                ,[usur_Estado]
-        FROM    acce.[tbUsuarios] T1 INNER JOIN [salo].[tbEmpleados] T2
-        ON      T1.empl_Id = T2.empl_Id INNER JOIN [salo].tbCargos T3
-		ON		T2.carg_Id = T3.carg_Id
-        WHERE   t1.usur_Contrasenia = @Password 
-        AND     t1.usur_Usuario = @usur_Usuario
+        SELECT * FROM acce.VW_Login_View       
+		WHERE   usur_Contrasenia = @Password 
+        AND     usur_Usuario = @usur_Usuario
 
         --SELECT 1 as Proceso
         END TRY
@@ -587,7 +592,7 @@ GO
 
 
 GO
-CREATE OR ALTER    PROCEDURE acce._RecuperarContrasenia
+CREATE OR ALTER    PROCEDURE acce.UDP_RecuperarContrasenia
 @usur_Usuario VARCHAR(100),
 @usur_Contrasenia NVARCHAR(MAX)
 
@@ -602,7 +607,12 @@ UPDATE [acce].[tbUsuarios]
    SET [usur_Contrasenia] = @Password
  WHERE usur_Usuario = @usur_Usuario
 
-SELECT 1 as Proceso
+ IF EXISTS (select * FROM acce.tbUsuarios WHERE usur_Usuario = @usur_Usuario)
+ BEGIN
+ SELECT 1 as Proceso
+ END
+ ELSE
+ SELECT 0 as Proceso
 
 END TRY
 BEGIN CATCH
@@ -1554,12 +1564,9 @@ END
 GO
 
 --Procedimientos almacenados de Productos
-GO
-CREATE OR ALTER PROCEDURE salo.UDP_tbProductos_Listado
+
+CREATE VIEW salo.VW_tbProductos_View
 AS
-BEGIN
-
-
 SELECT [prod_Id]
       ,[prod_Nombre]
       ,[prod_Precio]
@@ -1577,6 +1584,13 @@ SELECT [prod_Id]
   ON t1.cate_Id = T2.cate_Id INNER JOIN salo.tbProveedores T3
   ON T3.prov_Id = T1.prov_id
   WHERE prod_Estado = 1
+
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_tbProductos_Listado
+AS
+BEGIN
+
+SELECT * FROM salo.VW_tbProductos_View
 
 
 END
@@ -1589,24 +1603,8 @@ AS
 BEGIN
 
 
-SELECT [prod_Id]
-      ,[prod_Nombre]
-      ,[prod_Precio]
-      ,T1.[cate_Id]
-	  ,T2.cate_Descripcion
-      ,[prod_Stock]
-      ,T1.[prov_id]
-	  ,T3.prov_NombreEmpresa
-      ,[prod_FechaCreacion]
-      ,[prod_UsuarioCreacion]
-      ,[prod_FechaModificacion]
-      ,[prod_UsuarioModificacion]
-      ,[prod_Estado]
-  FROM [salo].[tbProductos] T1 INNER JOIN salo.tbCategorias T2
-  ON t1.cate_Id = T2.cate_Id INNER JOIN salo.tbProveedores T3
-  ON T3.prov_Id = T1.prov_id
-  WHERE prod_Estado = 1
-  AND prod_Id = @prod_Id
+SELECT * FROM salo.VW_tbProductos_View
+  WHERE prod_Id = @prod_Id
 
 
 END
@@ -2103,13 +2101,16 @@ END
 GO
 CREATE OR ALTER PROCEDURE gnrl.UDP_tbMetodoPago_Update
 	@metp_Id                      INT,
-	@metp_Descripcion             NVARCHAR (100)
+	@metp_Descripcion             NVARCHAR (100),
+	@metp_UsuarioModificacion		INT
 AS
 BEGIN
 BEGIN TRY
 
 	UPDATE gnrl.tbMetodoPago
 	SET metp_Descripcion = @metp_Descripcion
+		,metp_FechaModificacion = GETDATE()
+		,metp_UsuarioModificacion = @metp_UsuarioModificacion
 	WHERE metp_Id = @metp_Id;
 
 SELECT 1 as Proceso
@@ -2650,6 +2651,33 @@ END
 
 GO
 
+
+CREATE OR ALTER PROCEDURE salo.tbFacturas_StockSuficiente
+@prod_Id INT,
+@serv_Id INT
+AS
+BEGIN
+
+BEGIN TRY
+
+
+
+DECLARE @cantidad INT = (SELECT top(1) prod_Stock
+FROM salo.tbProductosXServicio T1 FULL JOIN salo.tbProductos T2
+ON T1.prod_Id = T2.prod_Id
+WHERE T2.prod_Id = @prod_Id OR serv_Id = @serv_Id
+ORDER BY 1 )
+
+SELECT @cantidad
+
+END TRY
+BEGIN CATCH
+SELECT 15 as Proceso
+END CATCH
+
+END
+
+
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_salo_tbFacturas_Insert
     @clie_Id                INT,
@@ -2941,16 +2969,14 @@ END CATCH
 END
 GO
 
---Procedimiento Delete ServiciosXProducto
-GO
-GO
-CREATE OR ALTER PROCEDURE salo.UDP_salo_tbServiciosXProducto_Listado
-AS
-BEGIN
-
+CREATE OR ALTER VIEW salo.VW_tbProductosxServicio_View
+as
 SELECT [spro_Id]
-      ,[serv_Id]
-      ,T1.[prod_Id]
+      ,T1.[serv_Id]
+	  ,T3.serv_Nombre
+	  ,T3.serv_Descripcion
+      ,T3.serv_Precio
+	  ,T1.[prod_Id]
 	  ,T2.prod_Nombre
 	  ,T2.prod_Precio
       ,[spro_FechaCreacion]
@@ -2959,10 +2985,31 @@ SELECT [spro_Id]
       ,[spro_UsuarioModificacion]
       ,[spro_Estado]
   FROM [salo].[tbProductosXServicio] T1 INNER JOIN salo.tbProductos T2
-  ON t1.prod_Id = T2.prod_Id
+  ON t1.prod_Id = T2.prod_Id INNER JOIN salo.tbServicios T3
+  ON T3.serv_Id = t1.serv_Id
   WHERE spro_Estado = 1
+
+
+--Procedimiento Delete ServiciosXProducto
+GO
+GO
+CREATE OR ALTER PROCEDURE salo.UDP_salo_tbServiciosXProducto_Listado
+AS
+BEGIN
+SELECT * FROM salo.VW_tbProductosxServicio_View
 END
 GO
+
+
+CREATE OR ALTER PROCEDURE salo.UDP_salo_tbServiciosXProducto_Buscar
+@sprod_Id int
+AS
+BEGIN
+SELECT * FROM salo.VW_tbProductosxServicio_View
+WHERE spro_Id = @sprod_Id
+END
+GO
+
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_salo_tbServiciosXProducto_Insert
     @serv_Id                    INT,
@@ -3109,7 +3156,7 @@ END
 
 
 GO
-CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Insert
+CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Insert 'asd', 'ásdf', 54, 'sdfsdf','asdasd',2
 	@prov_NombreEmpresa Nvarchar(150),
 	@prov_NombreContacto Nvarchar(150),
 	@muni_Id INT,
@@ -3163,7 +3210,7 @@ SET prov_NombreContacto = @prov_NombreContacto
 	,prov_DireccionExacta = @prov_DireccionExacta
 	WHERE @prov_NombreEmpresa = prov_NombreEmpresa
 	
-SELECT 1 as Proceso
+SELECT 3 as Proceso
 
 
 END TRY

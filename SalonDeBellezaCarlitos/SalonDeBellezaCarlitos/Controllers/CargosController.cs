@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
 using SalonDeBellezaCarlitos.Entities.Entities;
 using SalonDeBellezaCarlitos.WebUI.Models;
+using System;
 using System.Collections.Generic;
 
 namespace SalonDeBellezaCarlitos.WebUI.Controllers
@@ -27,7 +28,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             ViewBag.Toast = TempData["myData"] as string;
 
-            HttpContext.Session.SetString("MiClave", "MiValor");
+            
 
             var listado = _generalesService.ListadoCargos(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<CargoViewModel>>(listado);
@@ -50,6 +51,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Cargos/Crear")]
         public ActionResult Create(CargoViewModel cargo)
         {
+            cargo.carg_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            cargo.carg_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var result = 0;
             var car = _mapper.Map<tbCargos>(cargo);
             result = _generalesService.InsertarCargo(car);
@@ -74,6 +78,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Cargos/Editar")]
         public IActionResult Edit(CargoViewModel cargo)
         {
+            cargo.carg_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            cargo.carg_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
             var result = 0;
             var car = _mapper.Map<tbCargos>(cargo);
             result = _generalesService.EditarCargo(car);
@@ -82,7 +88,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
                 TempData["myData"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                return RedirectToAction("Listado");
             }
 
             TempData["myData"] = "success";
@@ -107,7 +113,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             if (result == 0)
             {
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                return RedirectToAction("Listado");
             }
 
             TempData["myData"] = "success";

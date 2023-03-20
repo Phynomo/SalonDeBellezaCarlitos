@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
@@ -28,6 +29,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public IActionResult Index()
         {
 
+            ViewBag.Toast = TempData["Municipios"] as string;
+
             ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion");
             var listado = _generalesService.ListadoMunicipios(out string error1);
             var listadoMapeado = _mapper.Map<IEnumerable<VWMunicipiosViewModel>>(listado);
@@ -49,14 +52,19 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(MunicipioViewModel municipio)
         {
             var result = 0;
+            municipio.muni_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            municipio.muni_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var muni = _mapper.Map<tbMunicipios>(municipio);
             result = _generalesService.InsertarMunicipio(muni);
 
             if (result == 0)
             {
+                TempData["Municipios"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return RedirectToAction("Listado");
             }
+            TempData["Municipios"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -64,14 +72,19 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Edit(MunicipioViewModel municipio)
         {
             var result = 0;
+            municipio.muni_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            municipio.muni_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var muni = _mapper.Map<tbMunicipios>(municipio);
             result = _generalesService.EditarMunicipio(muni);
 
             if (result == 0)
             {
+                TempData["Municipios"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return RedirectToAction("Listado");
             }
+            TempData["Municipios"] = "sucess";
             return RedirectToAction("Listado");
         }
 
@@ -84,9 +97,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             if (result == 0)
             {
+                TempData["Municipios"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return RedirectToAction("Listado");
             }
+            TempData["Municipios"] = "success";
             return RedirectToAction("Listado");
         }
 

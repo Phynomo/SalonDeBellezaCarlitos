@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
@@ -28,10 +29,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Usuario/Listado")]
         public IActionResult Index()
         {
-
+            ViewBag.Toast = TempData["Usuario"] as string;
             ViewBag.empl_Id = new SelectList(_generalesService.ListadoEmpleados(out string error1).ToList(), "empl_Id", "empl_Nombre");
-
-
             var listado = _generalesService.ListadoUsuariosView(out string error);
 
             var listadoMapeado = _mapper.Map<IEnumerable<VWUsuariosViewModel>>(listado);
@@ -48,14 +47,19 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(UsuariosViewModel Usuario)
         {
             var result = 0;
+            Usuario.usur_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            Usuario.usur_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var usu = _mapper.Map<tbUsuarios>(Usuario);
             result = _generalesService.InsertarUsuario(usu);
 
             if (result == 0)
             {
+                TempData["Usuario"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return RedirectToAction("Listado");
             }
+            TempData["Usuario"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -63,14 +67,19 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Edit(UsuariosViewModel Usuario)
         {
             var result = 0;
+            Usuario.usur_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            Usuario.usur_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var usu = _mapper.Map<tbUsuarios>(Usuario);
             result = _generalesService.EditarUsuario(usu);
 
             if (result == 0)
             {
+                TempData["Usuario"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return RedirectToAction("Listado");
             }
+            TempData["Usuario"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -84,9 +93,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             if (result == 0)
             {
+                TempData["Usuario"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al eliminar este registro");
                 return RedirectToAction("Listado");
             }
+            TempData["Usuario"] = "error";
             return RedirectToAction("Listado");
 
         }

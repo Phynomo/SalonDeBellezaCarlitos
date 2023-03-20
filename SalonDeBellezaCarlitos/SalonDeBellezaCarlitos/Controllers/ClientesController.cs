@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
 using SalonDeBellezaCarlitos.Entities.Entities;
@@ -24,7 +25,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Clientes/Listado")]
         public IActionResult Index()
         {
-
+            ViewBag.Toast = TempData["Clientes"] as string;
             var listado = _generalesService.ListadoClientes(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<ClienteViewModel>>(listado);
 
@@ -40,12 +41,16 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
+
+                cliente.clie_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                cliente.clie_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
                 var result = 0;
                 var cli = _mapper.Map<tbClientes>(cliente);
                 result = _generalesService.InsertarCLientes(cli);
 
                 if (result == 0)
                 {
+                    TempData["Clientes"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                     return RedirectToAction("Listado");
                 }
@@ -54,7 +59,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
 
             }
-            
+            TempData["Clientes"] = "success";
             return RedirectToAction("Listado");
         }
         [HttpGet("/Clientes/Editar/{id}")]
@@ -69,12 +74,16 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
+
+                cliente.clie_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                cliente.clie_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
                 var result = 0;
                 var cli = _mapper.Map<tbClientes>(cliente);
                 result = _generalesService.EditarCliente(cli);
 
                 if (result == 0)
                 {
+                    TempData["Clientes"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                     return View();
                 }
@@ -83,7 +92,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
 
             }
-            
+            TempData["Clientes"] = "success";
             return RedirectToAction("Listado");
 
         }
@@ -99,6 +108,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 if (result == 0)
                 {
+                    TempData["Clientes"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                     return View();
                 }
@@ -107,7 +117,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
 
             }
-            
+            TempData["Clientes"] = "success";
             return RedirectToAction("Listado");
 
         }

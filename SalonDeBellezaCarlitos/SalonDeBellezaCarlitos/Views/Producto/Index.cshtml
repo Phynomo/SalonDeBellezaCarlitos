@@ -1,5 +1,6 @@
-﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.ProductoViewModel>
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWProductosViewModel>
 
+<input type="hidden" value="@ViewBag.Toast" id="toast" />
 
 @{
     ViewData["Title"] = "Index";
@@ -32,10 +33,10 @@
                 @Html.DisplayNameFor(model => model.prod_Stock)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cate_Id)
+                @Html.DisplayNameFor(model => model.cate_Descripcion)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.prov_id)
+                @Html.DisplayNameFor(model => model.prov_NombreEmpresa)
             </th>
             <th></th>
         </tr>
@@ -54,10 +55,10 @@
                     @Html.DisplayFor(modelItem => item.prod_Stock)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.cate_Id)
+                    @Html.DisplayFor(modelItem => item.cate_Descripcion)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.prov_id)
+                    @Html.DisplayFor(modelItem => item.prov_NombreEmpresa)
                 </td>
                 <td class="text-end">
                     <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.prod_Id">Editar</a> |

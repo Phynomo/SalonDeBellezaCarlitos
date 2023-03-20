@@ -41,9 +41,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Facturas/Crear")]
         public IActionResult Create()
         {
-
+            //Feliz dia papasito
             ViewBag.FecturaPreInsertadahidden = "hidden";
-            ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
+            ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).Where(x => x.prod_Stock>0).ToList(), "prod_Id", "prod_Nombre");
             ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
             ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error).ToList(), "empl_Id", "empl_Nombre");
             ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error3).ToList(), "empl_Id", "empl_Nombre");
@@ -78,7 +78,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.clie_IdD = factura.clie_Id;
                     ViewBag.metp_IdD = factura.metp_Id;
 
-                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error24).ToList(), "prod_Id", "prod_Nombre");
+                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error24021).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error14).ToList(), "serv_Id", "serv_Nombre");
 
                     ViewBag.Toast = "errorD";
@@ -98,7 +98,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.clie_IdD = factura.clie_Id;
                 ViewBag.metp_IdD = factura.metp_Id;
 
-                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre", 0);
+                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
                 ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre", 0);
 
                 ViewBag.fact_Id = factura.fact_Id;
@@ -130,8 +130,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Atendido);
                     ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error3).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
                     ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error22).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
-                    ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error1255).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
-
+                    ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error1255).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id); 
+                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
+                    ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string ersror1).ToList(), "serv_Id", "serv_Nombre");
 
                     var lista2 = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                     ViewBag.Clientes = lista2;
@@ -153,7 +154,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.clie_IdD = factura.clie_Id;
                 ViewBag.metp_IdD = factura.metp_Id;
                 ViewBag.fact_Id = result;
-                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
+                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error122).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
                 ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
 
                 var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
@@ -189,7 +190,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.clie_IdD = factura.clie_Id;
                     ViewBag.metp_IdD = factura.metp_Id;
 
-                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error24).ToList(), "prod_Id", "prod_Nombre");
+                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error1242).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error14).ToList(), "serv_Id", "serv_Nombre");
 
 
@@ -214,7 +215,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.clie_IdD = factura.clie_Id;
                 ViewBag.metp_IdD = factura.metp_Id;
 
-                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre", 0);
+                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
                 ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre", 0);
 
                 ViewBag.fact_Id = factura.fact_Id;
@@ -256,7 +257,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.clie_IdD = item.clie_Id;
                     ViewBag.metp_IdD = item.metp_Id;
                     ViewBag.fact_Id = id;
-                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
+                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
 
                     var lista = _generalesService.BuscarFacturasDetalles(item.fact_Id).ToList();
@@ -304,7 +305,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.clie_IdD = factura.clie_Id;
                     ViewBag.metp_IdD = factura.metp_Id;
 
-                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error24).ToList(), "prod_Id", "prod_Nombre");
+                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string errsor2).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error14).ToList(), "serv_Id", "serv_Nombre");
 
 
@@ -326,7 +327,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.clie_IdD = factura.clie_Id;
                 ViewBag.metp_IdD = factura.metp_Id;
 
-                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre", 0);
+                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
                 ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre", 0);
 
                 ViewBag.fact_Id = factura.fact_Id;
@@ -359,7 +360,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error3).ToList(), "empl_Id", "empl_Nombre", factura.empl_Id_Caja);
                     ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error22).ToList(), "clie_Id", "clie_Nombre", factura.clie_Id);
                     ViewBag.metp_Id = new SelectList(_generalesService.ListadoMetodoPago(out string error1255).ToList(), "metp_Id", "metp_Descripcion", factura.metp_Id);
-
+                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string serror2).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
+                    ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string errsor1).ToList(), "serv_Id", "serv_Nombre");
 
                     var lista2 = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
                     ViewBag.Clientes = lista2;
@@ -381,7 +383,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.clie_IdD = factura.clie_Id;
                 ViewBag.metp_IdD = factura.metp_Id;
                 ViewBag.fact_Id = result;
-                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
+                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
                 ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
 
                 var lista = _generalesService.BuscarFacturasDetalles(factura.fact_Id).ToList();
@@ -416,7 +418,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.clie_IdD = factura.clie_Id;
                     ViewBag.metp_IdD = factura.metp_Id;
 
-                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error24).ToList(), "prod_Id", "prod_Nombre");
+                    ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string ersror2).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error14).ToList(), "serv_Id", "serv_Nombre");
 
 
@@ -441,7 +443,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.clie_IdD = factura.clie_Id;
                 ViewBag.metp_IdD = factura.metp_Id;
 
-                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre", 0);
+                ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).Where(x => x.prod_Stock > 0).ToList(), "prod_Id", "prod_Nombre");
                 ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre", 0);
 
                 ViewBag.fact_Id = factura.fact_Id;
@@ -502,6 +504,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 return RedirectToAction("Listado");
             }
 
+        }
+        
+        public IActionResult RevisarStock(int prod_Id, int serv_Id)
+        {
+            var stock = _generalesService.stockMaximo(prod_Id,serv_Id);
+            //ViewBag.muni_Id = new SelectList(cargarmunicipios.ToList(), "muni_Id", "muni_Descripcion");
+            return Json(stock);
         }
 
 

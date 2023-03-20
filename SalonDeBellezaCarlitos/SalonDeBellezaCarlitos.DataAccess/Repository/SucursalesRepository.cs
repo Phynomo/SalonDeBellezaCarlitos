@@ -35,7 +35,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@sucu_Decripcion", item.sucu_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@muni_Id", item.muni_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@sucu_DireccionExacta", item.sucu_DireccionExacta, DbType.String, ParameterDirection.Input);
-            parametros.Add("@sucu_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@sucu_UsuarioCreacion", item.sucu_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Sucursales, parametros, commandType: CommandType.StoredProcedure);
 
@@ -71,7 +71,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@sucu_Decripcion", item.sucu_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@muni_Id", item.muni_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@sucu_DireccionExacta", item.sucu_DireccionExacta, DbType.String, ParameterDirection.Input);
-            parametros.Add("@sucu_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@sucu_UsuarioModificacion", item.sucu_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Sucursales, parametros, commandType: CommandType.StoredProcedure);
 

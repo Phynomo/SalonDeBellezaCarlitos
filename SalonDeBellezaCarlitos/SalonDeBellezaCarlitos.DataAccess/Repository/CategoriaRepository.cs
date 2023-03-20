@@ -36,7 +36,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             var parametros = new DynamicParameters();
 
             parametros.Add("@cate_Descripcion", item.cate_Descripcion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@cate_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@cate_UsuarioCreacion", item.cate_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Categorias, parametros, commandType: CommandType.StoredProcedure);
 
@@ -55,7 +55,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             var parametros = new DynamicParameters();
             parametros.Add("@cate_Id", item.cate_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@cate_Descripcion", item.cate_Descripcion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@cate_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@cate_UsuarioModificacion", item.cate_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Categorias, parametros, commandType: CommandType.StoredProcedure);
 

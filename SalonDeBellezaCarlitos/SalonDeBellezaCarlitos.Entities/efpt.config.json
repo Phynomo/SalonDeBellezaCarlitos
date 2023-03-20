@@ -82,6 +82,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[acce].[VW_Login_View]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[acce].[VW_tbUsuarios_View]",
          "ObjectType": 3
       },
@@ -95,6 +99,14 @@
       },
       {
          "Name": "[salo].[VW_tbFacturaDetalle_View]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[salo].[VW_tbProductos_View]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[salo].[VW_tbProductosxServicio_View]",
          "ObjectType": 3
       },
       {

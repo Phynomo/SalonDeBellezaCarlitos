@@ -34,7 +34,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             var parametros = new DynamicParameters();
 
             parametros.Add("@metp_Descripcion", item.metp_Descripcion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@metp_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@metp_UsuarioCreacion", item.metp_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_MetodoPago, parametros, commandType: CommandType.StoredProcedure);
 
@@ -53,6 +53,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             var parametros = new DynamicParameters();
             parametros.Add("@metp_Id", item.metp_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@metp_Descripcion", item.metp_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@metp_UsuarioModificacion", item.metp_UsuarioModificacion, DbType.String, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_MetodoPago, parametros, commandType: CommandType.StoredProcedure);
 

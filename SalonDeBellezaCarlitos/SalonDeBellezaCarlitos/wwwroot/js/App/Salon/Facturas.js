@@ -7,6 +7,23 @@
 
 
 
+    $("#fade_Cantidad").on('input', function () {
+        if ($("#prod_Id").val() != 0 || $("#serv_Id").val() != 0) {
+            $.getJSON('/Facturas/RevisarStock', { prod_Id: $("#prod_Id").val(), serv_Id: $("#serv_Id").val() })
+            .done(function (stock) {
+                if (stock < $("#fade_Cantidad").val()) {
+                    MostrarMensajeWarning('No contamos con el stock necesario');
+                }
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                console.error('Error al cargar los productos: ' + textStatus + ', ' + errorThrown);
+            });
+        }
+       
+    })
+
+
+
     $("#prod_Id").prop("disabled", true);
     $("#serv_Id").prop("disabled", true);
     $("#fade_Cantidad").prop("disabled", true);
@@ -140,6 +157,7 @@ function EnviarFormFactura()
 
 function EnviarFormDetalles() {
 
+
     $("#lbl_prod_Id_AtendidoError").attr("hidden", true);
     $("#lbl_fade_Cantidad_AtendidoError").attr("hidden", true);
 
@@ -150,7 +168,19 @@ function EnviarFormDetalles() {
     console.log(Cantidad);
 
     if ((Producto != "0" && Servicio != "0") || Cantidad > 0) {
-        $("#formFacturaDetalle").submit();
+        $.getJSON('/Facturas/RevisarStock', { prod_Id: $("#prod_Id").val(), serv_Id: $("#serv_Id").val() })
+            .done(function (stock) {
+                if (stock >= $("#fade_Cantidad").val()) {
+                    $("#formFacturaDetalle").submit();
+                } else {
+                    MostrarMensajeWarning('No se cuenta con el stock necesario');
+                }
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                console.error('Error al cargar los productos: ' + textStatus + ', ' + errorThrown);
+            });
+
+
     } else {
 
         MostrarMensajeWarning("Llene todos los campos");

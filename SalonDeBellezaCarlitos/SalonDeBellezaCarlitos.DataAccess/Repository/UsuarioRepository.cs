@@ -39,7 +39,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@usur_Usuario", item.usur_Usuario, DbType.String, ParameterDirection.Input);
             parametros.Add("@usur_Contrasenia", item.usur_Contrasenia, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_Id", item.empl_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@usur_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@usur_UsuarioCreacion", item.usur_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Usuarios, parametros, commandType: CommandType.StoredProcedure);
 
@@ -58,6 +58,29 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             return db.Query<VW_tbUsuarios_View>(ScriptsDataBase.UDP_Listado_Usuarios, null, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<VW_Login_View> Login(tbUsuarios item)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@usur_Usuario", item.usur_Usuario, DbType.String, ParameterDirection.Input);
+            parametros.Add("@usur_Contrasenia", item.usur_Contrasenia, DbType.String, ParameterDirection.Input);
+
+            return db.Query<VW_Login_View>(ScriptsDataBase.UDP_Login, parametros, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public int Recuperar(tbUsuarios item)
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@usur_Usuario", item.usur_Usuario, DbType.String, ParameterDirection.Input);
+            parametros.Add("@usur_Contrasenia", item.usur_Contrasenia, DbType.String, ParameterDirection.Input);
+
+            return db.QueryFirst<int>(ScriptsDataBase.UDP_RecuperarContrasenia, parametros, commandType: CommandType.StoredProcedure);
+        }
+
         public IEnumerable<VW_tbUsuarios_View> BuscarView(int? id)
         {
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
@@ -73,7 +96,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
             parametros.Add("@usur_Id", item.usur_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_Id", item.empl_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@usuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@usuarioModificacion", item.usur_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Usuarios, parametros, commandType: CommandType.StoredProcedure);
 

@@ -1,4 +1,17 @@
-﻿function AbrirModalCreate() {
+﻿$(document).ready(function () {
+    $('#navSalon').addClass('active');
+    $('#navCategorias').addClass('active');
+    $('#subnavSalon').addClass('show');
+
+    if ($("#toast").val() == 'error') {
+        MostrarMensajeDanger("Ocurrio un error al realizar la Operacion!");
+        $("#modalCreate").appendTo('body').modal('show');
+    }
+    if ($("#toast").val() == 'success') {
+        MostrarMensajeSuccess("La operacion se realizo con exito!");
+    }
+});
+function AbrirModalCreate() {
     $("#modalCreate").appendTo('body').modal('show');
     $("#lbl_DescripcionCreateError").attr('hidden', true);
     var input = document.getElementById("cate_Descripcion");

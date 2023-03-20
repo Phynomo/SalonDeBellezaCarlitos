@@ -26,12 +26,14 @@ namespace SalonDeBellezaCarlitos
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddSession();
+            services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
+            services.AddSession(); // habilita el soporte de sesión
 
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-            }); // habilita el soporte de sesión
+            //services.AddSession(options =>
+            //{
+            //    options.IdleTimeout = TimeSpan.FromMinutes(30);
+            //}); // habilita el soporte de sesión
             services.DataAccess(Configuration.GetConnectionString("SalonCarlitosConn"));
             services.BusinessLogic();
             services.AddAutoMapper(x => x.AddProfile<MappingProfileExtensions>(), AppDomain.CurrentDomain.GetAssemblies());
@@ -44,8 +46,12 @@ namespace SalonDeBellezaCarlitos
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            app.UseSession();
-            // configura la aplicación para usar la sesión
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSession(); // configura la aplicación para usar la sesión
+            app.UseRouting();
+
+            app.UseAuthorization();
 
             if (env.IsDevelopment())
             {

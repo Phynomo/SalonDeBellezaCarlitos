@@ -1,4 +1,17 @@
-﻿function AbrirModalDelete(id) {
+﻿$(document).ready(function () {
+    $('#navSalon').addClass('active');
+    $('#navProductos').addClass('active');
+    $('#subnavSalon').addClass('show');
+
+    if ($("#toast").val() == 'error') {
+        MostrarMensajeDanger("Ocurrio un error al realizar el registro!");
+        $("#modalCreate").appendTo('body').modal('show');
+    }
+    if ($("#toast").val() == 'success') {
+        MostrarMensajeSuccess("La operacion se realizo con exito!");
+    }
+});
+function AbrirModalDelete(id) {
     console.log(id);
     $("#prod_Id_Delete").val(id);
     $("#EliminarProducto").appendTo('body').modal('show');

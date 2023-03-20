@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace SalonDeBellezaCarlitos.WebUI.Controllers
 {
@@ -54,6 +55,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(ProveedorViewModel proveedor)
         {
             var result = 0;
+            proveedor.prov_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            proveedor.prov_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var prov = _mapper.Map<tbProveedores>(proveedor);
             result = _generalesService.InsertarProveedor(prov);
 
@@ -122,6 +126,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Edit(ProveedorViewModel proveedor)
         {
             var result = 0;
+            proveedor.prov_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            proveedor.prov_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var prov = _mapper.Map<tbProveedores>(proveedor);
             result = _generalesService.EditarProveedor(prov);
 

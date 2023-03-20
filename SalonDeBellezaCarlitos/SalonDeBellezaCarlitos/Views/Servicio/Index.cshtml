@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.ServicioViewModel>
 
+<input type="hidden" value="@ViewBag.Toast" id="toast" />
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +9,7 @@
 
 <div class="row text-center">
     <div class="col">
-        <h1 class="text-decoration-underline text-center">LISTADO SERICIOS</h1>
+        <h1 class="text-center">Servicios</h1>
         <hr />
     </div>
 </div>

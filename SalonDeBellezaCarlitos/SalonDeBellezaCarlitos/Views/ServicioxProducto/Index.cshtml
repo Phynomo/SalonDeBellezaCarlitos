@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWServicioxproductoViewModel>
+
+<input type="hidden" value="@ViewBag.Toast" id="toast" />
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row text-center">
+    <div class="col">
+        <h1 class="text-center">Servicios X Productos</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row mb-3 text-center">
+    <div class="col">
+        <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar Un Servicio por Producto</button>
+    </div>
+</div>
+<table id="example" class="table dataTable compact hover stripe" style="width: 100%;" aria-describedby="example_info">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.serv_Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prod_Nombre)
+            </th>
+            <th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.serv_Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prod_Nombre)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.spro_Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.spro_Id">Details</a> |
+                    <button type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.spro_Id')">Eliminar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.Partial("_SerxProdCreateViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.ServicioxProductoViewModel())
+
+@Html.Partial("_SerxProdDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.ServicioxProductoViewModel())
+
+<script src="~/js/App/Salon/ServicioXProducto.js"></script>
+

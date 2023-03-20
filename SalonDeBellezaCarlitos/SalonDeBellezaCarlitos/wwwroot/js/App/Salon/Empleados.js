@@ -3,7 +3,12 @@
     $('#navEmpleados').addClass('active');
     $('#subnavSalon').addClass('show');
 
-
+    if ($("#toast").val() == 'error') {
+        MostrarMensajeDanger("Ocurrio un error al realizar el registro!");
+    }
+    if ($("#toast").val() == 'success') {
+        MostrarMensajeSuccess("La operacion se realizo con exito!");
+    }
 
     if ($("#muni_Id").val() == '') {
         var departamentoId = $("#depa_Id").val();

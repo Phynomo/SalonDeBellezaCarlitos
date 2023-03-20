@@ -37,7 +37,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@clie_Apellido", item.clie_Apellido, DbType.String, ParameterDirection.Input);
             parametros.Add("@clie_Telefono", item.clie_Telefono, DbType.String, ParameterDirection.Input);
             parametros.Add("@clie_CorreoElectronico", item.clie_CorreoElectronico, DbType.String, ParameterDirection.Input);
-            parametros.Add("@clie_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@clie_UsuarioCreacion", item.clie_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Clientes, parametros, commandType: CommandType.StoredProcedure);
 
@@ -59,7 +59,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@clie_Apellido", item.clie_Apellido, DbType.String, ParameterDirection.Input);
             parametros.Add("@clie_Telefono", item.clie_Telefono, DbType.String, ParameterDirection.Input);
             parametros.Add("@clie_CorreoElectronico", item.clie_CorreoElectronico, DbType.String, ParameterDirection.Input);
-            parametros.Add("@clie_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@clie_UsuarioModificacion", item.clie_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Clientes, parametros, commandType: CommandType.StoredProcedure);
 

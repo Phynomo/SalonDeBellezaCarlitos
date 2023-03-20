@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
@@ -27,8 +28,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Producto/Listado")]
         public IActionResult Index()
         {
-            var listado = _generalesService.ListadoProductos(out string error);
-            var listadoMapeado = _mapper.Map<IEnumerable<ProductoViewModel>>(listado);
+            ViewBag.Toast = TempData["Producto"] as string;
+            var listado = _generalesService.ListadoProductosView(out string error);
+            var listadoMapeado = _mapper.Map<IEnumerable<VWProductosViewModel>>(listado);
 
             if (string.IsNullOrEmpty(error))
             {
@@ -49,16 +51,21 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(ProductoViewModel producto)
         {
             var result = 0;
+            producto.prod_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            producto.prod_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var prod = _mapper.Map<tbProductos>(producto);
             result = _generalesService.InsertarProducto(prod);
 
             if (result == 0)
             {
+                TempData["Producto"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 ViewBag.cate_Id = new SelectList(_generalesService.ListadoCategorias(out string error).ToList(), "cate_Id", "cate_Descripcion");
                 ViewBag.prov_Id = new SelectList(_generalesService.ListadoProveedores(out string error2).ToList(), "prov_Id", "prov_NombreContacto");
                 return View();
             }
+            TempData["Producto"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -71,9 +78,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             if (result == 0)
             {
+                TempData["Producto"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return View();
             }
+            TempData["Producto"] = "success";
             return RedirectToAction("Listado");
 
         }
@@ -98,15 +107,20 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public IActionResult Edit(ProductoViewModel producto)
         {
             var result = 0;
+            producto.prod_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            producto.prod_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var prod = _mapper.Map<tbProductos>(producto);
             result = _generalesService.EditarProducto(prod);
 
             if (result == 0)
             {
+                TempData["Producto"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 ViewBag.cate_Id = new SelectList(_generalesService.ListadoCategorias(out string error).ToList(), "cate_Id", "cate_Descripcion");
                 ViewBag.prov_Id = new SelectList(_generalesService.ListadoProveedores(out string error2).ToList(), "prov_Id", "prov_NombreContacto");
             }
+            TempData["Producto"] = "success";
             return RedirectToAction("Listado");
         }
 

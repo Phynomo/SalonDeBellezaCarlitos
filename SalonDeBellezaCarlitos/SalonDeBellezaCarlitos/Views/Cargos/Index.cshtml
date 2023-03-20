@@ -38,7 +38,7 @@
     <td>
         @Html.DisplayFor(modelItem => item.carg_Descripcion)
     </td>
-    <td>
+    <td class="text-end">
         <button style="font-size: 10px; height:25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.carg_Id,@item.carg_Descripcion')">Editar</button> |
         <a style="font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.carg_Id">Details</a> |
         <button style="font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.carg_Id')">Delete</button>

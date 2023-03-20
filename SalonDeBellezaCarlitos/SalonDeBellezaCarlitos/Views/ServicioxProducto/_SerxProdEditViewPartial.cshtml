@@ -1,0 +1,45 @@
+﻿@model SalonDeBellezaCarlitos.WebUI.Models.ServicioxProductoViewModel
+
+
+<div class="modal" id="EditarServicioxProducto" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Servicio por Producto</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="Edit" id="formEdit">
+                <div class="modal-body">
+                    <input asp-for="spro_Id" class="form-control" id="spro_Id_Edit" name="spro_Id" hidden/>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="serv_Id" class="control-label"></label>
+                                <select asp-for="serv_Id" id="serv_Id" class="form-select" asp-items="ViewBag.serv_Id">
+                                    <option value="">-- Selecciones un Servicio --</option>
+                                </select>
+                                <label name="lbl_DepartamentoCreateError" id="lbl_DepartamentoCreateError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="prod_Id" class="control-label"></label>
+                                <select asp-for="prod_Id" id="prod_Id" class="form-select" asp-items="ViewBag.prod_Id">
+                                    <option value="">-- Selecciones un Producto --</option>
+                                </select>
+                                <label name="lbl_DepartamentoCreateError" id="lbl_DepartamentoCreateError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="GuardarModalEdit()">Editar cargo</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

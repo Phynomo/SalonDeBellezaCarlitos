@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.Extensions.DependencyInjection
+
+@using Microsoft.AspNetCore.Http
+@{
+    var session = Context.RequestServices.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+    string user_Id = ViewBag.user_Id = session?.GetString("usur_Id");
+    string Nombre = ViewBag.Nombre = session?.GetString("Nombre");
+    string Cargo = ViewBag.Cargo = session?.GetString("Cargo");
+    string Sucursal = ViewBag.Sucursal = session?.GetString("Sucursal");
+    if (user_Id == null || user_Id == "")
+    {
+        <script>window.location.href = '/Login/Index';</script>
+    }
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,7 +21,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
-    
+
     <link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,8 +37,8 @@
 
     <!-- Premium solid icons [ OPTIONAL ] -->
     <link rel="stylesheet" href="~/premium/icon-sets/icons/solid-icons/premium-solid-icons.min.css">
-    
-    
+
+
     <link rel="stylesheet" href="~/css/toastr/toastr.min.css">
 
 
@@ -381,17 +395,8 @@
                                         <!-- User menu link -->
                                         <div class="list-group list-group-borderless h-100 py-3">
 
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <i class="pli-male fs-5 me-2"></i> Profile
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                                <i class="pli-gear fs-5 me-2"></i> Settings
-                                            </a>
-
-                                            <a href="#" class="list-group-item list-group-item-action mt-auto">
-                                                <i class="pli-computer-secure fs-5 me-2"></i> Lock screen
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">
+                                            
+                                            <a href="Login/Index" class="list-group-item list-group-item-action">
                                                 <i class="pli-unlock fs-5 me-2"></i> Logout
                                             </a>
                                         </div>
@@ -437,9 +442,9 @@
                                 <!-- User name and position -->
                                 <button class="d-block btn shadow-none p-2" data-bs-toggle="collapse" data-bs-target="#usernav" aria-expanded="false" aria-controls="usernav">
                                     <span class="dropdown-toggle d-flex justify-content-center align-items-center">
-                                        <h6 class="mb-0 me-3">Aaron Chavez</h6>
+                                        <h6 class="mb-0 me-3">@ViewBag.Nombre</h6>
                                     </span>
-                                    <small class="text-muted">Administrator</small>
+                                    <small class="text-muted">@ViewBag.Cargo</small>
                                 </button>
 
                                 <!-- Collapsed user menu -->
@@ -454,7 +459,7 @@
                                     <a href="#" class="nav-link">
                                         <i class="pli-computer-secure fs-5 me-2"></i><span class="ms-1">Lock screen</span>
                                     </a>
-                                    <a href="#" class="nav-link">
+                                    <a href="Login/Index" class="nav-link">
                                         <i class="pli-unlock fs-5 me-2"></i><span class="ms-1">Logout</span>
                                     </a>
                                 </div>
@@ -479,13 +484,13 @@
                                 <!-- Dashboard submenu list -->
                                 <ul class="mininav-content nav collapse" id="subnavGeneral">
                                     <li class="nav-item">
-                                        <a href="/Metodopago/Listado" class="nav-link" id="navMetodoPago">Metodos de pago</a>
+                                        <a href="/Departamentos/Listado" class="nav-link" id="navDepartamentos">Departamentos</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="/EstadosCiviles/Listado" class="nav-link" id="navEstadocivil">Estados Civiles</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/Departamentos/Listado" class="nav-link" id="navDepartamentos">Departamentos</a>
+                                        <a href="/Metodopago/Listado" class="nav-link" id="navMetodoPago">Metodos de pago</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="/Municipios/Listado" class="nav-link" id="navMunicipios">Municipios</a>
@@ -509,25 +514,25 @@
                                         <a href="/Cargos/Listado" class="nav-link" id="navCargos">Cargos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/Empleados/Listado" class="nav-link" id="navEmpleados">Empleados</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="/Proveedores/Listado" class="nav-link" id="navProveedores">Proveedores</a>
-                                    </li>
-                                    <li class="nav-item">
                                         <a href="/Categorias/Listado" class="nav-link" id="navCategorias">Categorias</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="/Producto/Listado" class="nav-link" id="navProductos">Productos</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="/Clientes/Listado" class="nav-link" id="navClientes">Clientes</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/Servicio/Listado" class="nav-link" id="navServicios">Servicios</a>
+                                        <a href="/Empleados/Listado" class="nav-link" id="navEmpleados">Empleados</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="/Facturas/Listado" class="nav-link" id="navFacturas">Facturas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Producto/Listado" class="nav-link" id="navProductos">Productos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Proveedores/Listado" class="nav-link" id="navProveedores">Proveedores</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/Servicio/Listado" class="nav-link" id="navServicios">Servicios</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="/Sucursal/Listado" class="nav-link" id="navSucursales">Sucursales</a>
@@ -593,13 +598,7 @@
                             </a>
                             <ul class="mininav-content nav flex-column collapse">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">This device only</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">All Devices</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Lock screen</a>
+                                    <a href="Login/Index" class="nav-link">Cerrar sesion</a>
                                 </li>
                             </ul>
                         </li>
@@ -1478,12 +1477,12 @@
     <!-- Nifty JS [ OPTIONAL ] -->
     <script src="~/js/nifty.js" defer></script>
 
-    
+
     <script src="~/js/App/layout.js"></script>
     <script src="~/js/toastr/toastr.min.js"></script>
     <script src="~/js/toastr/toastr.js"></script>
 
-   
+
 
 </body>
 </html>

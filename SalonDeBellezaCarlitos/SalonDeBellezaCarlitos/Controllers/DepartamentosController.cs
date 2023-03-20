@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
 using SalonDeBellezaCarlitos.Entities.Entities;
@@ -26,7 +27,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Departamentos/Listado")]
         public IActionResult Index()
         {
-
+            ViewBag.Toast = TempData["Clientes"] as string;
             var listado = _generalesService.ListadoDepartamentos(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<DepartamentoViewModel>>(listado);
 
@@ -49,12 +50,16 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
+
+                departamento.depa_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                departamento.depa_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
                 var result = 0;
                 var car = _mapper.Map<tbDepartamentos>(departamento);
                 result = _generalesService.InsertarDepartamento(car);
 
                 if (result == 0)
                 {
+                    TempData["Departamentos"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                     return View();
                 }
@@ -63,7 +68,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
 
             }
-            
+            TempData["Departamentos"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -72,12 +77,15 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
+                departamento.depa_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                departamento.depa_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
                 var result = 0;
                 var dep = _mapper.Map<tbDepartamentos>(departamento);
                 result = _generalesService.EditarDepartamento(dep);
 
                 if (result == 0)
                 {
+                    TempData["Departamentos"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                     return View();
                 }
@@ -86,7 +94,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
 
             }
-            
+            TempData["Departamentos"] = "success";
             return RedirectToAction("Listado");
 
         }
@@ -109,6 +117,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 if (result == 0)
                 {
+                    TempData["Departamentos"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                     return View();
                 }
@@ -117,7 +126,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
 
             }
-            
+            TempData["Departamentos"] = "success";
             return RedirectToAction("Listado");
 
         }

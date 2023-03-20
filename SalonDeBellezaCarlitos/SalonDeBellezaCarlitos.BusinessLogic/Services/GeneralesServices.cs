@@ -23,6 +23,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
         private readonly FacturasRepository _FacturasRepository;
         private readonly MetodopagoRepositpory _MetodopagoRepository;
         private readonly ProveedorRepository _ProveedoresRepository;
+        private readonly ServicioxProductoRepository _ServicioxProductoRepository;
 
         public GeneralesServices(CargoRepository CargoRepository,
                                     EmpleadoRepository EmpleadoRepository,
@@ -38,7 +39,8 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                                     ReservacionRepository reservacionRepository,
                                     FacturasRepository facturasRepository,
                                     MetodopagoRepositpory metodopagoRepositpory,
-                                    ProveedorRepository proveedorRepository
+                                    ProveedorRepository proveedorRepository,
+                                    ServicioxProductoRepository servicioxProductoRepository
             )
         {
             _CargoRepository = CargoRepository;
@@ -56,6 +58,7 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             _FacturasRepository = facturasRepository;
             _MetodopagoRepository = metodopagoRepositpory;
             _ProveedoresRepository = proveedorRepository;
+            _ServicioxProductoRepository = servicioxProductoRepository;
         }
 
 
@@ -304,6 +307,34 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return 0;
             }
 
+        }
+
+
+        public int RecuperarUsuario(tbUsuarios item)
+        {
+            try
+            {
+                var resultado = _UsuariosRepository.Recuperar(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public IEnumerable<VW_Login_View> Login(tbUsuarios item)
+        {
+            try
+            {
+                return _UsuariosRepository.Login(item);
+            }
+            catch (Exception )
+            {
+                return null;
+            }
         }
 
 
@@ -991,6 +1022,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return Enumerable.Empty<tbProductos>();
             }
         }
+
+        public IEnumerable<VW_tbProductos_View> ListadoProductosView(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _ProductosRepository.ListView();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<VW_tbProductos_View>();
+            }
+        }
+
         public int InsertarProducto(tbProductos item)
         {
 
@@ -1167,9 +1213,20 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #region Facturas
 
-
+        public int stockMaximo(int prod_Id, int serv_Id)
+        {
+            try
+            {
+                return _FacturasRepository.stockmax(prod_Id, serv_Id);
+            }
+            catch (Exception)
+            {
+                return 999;
+            }
+        }
         public IEnumerable<VW_tbFacturas_Listado> BuscarFactura(int? id)
         {
+            //No se mutee miamor :(
             try
             {
                 return _FacturasRepository.BuscarFactura(id);
@@ -1441,6 +1498,55 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         #endregion
 
+
+        #region ServicioxProducto
+
+        public IEnumerable<VW_tbProductosxServicio_View> ListadoServicioxproducto(out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                return _ServicioxProductoRepository.ListView();
+            }
+            catch (Exception e)
+            {
+                error = e.Message;
+                return Enumerable.Empty<VW_tbProductosxServicio_View>();
+            }
+        }
+        public int InsertarServicioxProducto(tbProductosXServicio item)
+        {
+            try
+            {
+                var resultado = _ServicioxProductoRepository.Insert(item);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public int EliminarServicioxProducto(tbProductosXServicio serprod)
+        {
+
+            try
+            {
+                var resultado = _ServicioxProductoRepository.Delete(serprod);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+
+        #endregion
 
     }
 }

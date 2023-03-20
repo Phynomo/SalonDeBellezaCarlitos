@@ -2,6 +2,16 @@
     $('#navMunicipios').addClass('active');
     $('#navGeneral').addClass('active');
     $('#subnavGeneral').addClass('show');
+
+    if ($("#toast").val() == 'error') {
+        MostrarMensajeDanger("Ocurrio error al realizar la operacion");
+        $("#modalCreate").appendTo('body').modal('show');
+    }
+    if ($("#toast").val() == 'success') {
+        MostrarMensajeSuccess("La operacion se realizo con exito!");
+    }
+
+
 });
 
 

@@ -48,7 +48,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             var parametros = new DynamicParameters();
 
             parametros.Add("@carg_Descripcion", item.carg_Descripcion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@carg_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@carg_UsuarioCreacion", item.carg_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
             
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Cargos, parametros, commandType: CommandType.StoredProcedure);
 
@@ -68,7 +68,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             var parametros = new DynamicParameters();
             parametros.Add("@carg_Id", item.carg_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@carg_Descripcion", item.carg_Descripcion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@carg_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@carg_UsuarioModificacion", item.carg_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Cargos, parametros, commandType: CommandType.StoredProcedure);
 

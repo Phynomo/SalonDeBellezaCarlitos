@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
@@ -27,7 +28,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Sucursal/Listado")]
         public IActionResult Index()
         {
-
+            ViewBag.Toast = TempData["Sucursal"] as string;
             ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion");
 
             var listado = _generalesService.ListadoSucursalesView(out string error2);
@@ -44,14 +45,19 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(SucursalViewModel sucursal)
         {
             var result = 0;
+            sucursal.sucu_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            sucursal.sucu_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var suc = _mapper.Map<tbSucursales>(sucursal);
             result = _generalesService.InsertarSucursal(suc);
 
             if (result == 0)
             {
+                TempData["Sucursal"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return RedirectToAction("Listado");
             }
+            TempData["Sucursal"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -59,14 +65,19 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Edit(SucursalViewModel sucursal)
         {
             var result = 0;
+            sucursal.sucu_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            sucursal.sucu_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var suc = _mapper.Map<tbSucursales>(sucursal);
             result = _generalesService.EditarSucursal(suc);
 
             if (result == 0)
             {
+                TempData["Sucursal"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return RedirectToAction("Listado");
             }
+            TempData["Sucursal"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -79,9 +90,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             if (result == 0)
             {
+                TempData["Success"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al eliminar este registro");
                 return RedirectToAction("Listado");
             }
+            TempData["Sucursal"] = "success";
             return RedirectToAction("Listado");
 
         }

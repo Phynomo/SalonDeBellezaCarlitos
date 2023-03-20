@@ -33,7 +33,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Empleados/Listado")]
         public IActionResult Index()
         {
-
+            ViewBag.Toast = TempData["Empleados"] as string;
             string miValor = HttpContext.Session.GetString("MiClave");
 
             ViewBag.hola = miValor;
@@ -65,12 +65,16 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Empleados/Crear")]
         public ActionResult Create(EmpleadoViewModel empleado)
         {
+            empleado.empl_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            empleado.empl_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var result = 0;
             var emp = _mapper.Map<tbEmpleados>(empleado);
             result = _generalesService.InsertarEmpleado(emp);
 
             if (result == 0)
             {
+                TempData["Empleados"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro"); 
                 ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion",empleado.depa_Id);
                 ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(empleado.depa_Id), "muni_Id", "muni_Descripcion",empleado.muni_Id);
@@ -79,6 +83,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.sucu_Id = new SelectList(_generalesService.ListadoSucursales(out string error11).ToList(), "sucu_Id", "sucu_Descripcion",empleado.sucu_Id);
                 return View(empleado);
             }
+            TempData["Empleados"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -92,6 +97,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Empleados/Editar")]
         public IActionResult Edit(int? id)
         {
+
             var empleado = _generalesService.BuscarEmpleados(id);
             foreach (var item in empleado)
             {
@@ -136,12 +142,16 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Empleados/Editar")]
         public IActionResult Edit(EmpleadoViewModel empleado)
         {
+            empleado.empl_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            empleado.empl_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
             var result = 0;
             var emp = _mapper.Map<tbEmpleados>(empleado);
             result = _generalesService.EditarEmpleado(emp);
 
             if (result == 0)
             {
+                TempData["Empleados"] = "error";
                 var errores = _generalesService.BuscarEmpleados(emp.empl_Id);
                 ModelState.AddModelError("", "Ocurrió un error al editar este registro");
                 ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion", empleado.depa_Id);
@@ -180,6 +190,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 return View(empleado);
             }
+            TempData["Empleados"] = "success";
             return RedirectToAction("Listado");
         }
 
@@ -251,9 +262,11 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             if (result == 0)
             {
+                TempData["Empleados"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return View();
             }
+            TempData["Empleados"] = "success";
             return RedirectToAction("Listado");
 
         }

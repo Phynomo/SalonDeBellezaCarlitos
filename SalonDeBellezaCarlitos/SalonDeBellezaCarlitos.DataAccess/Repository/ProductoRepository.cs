@@ -38,7 +38,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@cate_Id", item.cate_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@prod_Stock", item.prod_Stock, DbType.String, ParameterDirection.Input);
             parametros.Add("@prov_Id", item.prov_id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@prod_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@prod_UsuarioCreacion", item.prod_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Productos, parametros, commandType: CommandType.StoredProcedure);
 
@@ -49,6 +49,11 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         {
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
             return db.Query<tbProductos>(ScriptsDataBase.UDP_Listado_Productos, null, commandType: CommandType.StoredProcedure);
+        }
+        public IEnumerable<VW_tbProductos_View> ListView()
+        {
+            using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
+            return db.Query<VW_tbProductos_View>(ScriptsDataBase.UDP_Listado_Productos, null, commandType: CommandType.StoredProcedure);
         }
 
         public int Update(tbProductos item)
@@ -63,7 +68,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@cate_Id", item.cate_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@prod_Stock", item.prod_Stock, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@prov_Id", item.prov_id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@prod_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@prod_UsuarioModificacion", item.prod_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Productos, parametros, commandType: CommandType.StoredProcedure);
 

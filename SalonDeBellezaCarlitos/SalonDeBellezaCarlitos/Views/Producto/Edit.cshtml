@@ -33,7 +33,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="cate_Id" class="control-label">Id Categoria</label>
-                        <select asp-for="cate_Id" class="form-control" asp-items="@ViewBag.cate_Id"></select>
+                        <select asp-for="cate_Id" class="form-select" asp-items="@ViewBag.cate_Id"></select>
                         <span asp-validation-for="cate_Id" class="text-danger"></span>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="prov_id" class="control-label">Id Proveedor</label>
-                        <select asp-for="prov_id" class="form-control" asp-items="@ViewBag.prov_id"></select>
+                        <select asp-for="prov_id" class="form-select" asp-items="@ViewBag.prov_id"></select>
                         <span asp-validation-for="prov_id" class="text-danger"></span>
                     </div>
                 </div>

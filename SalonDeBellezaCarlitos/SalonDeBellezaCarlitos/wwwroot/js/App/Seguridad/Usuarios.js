@@ -1,14 +1,14 @@
 ﻿$(document).ready(function () {
-    $('#navSalon').addClass('active');
-    $('#navCargos').addClass('active');
-    $('#subnavSalon').addClass('show');
+    $('#navSeguridad').addClass('active');
+    $('#navUsuarios').addClass('active');
+    $('#subnavSeguridad').addClass('show');
 
     if ($("#toast").val() == 'error') {
-        MostrarMensajeDanger("Ese registro ya exite");
+        MostrarMensajeDanger("Ocurrio un error al realizar el registro!");
         $("#modalCreate").appendTo('body').modal('show');
     }
     if ($("#toast").val() == 'success') {
-        MostrarMensajeSuccess("La operacion se realizo con exito");
+        MostrarMensajeSuccess("La operacion se realizo con exito!");
     }
 });
 

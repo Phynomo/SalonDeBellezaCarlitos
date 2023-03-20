@@ -33,6 +33,8 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Editar_Usuarios = "acce.UDP_tbUsuarios_Update";
         public static string UDP_Borrar_Usuarios = "acce.UDP_tbUsuario_Delete";
         public static string UDP_Buscar_Usuarios = "acce.UDP_tbUsuarios_Buscar";
+        public static string UDP_Login = "acce.UDP_Login";
+        public static string UDP_RecuperarContrasenia = "acce.UDP_RecuperarContrasenia";
 
         #endregion
 
@@ -156,6 +158,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Editar_FacturasDetalle = "salo.UDP_salo_tbFacturaDetalle_Update";
         public static string UDP_Borrar_FacturasDetalle = "salo.UDP_salo_tbFacturasDetalle_Delete";
         public static string UDP_Buscar_FacturasDetalle = "salo.UDP_salo_FacturaDetalle_Buscar";
+        public static string UDP_StockMax_FacturasDetalle = "salo.tbFacturas_StockSuficiente";
 
         #endregion
 
@@ -165,6 +168,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         public static string UDP_Insertar_ServiciosXProducto = "salo.UDP_salo_tbServiciosXProducto_Insert";
         public static string UDP_Editar_ServiciosXProducto = "salo.UDP_salo_tbServiciosXProducto_Update";
         public static string UDP_Borrar_ServiciosXProducto = "salo.UDP_salo_tbServiciosXProducto_Delete";
+        public static string UDP_Buscar_ServiciosXProducto = "salo.UDP_salo_tbServiciosXProducto_Buscar";
 
         #endregion
 

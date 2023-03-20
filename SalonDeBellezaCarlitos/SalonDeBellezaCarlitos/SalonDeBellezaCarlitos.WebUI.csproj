@@ -7,6 +7,17 @@
   <ItemGroup>
     <Content Remove="Views\Categorias\_CargosEditViewPartial.cshtml" />
     <Content Remove="Views\EstadosCiviles\_CreateModalPartialView.cshtml" />
+    <Content Remove="Views\ServicioxProducto\_CargosDeleteViewPartial.cshtml" />
+    <Content Remove="Views\ServicioxProducto\_CargosEditViewPartial.cshtml" />
+    <Content Remove="Views\ServicioxProducto\_CreateModalPartialView.cshtml" />
+    <Content Remove="Views\ServicioxProducto\_SerxProdViewPartial.cshtml" />
+    <Content Remove="wwwroot\js\App\Salon\NewFile.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\ServicioxProducto\NewFile.txt" />
+    <None Remove="Views\ServicioxProducto\_SerxProdViewPartial" />
+    <None Remove="Views\ServicioxProducto\_SerxProdViewPartial.csht" />
   </ItemGroup>
 
   <ItemGroup>

@@ -41,7 +41,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@serv_Nombre", item.serv_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@serv_Descripcion", item.serv_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@serv_Precio", item.serv_Precio, DbType.String, ParameterDirection.Input);
-            parametros.Add("@serv_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@serv_UsuarioCreacion", item.serv_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Servicios, parametros, commandType: CommandType.StoredProcedure);
 
@@ -66,7 +66,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@serv_Nombre", item.serv_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@serv_Descripcion", item.serv_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@serv_Precio", item.serv_Precio, DbType.String, ParameterDirection.Input);
-            parametros.Add("@serv_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@serv_UsuarioModificacion", item.serv_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Servicios, parametros, commandType: CommandType.StoredProcedure);
 

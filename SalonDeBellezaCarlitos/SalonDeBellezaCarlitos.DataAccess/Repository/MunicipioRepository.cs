@@ -37,7 +37,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@muni_Descripcion", item.muni_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@muni_Codigo", item.muni_Codigo, DbType.String, ParameterDirection.Input);
             parametros.Add("@depa_Id", item.depa_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@muni_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@muni_UsuarioCreacion", item.muni_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Municipios, parametros, commandType: CommandType.StoredProcedure);
 
@@ -74,7 +74,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@muni_Descripcion", item.muni_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@muni_Codigo", item.muni_Codigo, DbType.String, ParameterDirection.Input);
             parametros.Add("@depa_Id", item.depa_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@muni_UsuarioModificacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@muni_UsuarioModificacion", item.muni_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Municipios, parametros, commandType: CommandType.StoredProcedure);
 
