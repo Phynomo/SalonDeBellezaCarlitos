@@ -32,7 +32,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             HttpContext.Session.SetString("Nombre", "");
             HttpContext.Session.SetString("Cargo", "");
             HttpContext.Session.SetString("Sucursal", "");
-            HttpContext.Session.SetString("usur_Id", "");
+            HttpContext.Session.SetInt32("usur_Id", 0);
 
             ViewBag.Toast = TempData["login"] as string;
             return View();
@@ -47,8 +47,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             if (result.Count() == 0)
             {
                 TempData["login"] = "error";
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View();
+                return RedirectToAction("Index");
             }
 
             foreach (var item in result)
@@ -56,7 +55,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             HttpContext.Session.SetString("Nombre", item.empl_NombreCompleto);
             HttpContext.Session.SetString("Cargo", item.carg_Descripcion);
             HttpContext.Session.SetString("Sucursal", item.sucu_Id.ToString());
-            HttpContext.Session.SetString("usur_Id", item.usur_Id.ToString());
+            HttpContext.Session.SetInt32("usur_Id", item.usur_Id);
             }
 
             return RedirectToAction("Index", "Home");
@@ -71,7 +70,6 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             if (result == 0)
             {
                 TempData["login"] = "recuperacionfallida";
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return RedirectToAction("Index");
             }
             TempData["login"] = "recuperacionExitosa";

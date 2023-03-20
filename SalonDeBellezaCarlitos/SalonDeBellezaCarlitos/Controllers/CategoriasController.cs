@@ -52,8 +52,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
-                categoria.cate_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-                categoria.cate_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                categoria.cate_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+                categoria.cate_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
                 var result = 0;
                 var cate = _mapper.Map<tbCategorias>(categoria);
                 result = _generalesService.InsertarCategoria(cate);
@@ -92,8 +92,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
-                cargo.cate_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-                cargo.cate_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                cargo.cate_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+                cargo.cate_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
                 var result = 0;
                 var car = _mapper.Map<tbCategorias>(cargo);
                 result = _generalesService.EditarCategoria(car);
@@ -145,7 +145,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
-                var servicio = _generalesService.BuscarCategoria(id);
+                var servicio = _generalesService.BuscarCategoriaIEnumerable(id);
                 var servicioMapeado = _mapper.Map<IEnumerable<CategoriaViewModel>>(servicio);
                 return View(servicioMapeado);
             }

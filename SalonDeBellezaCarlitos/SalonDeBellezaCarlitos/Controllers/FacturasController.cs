@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
@@ -27,8 +28,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public IActionResult Index()
         {
             ViewBag.Toast = TempData["Factura"] as string;
-
-            var listado = _generalesService.ListadoFacturas(out string error);
+            int sucu_id = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            var listado = _generalesService.ListadoFacturas(out string error, sucu_id);
             var listadoMapeado = _mapper.Map<IEnumerable<VWFacturasViewModel>>(listado);
 
             if (!string.IsNullOrEmpty(error))
@@ -60,7 +61,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(FacturasViewModel factura)
         {
             var result = 0;
-
+            factura.fact_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             //Eliminar registro
             if (Convert.ToInt32(factura.fade_UsuarioModificacion) == 1)
             {
@@ -117,6 +118,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             //crear encabezado de la factura
             if ((factura.prod_Id == 0 && factura.serv_Id == 0) || (factura.prod_Id == null && factura.serv_Id == null))
             {
+
                 var fac = _mapper.Map<tbFacturas>(factura);
                 result = _generalesService.InsertarFacturas(fac);
 
@@ -286,6 +288,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             var result = 0;
 
+            factura.fact_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             //Eliminar registro
             if (Convert.ToInt32(factura.fade_UsuarioModificacion) == 1)
             {

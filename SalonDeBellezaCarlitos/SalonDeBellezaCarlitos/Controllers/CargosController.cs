@@ -51,8 +51,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Cargos/Crear")]
         public ActionResult Create(CargoViewModel cargo)
         {
-            cargo.carg_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            cargo.carg_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            cargo.carg_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            cargo.carg_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
             var result = 0;
             var car = _mapper.Map<tbCargos>(cargo);
@@ -78,8 +78,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Cargos/Editar")]
         public IActionResult Edit(CargoViewModel cargo)
         {
-            cargo.carg_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            cargo.carg_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            cargo.carg_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            cargo.carg_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             var result = 0;
             var car = _mapper.Map<tbCargos>(cargo);
             result = _generalesService.EditarCargo(car);

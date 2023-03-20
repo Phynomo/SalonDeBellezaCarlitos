@@ -8,47 +8,60 @@
 <h1 class="text-decoration-underline text-center">DETALLE CATEGORIA</h1>
 @foreach (var item in Model)
 {
-<div>
-    <hr />
-    <div class="row">
-        <div class="col">
-            <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.cate_Descripcion)</label><br />
-            <label>@Html.DisplayFor(model => item.cate_Descripcion)</label>
-        </div>
-    </div>
-
-    <div class="card mt-4">
-        <div class="card-header" style="background-color:#2a0637;">
-            <h3 class="text-white ">Auditoria</h3>
-        </div>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Accion</th>
-                        <th>Usuario</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Creado</td>
-                        <td>@ViewBag.UsuarioCreacion</td>
-                        <td>@ViewBag.FechaCreacion</td>
-                    </tr>
-                    <tr>
-                        <td>Modificado</td>
-                        <td>@ViewBag.UsuarioModificacion</td>
-                        <td>@ViewBag.FechaModificacion</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <hr />
     <div>
-        <a style="padding-top: 0.5%; font-size: 10px; height:25px;" class="btn btn-outline-dark btn-lg" asp-action="Index">Regresar a la Lista</a>
+        <hr />
+        <div class="row">
+            <div class="col">
+                <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.cate_Descripcion)</label><br />
+                <label>@Html.DisplayFor(model => item.cate_Descripcion)</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col d-flex justify-content-end">
+                <button type="button" id="btnEditar" class="btn btn-warning btn-sm" onclick="AbrirModalEdit('@item.cate_Id,@item.cate_Descripcion')">Editar</button> |
+                <a class="btn btn-dark" asp-action="Index">Regresar al listado</a>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header" style="background-color:#2a0637;">
+                <h3 class="text-white ">Auditoria</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Accion</th>
+                            <th>Usuario</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Creado</td>
+                            <td>@ViewBag.UsuarioCreacion</td>
+                            <td>@ViewBag.FechaCreacion</td>
+                        </tr>
+                        <tr>
+                            <td>Modificado</td>
+                            <td>@ViewBag.UsuarioModificacion</td>
+                            <td>@ViewBag.FechaModificacion</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr />
+        <div>
+            <a style="padding-top: 0.5%; font-size: 10px; height:25px;" class="btn btn-outline-dark btn-lg" asp-action="Index">Regresar a la Lista</a>
+        </div>
     </div>
-</div>
 
 }
+
+
+@Html.Partial("_CategoriasEditViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.CategoriaViewModel())
+
+
+<script src="~/js/App/Salon/Categorias.js"></script>

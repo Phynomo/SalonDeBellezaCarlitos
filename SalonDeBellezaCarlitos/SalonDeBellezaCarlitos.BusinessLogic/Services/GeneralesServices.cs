@@ -531,6 +531,19 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
         }
 
+        public IEnumerable<tbCategorias> BuscarCategoriaIEnumerable(int? id)
+        {
+            try
+            {
+                return _CategoriaRepository.BuscarCategoria(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
         #endregion
 
         #region Departamentos
@@ -1237,12 +1250,12 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
         }
 
-        public IEnumerable<VW_tbFacturas_Listado> ListadoFacturas(out string error)
+        public IEnumerable<VW_tbFacturas_Listado> ListadoFacturas(out string error, int sucu_id)
         {
             error = string.Empty;
             try
             {
-                return _FacturasRepository.ListView();
+                return _FacturasRepository.ListView(sucu_id);
             }
             catch (Exception e)
             {
@@ -1529,6 +1542,21 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         }
 
+        public int EditarServicioxProducto(tbProductosXServicio servicio)
+        {
+
+            try
+            {
+                var resultado = _ServicioxProductoRepository.Update(servicio);
+
+                return resultado;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
         public int EliminarServicioxProducto(tbProductosXServicio serprod)
         {
 
@@ -1545,6 +1573,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
 
         }
 
+        public tbProductosXServicio findServicioXProducto(int? id)
+        {
+            try
+            {
+                return _ServicioxProductoRepository.find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         #endregion
 

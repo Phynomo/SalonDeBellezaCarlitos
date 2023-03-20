@@ -12,25 +12,25 @@
             </div>
             <form asp-action="Edit" id="formEdit">
                 <div class="modal-body">
-                    <input asp-for="spro_Id" class="form-control" id="spro_Id_Edit" name="spro_Id" hidden/>
+                    <input asp-for="spro_Id" class="form-control" id="spro_Id_Edit" name="spro_Id" hidden />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label asp-for="serv_Id" class="control-label"></label>
-                                <select asp-for="serv_Id" id="serv_Id" class="form-select" asp-items="ViewBag.serv_Id">
+                                <select asp-for="serv_Id" id="serv_Id_Edit" class="form-select" asp-items="ViewBag.serv_Id">
                                     <option value="">-- Selecciones un Servicio --</option>
                                 </select>
-                                <label name="lbl_DepartamentoCreateError" id="lbl_DepartamentoCreateError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                                <label name="lbl_serv_Nombre_Edit" id="lbl_serv_Nombre_Edit" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label asp-for="prod_Id" class="control-label"></label>
-                                <select asp-for="prod_Id" id="prod_Id" class="form-select" asp-items="ViewBag.prod_Id">
+                                <select asp-for="prod_Id" id="prod_Id_Edit" class="form-select" asp-items="ViewBag.prod_Id">
                                     <option value="">-- Selecciones un Producto --</option>
                                 </select>
-                                <label name="lbl_DepartamentoCreateError" id="lbl_DepartamentoCreateError" class="control-label" hidden style="color: red;">Este campo es requerido</label>
+                                <label name="lbl_prod_Nombre_Edit" id="lbl_prod_Nombre_Edit" class="control-label" hidden style="color: red;">Este campo es requerido</label>
                             </div>
                         </div>
                     </div>

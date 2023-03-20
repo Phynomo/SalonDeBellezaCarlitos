@@ -607,7 +607,8 @@ UPDATE [acce].[tbUsuarios]
    SET [usur_Contrasenia] = @Password
  WHERE usur_Usuario = @usur_Usuario
 
- IF EXISTS (select * FROM acce.tbUsuarios WHERE usur_Usuario = @usur_Usuario)
+ IF EXISTS (select * FROM acce.tbUsuarios WHERE usur_Usuario = @usur_Usuario
+												AND [usur_Contrasenia] = @Password)
  BEGIN
  SELECT 1 as Proceso
  END
@@ -2632,9 +2633,11 @@ SELECT [fact_Id]
 --Procedimiento Insert Facturas 
 GO
 CREATE OR ALTER PROCEDURE salo.UDP_salo_tbFacturas_Listado
+@sucu_Id int
 AS
 BEGIN
 	SELECT * FROM VW_tbFacturas_Listado
+	WHERE sucu_Id = @sucu_Id
 
 END
 

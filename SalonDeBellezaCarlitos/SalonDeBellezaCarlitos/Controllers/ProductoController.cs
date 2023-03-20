@@ -51,8 +51,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(ProductoViewModel producto)
         {
             var result = 0;
-            producto.prod_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            producto.prod_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            producto.prod_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            producto.prod_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
             var prod = _mapper.Map<tbProductos>(producto);
             result = _generalesService.InsertarProducto(prod);
@@ -107,8 +107,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public IActionResult Edit(ProductoViewModel producto)
         {
             var result = 0;
-            producto.prod_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            producto.prod_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            producto.prod_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            producto.prod_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
             var prod = _mapper.Map<tbProductos>(producto);
             result = _generalesService.EditarProducto(prod);

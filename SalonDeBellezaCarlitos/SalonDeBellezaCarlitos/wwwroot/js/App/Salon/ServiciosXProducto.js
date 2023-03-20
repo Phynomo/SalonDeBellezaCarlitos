@@ -4,22 +4,6 @@
     $("#lbl_serv_Nombre").attr('hidden', true);
     $("#lbl_prod_Nombre").attr('hidden', true);
 
-    var input = document.getElementById("serv_Nombre",);
-    input.addEventListener("keydown", function (event) {
-        var key = event.key;
-
-        if (!isNaN(parseFloat(key)) && isFinite(key)) {
-            event.preventDefault();
-        }
-    });
-    var input = document.getElementById("prod_Nombre",);
-    input.addEventListener("keydown", function (event) {
-        var key = event.key; 
-
-        if (!isNaN(parseFloat(key)) && isFinite(key)) {
-            event.preventDefault();
-        }
-    });
 }
 
 function GuardarModalCreate() {
@@ -42,6 +26,35 @@ function GuardarModalCreate() {
     }
 }
 
+function AbrirModalEdit(cadena) {
+    var datastring = cadena;
+    var data = datastring.split(',');
+    $("#spro_Id_Edit").val(data[0]);
+    $("#serv_Nombre_Edit").val(data[1]);
+    $("#prod_Nombre_Edit").val(data[2]);
+    $("#EditarServicioxProducto").appendTo('body').modal('show');
+};
+
+function GuardarModalEdit() {
+    var serv_Nombre = $('#serv_Nombre_Edit').val();
+    var prod_Nombre = $('#prod_Nombre_Edit').val();
+
+    $("#lbl_DescripcionEditError").attr('hidden', true);
+
+    if (serv_Nombre != "" && prod_Nombre != "") {
+        $("#formEdit").submit();
+
+    } else {
+        if (serv_Nombre == "") {
+            $("#lbl_serv_Nombre_Edit").attr('hidden', false);
+        }
+        if (prod_Nombre == "") {
+            $("#lbl_prod_Nombre_Edit").attr('hidden', false);
+        }
+    }
+
+}
+
 function AbrirModalDelete(id) {
     $("#spro_Id_Delete").val(id);
     $("#EliminarServicioXProducto").appendTo('body').modal('show');
@@ -61,4 +74,9 @@ function GuardarModalDelete() {
 
     }
 
+}
+
+
+function tumama() {
+    $("#modalCreate").appendTo('body').modal('show');
 }

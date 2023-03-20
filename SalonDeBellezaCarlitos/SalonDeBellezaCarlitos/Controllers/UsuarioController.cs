@@ -47,8 +47,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(UsuariosViewModel Usuario)
         {
             var result = 0;
-            Usuario.usur_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            Usuario.usur_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            Usuario.usur_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            Usuario.usur_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
             var usu = _mapper.Map<tbUsuarios>(Usuario);
             result = _generalesService.InsertarUsuario(usu);
@@ -67,8 +67,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Edit(UsuariosViewModel Usuario)
         {
             var result = 0;
-            Usuario.usur_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            Usuario.usur_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            Usuario.usur_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            Usuario.usur_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
             var usu = _mapper.Map<tbUsuarios>(Usuario);
             result = _generalesService.EditarUsuario(usu);

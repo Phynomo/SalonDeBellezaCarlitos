@@ -27,7 +27,10 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/ServicioxProducto/Listado")]
         public IActionResult Index()
         {
-            var listado = _generalesService.ListadoServicioxproducto(out string error);
+            ViewBag.Toast = TempData["ServicioxProducto"] as string;
+            ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error).ToList(), "serv_Id", "serv_Nombre");
+            ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string ersdfror).ToList(), "prod_Id", "prod_Nombre");
+            var listado = _generalesService.ListadoServicioxproducto(out string esdfarror);
             var listadoMapeado = _mapper.Map<IEnumerable<VWServicioxproductoViewModel>>(listado);
 
             if (!string.IsNullOrEmpty(error))
@@ -41,11 +44,10 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/ServicioxProducto/Crear")]
         public IActionResult Create()
         {
-            ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error).ToList(), "serv_Id", "serv_Nombre");
+            ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
             ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
             return View();
         }
-
         [HttpPost("/ServicioxProducto/Crear")]
         public ActionResult Create(ServicioxProductoViewModel producto)
         {
@@ -55,13 +57,34 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             
             if (result == 0)
             {
-                TempData["Producto"] = "error";
+                TempData["ServicioxProducto"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error).ToList(), "serv_Id", "serv_Nombre");
+                ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
                 ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
                 return View();
             }
-            TempData["Producto"] = "success";
+            TempData["ServicioxProducto"] = "success";
+            return RedirectToAction("Listado");
+        }
+
+        [HttpPost("/ServicioxProducto/Editar")]
+        public IActionResult Edit(ServicioxProductoViewModel producto)
+        {
+            var result = 0;
+            producto.prod_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            producto.prod_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+
+            var prod = _mapper.Map<tbProductos>(producto);
+            result = _generalesService.EditarProducto(prod);
+
+            if (result == 0)
+            {
+                TempData["ServicioxProducto"] = "error";
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                ViewBag.cate_Id = new SelectList(_generalesService.ListadoCategorias(out string error).ToList(), "cate_Id", "cate_Descripcion");
+                ViewBag.prov_Id = new SelectList(_generalesService.ListadoProveedores(out string error2).ToList(), "prov_Id", "prov_NombreContacto");
+            }
+            TempData["ServicioxProducto"] = "success";
             return RedirectToAction("Listado");
         }
 

@@ -3,11 +3,11 @@
 @using Microsoft.AspNetCore.Http
 @{
     var session = Context.RequestServices.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-    string user_Id = ViewBag.user_Id = session?.GetString("usur_Id");
+    int user_Id = ViewBag.user_Id = Convert.ToInt32( session?.GetInt32("usur_Id"));
     string Nombre = ViewBag.Nombre = session?.GetString("Nombre");
     string Cargo = ViewBag.Cargo = session?.GetString("Cargo");
     string Sucursal = ViewBag.Sucursal = session?.GetString("Sucursal");
-    if (user_Id == null || user_Id == "")
+    if (user_Id == 0)
     {
         <script>window.location.href = '/Login/Index';</script>
     }
@@ -471,7 +471,7 @@
                     <!-- End - Profile widget -->
 
                     <div class="mainnav__categoriy py-3">
-                        <h6 class="mainnav__caption mt-0 px-3 fw-bold">Link Items</h6>
+                        <h6 class="mainnav__caption mt-0 px-3 fw-bold">Esquemas</h6>
                         <ul class="mainnav__menu nav flex-column">
 
                             <li class="nav-item has-sub">
@@ -539,6 +539,9 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="/Reservacion/Listado" class="nav-link" id="navReservaciones">Reservaciones</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/ServicioxProducto/Listado" class="nav-link" id="navServicioxProducto">Servicios Detalle</a>
                                     </li>
 
                                 </ul>

@@ -49,8 +49,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
-                estadociv.estc_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-                estadociv.estc_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                estadociv.estc_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+                estadociv.estc_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
                 var result = 0;
                 var civ = _mapper.Map<tbEstadosCiviles>(estadociv);
@@ -108,8 +108,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
-                estado.estc_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-                estado.estc_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                estado.estc_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+                estado.estc_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
                 var result = 0;
                 var est = _mapper.Map<tbEstadosCiviles>(estado);

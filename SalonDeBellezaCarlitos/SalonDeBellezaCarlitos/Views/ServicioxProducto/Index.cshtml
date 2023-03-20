@@ -10,14 +10,14 @@
 
 <div class="row text-center">
     <div class="col">
-        <h1 class="text-center">Servicios X Productos</h1>
+        <h1 class="text-center">Servicios Detalle</h1>
         <hr />
     </div>
 </div>
 
 <div class="row mb-3 text-center">
     <div class="col">
-        <button class="btn btn-primary" onclick="AbrirModalCreate()">Agregar Un Servicio por Producto</button>
+        <button class="btn btn-primary" onclick="AbrirModalCreate()">Un Servicio por Producto</button>
     </div>
 </div>
 <table id="example" class="table dataTable compact hover stripe" style="width: 100%;" aria-describedby="example_info">
@@ -29,7 +29,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.prod_Nombre)
             </th>
-            <th>
             <th></th>
         </tr>
     </thead>
@@ -44,7 +43,7 @@
                     @Html.DisplayFor(modelItem => item.prod_Nombre)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.spro_Id">Edit</a> |
+                    <button type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.spro_Id,@item.serv_Nombre,@item.prod_Nombre')">Editar</button> |
                     <a asp-action="Details" asp-route-id="@item.spro_Id">Details</a> |
                     <button type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.spro_Id')">Eliminar</button>
                 </td>
@@ -53,9 +52,12 @@
     </tbody>
 </table>
 
+
 @Html.Partial("_SerxProdCreateViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.ServicioxProductoViewModel())
+
+@Html.Partial("_SerxProdEditViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.ServicioxProductoViewModel())
 
 @Html.Partial("_SerxProdDeleteViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.ServicioxProductoViewModel())
 
-<script src="~/js/App/Salon/ServicioXProducto.js"></script>
+<script src="~/js/App/Salon/ServiciosXProducto.js"></script>
 

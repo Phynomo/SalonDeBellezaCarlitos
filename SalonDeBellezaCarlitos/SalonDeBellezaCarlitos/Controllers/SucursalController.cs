@@ -45,8 +45,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(SucursalViewModel sucursal)
         {
             var result = 0;
-            sucursal.sucu_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            sucursal.sucu_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            sucursal.sucu_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            sucursal.sucu_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
             var suc = _mapper.Map<tbSucursales>(sucursal);
             result = _generalesService.InsertarSucursal(suc);
@@ -65,8 +65,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Edit(SucursalViewModel sucursal)
         {
             var result = 0;
-            sucursal.sucu_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            sucursal.sucu_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            sucursal.sucu_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            sucursal.sucu_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
             var suc = _mapper.Map<tbSucursales>(sucursal);
             result = _generalesService.EditarSucursal(suc);

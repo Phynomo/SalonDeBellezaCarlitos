@@ -54,7 +54,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.depa_Descripcion)
                 </td>
-                <td>
+                <td class="text-end">
                     <button style="padding-top: 1.5%; font-size: 10px; height: 25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.sucu_Descripcion,@item.depa_Id,@item.muni_Id,@item.sucu_DireccionExacta,@item.sucu_Id')">Editar</button> |
                     <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.sucu_Id">Detalles</a>
                     <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.sucu_Id')">Eliminar</button>
@@ -63,6 +63,7 @@
         }
     </tbody>
 </table>
+
 
 
 @Html.Partial("_SucursalCreateModalViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.SucursalViewModel())

@@ -65,8 +65,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Empleados/Crear")]
         public ActionResult Create(EmpleadoViewModel empleado)
         {
-            empleado.empl_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            empleado.empl_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            empleado.empl_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            empleado.empl_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
             var result = 0;
             var emp = _mapper.Map<tbEmpleados>(empleado);
@@ -142,8 +142,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Empleados/Editar")]
         public IActionResult Edit(EmpleadoViewModel empleado)
         {
-            empleado.empl_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            empleado.empl_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            empleado.empl_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            empleado.empl_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
             var result = 0;
             var emp = _mapper.Map<tbEmpleados>(empleado);

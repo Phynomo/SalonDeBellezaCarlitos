@@ -42,8 +42,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             try
             {
 
-                cliente.clie_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-                cliente.clie_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                cliente.clie_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+                cliente.clie_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
                 var result = 0;
                 var cli = _mapper.Map<tbClientes>(cliente);
                 result = _generalesService.InsertarCLientes(cli);
@@ -75,8 +75,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             try
             {
 
-                cliente.clie_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-                cliente.clie_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                cliente.clie_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+                cliente.clie_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
                 var result = 0;
                 var cli = _mapper.Map<tbClientes>(cliente);
                 result = _generalesService.EditarCliente(cli);

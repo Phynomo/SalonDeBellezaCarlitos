@@ -5,7 +5,7 @@
 }
 
 
-<h1 class="text-decoration-underline text-center">DETALLE ESTADO CIVIL</h1>
+<h1 class=" text-center">DETALLE ESTADO CIVIL</h1>
 @foreach (var item in Model)
 {
     <div>
@@ -17,6 +17,12 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col d-flex justify-content-end">
+                <button type="button" id="btnEditar" class="btn btn-warning btn-sm" onclick="AbrirModalEdit('@item.estc_Id,@item.estc_Descripcion')">Editar</button> |
+                <a class="btn btn-dark" asp-action="Index">Regresar al listado</a>
+            </div>
+        </div>
 
 
         <div class="card mt-4">
@@ -54,3 +60,11 @@
         <a style="padding-top: 0.5%; font-size: 10px; height:25px;" class="btn btn-outline-dark btn-lg" asp-action="Index">Regresar a la Lista</a>
     </div>
 }
+
+
+
+
+@Html.Partial("_EstadoCivilEditViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.EstadoCivilViewModel())
+
+
+<script src="~/js/App/Salon/EstadosCiviles.js"></script>

@@ -51,8 +51,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
-                Metodopagos.metp_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-                Metodopagos.metp_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                Metodopagos.metp_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+                Metodopagos.metp_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
                 var result = 0;
                 var met = _mapper.Map<tbMetodoPago>(Metodopagos);
@@ -111,8 +111,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             try
             {
-                metodo.metp_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-                metodo.metp_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                metodo.metp_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+                metodo.metp_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
                 var result = 0;
                 var met = _mapper.Map<tbMetodoPago>(metodo);

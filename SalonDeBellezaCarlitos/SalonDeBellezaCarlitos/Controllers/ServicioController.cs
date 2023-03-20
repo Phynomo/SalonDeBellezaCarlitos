@@ -46,8 +46,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             try
             {
                 var result = 0;
-                servicio.serv_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-                servicio.serv_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                servicio.serv_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+                servicio.serv_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
                 var ser = _mapper.Map<tbServicios>(servicio);
                 result = _generalesService.InsertarServicio(ser);
@@ -80,8 +80,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             try
             {
                 var result = 0;
-                servicio.serv_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-                servicio.serv_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+                servicio.serv_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+                servicio.serv_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
                 var ser = _mapper.Map<tbServicios>(servicio);
                 result = _generalesService.EditarServicio(ser);

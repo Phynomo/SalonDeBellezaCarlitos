@@ -43,7 +43,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@empl_Id_Atendido", item.empl_Id_Atendido, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_Id_Caja", item.empl_Id_Caja, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@metp_Id", item.metp_Id, DbType.String, ParameterDirection.Input);
-            parametros.Add("@fact_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@fact_UsuarioCreacion", item.fact_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_Facturas, parametros, commandType: CommandType.StoredProcedure);
 
@@ -59,7 +59,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@prod_Id", item.empl_Id_Atendido, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@serv_Id", item.empl_Id_Caja, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@fade_Cantidad", item.fact_UsuarioCreacion, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@fade_UsuarioCreacion", 1, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@fade_UsuarioCreacion", item.fact_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Insertar_FacturasDetalle, parametros, commandType: CommandType.StoredProcedure);
 
@@ -95,10 +95,14 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<VW_tbFacturas_Listado> ListView()
+        public IEnumerable<VW_tbFacturas_Listado> ListView(int sucu_id)
         {
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
-            return db.Query<VW_tbFacturas_Listado>(ScriptsDataBase.UDP_Listado_Facturas, null, commandType: CommandType.StoredProcedure);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@sucu_Id", sucu_id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<VW_tbFacturas_Listado>(ScriptsDataBase.UDP_Listado_Facturas, parametros, commandType: CommandType.StoredProcedure);
         }
 
         public int Update(tbFacturas item)

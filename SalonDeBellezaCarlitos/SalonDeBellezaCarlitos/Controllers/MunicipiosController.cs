@@ -52,8 +52,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Create(MunicipioViewModel municipio)
         {
             var result = 0;
-            municipio.muni_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            municipio.muni_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            municipio.muni_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            municipio.muni_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
             var muni = _mapper.Map<tbMunicipios>(municipio);
             result = _generalesService.InsertarMunicipio(muni);
@@ -72,8 +72,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public ActionResult Edit(MunicipioViewModel municipio)
         {
             var result = 0;
-            municipio.muni_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            municipio.muni_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            municipio.muni_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            municipio.muni_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
             var muni = _mapper.Map<tbMunicipios>(municipio);
             result = _generalesService.EditarMunicipio(muni);
