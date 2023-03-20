@@ -3156,7 +3156,7 @@ END
 
 
 GO
-CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Insert 'asd', 'ásdf', 54, 'sdfsdf','asdasd',2
+CREATE OR ALTER PROCEDURE salo.UDP_tbProveedores_Insert 
 	@prov_NombreEmpresa Nvarchar(150),
 	@prov_NombreContacto Nvarchar(150),
 	@muni_Id INT,

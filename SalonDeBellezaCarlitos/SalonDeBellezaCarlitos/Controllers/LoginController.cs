@@ -28,6 +28,12 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("Login/Index")]
         public IActionResult Index()
         {
+
+            HttpContext.Session.SetString("Nombre", "");
+            HttpContext.Session.SetString("Cargo", "");
+            HttpContext.Session.SetString("Sucursal", "");
+            HttpContext.Session.SetString("usur_Id", "");
+
             ViewBag.Toast = TempData["login"] as string;
             return View();
         }
