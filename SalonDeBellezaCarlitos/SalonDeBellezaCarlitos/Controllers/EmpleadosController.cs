@@ -65,6 +65,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Empleados/Crear")]
         public ActionResult Create(EmpleadoViewModel empleado)
         {
+            try
+            {
             empleado.empl_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             empleado.empl_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
@@ -85,6 +87,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             TempData["Empleados"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+
+                TempData["Empleados"] = "error";
+                return RedirectToAction("Listado");
+            }
+           
         }
 
         public IActionResult CargarMunicipios(int id)
@@ -97,10 +107,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Empleados/Editar")]
         public IActionResult Edit(int? id)
         {
-
+            try
+            {
             var empleado = _generalesService.BuscarEmpleados(id);
+            var empleado2 = _generalesService.findEmpleado(id);
+            var emp = _mapper.Map<EmpleadoViewModel>(empleado2);
             foreach (var item in empleado)
             {
+               
                 var depa_Id = _generalesService.BuscarMunicipio(item.muni_Id);
                 ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion", depa_Id.depa_Id);
                 ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(depa_Id.depa_Id), "muni_Id", "muni_Descripcion", item.muni_Id);
@@ -115,7 +129,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.empl_DireccionExacta = item.empl_DireccionExacta;
                 ViewBag.empl_Telefono = item.empl_Telefono;
                 ViewBag.empl_CorreoElectronico = item.empl_CorreoElectronico;
-
+                emp.depa_Id = depa_Id.depa_Id;
                 if (item.empl_Sexo == "M")
                 {
                     ViewBag.empl_SexoM = "checked";
@@ -136,12 +150,22 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             }
 
-            return View();
+            return View(emp);
+            }
+            catch (Exception)
+            {
+
+                TempData["Empleados"] = "error";
+                return RedirectToAction("Listado");
+            }
+           
         }
 
         [HttpPost("/Empleados/Editar")]
         public IActionResult Edit(EmpleadoViewModel empleado)
         {
+            try
+            {
             empleado.empl_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             empleado.empl_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
@@ -190,14 +214,25 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 return View(empleado);
             }
+
             TempData["Empleados"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+
+                TempData["Empleados"] = "error";
+                return RedirectToAction("Listado");
+            }
+            
         }
 
 
         [HttpGet("/Empleados/Detalles")]
         public IActionResult Details(int? id)
         {
+            try
+            {
             var empleado = _generalesService.BuscarEmpleados(id);
             foreach (var item in empleado)
             {
@@ -252,10 +287,20 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 }
             }
             return View();
+            }
+            catch (Exception)
+            {
+
+                TempData["Empleados"] = "error";
+                return RedirectToAction("Listado");
+            }
+            
         }
         [HttpPost("/Empleados/Eliminar")]
         public IActionResult Delete(EmpleadoViewModel empleado)
         {
+            try
+            {
             var result = 0;
             var emp = _mapper.Map<tbEmpleados>(empleado);
             result = _generalesService.EliminarEmpleado(emp);
@@ -263,11 +308,17 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             if (result == 0)
             {
                 TempData["Empleados"] = "error";
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 return View();
             }
             TempData["Empleados"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["Empleados"] = "error";
+                return View();
+            }
+            
 
         }
 

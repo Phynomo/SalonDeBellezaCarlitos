@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     $('.table').DataTable({
         select: true,
+        "autoWidth": true,
         language: {
             "decimal": "",
             "emptyTable": "No hay información",

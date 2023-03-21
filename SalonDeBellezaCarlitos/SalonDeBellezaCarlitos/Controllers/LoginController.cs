@@ -29,11 +29,6 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public IActionResult Index()
         {
 
-            HttpContext.Session.SetString("Nombre", "");
-            HttpContext.Session.SetString("Cargo", "");
-            HttpContext.Session.SetString("Sucursal", "");
-            HttpContext.Session.SetInt32("usur_Id", 0);
-
             ViewBag.Toast = TempData["login"] as string;
             return View();
         }

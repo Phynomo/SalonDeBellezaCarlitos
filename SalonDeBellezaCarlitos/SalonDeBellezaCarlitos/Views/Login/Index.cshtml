@@ -8,7 +8,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <link rel="shortcut icon" href="~/img/Logo.ico" style="filter: invert(100%);">
+    <link rel="stylesheet" href="~/css/Login/index.css">
     <link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,41 +27,132 @@
     <link rel="stylesheet" href="~/premium/icon-sets/icons/solid-icons/premium-solid-icons.min.css">
 
 
-    <link rel="stylesheet" href="~/css/Login/index.css">
     <link rel="stylesheet" href="~/css/toastr/toastr.min.css">
     <title>SDBC</title>
+
+    @*<style>
+            body {
+                background-image: url(../../wwwroot/img/LoginBG.jpg);
+            }
+        </style>*@
+
 </head>
 
 <body>
     <input type="hidden" value="@ViewBag.Toast" id="toast" />
-    <section>
-        <div class="form-box">
-            <div class="form-value">
-                <form asp-action="Index" id="loginform">
-                    <h2>Login</h2>
-                    <div class="inputbox">
-                        <ion-icon name="mail-outline"></ion-icon>
-                        <input asp-for="usur_Usuario" id="usuario" type="text" placeholder=" ">
-                        <label for="" id="lblUsuario1" hidden>Usuario</label>
-                        <label for="" id="lblUsuario2" hidden class="text-danger" style="color:crimson;">Usuario*</label>
+    @*<section>
+            <div class="form-box">
+                <div class="form-value">
+                    <form asp-action="Index" id="loginform">
+                        <h2>Login</h2>
+                        <div class="inputbox">
+                            <ion-icon name="mail-outline"></ion-icon>
+                            <input asp-for="usur_Usuario" id="usuario" type="text" placeholder=" ">
+                            <label for="" id="lblUsuario1" hidden>Usuario</label>
+                            <label for="" id="lblUsuario2" hidden class="text-danger" style="color:crimson;">Usuario*</label>
+                        </div>
+                        <div class="inputbox">
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                            <input asp-for="usur_Contrasenia" id="password" type="password" placeholder=" ">
+                            <label for="" id="lblContraseña1" hidden>Contraseña</label>
+                            <label for="" id="lblContraseña2" hidden class="text-danger" style="color: crimson;">Contraseña*</label>
+                        </div>
+
+                        <div class="forget text-center">
+                            <a class="text-white" style="margin:auto; font-size:1.2em; text-decoration:none;" onclick="abrirRecuperar()" href="#">Recuperar usuario</a>
+                        </div>
+                        <button class="mt-2" type="button" onclick="IniciarSesion()">Iniciar sesion</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>*@
+
+
+
+    <!-- Section: Design Block -->
+    <section class="">
+
+        <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+            <div class="row gx-lg-5 align-items-center mb-5">
+                <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+                    <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                         <br />
+                        <span style="color: hsl(218, 81%, 75%)"></span>
+                    </h1>
+                    <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+                        
+                    </p>
+                </div>
+
+                <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                    <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                    <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+                    <div class="card bg-glass">
+                        <div class="card-body px-4 py-5 px-md-5">
+                            <form asp-action="Index" id="loginform">
+                                <!-- 2 column grid layout with text inputs for the first and last names -->
+                                @*<div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="form3Example1" class="form-control" />
+                                            <label class="form-label" for="form3Example1">First name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" id="form3Example2" class="form-control" />
+                                            <label class="form-label" for="form3Example2">Last name</label>
+                                        </div>
+                                    </div>
+                                </div>*@
+                                <h2 class="mt-2 mb-3">Login</h2>
+                                <!-- Email input -->
+                                <div class="form-outline mt-2 mb-4">
+                                    @*<input type="email" id="form3Example3" class="form-control" />
+                                    <label class="form-label" for="form3Example3">Email address</label>*@
+                                    <input asp-for="usur_Usuario" id="usuario" type="text" class="form-control">
+                                    <label class="form-label" id="lblUsuario1" hidden>Usuario</label>
+                                    <label  class="form-label text-danger font-weight-bold" id="lblUsuario2" hidden style="color:crimson;">Usuario*</label>
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    @*<input type="password" id="form3Example4" class="form-control" />
+                                    <label class="form-label" for="form3Example4">Password</label>*@
+                                    <input asp-for="usur_Contrasenia" id="password" type="password" class="form-control">
+                                    <label class="form-label" id="lblContraseña1" hidden>Contraseña</label>
+                                    <label class="form-label text-danger font-weight-bold" id="lblContraseña2" hidden style="color: crimson;">Contraseña*</label>
+                                </div>
+
+                                <!-- Checkbox -->
+                                <div class="form-check d-flex justify-content-center mb-4">
+                                    <label class="form-check-label" for="form2Example33">
+                                        <a class="form-label" style="margin:auto; font-size:1.2em; text-decoration:none;" onclick="abrirRecuperar()" href="#">Recuperar usuario</a>
+                                    </label>
+                                </div>
+
+                                <!-- Submit button -->
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                       <button style="width:70%;" class="mt-2 mb-2 btn btn-primary btn-block" type="button" onclick="IniciarSesion()">Iniciar sesion</button>
+                                    </div>
+                                </div>
+
+                                <!-- Register buttons -->
+                                
+                            </form>
+                        </div>
                     </div>
-                    <div class="inputbox">
-                        <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input asp-for="usur_Contrasenia" id="password" type="password" placeholder=" ">
-                        <label for="" id="lblContraseña1" hidden>Contraseña</label>
-                        <label for="" id="lblContraseña2" hidden class="text-danger" style="color: crimson;">Contraseña*</label>
-                    </div>
-                    
-                    <div class="forget text-center">
-                        <a class="text-white" style="margin:auto; font-size:1.2em; text-decoration:none;" onclick="abrirRecuperar()" href="#">Recuperar usuario</a>
-                    </div>
-                    <button class="mt-2" type="button" onclick="IniciarSesion()">Iniciar sesion</button>
-                </form>
+                </div>
             </div>
         </div>
     </section>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- Section: Design Block -->
+
+
 
     @Html.Partial("_RecuperarContraseniaViewPartial", new SalonDeBellezaCarlitos.WebUI.Models.UsuariosViewModel())
 </body>
@@ -82,3 +174,9 @@
 
 <script src="~/js/toastr/toastr.min.js"></script>
 <script src="~/js/toastr/toastr.js"></script>
+
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>

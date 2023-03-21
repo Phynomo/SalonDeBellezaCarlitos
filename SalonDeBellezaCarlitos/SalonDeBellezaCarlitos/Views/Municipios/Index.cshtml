@@ -2,7 +2,7 @@
 
 <input type="hidden" value="@ViewBag.Toast" id="toast" />
 
-@{ ViewData["Title"] = "Index";
+@{ ViewData["Title"] = "Municipios";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <div class="row text-center">
@@ -50,9 +50,9 @@
         @Html.DisplayFor(modelItem => item.muni_Codigo)
     </td>
     <td class="text-end">
-        <button style="font-size: 10px; height:25px;" type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.muni_Id,@item.muni_Codigo,@item.muni_Descripcion,@item.depa_Id')">Editar</button> |
-        <a style="font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.muni_Id">Details</a> |
-        <button style="font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.muni_Id')">Delete</button>
+        <button type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.muni_Id,@item.muni_Codigo,@item.muni_Descripcion,@item.depa_Id')">Editar</button>
+        <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.muni_Id">Details</a> 
+        <button class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.muni_Id')">Delete</button>
 
     </td>
 </tr>}

@@ -28,8 +28,6 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         {
             ViewBag.Toast = TempData["myData"] as string;
 
-            
-
             var listado = _generalesService.ListadoCargos(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<CargoViewModel>>(listado);
 
@@ -51,6 +49,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Cargos/Crear")]
         public ActionResult Create(CargoViewModel cargo)
         {
+            try
+            {
             cargo.carg_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             cargo.carg_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
@@ -66,6 +66,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             TempData["myData"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["myData"] = "error";
+                return RedirectToAction("Listado");
+            }
+            
         }
 
         [HttpGet("/Cargos/Editar/{id}")]
@@ -78,6 +85,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Cargos/Editar")]
         public IActionResult Edit(CargoViewModel cargo)
         {
+            try
+            {
             cargo.carg_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             cargo.carg_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             var result = 0;
@@ -93,6 +102,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
             TempData["myData"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["myData"] = "error";
+                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                return RedirectToAction("Listado");
+            }
+            
            
         }
 
@@ -106,25 +123,37 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Cargos/Eliminar")]
         public IActionResult Delete(CargoViewModel cargo)
         {
+
+            try
+            {
             var result = 0;
             var car = _mapper.Map<tbCargos>(cargo);
             result = _generalesService.EliminarCargo(car);
 
             if (result == 0)
             {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return RedirectToAction("Listado");
+                    TempData["myData"] = "error";
+                    return RedirectToAction("Listado");
             }
 
             TempData["myData"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+
+                TempData["myData"] = "error";
+                return RedirectToAction("Listado");
+            }
+           
 
         }
 
         [HttpGet("/Cargos/Detalles")]
         public IActionResult Details(int? id)
         {
-
+            try
+            {
             var listado = _generalesService.BuscarCargo(id);
             var listadoMapeado = _mapper.Map<IEnumerable<CargoViewModel>>(listado);
             foreach (var item in listadoMapeado)
@@ -143,6 +172,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             
 
             return View(listadoMapeado);
+            }
+            catch (Exception)
+            {
+
+                TempData["myData"] = "error";
+                return RedirectToAction("Listado");
+            }
+            
         }
 
     }

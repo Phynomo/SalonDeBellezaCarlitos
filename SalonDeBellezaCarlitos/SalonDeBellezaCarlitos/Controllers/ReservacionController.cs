@@ -50,6 +50,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Reservacion/Crear")]
         public ActionResult Create(ReservacionesViewModel reservacion)
         {
+            try
+            {
             var result = 0;
             reservacion.rese_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             reservacion.rese_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
@@ -61,10 +63,18 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
                 ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error).ToList(), "clie_Id", "clie_Nombre", rese.clie_Id);
                 ViewBag.sucu_Id = new SelectList(_generalesService.ListadoSucursales(out string error2).ToList(), "sucu_Id", "sucu_Descripcion", rese.sucu_Id);
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                return View(reservacion);
+                    ViewBag.Toast = "error";
+                    return View(reservacion);
+                }
+                ViewBag.Toast = "success";
+                return RedirectToAction("Listado");
             }
-            return RedirectToAction("Listado");
+            catch (Exception)
+            {
+                TempData["Reservacion"] = "error";
+                return RedirectToAction("Listado");
+            }
+           
         }
 
         [HttpGet("/Reservacion/Editar")]
@@ -100,6 +110,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Reservacion/Editar")]
         public ActionResult Edit(ReservacionesViewModel reservaciones)
         {
+            try
+            {
             var result = 0;
             reservaciones.rese_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             reservaciones.rese_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
@@ -125,6 +137,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.sucu_Id = new SelectList(_generalesService.ListadoSucursales(out string error12).ToList(), "sucu_Id", "sucu_Descripcion", reservaciones.sucu_Id);
                     return View(reservaciones);
             }
+            }
+            catch (Exception)
+            {
+                TempData["Reservacion"] = "error";
+                return RedirectToAction("Listado");
+            }
+            
         }
 
         [HttpGet("/Reservacion/Detalles")]
@@ -184,16 +203,27 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Reservacion/Eliminar")]
         public IActionResult Delete(ReservacionesViewModel reservaciones)
         {
+            try
+            {
             var result = 0;
             var rese = _mapper.Map<tbReservaciones>(reservaciones);
             result = _generalesService.EliminarReservacion(rese);
 
             if (result == 0)
-            {
-                ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
+                {
+                    TempData["Reservacion"] = "error";
+                    return RedirectToAction("Listado");
+                }
+
+                TempData["Reservacion"] = "success";
                 return RedirectToAction("Listado");
             }
-            return RedirectToAction("Listado");
+            catch (Exception)
+            {
+                TempData["Reservacion"] = "error";
+                return RedirectToAction("Listado");
+            }
+            
 
         }
 

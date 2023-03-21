@@ -46,6 +46,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Usuario/Crear")]
         public ActionResult Create(UsuariosViewModel Usuario)
         {
+            try
+            {
             var result = 0;
             Usuario.usur_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             Usuario.usur_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
@@ -61,12 +63,21 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             TempData["Usuario"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["Usuario"] = "error";
+                return RedirectToAction("Listado");
+            }
+            
         }
 
         [HttpPost("/Usuario/Editar")]
         public ActionResult Edit(UsuariosViewModel Usuario)
         {
-            var result = 0;
+            try
+            {
+             var result = 0;
             Usuario.usur_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             Usuario.usur_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
@@ -81,12 +92,21 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             TempData["Usuario"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["Usuario"] = "error";
+                return RedirectToAction("Listado");
+            }
+           
         }
 
 
         [HttpPost("/Usuario/Eliminar")]
         public IActionResult Delete(UsuariosViewModel Usuario)
         {
+            try
+            {
             var result = 0;
             var usu = _mapper.Map<tbUsuarios>(Usuario);
             result = _generalesService.EliminarUsuario(usu);
@@ -99,6 +119,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             TempData["Usuario"] = "error";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["Usuario"] = "error";
+                return RedirectToAction("Listado");
+            }
+            
 
         }
 

@@ -27,7 +27,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpGet("/Departamentos/Listado")]
         public IActionResult Index()
         {
-            ViewBag.Toast = TempData["Clientes"] as string;
+            ViewBag.Toast = TempData["Departamentos"] as string;
             var listado = _generalesService.ListadoDepartamentos(out string error);
             var listadoMapeado = _mapper.Map<IEnumerable<DepartamentoViewModel>>(listado);
 

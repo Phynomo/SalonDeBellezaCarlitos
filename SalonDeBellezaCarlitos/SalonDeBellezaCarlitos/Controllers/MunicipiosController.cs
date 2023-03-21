@@ -51,6 +51,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Municipios/Crear")]
         public ActionResult Create(MunicipioViewModel municipio)
         {
+            try
+            {
             var result = 0;
             municipio.muni_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             municipio.muni_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
@@ -66,11 +68,20 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             TempData["Municipios"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["Municipios"] = "error";
+                return RedirectToAction("Listado");
+            }
+           
         }
 
         [HttpPost("/Municipios/Editar")]
         public ActionResult Edit(MunicipioViewModel municipio)
         {
+            try
+            {
             var result = 0;
             municipio.muni_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             municipio.muni_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
@@ -86,11 +97,20 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             TempData["Municipios"] = "sucess";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["Municipios"] = "error";
+                return RedirectToAction("Listado");
+            }
+           
         }
 
         [HttpPost("/Municipios/Eliminar")]
         public ActionResult Delete(MunicipioViewModel municipio)
         {
+            try
+            {
             var result = 0;
             var muni = _mapper.Map<tbMunicipios>(municipio);
             result = _generalesService.EliminarMunicipio(muni);
@@ -103,12 +123,20 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             TempData["Municipios"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["Municipios"] = "error";
+                return RedirectToAction("Listado");
+            }
+            
         }
 
         [HttpGet("/Municipios/Detalles")]
         public IActionResult Details(int? id)
         {
-
+            try
+            {
             ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion");
 
             var listado = _generalesService.BuscarMunicipioView(id);
@@ -129,6 +157,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
 
             return View(listadoMapeado);
+            }
+            catch (Exception)
+            {
+                TempData["Municipios"] = "error";
+                return RedirectToAction("Listado");
+            }
+           
         }
 
     }

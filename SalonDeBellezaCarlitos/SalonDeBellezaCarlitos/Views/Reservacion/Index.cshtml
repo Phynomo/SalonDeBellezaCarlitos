@@ -2,7 +2,7 @@
 
 <input type="hidden" value="@ViewBag.Toast" id="toast" />
 
-@{ ViewData["Title"] = "Index";
+@{ ViewData["Title"] = "Reservaciones";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 
@@ -61,9 +61,9 @@
         @Html.DisplayFor(modelItem => item.rese_HoraFin)
     </td>
     <td class="text-end">
-        <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.rese_Id">Editar</a> |
-        <a style="padding-top: 1.5%; font-size: 10px; height:25px;" class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.rese_Id">Detalles</a> |
-        <button style="padding-top: 1.5%; font-size: 10px; height:25px;" type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.rese_Id')">Eliminar</button>
+        <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.rese_Id">Editar</a> 
+        <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.rese_Id">Detalles</a> 
+        <button type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.rese_Id')">Eliminar</button>
     </td>
 </tr>}
     </tbody>

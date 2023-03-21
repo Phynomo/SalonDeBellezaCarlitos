@@ -110,7 +110,7 @@ function AbrirModalEdit(cadena) {
 
 
 function GuardarModalEdit() {
-    var clie_Nombre = $('#serv_Nombre_Edit').val();
+    var clie_Nombre = $('#clie_Nombre_Edit').val();
     var clie_Apellido = $('#clie_Apellido_Edit').val();
     var clie_Telefono = $('#clie_Telefono_Edit').val();
     var clie_CorreoElectronico = $('#clie_CorreoElectronico_Edit').val();

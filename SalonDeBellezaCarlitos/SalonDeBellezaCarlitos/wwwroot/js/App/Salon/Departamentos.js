@@ -81,6 +81,7 @@ function GuardarModalEdit() {
     var depa_Codigo = $('#depa_Codigo_Edit').val();
 
     $("#lbl_DescripcionEditError").attr('hidden', true);
+    $("#lbl_CodigoEditError").attr('hidden', true)
 
     if (depa_Descripcion != "" && depa_Codigo != "") {
         $("#formEdit").submit();

@@ -89,3 +89,50 @@ function GuardarModalDelete() {
     }
 
 }
+
+
+
+
+function EnviarForm() {
+    var prov_NombreEmpresa = $("#prov_NombreEmpresa").val();
+    var prov_NombreContacto = $("#prov_NombreContacto").val();
+    var depa_Id = $("#depa_Id").val();
+    var muni_Id = $("#muni_Id").val();
+    var prov_DireccionExacta = $("#prov_DireccionExacta").val();
+    var prov_Telefono = $("#prov_Telefono").val();
+
+
+    $("#lblprov_NombreEmpresa").attr('hidden', true);
+    $("#lblprov_NombreContacto").attr('hidden', true);
+    $("#lbldepa_Id").attr('hidden', true);
+    $("#lblmuni_Id").attr('hidden', true);
+    $("#lblprov_DireccionExacta").attr('hidden', true);
+    $("#lblprov_Telefono").attr('hidden', true);
+
+    if (prov_NombreEmpresa != "" && prov_NombreContacto != "" && depa_Id != "" &&
+        muni_Id != "" && prov_DireccionExacta != "" && prov_Telefono != "") {
+        $("#form").submit();
+    } else {
+        MostrarMensajeWarning("Tienes campos vacios, llenalos por favor");
+        if (prov_NombreEmpresa == "") {
+            $("#lblprov_NombreEmpresa").attr('hidden', false);
+        }
+        if (prov_NombreContacto == "") {
+            $("#lblprov_NombreContacto").attr('hidden', false);
+        }
+        if (depa_Id == "") {
+            $("#lbldepa_Id").attr('hidden', false);
+        }
+        if (muni_Id == "") {
+            $("#lblmuni_Id").attr('hidden', false);
+        }
+        if (prov_DireccionExacta == "") {
+            $("#lblprov_DireccionExacta").attr('hidden', false);
+        }
+        if (prov_Telefono == "") {
+            $("#lblprov_Telefono").attr('hidden', false);
+        }
+    }
+
+}
+

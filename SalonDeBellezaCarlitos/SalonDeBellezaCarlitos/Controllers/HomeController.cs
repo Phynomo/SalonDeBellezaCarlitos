@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SalonDeBellezaCarlitos.Models;
 using System;
@@ -16,6 +17,16 @@ namespace SalonDeBellezaCarlitos.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.SetString("Nombre", "");
+            HttpContext.Session.SetString("Cargo", "");
+            HttpContext.Session.SetString("Sucursal", "");
+            HttpContext.Session.SetInt32("usur_Id", 0);
+
+            return View("Index","Login");
         }
 
         public IActionResult Index()

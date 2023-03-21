@@ -44,7 +44,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Sucursal/Crear")]
         public ActionResult Create(SucursalViewModel sucursal)
         {
-            var result = 0;
+            try
+            {
+ var result = 0;
             sucursal.sucu_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             sucursal.sucu_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
@@ -59,11 +61,20 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             TempData["Sucursal"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["Sucursal"] = "error";
+                return RedirectToAction("Listado");
+            }
+           
         }
 
         [HttpPost("/Sucursal/Editar")]
         public ActionResult Edit(SucursalViewModel sucursal)
         {
+            try
+            {
             var result = 0;
             sucursal.sucu_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             sucursal.sucu_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
@@ -79,11 +90,20 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             TempData["Sucursal"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["Sucursal"] = "error";
+                return RedirectToAction("Listado");
+            }
+            
         }
 
         [HttpPost("/Sucursal/Eliminar")]
         public IActionResult Delete(SucursalViewModel sucursal)
         {
+            try
+            {
             var result = 0;
             var suc = _mapper.Map<tbSucursales>(sucursal);
             result = _generalesService.EliminarSucursal(suc);
@@ -96,13 +116,21 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             TempData["Sucursal"] = "success";
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["Sucursal"] = "error";
+                return RedirectToAction("Listado");
+            }
+            
 
         }
 
         [HttpGet("/Sucursal/Detalles")]
         public IActionResult Details(int? id)
         {
-
+            try
+            {
             ViewBag.depa_Id = new SelectList(_generalesService.ListadoDepartamentos(out string error).ToList(), "depa_Id", "depa_Descripcion");
             var listado = _generalesService.BuscarSucursalesView(id);
             var listadoMapeado = _mapper.Map<IEnumerable<VWSucursalesViewModel>>(listado);
@@ -128,6 +156,14 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             }
             
             return View(listadoMapeado);
+            }
+            catch (Exception)
+            {
+                TempData["Sucursal"] = "error";
+                return RedirectToAction("Listado");
+            }
+
+           
         }
 
     }

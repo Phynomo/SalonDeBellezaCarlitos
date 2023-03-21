@@ -54,6 +54,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Proveedores/Crear")]
         public ActionResult Create(ProveedorViewModel proveedor)
         {
+            try
+            {
             var result = 0;
             proveedor.prov_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             proveedor.prov_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
@@ -86,6 +88,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     return View(proveedor);
             }
 
+            }
+            catch (Exception)
+            {
+                TempData["Proveedor"] = "noprevisto";
+                return RedirectToAction("Listado");
+            }
+           
 
         }
 
@@ -125,7 +134,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Proveedores/Editar")]
         public ActionResult Edit(ProveedorViewModel proveedor)
         {
-            var result = 0;
+            try
+            {
+var result = 0;
             proveedor.prov_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
             proveedor.prov_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
@@ -156,6 +167,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.muni_Id = new SelectList(_generalesService.ListadoMunicipiosPorDepartamento(proveedor.depa_Id), "muni_Id", "muni_Descripcion", proveedor.muni_Id);
                     return View(proveedor);
             }
+            }
+            catch (Exception)
+            {
+                TempData["Proveedor"] = "noprevisto";
+                return RedirectToAction("Listado");
+            }
+            
         }
 
         [HttpGet("/Proveedores/Detalles")]
@@ -212,6 +230,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         [HttpPost("/Proveedores/Eliminar")]
         public IActionResult Delete(ProveedorViewModel Proveedor)
         {
+            try
+            {
             var result = 0;
             var pro = _mapper.Map<tbProveedores>(Proveedor);
             result = _generalesService.EliminarProveedor(pro);
@@ -222,6 +242,13 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 return View();
             }
             return RedirectToAction("Listado");
+            }
+            catch (Exception)
+            {
+                TempData["Proveedor"] = "noprevisto";
+                return RedirectToAction("Listado");
+            }
+           
 
         }
 
