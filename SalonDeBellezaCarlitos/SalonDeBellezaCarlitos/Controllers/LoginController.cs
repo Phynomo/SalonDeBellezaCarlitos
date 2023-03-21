@@ -49,7 +49,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
             HttpContext.Session.SetString("Nombre", item.empl_NombreCompleto);
             HttpContext.Session.SetString("Cargo", item.carg_Descripcion);
-            HttpContext.Session.SetString("Sucursal", item.sucu_Id.ToString());
+            HttpContext.Session.SetInt32("Sucursal", item.sucu_Id);
             HttpContext.Session.SetInt32("usur_Id", item.usur_Id);
             }
 

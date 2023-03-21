@@ -4,11 +4,11 @@
     $('#subnavSalon').addClass('show');
 
     if ($("#toast").val() == 'error') {
-        MostrarMensajeDanger("Ocurrio un error al realizar el registro!");
+        MostrarMensajeDanger("Ocurrió un error al realizar la operación!");
         $("#modalCreate").appendTo('body').modal('show');
     }
     if ($("#toast").val() == 'success') {
-        MostrarMensajeSuccess("La operacion se realizo con exito!");
+        MostrarMensajeSuccess("La operación se realizo con exito!");
     }
 });
 function AbrirModalDelete(id) {

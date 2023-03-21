@@ -4,10 +4,10 @@
     $('#subnavSalon').addClass('show');
 
     if ($("#toast").val() == 'error') {
-        MostrarMensajeDanger("Pueda que este registro ya exista");
+        MostrarMensajeDanger("Ocurrió un error al realizar la operación!");
     }
     if ($("#toast").val() == 'success') {
-        MostrarMensajeSuccess("La operacion se realizo con exito!");
+        MostrarMensajeSuccess("La operación se realizo con exito!");
     }
 });
 

@@ -4,7 +4,7 @@
     $('#subnavSalon').addClass('show');
 
     if ($("#toast").val() == 'error') {
-        MostrarMensajeDanger("Ocurrio un error al realizar el registro!");
+        MostrarMensajeDanger("Ocurrió un error al realizar la operación!");
     }
     if ($("#toast").val() == 'success') {
         MostrarMensajeSuccess("La operacion se realizo con exito!");
@@ -128,7 +128,7 @@ function EnviaFormuario()
         && empl_Apellido != "" && empl_Nombre != "") {
         $("#formCreate").submit();
     } else {
-        MostrarMensajeWarning("Tienes campos vacios, llenalos por favor");
+        MostrarMensajeWarning("Tienes campos vacíos, llenalos por favor");
 
         if (sexo == "") {
             $("#lblempl_Sexo").attr('hidden', false);

@@ -96,7 +96,7 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
             parametros.Add("@empl_FechaNacimiento", FN, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_FechaContratacion", FC.ToString(), DbType.String, ParameterDirection.Input);
             parametros.Add("@carg_Id", item.carg_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@sucu_Id", item.carg_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@sucu_Id", item.sucu_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@empl_UsuarioModificacion", item.empl_UsuarioModificacion, DbType.Int32, ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.UDP_Editar_Empleados, parametros, commandType: CommandType.StoredProcedure);

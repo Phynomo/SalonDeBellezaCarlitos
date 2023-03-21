@@ -67,8 +67,8 @@
         @Html.DisplayFor(modelItem => item.empl_CorreoElectronico)
     </td>
     <td class="text-end">
-        <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.empl_Id">Editar</a> |
-        <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.empl_Id">Detalles</a> |
+        <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@item.empl_Id">Editar</a> 
+        <a class="btn btn-outline-secondary btn-sm" asp-action="Details" asp-route-id="@item.empl_Id">Detalles</a> 
         <button type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.empl_Id')">Eliminar</button>
     </td>
 </tr>

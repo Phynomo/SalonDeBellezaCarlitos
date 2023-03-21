@@ -55,8 +55,8 @@
         @Html.DisplayFor(modelItem => item.prov_Telefono)
     </td>
     <td class="text-end">
-        <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.prov_Id">Editar</a>
-        <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.prov_Id">Detalles</a>
+        <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@item.prov_Id">Editar</a>
+        <a class="btn btn-outline-secondary btn-sm" asp-action="Details" asp-route-id="@item.prov_Id">Detalles</a>
         <button type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.prov_Id')">Eliminar</button>
     </td>
 </tr>}

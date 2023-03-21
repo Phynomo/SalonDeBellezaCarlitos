@@ -4,19 +4,19 @@
     $('#subnavSalon').addClass('show');
 
     if ($("#toast").val() == 'repetido') {
-        MostrarMensajeWarning("El nombre de la empresa ya fue registrado");
+        MostrarMensajeWarning("El nombre de la empresa ya fué registrado");
     }
     if ($("#toast").val() == 'success') {
-        MostrarMensajeSuccess("La operacion se realizo con exito");
+        MostrarMensajeSuccess("La operación se realizó con exito");
     }
     if ($("#toast").val() == 'fatal') {
-        MostrarMensajeWarning("Complete todos los campos");
+        MostrarMensajeWarning("Complete todos los campos porfavor");
     }
     if ($("#toast").val() == 'noprevisto') {
         MostrarMensajeDanger("A ocurrido algo no previsto, intentalo de nuevo");
     }
     if ($("#toast").val() == 'errorC') {
-        MostrarMensajeDanger("Ocurrio un error mientras se cargaba la informacion, intentalo de nuevo");
+        MostrarMensajeDanger("Ocurrió un error mientras se cargaba la información, intentalo de nuevo");
     }
 
     if ($("#muni_Id").val() == '') {

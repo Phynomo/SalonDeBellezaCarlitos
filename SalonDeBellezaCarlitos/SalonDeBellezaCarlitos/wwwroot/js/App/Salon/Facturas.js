@@ -66,18 +66,18 @@
 
     $('#prod_Id').val("0");
     $('#serv_Id').val("0");
-    $('#fade_Cantidad').val("0");
+    $('#fade_Cantidad').val("1");
 
 
     if ($("#toast").val() == 'errorD') {
-        MostrarMensajeDanger("Ocurrio un error en esta operacion, intentalo de nuevo");
+        MostrarMensajeDanger("Ocurrio un error en esta operación, intentalo de nuevo");
     }
     if ($("#toast").val() == 'successD') {
         MostrarMensajeSuccess("La operacion se realizo con exito");
     }
 
     if ($("#toast").val() == 'errorH') {
-        MostrarMensajeDanger("Ocurrio un error en esta operacion, intentalo de nuevo");
+        MostrarMensajeDanger("Ocurrio un error en esta operación, intentalo de nuevo");
     }
     if ($("#toast").val() == 'successH') {
         MostrarMensajeSuccess("La factura se creo con exito");
@@ -85,14 +85,14 @@
     }
 
     if ($("#toast").val() == 'errorB') {
-        MostrarMensajeDanger("Ocurrio un error en esta operacion, intentalo de nuevo");
+        MostrarMensajeDanger("Ocurrio un error en esta operación, intentalo de nuevo");
     }
     if ($("#toast").val() == 'successB') {
         MostrarMensajeSuccess("Se ha ingresado con exito la compra");
         MostrarMensajeInfo("Puedes insertar mas compras si lo deseas");
     }
     if ($("#toast").val() == 'errorC') {
-        MostrarMensajeDanger("Ocurrio un error mientras se cargaba la informacion, intentalo de nuevo");
+        MostrarMensajeDanger("Ocurrió un error mientras se cargaba la información, intentalo de nuevo");
     }
     if ($("#toast").val() == 'sucursal') {
         MostrarMensajeDanger("No puedes cargar una factura de otra sucursal");
@@ -185,7 +185,7 @@ function EnviarFormDetalles() {
 
     } else {
 
-        MostrarMensajeWarning("Llene todos los campos");
+        MostrarMensajeWarning("Llene todos los campos porfavor");
         if (Producto == "0" && Servicio == "0") {
             $("#lbl_prod_Id_AtendidoError").attr("hidden", false);
         }

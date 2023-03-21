@@ -4,11 +4,11 @@
     $('#subnavSalon').addClass('show');
 
     if ($("#toast").val() == 'error') {
-        MostrarMensajeDanger("Ocurrio un error al realizar el registro!");
+        MostrarMensajeDanger("Ocurrio un error al realizar la operación!");
         $("#modalCreate").appendTo('body').modal('show');
     }
     if ($("#toast").val() == 'success') {
-        MostrarMensajeSuccess("La operacion se realizo con exito!");
+        MostrarMensajeSuccess("La operación se realizo con exito!");
     }
 
     if ($("#muni_Id").val() == '') {
@@ -145,6 +145,7 @@ function GuardarModalCreate() {
         $("#formCreate").submit();
 
     } else {
+        MostrarMensajeWarning("Llene todos los campos");
         if (sucu_Descripcion == "") {
             $("#lbl_sucu_Descripcion").attr('hidden', false);
         }
@@ -216,6 +217,7 @@ function GuardarModalEdit() {
         $("#formEdit").submit();
 
     } else {
+        MostrarMensajeWarning("Llene todos los campos");
         if (sucu_DescripcionE == "") {
             $("#lbl_sucu_DescripcionE").attr('hidden', false);
         }

@@ -62,7 +62,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                 ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
                 ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
-                return View();
+                return RedirectToAction("Listado");
             }
             TempData["ServicioxProducto"] = "success";
             return RedirectToAction("Listado");
@@ -79,7 +79,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.serv_Id = item.serv_Id;
                 ViewBag.prod_Id = item.prod_Id;
             }
-            return View();
+            return RedirectToAction("Listado");
 
         }
 
@@ -124,7 +124,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 {
                     TempData["ServicioxProducto"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                    return View();
+                    return RedirectToAction("Listado");
                 }
             }
             catch (Exception)
@@ -150,6 +150,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             //return View(listadoMapeado);
 
             var producto = _generalesService.BuscarServicioXProducto(id);
+
             foreach (var item in producto)
             {
                 var serv_Id = _generalesService.findServicio(item.serv_Id);
@@ -157,8 +158,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 ViewBag.serv_Id = item.serv_Id;
                 ViewBag.prod_Id = item.prod_Id;
-                ViewBag.serv_Id = serv_Id.serv_Nombre;
-                ViewBag.prod_Id = prod_Id.prod_Nombre;
+                ViewBag.serv_Nombre = serv_Id.serv_Nombre;
+                ViewBag.prod_Nombre = prod_Id.prod_Nombre;
+                ViewBag.spro_Id = id;
 
 
                 var UsuarioCreacion = _generalesService.BuscarUsuario(item.spro_UsuarioCreacion);

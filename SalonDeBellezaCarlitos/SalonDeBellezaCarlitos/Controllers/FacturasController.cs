@@ -28,7 +28,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
         public IActionResult Index()
         {
             ViewBag.Toast = TempData["Factura"] as string;
-            int sucu_id = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            int sucu_id = Convert.ToInt32(HttpContext.Session.GetInt32("Sucursal"));
             var listado = _generalesService.ListadoFacturas(out string error, sucu_id);
             var listadoMapeado = _mapper.Map<IEnumerable<VWFacturasViewModel>>(listado);
 
@@ -274,9 +274,9 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 {
                     var empl = _generalesService.findEmpleado(item.empl_Id_Caja);
 
-                    var hola = Convert.ToInt32(HttpContext.Session.GetInt32("Sucursal"));
+                    var sucursalid = Convert.ToInt32(HttpContext.Session.GetInt32("Sucursal"));
 
-                    if (empl.sucu_Id == hola)
+                    if (empl.sucu_Id != sucursalid)
                     {
                         TempData["Factura"] = "sucursal";
                         return RedirectToAction("Listado");

@@ -4,11 +4,11 @@
     $('#subnavSalon').addClass('show');
     
     if ($("#toast").val() == 'error') {
-        MostrarMensajeDanger("Ocurrio un error al realizar la operacion!");
+        MostrarMensajeDanger("Ocurrió un error al realizar la operación!");
         $("#modalCreate").appendTo('body').modal('show');
     }
     if ($("#toast").val() == 'success') {
-        MostrarMensajeSuccess("La operacion se realizo con exito!");
+        MostrarMensajeSuccess("La operación se realizo con exito!");
     }
 });
 function AbrirModalCreate() {
@@ -63,6 +63,7 @@ function GuardarModalCreate() {
         $("#formCreate").submit();
 
     } else {
+        MostrarMensajeWarning("Llene todos los campos");
         if (clie_Nombre == "") {
             $("#lbl_clie_Nombre").attr('hidden', false);
         }
@@ -121,6 +122,7 @@ function GuardarModalEdit() {
         $("#formEdit").submit();
 
     } else {
+        MostrarMensajeWarning("Llene todos los campos");
         if (clie_Nombre == "") {
             $("#lbl_NombreEditError").attr('hidden', false);
         }

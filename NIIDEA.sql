@@ -2335,7 +2335,7 @@ BEGIN
 BEGIN TRY
 
 IF NOT EXISTS (SELECT * FROM gnrl.tbDepartamentos
-				WHERE @depa_Descripcion = depa_Descripcion AND @depa_Codigo = depa_Codigo)
+				WHERE @depa_Descripcion = depa_Descripcion OR @depa_Codigo = depa_Codigo)
 BEGIN
     INSERT INTO gnrl.tbDepartamentos(   [depa_Descripcion], 
                                         depa_Codigo, 
@@ -2356,7 +2356,7 @@ SELECT 1 as Proceso
 
 END
 ELSE IF EXISTS (SELECT * FROM gnrl.tbDepartamentos
-				WHERE @depa_Descripcion = depa_Descripcion AND @depa_Codigo = depa_Codigo AND depa_Estado = 1)
+				WHERE (@depa_Descripcion = depa_Descripcion OR @depa_Codigo = depa_Codigo) AND depa_Estado = 1)
 SELECT 0 as Proceso
 ELSE
 UPDATE gnrl.tbDepartamentos
@@ -3005,11 +3005,11 @@ GO
 
 
 CREATE OR ALTER PROCEDURE salo.UDP_salo_tbServiciosXProducto_Buscar
-@sprod_Id int
+@spro_Id int
 AS
 BEGIN
 SELECT * FROM salo.VW_tbProductosxServicio_View
-WHERE spro_Id = @sprod_Id
+WHERE spro_Id = @spro_Id
 END
 GO
 

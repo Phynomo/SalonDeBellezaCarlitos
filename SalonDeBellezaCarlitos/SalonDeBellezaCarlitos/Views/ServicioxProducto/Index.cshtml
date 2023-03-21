@@ -30,7 +30,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.prod_Nombre)
             </th>
-            <th></th>
+            <th class="text-end">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -43,9 +43,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.prod_Nombre)
                 </td>
-                <td>
-                    <button type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.spro_Id,@item.serv_Nombre,@item.prod_Nombre')">Editar</button> |
-                    <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.spro_Id">Detalles</a> |
+                <td class="text-end">
+                    <button type="button" id="btnEditar" class="btn btn-outline-primary btn-sm" onclick="AbrirModalEdit('@item.spro_Id,@item.serv_Id,@item.prod_Id')">Editar</button> 
+                    <a class="btn btn-outline-secondary btn-sm" asp-action="Details" asp-route-id="@item.spro_Id">Detalles</a> 
                     <button type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.spro_Id')">Eliminar</button>
                 </td>
             </tr>

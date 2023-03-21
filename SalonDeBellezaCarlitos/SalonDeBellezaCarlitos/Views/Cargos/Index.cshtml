@@ -39,8 +39,8 @@
         @Html.DisplayFor(modelItem => item.carg_Descripcion)
     </td>
     <td class="text-end">
-        <button  type="button" id="btnEditar" class="btn btn-outline-primary btn-sm" onclick="AbrirModalEdit('@item.carg_Id,@item.carg_Descripcion')">Editar</button> |
-        <a class="btn btn-outline-secondary btn-sm" asp-action="Details" asp-route-id="@item.carg_Id">Detalles</a> |
+        <button  type="button" id="btnEditar" class="btn btn-outline-primary btn-sm" onclick="AbrirModalEdit('@item.carg_Id,@item.carg_Descripcion')">Editar</button> 
+        <a class="btn btn-outline-secondary btn-sm" asp-action="Details" asp-route-id="@item.carg_Id">Detalles</a> 
         <button  type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.carg_Id')">Eliminar</button>
     </td>
 </tr>}

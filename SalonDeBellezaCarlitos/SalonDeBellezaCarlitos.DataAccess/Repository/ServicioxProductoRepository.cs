@@ -62,12 +62,12 @@ namespace SalonDeBellezaCarlitos.DataAccess.Repository
 
             return resultado;
         }
-        public IEnumerable<tbProductosXServicio> BuscarServicioXProducto(int? id)
+        public IEnumerable<VW_tbProductosxServicio_View> BuscarServicioXProducto(int? id)
         {
             using var db = new SqlConnection(SalonCarlitosContext.ConnectionString);
             var parametros = new DynamicParameters();
             parametros.Add("@spro_Id", id, DbType.Int32, ParameterDirection.Input);
-            return db.Query<tbProductosXServicio>(ScriptsDataBase.UDP_Buscar_ServiciosXProducto, parametros, commandType: CommandType.StoredProcedure);
+            return db.Query<VW_tbProductosxServicio_View>(ScriptsDataBase.UDP_Buscar_ServiciosXProducto, parametros, commandType: CommandType.StoredProcedure);
         }
         //public IEnumerable<tbProductos> BuscarProducto(int? id)
         //{

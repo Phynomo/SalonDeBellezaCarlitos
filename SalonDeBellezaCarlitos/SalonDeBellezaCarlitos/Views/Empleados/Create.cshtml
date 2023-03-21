@@ -46,7 +46,7 @@
                 <div class="form-group col">
                     <label asp-for="empl_Sexo" class="control-label"></label>
                     <br />
-                    @Html.RadioButtonFor(model => model.empl_Sexo, "M", new { id = "M" }) Masculino<br />
+                    @Html.RadioButtonFor(model => model.empl_Sexo, "M", new { id = "M" }) Masculino   
                     @Html.RadioButtonFor(model => model.empl_Sexo, "F", new { id = "F" }) Femenino
                     <br />
                     <span id="lblempl_Sexo" class="text-danger" hidden>Este campo es requerido</span>
