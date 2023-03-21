@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalonDeBellezaCarlitos.BusinessLogic.Services;
@@ -66,23 +67,38 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             TempData["ServicioxProducto"] = "success";
             return RedirectToAction("Listado");
         }
+        [HttpGet("/ServicioxProducto/Editar/{id}")]
+        public IActionResult Edit(int? id)
+        {
+            //    var listado = _generalesService.BuscarCargo(id);
+            var productos = _generalesService.BuscarServicioXProducto(id);
+            //ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
+            //ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
+            foreach (var item in productos)
+            {
+                ViewBag.serv_Id = item.serv_Id;
+                ViewBag.prod_Id = item.prod_Id;
+            }
+            return View();
+
+        }
 
         [HttpPost("/ServicioxProducto/Editar")]
         public IActionResult Edit(ServicioxProductoViewModel producto)
         {
             var result = 0;
-            producto.prod_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
-            producto.prod_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetString("usur_Id"));
+            producto.spro_UsuarioCreacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
+            producto.spro_UsuarioModificacion = Convert.ToInt32(HttpContext.Session.GetInt32("usur_Id"));
 
-            var prod = _mapper.Map<tbProductos>(producto);
-            result = _generalesService.EditarProducto(prod);
+            var prod = _mapper.Map<tbProductosXServicio>(producto);
+            result = _generalesService.EditarServicioxProducto(prod);
 
             if (result == 0)
             {
                 TempData["ServicioxProducto"] = "error";
                 ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                ViewBag.cate_Id = new SelectList(_generalesService.ListadoCategorias(out string error).ToList(), "cate_Id", "cate_Descripcion");
-                ViewBag.prov_Id = new SelectList(_generalesService.ListadoProveedores(out string error2).ToList(), "prov_Id", "prov_NombreContacto");
+                //ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
+                //ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string error2).ToList(), "prod_Id", "prod_Nombre");
             }
             TempData["ServicioxProducto"] = "success";
             return RedirectToAction("Listado");

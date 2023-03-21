@@ -1584,7 +1584,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return null;
             }
         }
-
+        public IEnumerable<tbProductosXServicio> BuscarServicioXProducto(int? id)
+        {
+            try
+            {
+                return _ServicioxProductoRepository.BuscarServicioXProducto(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         #endregion
 
     }
