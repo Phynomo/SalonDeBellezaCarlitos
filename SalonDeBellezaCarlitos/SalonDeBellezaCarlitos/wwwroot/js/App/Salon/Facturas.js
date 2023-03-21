@@ -94,7 +94,9 @@
     if ($("#toast").val() == 'errorC') {
         MostrarMensajeDanger("Ocurrio un error mientras se cargaba la informacion, intentalo de nuevo");
     }
-
+    if ($("#toast").val() == 'sucursal') {
+        MostrarMensajeDanger("No puedes cargar una factura de otra sucursal");
+    }
 });
 
 

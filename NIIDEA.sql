@@ -1362,7 +1362,7 @@ ELSE
 UPDATE salo.tbCargos
 SET carg_Estado = 1
 WHERE carg_Descripcion = @carg_Descripcion
-
+select 1
 END TRY
 BEGIN CATCH
 SELECT 0 as Proceso

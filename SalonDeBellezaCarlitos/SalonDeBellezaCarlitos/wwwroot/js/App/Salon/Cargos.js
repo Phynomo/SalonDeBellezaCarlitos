@@ -4,8 +4,7 @@
     $('#subnavSalon').addClass('show');
 
     if ($("#toast").val() == 'error') {
-        MostrarMensajeDanger("Ocurrio un error al realizar la operacion!");
-        $("#modalCreate").appendTo('body').modal('show');
+        MostrarMensajeDanger("Pueda que este registro ya exista");
     }
     if ($("#toast").val() == 'success') {
         MostrarMensajeSuccess("La operacion se realizo con exito!");

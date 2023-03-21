@@ -264,6 +264,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 var factura = _generalesService.BuscarFactura(id);
                 var facturaMapeado = _mapper.Map<IEnumerable<VWFacturasViewModel>>(factura);
 
+                
                 #region Cargar datos...
                 if (factura.Count() == 0)
                 {
@@ -271,6 +272,17 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 }
                 foreach (var item in factura)
                 {
+                    var empl = _generalesService.findEmpleado(item.empl_Id_Caja);
+
+                    var hola = Convert.ToInt32(HttpContext.Session.GetInt32("Sucursal"));
+
+                    if (empl.sucu_Id == hola)
+                    {
+                        TempData["Factura"] = "sucursal";
+                        return RedirectToAction("Listado");
+                    }
+
+
                     ViewBag.empl_Id_Atendido = new SelectList(_generalesService.ListadoEmpleados(out string error12).ToList(), "empl_Id", "empl_Nombre", item.empl_Id_Atendido);
                     ViewBag.empl_Id_Caja = new SelectList(_generalesService.ListadoEmpleados(out string error31).ToList(), "empl_Id", "empl_Nombre", item.empl_Id_Caja);
                     ViewBag.clie_Id = new SelectList(_generalesService.ListadoClientes(out string error21).ToList(), "clie_Id", "clie_Nombre", item.clie_Id);
@@ -283,6 +295,8 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                     ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error1).ToList(), "serv_Id", "serv_Nombre");
 
                     var lista = _generalesService.BuscarFacturasDetalles(item.fact_Id).ToList();
+
+                    
 
                     ViewBag.Clientes = lista;
 

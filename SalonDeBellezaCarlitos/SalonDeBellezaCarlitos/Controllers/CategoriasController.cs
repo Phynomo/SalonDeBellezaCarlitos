@@ -62,7 +62,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 {
                     TempData["Categorias"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                    return View();
+                    return RedirectToAction("Listado");
                 }
             }
             catch (Exception)
@@ -102,7 +102,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 {
                     TempData["Categorias"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                    return View();
+                    return RedirectToAction("Listado");
                 }
             }
             catch (Exception)
@@ -128,7 +128,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 {
                     TempData["Categorias"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
-                    return View();
+                    return RedirectToAction("Listado");
                 }
             }
             catch (Exception)
