@@ -413,6 +413,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public tbServicios findServicio(int? id)
+        {
+            try
+            {
+                return _ServicioRepository.find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         public int EditarServicio(tbServicios servicio)
         {
 

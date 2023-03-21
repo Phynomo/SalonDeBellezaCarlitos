@@ -122,7 +122,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
 
                 if (result == 0)
                 {
-                    TempData["Servicio"] = "error";
+                    TempData["ServicioxProducto"] = "error";
                     ModelState.AddModelError("", "Ocurrió un error al Crear este registro");
                     return View();
                 }
@@ -131,8 +131,50 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
             {
 
             }
-            TempData["Servicio"] = "success";
+            TempData["ServicioxProducto"] = "success";
             return RedirectToAction("Listado");
+        }
+        [HttpGet("/ServicioxProducto/Detalles")]
+        public IActionResult Details(int? id)
+        {
+            //ViewBag.serv_Id = new SelectList(_generalesService.ListadoServicios(out string error).ToList(), "serv_Id", "serv_Nombre");
+            //ViewBag.prod_Id = new SelectList(_generalesService.ListadoProductos(out string ersdfror).ToList(), "prod_Id", "prod_Nombre");
+            //var listado = _generalesService.ListadoServicioxproducto(out string esdfarror);
+            //var listadoMapeado = _mapper.Map <IEnumerable<VWServicioxproductoViewModel>>(listado);
+
+            //if (!string.IsNullOrEmpty(error))
+            //{
+            //    ModelState.AddModelError("", error);
+            //}
+
+            //return View(listadoMapeado);
+
+            var producto = _generalesService.BuscarServicioXProducto(id);
+            foreach (var item in producto)
+            {
+                var serv_Id = _generalesService.findServicio(item.serv_Id);
+                var prod_Id = _generalesService.findProducto(item.prod_Id);
+
+                ViewBag.serv_Id = item.serv_Id;
+                ViewBag.prod_Id = item.prod_Id;
+                ViewBag.serv_Id = serv_Id.serv_Nombre;
+                ViewBag.prod_Id = prod_Id.prod_Nombre;
+
+
+                var UsuarioCreacion = _generalesService.BuscarUsuario(item.spro_UsuarioCreacion);
+                var nombreCreacion = _generalesService.findEmpleado(UsuarioCreacion.empl_Id);
+                ViewBag.UsuarioCreacion = nombreCreacion.empl_Nombre + " " + nombreCreacion.empl_Apellido;
+                ViewBag.FechaCreacion = item.spro_FechaCreacion;
+
+                if (!string.IsNullOrEmpty(item.spro_UsuarioModificacion.ToString()))
+                {
+                    var UsuarioModificacion = _generalesService.BuscarUsuario(item.spro_UsuarioModificacion);
+                    var nombreModificacion = _generalesService.findEmpleado(UsuarioModificacion.empl_Id);
+                    ViewBag.UsuarioModificacion = nombreModificacion.empl_Nombre + " " + nombreModificacion.empl_Apellido;
+                    ViewBag.FechaModificacion = item.spro_FechaModificacion;
+                }
+            }
+            return View();
         }
     }
 }
