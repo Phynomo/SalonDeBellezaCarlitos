@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWServicioxproductoViewModel>
+﻿@*@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWServicioxproductoViewModel>*@
+@model IEnumerable<SalonDeBellezaCarlitos.WebUI.Models.VWServicioxproductoViewModel>
 
 <input type="hidden" value="@ViewBag.Toast" id="toast" />
 
@@ -17,7 +18,7 @@
 
 <div class="row mb-3 text-center">
     <div class="col">
-        <button class="btn btn-primary" onclick="AbrirModalCreate()">Un Servicio por Producto</button>
+        <button class="btn btn-primary" onclick="AbrirModalCreate()">Un Servicio Detalle</button>
     </div>
 </div>
 <table id="example" class="table dataTable compact hover stripe" style="width: 100%;" aria-describedby="example_info">
@@ -44,7 +45,7 @@
                 </td>
                 <td>
                     <button type="button" id="btnEditar" class="btn btn-outline-warning btn-sm" onclick="AbrirModalEdit('@item.spro_Id,@item.serv_Nombre,@item.prod_Nombre')">Editar</button> |
-                    <a asp-action="Details" asp-route-id="@item.spro_Id">Details</a> |
+                    <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.spro_Id">Detalles</a> |
                     <button type="button" id="btnEliminar" class="btn btn-outline-danger btn-sm" onclick="AbrirModalDelete('@item.spro_Id')">Eliminar</button>
                 </td>
             </tr>

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-decoration-underline text-center">DETALLE CLIENTE</h1>
+<h1 class="text-center">Cliente</h1>
 @foreach (var item in Model)
 {
 <div>
@@ -28,6 +28,13 @@
         <div class="col">
             <label class="text-black font-weight-bold">@Html.DisplayNameFor(model => model.clie_CorreoElectronico)</label><br />
             <label>@Html.DisplayFor(model => item.clie_CorreoElectronico)</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col d-flex justify-content-end">
+            <a class="btn btn-primary mx-1" asp-action="Edit" asp-route-id="@ViewBag.spor_Id">Editar</a>
+            <a class="btn btn-dark" asp-action="Index">Regresar al listado</a>
         </div>
     </div>
 
@@ -61,7 +68,7 @@
     </div>
     <hr />
     <div>
-        <a style="padding-top: 0.5%; font-size: 10px; height:25px;" class="btn btn-outline-dark btn-lg" asp-action="Index">Regresar a la Lista</a>
+        <a class="btn btn-outline-dark btn-lg" asp-action="Index">Regresar a la Lista</a>
     </div>
 </div>
 

@@ -142,7 +142,7 @@ namespace SalonDeBellezaCarlitos.WebUI.Controllers
                 ViewBag.prod_Stock = item.prod_Stock;
 
                 var UsuarioCreacion = _generalesService.BuscarUsuario(item.prod_UsuarioCreacion);
-                var nombreCreacion = _generalesService.findEmpleado(UsuarioCreacion.empl_Id);
+                var nombreCreacion = _generalesService.findEmpleado(UsuarioCreacion.empl_Id);   
                 ViewBag.UsuarioCreacion = nombreCreacion.empl_Nombre + " " + nombreCreacion.empl_Apellido;
                 ViewBag.FechaCreacion = item.prod_FechaCreacion;
 

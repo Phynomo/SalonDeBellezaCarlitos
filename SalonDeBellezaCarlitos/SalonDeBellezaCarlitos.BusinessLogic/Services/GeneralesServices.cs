@@ -413,6 +413,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
             }
 
         }
+        public tbServicios findServicio(int? id)
+        {
+            try
+            {
+                return _ServicioRepository.find(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         public int EditarServicio(tbServicios servicio)
         {
 
@@ -1584,7 +1595,17 @@ namespace SalonDeBellezaCarlitos.BusinessLogic.Services
                 return null;
             }
         }
-
+        public IEnumerable<tbProductosXServicio> BuscarServicioXProducto(int? id)
+        {
+            try
+            {
+                return _ServicioxProductoRepository.BuscarServicioXProducto(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         #endregion
 
     }
